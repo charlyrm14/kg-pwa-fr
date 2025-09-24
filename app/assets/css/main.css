@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@custom-variant theme-midnight (&:where([data-theme="midnight"] *));
+
+@theme {
+    --color-dark: #181818;
+    --color-dark-light: #212121;
+    --color-dark-extralight: #303030;
+    --color-dark-soft: #424242;
+}
