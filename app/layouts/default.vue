@@ -6,7 +6,7 @@
 <template>
     <div class="flex flex-col min-h-screen">
         <Header/>
-        <main class="flex-grow pt-16 pb-16 bg-white dark:bg-dark">
+        <main class="flex-grow pt-16 pb-16 bg-gray-100 dark:bg-dark">
             <div class="container mx-auto p-4">
                 <slot />
             </div>
