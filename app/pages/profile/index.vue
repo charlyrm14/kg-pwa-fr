@@ -48,6 +48,12 @@
                 :class="contentTab === 3 ? 'border-b-4 border-blue-500 dark:text-white' : 'text-gray-400'"> 
                     Información general
             </button>
+            <button 
+                @click="contentTab = 4"
+                class="cursor-pointer hover:opacity-75 text-lg"
+                :class="contentTab === 4 ? 'border-b-4 border-blue-500 dark:text-white' : 'text-gray-400'"> 
+                    Compartir
+            </button>
         </nav>
     </section>
 
@@ -132,6 +138,27 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div v-if="contentTab === 4">
+            <div class="flex justify-center">
+                <img 
+                    src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png" 
+                    alt="Qr profile"
+                    class="rounded-lg">
+            </div>
+            <div class="mt-4 flex justify-center">
+                <p class="dark:text-white"> Escanea QR </p>
+            </div>
+            <div class="flex justify-start items-center gap-x-4 mt-8">
+                <button
+                    class="bg-green-500 text-white p-3 rounded-full cursor-pointer hover:opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+                </button>
+                <button
+                    class="bg-blue-500 text-white p-3 rounded-full cursor-pointer hover:opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                </button>
             </div>
         </div>
     </section>
