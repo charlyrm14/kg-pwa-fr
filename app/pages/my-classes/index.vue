@@ -16,37 +16,37 @@
                 </h4>
             </div>
             <div class="flex overflow-x-auto md:justify-center md:items-center gap-x-4">
-                <div class="bg-lime-400 p-4 rounded-4xl overflow-hidden flex-shrink-0">
+                <div class="bg-lime-400 px-3 py-4 rounded-4xl overflow-hidden flex-shrink-0">
                     <h2 class="text-white text-xs uppercase text-center flex flex-col"> 
                         L <span class="text-2xl font-bold"> 22 </span>
                     </h2>
                 </div>
-                <div class="bg-dark-extralight p-4 rounded-4xl overflow-hidden flex-shrink-0">
+                <div class="bg-dark-extralight px-3 py-4 rounded-4xl overflow-hidden flex-shrink-0">
                     <h2 class="text-white text-xs uppercase text-center flex flex-col"> 
                         M <span class="text-2xl font-bold"> 23 </span>
                     </h2>
                 </div>
-                <div class="bg-lime-400 p-4 rounded-4xl overflow-hidden flex-shrink-0">
+                <div class="bg-lime-400 px-3 py-4 rounded-4xl overflow-hidden flex-shrink-0">
                     <h2 class="text-white text-xs uppercase text-center flex flex-col"> 
                         M <span class="text-2xl font-bold"> 24 </span>
                     </h2>
                 </div>
-                <div class="bg-dark-extralight p-4 rounded-4xl overflow-hidden flex-shrink-0">
+                <div class="bg-dark-extralight px-3 py-4 rounded-4xl overflow-hidden flex-shrink-0">
                     <h2 class="text-white text-xs uppercase text-center flex flex-col"> 
                         J <span class="text-2xl font-bold"> 25 </span>
                     </h2>
                 </div>
-                <div class="bg-lime-400 p-4 rounded-4xl overflow-hidden flex-shrink-0">
+                <div class="bg-lime-400 px-3 py-4 rounded-4xl overflow-hidden flex-shrink-0">
                     <h2 class="text-white text-xs uppercase text-center flex flex-col"> 
                         V <span class="text-2xl font-bold"> 26 </span>
                     </h2>
                 </div>
-                <div class="bg-dark-extralight p-4 rounded-4xl overflow-hidden flex-shrink-0">
+                <div class="bg-dark-extralight px-3 py-4 rounded-4xl overflow-hidden flex-shrink-0">
                     <h2 class="text-white text-xs uppercase text-center flex flex-col"> 
                         S <span class="text-2xl font-bold"> 27 </span>
                     </h2>
                 </div>
-                <div class="bg-dark-extralight p-4 rounded-4xl overflow-hidden flex-shrink-0">
+                <div class="bg-dark-extralight px-3 py-4 rounded-4xl overflow-hidden flex-shrink-0">
                     <h2 class="text-white text-xs uppercase text-center flex flex-col"> 
                         D <span class="text-2xl font-bold"> 28 </span>
                     </h2>
@@ -57,7 +57,7 @@
 
     <section class="mt-6">
         <SectionTitle title="Historial de asistencias"/>
-        <div class="bg-gray-200 dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-1 rounded-lg flex justify-center items-center">
+        <div class="bg-gray-200/60 dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-1 rounded-lg flex justify-center items-center">
             <button
                 @click="contentTab = 1"
                 class="dark:text-white w-full cursor-pointer hover:opacity-75"
