@@ -31,21 +31,19 @@
         :title="contentTitle(pageHeaderTitle)"/>
 
     <section class="mt-6">
-        <div>
-            <div class="relative flex items-center w-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search absolute left-3 size-5 text-gray-400 dark:text-gray-300"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
-                <input 
-                    type="text" 
-                    placeholder="Buscar..." 
-                    class="w-full pl-10 p-3 border rounded-lg focus:outline-none border-gray-100 bg-gray-100 dark:bg-dark-extralight dark:border-dark-extralight dark:text-white shadow" />
-            </div>
+        <div class="relative flex items-center w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search absolute left-3 size-5 text-gray-400 dark:text-gray-300"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+            <input 
+                type="text" 
+                placeholder="Buscar..." 
+                class="w-full pl-10 p-3 border rounded-full focus:outline-none border-gray-100 bg-white dark:bg-dark-extralight dark:border-dark-extralight dark:text-white shadow" />
         </div>
     </section>
     
     <section class="mt-6">
         <NuxtLink
             to="/contents/news">
-                <div class="bg-gray-100 dark:bg-dark-extralight border border-gray-200 dark:border-dark-extralight rounded-lg px-3 py-2  shadow">
+                <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-extralight rounded-lg px-3 py-2  shadow">
                     <div class="flex items-start gap-4">                
                         <div class="flex-shrink-0">
                             <img
