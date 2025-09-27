@@ -91,29 +91,45 @@
             </div>
         </div>
         <div v-if="contentTab === 2">
+
             <SectionTitle title="Sobre mí"/>
             <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-none rounded-lg p-4 shadow mb-4">
-                
-                <p class="dark:text-white font-extralight">
+                <div class="flex justify-end items-center">
+                    <button class="dark:text-gray-400 cursor-pointer hover:opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-icon lucide-pen"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
+                    </button>
+                </div>
+                <p class="dark:text-white font-extralight mt-3">
                     Lorem ipsum dolor sit amet consectetur adipiscing elit taciti, pulvinar congue aliquet rhoncus tempus interdum ut est, non morbi massa laoreet fringilla proin hendrerit. Donec nec inceptos a dictum et ante mattis fusce dictumst, purus aliquet suscipit aptent litora taciti dui orci dapibus, vel nunc erat cum maecenas laoreet tincidunt diam. Tellus sed purus convallis curae faucibus tempus congue imperdiet quisque, euismod neque consequat orci ullamcorper elementum eleifend vitae lectus, hendrerit ultricies habitasse a ut donec accumsan mauris.
                 </p>
             </div>
+
             <SectionTitle title="Hobbies"/>
             <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-none rounded-lg p-4 mt-4 shadow">
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-lime-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Correr </span>
-                    <span class="bg-lime-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Jugar </span>
-                    <span class="bg-lime-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Pasear </span>
-                    <span class="bg-lime-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> La playa </span>
-                    <span class="bg-lime-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Futbol </span>
-                    <span class="bg-lime-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Ver peliculas </span>
-                    <span class="bg-lime-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Ir al cine </span>
-                    <span class="bg-lime-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Escuchar música </span>
+                <div class="flex justify-end items-center">
+                    <button class="dark:text-gray-400 cursor-pointer hover:opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-icon lucide-pen"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
+                    </button>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="bg-blue-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Correr </span>
+                    <span class="bg-blue-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Jugar </span>
+                    <span class="bg-blue-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Pasear </span>
+                    <span class="bg-blue-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> La playa </span>
+                    <span class="bg-blue-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Futbol </span>
+                    <span class="bg-blue-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Ver peliculas </span>
+                    <span class="bg-blue-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Ir al cine </span>
+                    <span class="bg-blue-500 text-white text-sm md:text-base hover:opacity-75 px-4 py-1 rounded-xl whitespace-nowrap"> Escuchar música </span>
                 </div>
             </div>
         </div>
         <div v-if="contentTab === 3">
             <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-none rounded-lg p-4 shadow">
+                <div class="flex justify-end items-center">
+                    <button class="dark:text-gray-400 cursor-pointer hover:opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-icon lucide-pen"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
+                    </button>
+                </div>
                 <div class="flex justify-between items-center border-b border-gray-200 dark:border-dark-soft">
                     <div class="flex justify-between items-center dark:text-white gap-x-4 mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cake-icon lucide-cake"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/></svg>
@@ -150,14 +166,21 @@
             <div class="mt-4 flex justify-center">
                 <p class="dark:text-white"> Escanea QR </p>
             </div>
-            <div class="flex justify-start items-center gap-x-4 mt-8">
+            <div class="mt-3">
+                <SectionTitle title="Otros"/>
+            </div>
+            <div class="flex justify-start items-center gap-x-4 mt-2 bg-white dark:bg-dark-extralight border border-gray-200 dark:border-none rounded-full p-3 shadow">
                 <button
-                    class="bg-green-500 text-white p-3 rounded-full cursor-pointer hover:opacity-75">
+                    class="bg-gray-200 dark:bg-dark-soft text-gray-500 dark:text-white p-3 rounded-full cursor-pointer hover:opacity-75">
                         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
                 </button>
                 <button
-                    class="bg-blue-500 text-white p-3 rounded-full cursor-pointer hover:opacity-75">
+                    class="bg-gray-200 dark:bg-dark-soft text-gray-500 dark:text-white p-3 rounded-full cursor-pointer hover:opacity-75">
                         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                </button>
+                <button
+                    class="bg-gray-200 dark:bg-dark-soft text-gray-500 dark:text-white p-3 rounded-full cursor-pointer hover:opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
                 </button>
             </div>
         </div>
