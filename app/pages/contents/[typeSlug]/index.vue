@@ -16,9 +16,9 @@
     }
 
     const pageHeaderTitle = computed<ContentSlug>(() => {
-        const slug = route.params.slug
-        if (slug === 'events' || slug === 'tips' || slug === 'nutrition') {
-            return slug
+        const typeSlug = route.params.typeSlug
+        if (typeSlug === 'events' || typeSlug === 'tips' || typeSlug === 'nutrition') {
+            return typeSlug
         }
         return 'news'
     })
@@ -42,7 +42,7 @@
     
     <section class="mt-6">
         <NuxtLink
-            to="/contents/news">
+            :to="`/contents/${route.params.typeSlug}/mi-noticia`">
                 <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-extralight rounded-lg px-3 py-2  shadow">
                     <div class="flex items-start gap-4">                
                         <div class="flex-shrink-0">
