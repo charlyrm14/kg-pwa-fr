@@ -5,10 +5,13 @@
 <template>
     <section class="mt-6">
 
-        <SectionTitle title="Recordatorios"/>
+        <SectionTitle 
+            title="Recordatorios"
+            :show-icon="true"
+            align="between"/>
             
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-x-4">
-            <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg p-4 cursor-pointer hover:opacity-75 shadow">
+        <div class="flex gap-6 overflow-x-auto">
+            <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg px-6 py-4 hover:opacity-75 shadow overflow-hidden flex-shrink-0">
                 <h4 class="dark:text-white text-sm font-extralight"> Próxima clase </h4>
                 <p class="font-extrabold text-4xl text-gray-500 dark:text-white my-3"> 24 Sept </p>
                 <span class="dark:text-white inline-flex items-center gap-x-2 font-extralight text-sm">
@@ -16,7 +19,7 @@
                         09:00 a 10:00
                 </span>
             </div>
-            <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg p-4 cursor-pointer hover:opacity-75 shadow">
+            <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg px-6 py-4 hover:opacity-75 shadow overflow-hidden flex-shrink-0">
                 <h4 class="dark:text-white text-sm font-extralight"> Próximo pago </h4>
                 <p class="font-extrabold text-4xl text-gray-500 dark:text-white my-3"> 28 Sept </p>
                 <span class="dark:text-white inline-flex items-center gap-x-2 font-extralight text-sm">
@@ -24,6 +27,36 @@
                         Mensualidad
                 </span>
             </div>
+            <NuxtLink to="/birthdays">
+                <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg px-6 py-4 cursor-pointer hover:opacity-75 shadow overflow-hidden flex-shrink-0">
+                    <h4 class="dark:text-white text-sm font-extralight"> Cumpleaños </h4>
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="42" 
+                        height="42" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        class="lucide lucide-cake-icon lucide-cake text-gray-500 dark:text-white my-3">
+                            <path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/>
+                            <path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/>
+                            <path d="M2 21h20"/>
+                            <path d="M7 8v3"/>
+                            <path d="M12 8v3"/>
+                            <path d="M17 8v3"/>
+                            <path d="M7 4h.01"/>
+                            <path d="M12 4h.01"/>
+                            <path d="M17 4h.01"/>
+                    </svg>
+                    <span class="dark:text-white inline-flex items-center gap-x-2 font-extralight text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+                            8 cumpleañeros
+                    </span>
+                </div>
+            </NuxtLink>
         </div>
 
     </section>

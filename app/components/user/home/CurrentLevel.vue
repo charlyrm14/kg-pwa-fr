@@ -6,9 +6,7 @@
     <section class="mt-6">
 
         <SectionTitle
-            title="Tu nivel actual"
-            :show-icon="true"
-            align="between"/>
+            title="Tu nivel actual"/>
 
         <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg p-4 cursor-pointer hover:opacity-75 shadow">
             <div class="flex justify-between items-center">
