@@ -79,7 +79,7 @@
     <section class="mt-6">
         <SectionTitle title="Estadísticas"/>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-gray-200/60 dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-2 rounded-lg">
+            <div class="bg-white dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-2 rounded-lg shadow">
                 <div class="flex justify-center items-center">
                     <div class="border-6 border-gray-200 dark:border-dark-soft rounded-full px-4 py-5">
                         <span class="font-light dark:text-white text-lg"> 80% </span>
@@ -89,7 +89,7 @@
                     <p class="dark:text-white font-light text-center"> Para completar el nivel </p>
                 </div>
             </div>
-            <div class="bg-gray-200/60 dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-2 rounded-lg">
+            <div class="bg-white dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-2 rounded-lg shadow">
                 <div class="flex justify-center items-center">
                     <div class="border-6 border-gray-200 dark:border-dark-soft rounded-full px-4 py-4">
                         <span class="font-light dark:text-white text-lg">
