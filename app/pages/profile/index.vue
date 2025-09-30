@@ -46,7 +46,7 @@
                 @click="contentTab = 3"
                 class="cursor-pointer hover:opacity-75 text-lg"
                 :class="contentTab === 3 ? 'border-b-4 border-blue-500 dark:text-white' : 'text-gray-400'"> 
-                    Información general
+                    Información
             </button>
             <button 
                 @click="contentTab = 4"
