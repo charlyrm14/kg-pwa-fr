@@ -6,9 +6,7 @@
     <section class="mt-6">
 
         <SectionTitle
-            title="Reto semanal"
-            :show-icon="true"
-            align="between"/>
+            title="Reto semanal"/>
 
         <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg p-4 cursor-pointer hover:opacity-75 shadow">
             <div class="flex justify-start items-center gap-x-4">
