@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+    import Breadcrumb from '~/components/common/Breadcrumb.vue';
+
     definePageMeta({
         layout: 'admin'
     })
@@ -7,7 +9,15 @@
 </script>
 
 <template>
-    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 px-5">
+    <section class="md:px-5">
+        <Breadcrumb
+            heading="Dashboard"
+            primary-section="Home"
+            primary-link="/kg-admin"
+            secondary-section="Estadísticas"/>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 px-5 mt-6">
         <div class="bg-white dark:bg-dark-light shadow-lg rounded-lg p-5">
             <div class="flex justify-between items-center">
                 <h4 class="text-gray-600 dark:text-gray-200">
