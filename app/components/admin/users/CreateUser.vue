@@ -27,6 +27,7 @@
                         Agregar usuario
                 </h2>
                 <button
+                    :disabled="isSubmitting"
                     class="text-gray-400 dark:text-gray-500 hover:text-red-500 transition"
                     :class="isSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'"
                     @click="$emit('closeCreateUserModal')">

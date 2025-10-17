@@ -2,7 +2,9 @@
 
     import CreateUser from '~/components/admin/users/CreateUser.vue';
     import { useModalManager } from '#imports';
-
+    import Breadcrumb from '~/components/common/Breadcrumb.vue';
+    import DeleteUser from '~/components/admin/users/DeleteUser.vue';
+    
     definePageMeta({
         layout: 'admin'
     });
@@ -15,26 +17,13 @@
 </script>
 
 <template>
-    <section class="md:px-5">
-        <h1 class="dark:text-white font-bold text-xl"> Lista usuarios </h1>
-        <nav class="flex mt-3" aria-label="Breadcrumb">
-            <ol role="list" class="flex items-center space-x-2 sm:space-x-3">
-                <li class="flex items-center">
-                    <a href="#" class="text-base font-medium text-gray-500 hover:text-blue-600 transition duration-150 dark:text-gray-400 dark:hover:text-blue-400">
-                        Usuarios
-                    </a>
-                </li>
 
-                <li class="flex items-center">
-                    <svg class="h-5 w-5 text-gray-400 mx-2 sm:mx-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10l-3.293-3.293a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="text-base font-semibold text-blue-600 dark:text-blue-400">
-                        Lista
-                    </span>
-                </li>
-            </ol>
-        </nav>
+    <section class="md:px-5">
+        <Breadcrumb
+            heading="Lista usuarios"
+            primary-section="Usuarios"
+            primary-link="/kg-admin/users"
+            secondary-section="Lista"/>
     </section>
 
     <section class="mt-6 md:px-5">
@@ -200,14 +189,16 @@
                                 v-if="showActionsContent"
                                 class="absolute -bottom-26 -left-9 bg-white border border-gray-200 dark:border-none dark:bg-dark-extralight rounded-lg shadow-xl w-40">
                                     <div class="px-2 py-2 ">
-                                        <button
+                                        <NuxtLink
+                                            to="/kg-admin/users/edit/4f507188-2b7e-4263-9e06-dcb01ea9c0e4"
                                             class="dark:text-gray-400 text-base inline-flex items-center gap-x-2 font-light px-3 py-1 cursor-pointer hover:text-blue-500  rounded-lg w-full">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen-icon lucide-user-round-pen"><path d="M2 21a8 8 0 0 1 10.821-7.487"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="8" r="5"/></svg>
                                                     Editar
-                                        </button>
+                                        </NuxtLink>
                                     </div> 
                                     <div class="px-2 py-2">
                                         <button
+                                            @click="open('DeleteUserModal')"
                                             class="dark:text-gray-400 text-base inline-flex items-center gap-x-2 font-light px-3 py-1 cursor-pointer hover:text-red-500  rounded-lg w-full">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                                                     Eliminar
@@ -310,5 +301,9 @@
     <CreateUser 
         v-if="isOpen('CreateUserModal')"
         @closeCreateUserModal="close"/>
+
+    <DeleteUser
+        v-if="isOpen('DeleteUserModal')"
+        @closeDeleteUserModal="close"/>
 
 </template>
