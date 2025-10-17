@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 px-5">
         <div class="bg-white dark:bg-dark-light shadow-lg rounded-lg p-5">
             <div class="flex justify-between items-center">
                 <h4 class="text-gray-600 dark:text-gray-200">
@@ -141,7 +141,7 @@
             </div>
         </div>
     </section>
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 px-5">
         <div class="bg-white dark:bg-dark-light shadow-lg rounded-lg p-5">
             <div class="flex justify-between items-center">
                 <h4 class="text-gray-600 dark:text-gray-200">
