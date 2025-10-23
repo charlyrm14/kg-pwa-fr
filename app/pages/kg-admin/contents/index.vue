@@ -129,11 +129,12 @@
                                 </div>
                         </div>
                     </div>
-                    <button
+                    <NuxtLink
+                        to="/kg-admin/contents/create"
                         class="inline-flex items-center gap-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-75"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus2-icon lucide-file-plus-2"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M3 15h6"/><path d="M6 12v6"/></svg>
                                 Agregar <span class="hidden md:block"> contenido </span> 
-                    </button>
+                    </NuxtLink>
                 </div>
             </div>
             
