@@ -6,7 +6,7 @@
 
 <template>
 <div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-dark-light rounded-t-2xl ring-1 ring-gray-300 dark:ring-dark-soft p-2 shadow-lg transform transition-transform duration-300 z-[9999] translate-y-0">
-        <div class="w-120 md:w-full h-65 md:h-70 mx-auto mb-4 p-4 md:p-8 ">
+        <div class="w-full h-65 md:h-70 mx-auto mb-4 p-4 md:p-8 ">
             
             <div class="flex justify-between items-center">
                 <h4 class="dark:text-white text-xl"> Enviar a </h4>

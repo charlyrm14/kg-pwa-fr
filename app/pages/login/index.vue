@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+    import Shark from '~/assets/media/shark.png';
+
     definePageMeta({
         layout: 'login'
     })
@@ -10,6 +12,13 @@
     <section>
         <div class="fixed inset-0 flex items-center justify-center z-50 bg-gray-100 dark:bg-dark p-4">
             <div class="w-full md:w-2/3 lg:w-1/3 max-h-full  rounded-xl p-6 overflow-y-auto">
+
+                <div class="flex justify-center">
+                    <img 
+                        :src="Shark" 
+                        alt="Shark login"
+                        class="w-[70%]">
+                </div>
 
                 <p class="text-blue-500 text-xl font-extrabold"> Inicia sesión </p>
                 <h2 class="text-4xl font-bold dark:text-white mb-2"> ¡Hola de nuevo! </h2>

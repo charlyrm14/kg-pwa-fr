@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant theme-midnight (&:where([data-theme="midnight"] *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
     --color-dark: #181818;
