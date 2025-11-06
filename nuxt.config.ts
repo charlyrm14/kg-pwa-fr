@@ -19,6 +19,12 @@ export default defineNuxtConfig({
       }
     }
   },
+  runtimeConfig: {
+    public: {
+      mockApiMode: process.env.NUXT_MOCK_API_MODE || false,
+      tokenAccessName: process.env.NUXT_TOKEN_ACCESS_NAME || 'auth-token'
+    },
+  },
   alias: {
     '~/types': '/types',
     '@types': '/types'

@@ -4,7 +4,11 @@
     import NextEvent from '~/components/user/home/NextEvent.vue';
     import Reminders from '~/components/user/home/Reminders.vue';
     import WeeklyChallenge from '~/components/user/home/WeeklyChallenge.vue';
-    Reminders
+    
+    definePageMeta({
+        requiresAuth: true
+    })
+
 </script>
 
 <template>
