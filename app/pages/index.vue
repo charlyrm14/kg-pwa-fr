@@ -5,10 +5,6 @@
     import Reminders from '~/components/user/home/Reminders.vue';
     import WeeklyChallenge from '~/components/user/home/WeeklyChallenge.vue';
     
-    definePageMeta({
-        requiresAuth: true
-    })
-
 </script>
 
 <template>

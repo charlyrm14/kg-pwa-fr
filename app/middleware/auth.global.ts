@@ -1,10 +1,12 @@
 import { useAuth } from "#imports"
 
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((to) => {
 
     const { isAuthenticated } = useAuth()
 
-    if(to.meta.requiresAuth && !isAuthenticated) {
+    if (['/login', '/register'].includes(to.path)) return
+
+    if(!isAuthenticated.value) {
         return navigateTo('login')
     }
 })
