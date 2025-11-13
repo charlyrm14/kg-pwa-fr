@@ -9,14 +9,23 @@ export function useAuth() {
         description: string
     }
 
-    const isAuthenticated = ref<boolean>(false)
     const token = useCookie<string | null>(config.public.tokenAccessName)
     const error = reactive<ErrorState>({
         status: false,
         description: '',
     })
 
-    const IS_MOCK_API_MODE = config.public.mockApiMode === 'true'
+    const IS_MOCK_API_MODE = config.public.mockApiMode
+
+    let initialAuthStatus: boolean;
+
+    if (IS_MOCK_API_MODE) {
+        initialAuthStatus = false;
+    } else {
+        initialAuthStatus = true; 
+    }
+
+    const isAuthenticated = ref<boolean>(initialAuthStatus)
 
     const login = async(email: string, password: string) => {
         try {
@@ -38,7 +47,6 @@ export function useAuth() {
                 }
 
             } else {
-
                 console.log('API login functionality')
             }
 
