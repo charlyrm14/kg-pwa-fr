@@ -2,11 +2,11 @@ import { useAuth } from "#imports"
 
 export default defineNuxtRouteMiddleware((to) => {
 
-    const { isAuthenticated } = useAuth()
+    // const { isAuthenticated } = useAuth()
 
-    if (['/login', '/register'].includes(to.path)) return
+    // if (['/login', '/register'].includes(to.path)) return
 
-    if(!isAuthenticated.value) {
-        return navigateTo('login')
-    }
+    // if(!isAuthenticated.value) {
+    //     return navigateTo('login')
+    // }
 })

@@ -1,3 +1,8 @@
+import CardNews from '~/assets/media/card-news.png'
+import CardEvents from '~/assets/media/card-events.png'
+import CardTips from '~/assets/media/card-tips.png'
+import CardNutrition from '~/assets/media/card-nutrition.png'
+
 type ContentTypeSlug = 'news' | 'events' | 'tips' | 'nutrition';
 
 export const contentTitle = (type: ContentTypeSlug = 'news') => {
@@ -10,4 +15,18 @@ export const contentTitle = (type: ContentTypeSlug = 'news') => {
     }
 
     return contentType[type]  || contentType.news
+}
+
+export const contentTypeImage = (type?: string) => {
+
+    const normalized = type?.toLowerCase() as ContentTypeSlug | undefined;
+
+    const imageURL: Record<ContentTypeSlug, string> = {
+        news: CardNews,
+        events: CardEvents,
+        tips: CardTips,
+        nutrition: CardNutrition
+    }
+
+    return normalized ? imageURL[normalized] : imageURL.news
 }

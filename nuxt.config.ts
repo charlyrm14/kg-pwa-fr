@@ -5,6 +5,13 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  modules: ['@pinia/nuxt'],
+  pinia: {
+    /**
+     * @default `['stores']`
+     */
+    storesDirs: []
+  },
   css: ['@/app/assets/css/main.css'],
   vite: {
     plugins: [
@@ -22,7 +29,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       mockApiMode: process.env.NUXT_PUBLIC_MOCK_API_MODE === 'true',
-      tokenAccessName: process.env.NUXT_PUBLIC_TOKEN_ACCESS_NAME || 'auth-token'
+      tokenAccessName: process.env.NUXT_PUBLIC_TOKEN_ACCESS_NAME || 'auth-token',
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000/api/v1',
     },
   },
   alias: {
