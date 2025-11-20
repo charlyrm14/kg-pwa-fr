@@ -3,7 +3,9 @@ export type ContentTypeSlug = 'news' | 'events' | 'tips' | 'nutrition';
 export interface EventDetails {
     location: string | null
     start_date: string | null
+    start_hour: string | null
     end_date: string | null
+    end_hour: string | null
 }
 
 export interface Content {

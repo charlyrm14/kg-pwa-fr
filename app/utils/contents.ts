@@ -17,9 +17,9 @@ export const contentTitle = (type: ContentTypeSlug = 'news') => {
     return contentType[type]  || contentType.news
 }
 
-export const contentTypeImage = (type?: string) => {
+export const contentTypeImage = (type: string = 'news'): string => {
 
-    const normalized = type?.toLowerCase() as ContentTypeSlug | undefined;
+    const normalized = type?.toLowerCase() as ContentTypeSlug;
 
     const imageURL: Record<ContentTypeSlug, string> = {
         news: CardNews,
@@ -28,5 +28,5 @@ export const contentTypeImage = (type?: string) => {
         nutrition: CardNutrition
     }
 
-    return normalized ? imageURL[normalized] : imageURL.news
+    return imageURL[normalized] ?? imageURL.news
 }
