@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+    const url = useRequestURL()
+
     defineEmits(['closeShareModal'])
 
 </script>
@@ -43,7 +45,7 @@
                     <input 
                         type="text"
                         class="w-full bg-gray-200 p-4 rounded-lg dark:bg-dark-soft dark:text-slate-200 cursor-pointer"
-                        placeholder="http://localhost:3000/contents/news/13bd3802-2d17"
+                        :placeholder="url?.href"
                         disabled>
                     <div class="absolute top-1 right-1 cursor-pointer hover:opacity-75 bg-gray-300 dark:bg-dark-extralight p-3 rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 dark:text-white">

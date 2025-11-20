@@ -1,8 +1,36 @@
 <script setup lang="ts">
     import Alert from '~/components/common/Alert.vue'
     import ShareContent from '~/components/user/contents/ShareContent.vue'
+    import { contentTypeImage } from '#imports'
+    import { useContentStore } from '~/stores/contents'
 
     const route = useRoute()
+    const slugParam = route.params.contentSlug
+
+    let slugContent: string
+
+    if(Array.isArray(slugParam) || !slugParam) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'Invalid slug or page not found'
+        })
+    } else {
+        slugContent = slugParam
+    }
+
+    const contentStore = useContentStore()
+
+    const { data: content, error } = await useAsyncData('content', async () => {        
+        await contentStore.fetchContentBySlug(slugContent as string)
+        return contentStore.contentDetail
+    })
+
+    if (error.value) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'Page not found'
+        })
+    }
 
     const contentTab = ref<number>(1)
     const favoriteAlert = ref<boolean>(false)
@@ -16,6 +44,10 @@
         showShareModal.value = false
     }
     
+    const typeSlugParam = computed(() => {
+        const param = route.params.typeSlug
+        return Array.isArray(param) ? param[0] : param ?? 'news'
+    })
 
 </script>
 
@@ -33,16 +65,16 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
         </NuxtLink>
     </section>
-
+    
     <section class="mt-2">
         <div class="flex justify-center items-start py-2">
             <div class="relative w-full mx-auto  rounded-xl overflow-hidden">
-                
+
                 <div class="relative w-full h-76 lg:h-[30rem] overflow-hidden">
                     <img 
-                        src="https://nadaconexceso.com/wp-content/uploads/2021/04/Nataci%C3%B3n-Qu%C3%A9-es-y-sus-caracter%C3%ADsticas-Nada-con-exceso.jpg" 
-                        alt="Contenido principal" 
-                        class="w-full h-full object-cover"/>
+                        :src="contentTypeImage(typeSlugParam)"
+                        :alt="content?.title ?? 'unknown'" 
+                        class="w-full h-full object-cover brightness-25"/>
                 </div>
                 
                 <div class="p-4 pt-8">
@@ -91,10 +123,10 @@
 
     <section>
         <div>
-            <h1 class="dark:text-white font-bold text-2xl"> Mi noticia de un contenido </h1>
+            <h1 class="dark:text-white font-bold text-2xl"> {{ content?.title ?? 'unknown' }} </h1>
             <p class="inline-flex items-center gap-2 dark:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar1-icon lucide-calendar-1"><path d="M11 14h1v4"/><path d="M16 2v4"/><path d="M3 10h18"/><path d="M8 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
-                    <span class="block text-sm font-light"> Publicado el 25 Sept, 2025 </span>
+                    <span class="block text-sm font-light"> Publicado el {{ content?.created_at ?? '--/--/--'}} </span>
             </p>
         </div>
     </section>
@@ -120,13 +152,7 @@
     <section v-if="contentTab === 1" class="my-6">
         <div class="bg-white dark:bg-dark-extralight rounded-lg p-3 shadow border border-gray-200 dark:border-none">
             <p class="dark:text-white font-light">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit suscipit eget congue, vel sed ultricies scelerisque posuere penatibus cras dis venenatis conubia, placerat dictumst tincidunt per habitant blandit lobortis justo non. Pellentesque pharetra posuere aliquam ac hendrerit in maecenas fusce commodo viverra, egestas condimentum erat quisque cras volutpat eget fames. Leo class aliquet ac habitasse curae dui cubilia sodales hendrerit, volutpat sapien montes inceptos nisi a pellentesque risus curabitur, tempus nascetur justo dictum consequat porttitor lacinia tristique.
-            </p>
-            <p class="dark:text-white font-light my-2">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit suscipit eget congue, vel sed ultricies scelerisque posuere penatibus cras dis venenatis conubia, placerat dictumst tincidunt per habitant blandit lobortis justo non. Pellentesque pharetra posuere aliquam ac hendrerit in maecenas fusce commodo viverra, egestas condimentum erat quisque cras volutpat eget fames. Leo class aliquet ac habitasse curae dui cubilia sodales hendrerit, volutpat sapien montes inceptos nisi a pellentesque risus curabitur, tempus nascetur justo dictum consequat porttitor lacinia tristique.
-            </p>
-            <p class="dark:text-white font-light my-2">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit suscipit eget congue, vel sed ultricies scelerisque posuere penatibus cras dis venenatis conubia, placerat dictumst tincidunt per habitant blandit lobortis justo non. Pellentesque pharetra posuere aliquam ac hendrerit in maecenas fusce commodo viverra, egestas condimentum erat quisque cras volutpat eget fames. Leo class aliquet ac habitasse curae dui cubilia sodales hendrerit, volutpat sapien montes inceptos nisi a pellentesque risus curabitur, tempus nascetur justo dictum consequat porttitor lacinia tristique.
+                {{ content?.content ?? 'No content' }}
             </p>
         </div>        
     </section>
@@ -139,7 +165,7 @@
                         ¿Cúando?
                 </p>
                 <p class="dark:text-white text-base md:text-lg gap-1"> 
-                    27 de Septiembre 2025
+                    {{ content?.event?.start_date }}
                 </p>
             </div>
             <div class="mt-4">
@@ -148,7 +174,7 @@
                         ¿A Qué hora?
                 </p>
                 <p class="dark:text-white text-base md:text-lg gap-1"> 
-                    09:00 a 12:00
+                    {{ content?.event?.start_hour ?? '--/--/--' }} a {{ content?.event?.end_hour ?? '--/--/--' }}
                 </p>
             </div>
             <div class="mt-4">
@@ -157,7 +183,7 @@
                         ¿Dónde?
                 </p>
                 <p class="dark:text-white text-base md:text-lg gap-1"> 
-                    José María Pino Suárez 30, Centro Histórico de la Cdad. de México, Centro, Cuauhtémoc, 06060 Ciudad de México, CDMX
+                    {{ content?.event?.location }}
                 </p>
             </div>
         </div>
