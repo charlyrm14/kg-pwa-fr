@@ -27,3 +27,20 @@ export interface UserProfileData {
     created_at: string
     updated_at: string
 }
+
+export interface UserProfileBirthday {
+    about_me: string
+    birthdate: string
+    age: number
+    gender: string
+}
+
+export interface UserBirthday {
+    name: string
+    last_name: string
+    mother_last_name: string | null
+    email: string
+    uuid: string
+    student_code: string | null
+    profile: UserProfileBirthday
+}
