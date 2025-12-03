@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import SectionTitle from '../shared/SectionTitle.vue';
+    import { currentFormattedDateMonthDay } from '#imports';
 </script>
 
 <template>
@@ -11,7 +12,7 @@
             align="between"/>
             
         <div class="flex gap-6 overflow-x-auto">
-            <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg px-6 py-4 hover:opacity-75 shadow overflow-hidden flex-shrink-0">
+            <div class="bg-violet-900 rounded-lg px-6 py-4 hover:opacity-75 shadow overflow-hidden flex-shrink-0">
                 <h4 class="dark:text-white text-sm font-extralight"> Próxima clase </h4>
                 <p class="font-extrabold text-4xl text-gray-500 dark:text-white my-3"> 24 Sept </p>
                 <span class="dark:text-white inline-flex items-center gap-x-2 font-extralight text-sm">
@@ -19,7 +20,7 @@
                         09:00 a 10:00
                 </span>
             </div>
-            <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg px-6 py-4 hover:opacity-75 shadow overflow-hidden flex-shrink-0">
+            <div class="bg-lime-500 rounded-lg px-6 py-4 hover:opacity-75 shadow overflow-hidden flex-shrink-0">
                 <h4 class="dark:text-white text-sm font-extralight"> Próximo pago </h4>
                 <p class="font-extrabold text-4xl text-gray-500 dark:text-white my-3"> 28 Sept </p>
                 <span class="dark:text-white inline-flex items-center gap-x-2 font-extralight text-sm">
@@ -28,7 +29,7 @@
                 </span>
             </div>
             <NuxtLink to="/birthdays">
-                <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg px-6 py-4 cursor-pointer hover:opacity-75 shadow overflow-hidden flex-shrink-0">
+                <div class="bg-fuchsia-700  rounded-lg px-6 py-4 cursor-pointer hover:opacity-75 shadow overflow-hidden flex-shrink-0 w-auto">
                     <h4 class="dark:text-white text-sm font-extralight"> Cumpleaños </h4>
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
@@ -51,9 +52,9 @@
                             <path d="M12 4h.01"/>
                             <path d="M17 4h.01"/>
                     </svg>
-                    <span class="dark:text-white inline-flex items-center gap-x-2 font-extralight text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
-                            8 usuarios
+                    <span class="dark:text-white font-extralight text-sm inline-flex items-center gap-x-2 whitespace-nowrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days-icon lucide-calendar-days"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                            {{ currentFormattedDateMonthDay() }}
                     </span>
                 </div>
             </NuxtLink>
