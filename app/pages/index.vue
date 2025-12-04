@@ -8,11 +8,13 @@
 </script>
 
 <template>
-    <ContentTypes/>
-    <CurrentLevel/>
-    <Reminders/>
-    <WeeklyChallenge/>
-    <NextEvent/>
+    <section>
+        <ContentTypes/>
+        <CurrentLevel/>
+        <Reminders/>
+        <WeeklyChallenge/>
+        <NextEvent/>
+    </section>
 </template>
 
 

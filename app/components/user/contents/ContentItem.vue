@@ -27,7 +27,7 @@
                             <span> {{ content?.author ?? 'unknown' }} </span>
                         </p>
                         <h2 class="text-pink-500 font-medium text-base md:text-2xl my-3 md:my-0 leading-snug">
-                            {{ content?.title ?? 'unknown' }}
+                            {{ content?.title.slice(0, 50)  ?? 'unknown' }} ...
                         </h2>
                         <p class="hidden md:block my-1 text-gray-600 dark:text-gray-300">
                             {{ content?.content.slice(0, 130) ?? 'unknown' }}
