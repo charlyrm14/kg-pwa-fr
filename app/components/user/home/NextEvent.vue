@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <section class="mt-6">
+    <section class="my-6">
         
         <SectionTitle
             title="Próximo evento"/>
