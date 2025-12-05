@@ -2,13 +2,19 @@
     import { useFavorites } from '#imports';
     import CoverCard  from '~/assets/media/card-news.png'
     import Hearth from '~/assets/media/hearth.png'
+    import { useAlert } from '#imports';
+    import Alert from '~/components/common/Alert.vue';
+    import { colorByContentType } from '#imports';
     
     const { favorites, removeFromFavorite } = useFavorites()
+    const { alert, closeAlert } = useAlert()
 
 </script>
 
 <template>
     <section>
+
+        <Alert v-if="alert.status" :title="alert.title" :description="alert.description" :type="alert.type" @closeAlert="closeAlert"/>
 
         <section class="space-y-3">
             <div class="px-3 mb-6">
@@ -18,16 +24,20 @@
             <ClientOnly>
             <template v-if="(favorites || []).length > 0">
                 <div  v-for="(favorite, index) in favorites" :key="index" class="p-3 flex justify-between gap-x-4 items-start cursor-pointer rounded-lg bg-white hover:opacity-75 dark:bg-dark-light dark:hover:bg-dark-extralight">
-                    <div class="group overflow-hidden rounded-full aspect-square w-25 transition-all duration-300 hover:bg-gray-200/30 dark:hover:bg-dark-light/40">
-                        <img :src="CoverCard" :alt="favorite?.title" class="w-full h-full object-cover"/>
-                    </div>
+                    <NuxtLink 
+                        :to="`/contents/${favorite?.type.toLowerCase()}/${favorite?.slug}`"
+                        class="group overflow-hidden rounded-full aspect-square w-25 transition-all duration-300 hover:bg-gray-200/30 dark:hover:bg-dark-light/40">
+                            <img :src="CoverCard" :alt="favorite?.title" class="w-full h-full object-cover"/>
+                    </NuxtLink>
                     <div class="border-b border-gray-200 dark:border-dark-soft w-full pb-2">
                         <div class="flex justify-between">
                             <div>
-                                <h1 class="dark:text-white">
-                                    {{ favorite?.title.slice(0, 30) ?? 'unknown' }}...
-                                </h1>
-                                <span class="text-sm bg-lime-500 text-white my-2 rounded-lg px-2">
+                                <NuxtLink :to="`/contents/${favorite?.type.toLowerCase()}/${favorite?.slug}`">
+                                    <h1 class="dark:text-white">
+                                        {{ favorite?.title.slice(0, 30) ?? 'unknown' }}...
+                                    </h1>
+                                </NuxtLink>
+                                <span class="text-sm text-white my-2 rounded-lg px-2" :class="`${colorByContentType(favorite?.type)}`">
                                     {{ favorite?.type }}
                                 </span>
                                 <span class="block text-xs dark:text-gray-400 my-2">

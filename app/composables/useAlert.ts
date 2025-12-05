@@ -14,20 +14,20 @@ export function useAlert () {
         alert.value.description = description,
         alert.value.type = alertType,
         alert.value.status = true
-        resetAlert()
+        setTimeout(() => {
+            resetAlert()
+        }, 3000);
     }
 
     const closeAlert = () => {
-        alert.value.status = false
+        resetAlert()
     }
 
     const resetAlert = () => {
-        setTimeout(() => {
-            alert.value.title = '',
-            alert.value.description = '',
-            alert.value.type = 'success',
-            alert.value.status = false
-        }, 3000);
+        alert.value.title = '',
+        alert.value.description = '',
+        alert.value.type = 'success',
+        alert.value.status = false
     }
 
     return {
