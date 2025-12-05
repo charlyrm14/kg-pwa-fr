@@ -1,12 +1,12 @@
 import type { AlertType } from "#imports"
 
-export function getAlertColor(type: AlertType): string {
+export function getAlertColorText(type: AlertType): string {
 
     const colors: Record<AlertType, string> = {
-        success: 'green',
-        error: 'red',
-        warning: 'amber',
-        info: 'blue'
+        success: 'bg-green-100',
+        error: 'bg-red-100',
+        warning: 'bg-amber-100',
+        info: 'bg-blue-100'
     }
 
     return colors[type]

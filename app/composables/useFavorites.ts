@@ -1,6 +1,10 @@
+import { useAlert } from "#imports"
+
 const STORAGE_KEY = 'favorites'
 
 export function useFavorites () {
+    
+    const { showAlert } = useAlert()
 
     type Favorite = {
         title: string
@@ -24,6 +28,9 @@ export function useFavorites () {
         if(!favorites.value?.some(fav => fav.slug === content.slug)) {
             favorites.value?.push(content)
             save()
+            showAlert('Éxito', 'Agredado a favoritos', 'success')
+        } else {
+            showAlert('Éxito', 'Agredado a favoritos', 'success')
         }
     }
 
@@ -36,6 +43,7 @@ export function useFavorites () {
     const removeFromFavorite = (slug: string) => {
         favorites.value = favorites.value?.filter(fav => fav.slug !== slug) ?? []
         save()
+        showAlert('Éxito', 'Eliminado de favoritos', 'success')
     }
 
     const isFavorite = (slug: string) => {

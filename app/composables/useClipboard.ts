@@ -7,10 +7,10 @@ export function useClipboard () {
     const copyToClipboard = async(text: string) => {
         try {
             await navigator.clipboard.writeText(text)
-            showAlert('Copiado', 'Texto copiado al portapapeles', 'success')
+            showAlert('Copiado', 'Copiado al portapapeles', 'success')
             
         } catch (error) {
-            showAlert('Error', 'No se pudo copiar el texxto', 'error')
+            showAlert('Error', 'No se pudo copiar el texto', 'error')
         }
     }
 

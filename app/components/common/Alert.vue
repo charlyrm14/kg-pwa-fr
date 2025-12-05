@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import type { AlertType } from '#imports';
-    import { getAlertColor, getAlertIcon } from '#imports';
+    import { getAlertColorText, getAlertIcon } from '#imports';
 
     const props = withDefaults(
         defineProps<{
@@ -15,8 +15,10 @@
         }
     )
 
-    const alertColor = computed(() => getAlertColor(props.type))
+    const alertColor = computed(() => getAlertColorText(props.type))
     const alertIcon = computed(() => getAlertIcon(props.type))
+
+    const emit = defineEmits(['closeAlert'])
 
 </script>
 
@@ -25,17 +27,18 @@
             <div class="flex justify-between items-center gap-x-12">
                 <div class="flex items-start gap-x-4">
                     <div 
-                        :class="'p-2 rounded-lg border border-gray-100 dark:border-none bg-' + alertColor + '-100'">
+                        :class="`p-2 rounded-lg border border-gray-100 dark:border-none ${alertColor}`">
                             <span v-html="alertIcon"></span>
                     </div>
                     <div>
-                        <p class="text-sm font-light dark:text-gray-400"> 
+                        <p class="text-xs md:text-sm font-light dark:text-gray-400"> 
                             {{ title }}
-                                <span class="block text-base dark:text-white"> {{ description }}</span> 
+                                <span class="block text-sm md:text-base dark:text-white"> {{ description }}</span> 
                         </p>
                     </div>
                 </div>
                 <button 
+                    @click="$emit('closeAlert')"
                     class="text-gray-500 cursor-pointer hover:text-red-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />

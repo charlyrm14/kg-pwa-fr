@@ -13,7 +13,7 @@
 <template>
     <NuxtLink
         :to="`/contents/${route.params.typeSlug}/${content?.slug}`">
-            <div class="p-3 flex justify-between gap-x-4 items-center cursor-pointer rounded-lg bg-white hover:opacity-75 dark:bg-dark-light dark:hover:bg-dark-extralight">
+            <div class="p-3 flex justify-between gap-x-4 items-center cursor-pointer rounded-lg bg-white hover:opacity-75 dark:bg-dark-light dark:hover:bg-dark-extralight my-4">
                 <div class="group overflow-hidden rounded-full aspect-square w-25 transition-all duration-300 hover:bg-gray-200/30 dark:hover:bg-dark-light/40">
                     <img :src="contentTypeImage(content?.type)" :alt="content?.title ?? 'unknown'" class="w-full h-full object-cover"/>
                 </div>

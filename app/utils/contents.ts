@@ -30,3 +30,31 @@ export const contentTypeImage = (type: string = 'news'): string => {
 
     return imageURL[normalized] ?? imageURL.news
 }
+
+export const colorByContentType = (type: string = 'news'): string => {
+
+    const normalized = type?.toLowerCase() as ContentTypeSlug;
+
+    const color: Record<ContentTypeSlug, string> = {
+        news: 'bg-amber-500',
+        events: 'bg-purple-500',
+        tips: 'bg-pink-500',
+        nutrition: 'bg-lime-500'
+    }
+
+    return color[normalized]  || color.news
+}
+
+export const contentSectionTitle = (type: string = 'news'): string => {
+
+    const normalized = type?.toLowerCase() as ContentTypeSlug;
+
+    const contentType: Record<ContentTypeSlug, string> = {
+        news: 'Noticias',
+        events: 'Eventos',
+        tips: 'Tips',
+        nutrition: 'Nutrición'
+    }
+
+    return contentType[normalized]  || contentType.news
+}
