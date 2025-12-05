@@ -52,8 +52,10 @@
         </section>
 
         <section class="mt-21 md:mt-25">
-            <h1 class="text-center text-2xl dark:text-white font-extrabold"> 
-                {{ user?.name ?? 'unknown' }} {{ user?.last_name ?? '' }}
+            <h1 
+                v-gsap.whenVisible.animateText.once.slow
+                class="text-center text-2xl dark:text-white font-extrabold"> 
+                    {{ user?.name ?? 'unknown' }} {{ user?.last_name ?? '' }}
             </h1>
         </section>
 
