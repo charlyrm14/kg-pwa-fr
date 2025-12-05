@@ -4,6 +4,7 @@
     import { contentTypeImage } from '#imports'
     import { useContentStore } from '~/stores/contents'
     import { useFavorites } from '#imports'
+    import { useAlert } from '#imports'
 
     const route = useRoute()
     const slugParam = route.params.contentSlug
@@ -21,6 +22,7 @@
 
     const contentStore = useContentStore()
     const { addToFavorites, isFavorite } = useFavorites()
+    const { alert } = useAlert()
 
     const { data: content, error } = await useAsyncData('content', async () => {        
         await contentStore.fetchContentBySlug(slugContent as string)
@@ -35,12 +37,7 @@
     }
 
     const contentTab = ref<number>(1)
-    const favoriteAlert = ref<boolean>(false)
     const showShareModal = ref<boolean>(false)
-
-    const closeFavoritesAlert = () => {
-        favoriteAlert.value = false
-    }
 
     const closeShareModal = () => {
         showShareModal.value = false
@@ -56,10 +53,7 @@
 <template>
     <section>
 
-        <Alert
-            v-if="favoriteAlert"
-            description="Agregado a favoritos"
-            @closeFavoritesAlert="closeFavoritesAlert"/>
+        <Alert v-if="alert.status" :title="alert.title" :description="alert.description" :type="alert.type"/>
 
         <section>
             <NuxtLink

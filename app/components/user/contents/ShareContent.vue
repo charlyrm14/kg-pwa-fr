@@ -1,6 +1,8 @@
 <script setup lang="ts">
+    import { useClipboard } from '#imports';
 
     const url = useRequestURL()
+    const { copyToClipboard } = useClipboard()
 
     defineEmits(['closeShareModal'])
 
@@ -47,11 +49,11 @@
                         class="w-full bg-gray-200 p-4 rounded-lg dark:bg-dark-soft dark:text-slate-200 cursor-pointer"
                         :placeholder="url?.href"
                         disabled>
-                    <div class="absolute top-1 right-1 cursor-pointer hover:opacity-75 bg-gray-300 dark:bg-dark-extralight p-3 rounded-lg">
+                    <button @click="copyToClipboard(url?.href)" class="absolute top-1 right-1 cursor-pointer hover:opacity-75 bg-gray-300 dark:bg-dark-extralight p-3 rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 dark:text-white">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6" />
                         </svg>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
