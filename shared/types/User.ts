@@ -1,3 +1,7 @@
+export type Gender = 'MASCULINO' | 'FEMENINO'
+export type ColorBgGender = 'bg-blue-100' | 'bg-pink-100'
+export type ColorTextGender = 'text-blue-500' | 'text-pink-500'
+export type ColorBorderGender = 'border-blue-500' | 'border-pink-500'
 
 export interface ProfileData {
     about_me: string | null

@@ -1,12 +1,10 @@
-type Months = 'Enero' | 'Febrero' | 'Marzo' | 'Abril' | 'Mayo' | 'Junio' | 'Julio' | 'Agosto' | 'Septiembre' | 'Octubre' | 'Noviembre' |'Diciembre'
-type WeekDay = {
-    day_id: number
-    day: string
-    shortening: string
-    date: string
-    assigned: boolean
-}
+import type { Months, WeekDay } from '~~/shared/types/Dates'
 
+/**
+ * The function `currentFormattedDateMonthDay` returns the current month and day in Spanish format.
+ * @returns The function `currentFormattedDateMonthDay` returns a string in the format "Month, Day"
+ * where Month is the current month in Spanish and Day is the current day of the month.
+ */
 export const currentFormattedDateMonthDay = (): string => {
     const date = new Date();
 
@@ -18,6 +16,11 @@ export const currentFormattedDateMonthDay = (): string => {
     return `${currentMonth}, ${day}` as string
 } 
 
+/**
+ * The function `currentMonth` returns the current month and year in Spanish.
+ * @returns The function `currentMonth` returns a string representing the current month and year in
+ * Spanish format, for example, "Septiembre 2022".
+ */
 export const currentMonth = (): string => {
     const date = new Date();
 
@@ -28,6 +31,15 @@ export const currentMonth = (): string => {
     return `${currentMonth} ${currentYear}` as string
 }
 
+/**
+ * The function `daysByCurrentWeek` returns an array of objects representing the days of the current
+ * week with their corresponding day names, shortenings, and dates.
+ * @returns The function `daysByCurrentWeek` returns an array of objects representing the days of the
+ * current week. Each object contains the following properties:
+ * - `day_id`: The ID of the day (1 for Monday, 2 for Tuesday, and so on).
+ * - `day`: The full name of the day (e.g., "Lunes", "Martes").
+ * - `shortening`: The
+ */
 export const daysByCurrentWeek = (): WeekDay[] => {
     const today = new Date();
     const year = today.getFullYear();
