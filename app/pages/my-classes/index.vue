@@ -4,6 +4,7 @@
     import { useSchedule } from '#imports';
     import AttendanceCurrentMonth from '~/components/user/schedules/AttendanceCurrentMonth.vue';
     import AttendanceByMonth from '~/components/user/schedules/AttendanceByMonth.vue';
+    import AttendancesStatuses from '~/components/user/attendances/AttendancesStatuses.vue';
     
     const { data: schedule } = await useAsyncData('schedule', async() => {
         const { fetchUserSchedule } = useSchedule()
@@ -32,23 +33,17 @@
         
         <section>
             <SectionTitle title="Mis clases"/>
-            <div class="bg-white dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-4 rounded-lg shadow">
-                <div class="flex justify-between md:justify-center items-start">
-                    <h4 class="text-black dark:text-white uppercase text-2xl font-light"> 
-                        Esta semana <span class="block normal-case text-xs font-light md:text-center"> {{ currentMonth() }} </span>
-                    </h4>
-                    <span class="dark:text-white inline-flex items-center gap-x-2 md:hidden"> 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
-                            {{ entry_time }} - {{ departure_time }} 
-                    </span>
+            <div>
+                <div class="flex justify-center md:justify-center items-start">
+                    <h4 class="text-black dark:text-white text-base md:text-lg font-light"> Esta semana </h4>
                 </div>
-                <div class="hidden md:flex md:justify-center md:items-center my-2">
+                <div class="flex justify-center md:items-center mb-2">
                     <span class="dark:text-white inline-flex items-center gap-x-2 font-light"> 
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
                             {{ entry_time }} - {{ departure_time }} 
                     </span>
                 </div>
-                <div class="flex overflow-x-auto md:justify-center md:items-center gap-x-4 mt-4">
+                <div class="flex overflow-x-auto justify-center md:items-center gap-x-4 mt-4">
                     <div
                         v-for="dayWeek in weekWithAssignedDays"
                         :key="dayWeek.day_id"
@@ -62,8 +57,8 @@
             </div>
         </section>
 
-        <section class="mt-6">
-            <SectionTitle title="Historial de asistencias"/>
+        <section class="mt-12">
+            <h4 class="text-black dark:text-white text-lg font-light mb-4"> Historial de asistencias </h4>
             <div class="bg-gray-200/60 dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-1 rounded-lg flex justify-center items-center">
                 <button
                     @click="contentTab = 1"
@@ -82,6 +77,7 @@
 
         <section class="mt-6">
             <div v-if="contentTab === 1">
+                <AttendancesStatuses/>
                 <AttendanceCurrentMonth/>
             </div>
             <div v-else>
