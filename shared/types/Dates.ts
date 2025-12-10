@@ -7,3 +7,9 @@ export type WeekDay = {
     date: string
     assigned: boolean
 }
+
+export interface MonthItem {
+    id: number
+    month: string
+    year: number
+}

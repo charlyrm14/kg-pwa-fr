@@ -1,9 +1,9 @@
 <script setup lang="ts">
-    import { currentMonth, daysByCurrentWeek } from '#imports';
+    import { daysByCurrentWeek } from '#imports';
     import SectionTitle from '~/components/user/shared/SectionTitle.vue';
     import { useSchedule } from '#imports';
-    import AttendanceCurrentMonth from '~/components/user/schedules/AttendanceCurrentMonth.vue';
-    import AttendanceByMonth from '~/components/user/schedules/AttendanceByMonth.vue';
+    import AttendanceCurrentMonth from '~/components/user/attendances/AttendanceCurrentMonth.vue';
+    import AttendanceByMonth from '~/components/user/attendances/AttendanceByMonth.vue';
     import AttendancesStatuses from '~/components/user/attendances/AttendancesStatuses.vue';
     
     const { data: schedule } = await useAsyncData('schedule', async() => {
@@ -59,17 +59,17 @@
 
         <section class="mt-12">
             <h4 class="text-black dark:text-white text-lg font-light mb-4"> Historial de asistencias </h4>
-            <div class="bg-gray-200/60 dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-1 rounded-lg flex justify-center items-center">
+            <div class="bg-gray-200/60 dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-1 rounded-full flex justify-center items-center">
                 <button
                     @click="contentTab = 1"
                     class="dark:text-white w-full cursor-pointer hover:opacity-75"
-                    :class="contentTab === 1 ? 'bg-white dark:bg-dark-soft px-4 py-2 rounded-lg font-bold' : ''">
+                    :class="contentTab === 1 ? 'bg-white dark:bg-dark-soft px-4 py-2 rounded-full font-bold' : 'font-extralight'">
                         Mes actual
                 </button>
                 <button
                     @click="contentTab = 2"
                     class="dark:text-white w-full cursor-pointer hover:opacity-75"
-                    :class="contentTab === 2 ? 'bg-white dark:bg-dark-soft px-4 py-2 rounded-lg font-bold': 'font-light'">
+                    :class="contentTab === 2 ? 'bg-white dark:bg-dark-soft px-4 py-2 rounded-full font-bold': 'font-extralight'">
                         Otros meses
                 </button>
             </div>
