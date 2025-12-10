@@ -1,4 +1,4 @@
-import type { Months, WeekDay } from '~~/shared/types/Dates'
+import type { Months, WeekDay, MonthItem } from '~~/shared/types/Dates'
 
 /**
  * The function `currentFormattedDateMonthDay` returns the current month and day in Spanish format.
@@ -85,3 +85,19 @@ export const daysByCurrentWeek = (): WeekDay[] => {
     return result;
 }
 
+export const currentMonthsOfYear = (): MonthItem[] => {
+
+    const months = [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ]
+
+    const date = new Date()
+
+    return months
+    .slice(0, date.getMonth() + 1)
+    .map((month, index) => ({
+        id: index + 1,
+        month: month,
+        year: date.getFullYear()
+    })).reverse()
+}

@@ -59,3 +59,10 @@ export interface UserAttendance {
     current_year: number
     attendances: Attendance[]
 }
+
+export interface AttendanceReport {
+    report_type: string
+    year: number
+    month: number
+    user_id: string | null
+}
