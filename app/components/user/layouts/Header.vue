@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import Shark from '~/assets/media/shark.png'
 
     const route = useRoute()
     const menuOptions = ref<boolean>(false)
@@ -9,7 +8,12 @@
 <template>
     <header class="bg-white dark:bg-dark dark:text-white p-3 fixed top-0 left-0 w-full z-10 border-b border-gray-200 dark:border-dark-soft">
         <nav class="container mx-auto flex justify-between items-center">
-            <img :src="Shark" alt="Shark logo" class="w-10 drop-shadow-lg drop-shadow-blue-500"/>
+            <div class="flex gap-x-3">
+                <div class="dark:text-white w-10 h-10 bg-gray-200 dark:bg-dark-extralight rounded-full flex justify-center items-center border-2 border-sky-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <h4 class="text-gray-500 dark:text-gray-400 text-xs"> Bienvenido <span class="block text-blue-500 text-base font-extrabold"> Carlos R </span> </h4>
+            </div>
             <div class="flex space-x-1">
                 <div class="relative">
                     <button @click="menuOptions = !menuOptions" class="cursor-pointer hover:text-blue-500 p-2" :class="menuOptions ? 'bg-gray-200/60 dark:bg-dark-soft rounded-full' : ''">

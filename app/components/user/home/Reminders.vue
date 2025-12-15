@@ -1,64 +1,27 @@
 <script setup lang="ts">
-    import SectionTitle from '../shared/SectionTitle.vue';
-    import { currentFormattedDateMonthDay } from '#imports';
 </script>
 
 <template>
-    <section class="mt-6">
-
-        <SectionTitle 
-            title="Recordatorios"
-            :show-icon="true"
-            align="between"/>
-            
-        <div class="flex gap-6 overflow-x-auto">
-            <div class="bg-violet-900 rounded-lg px-6 py-4 hover:opacity-75 shadow overflow-hidden flex-shrink-0">
-                <h4 class="text-white text-sm font-extralight"> Próxima clase </h4>
-                <p class="font-extrabold text-4xl text-white my-3"> 24 Sept </p>
-                <span class="text-white inline-flex items-center gap-x-2 font-extralight text-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
-                        09:00 a 10:00
-                </span>
-            </div>
-            <div class="bg-lime-500 rounded-lg px-6 py-4 hover:opacity-75 shadow overflow-hidden flex-shrink-0">
-                <h4 class="text-white text-sm font-extralight"> Próximo pago </h4>
-                <p class="font-extrabold text-4xl text-white my-3"> 28 Sept </p>
-                <span class="text-white inline-flex items-center gap-x-2 font-extralight text-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-coins-icon lucide-hand-coins"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></svg>
-                        Mensualidad
-                </span>
-            </div>
-            <NuxtLink to="/birthdays">
-                <div class="bg-fuchsia-700  rounded-lg px-6 py-4 cursor-pointer hover:opacity-75 shadow overflow-hidden flex-shrink-0 w-auto">
-                    <h4 class="text-white text-sm font-extralight"> Cumpleaños </h4>
-                    <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="42" 
-                        height="42" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        stroke-width="2" 
-                        stroke-linecap="round" 
-                        stroke-linejoin="round" 
-                        class="lucide lucide-cake-icon lucide-cake text-white my-3">
-                            <path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/>
-                            <path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/>
-                            <path d="M2 21h20"/>
-                            <path d="M7 8v3"/>
-                            <path d="M12 8v3"/>
-                            <path d="M17 8v3"/>
-                            <path d="M7 4h.01"/>
-                            <path d="M12 4h.01"/>
-                            <path d="M17 4h.01"/>
-                    </svg>
-                    <span class="text-white font-extralight text-sm inline-flex items-center gap-x-2 whitespace-nowrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days-icon lucide-calendar-days"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
-                            {{ currentFormattedDateMonthDay() }}
-                    </span>
-                </div>
-            </NuxtLink>
+    <section class="mt-6 space-y-3">
+        <div class="flex justify-between items-center">
+            <h2 class="dark:text-white font-extrabold text-xl"> Recordatorio </h2>
         </div>
-
+        <div class="p-4 rounded-xl shadow-2xl bg-gradient-to-br from-red-900 to-gray-800 border border-red-700 transition duration-300 transform hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(255,50,50,0.4)]">
+            <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-red-700/50 border border-red-500/50 flex items-center justify-center text-red-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.4 2.148-1.4 2.913 0l5.503 10.02c.765 1.4-.207 3.099-1.57 3.099H4.324c-1.363 0-2.335-1.699-1.57-3.099l5.503-10.02zM10 13a1 1 0 100-2 1 1 0 000 2zm0-4a1 1 0 00-1 1v2a1 1 0 102 0v-2a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </div>                    
+                <div class="flex flex-col">
+                    <h3 class="text-white text-sm md:text-base"> Próximo pago </h3>                        
+                    <p class="text-sm md:text-lg text-gray-300 font-extrabold">
+                        Pago de mensualidad 
+                            <span class="text-gray-400 mx-1">•</span> 
+                                $120.00
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
 </template>

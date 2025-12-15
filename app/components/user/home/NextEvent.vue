@@ -1,31 +1,38 @@
 <script setup lang="ts">
-    import SectionTitle from '~/components/user/shared/SectionTitle.vue';
 </script>
 
 <template>
-    <section class="my-6">
-        
-        <SectionTitle
-            title="Próximo evento"/>
-
-        <NuxtLink
-            to="/contents/events/mi-noticia">
-            <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg p-4 cursor-pointer hover:opacity-75 shadow">
-                <div class="flex justify-start items-center gap-x-4">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock-icon lucide-calendar-clock text-pink-500"><path d="M16 14v2.2l1.6 1"/><path d="M16 2v4"/><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M3 10h5"/><path d="M8 2v4"/><circle cx="16" cy="16" r="6"/></svg>
+    <section>
+        <NuxtLink to="/contents/events/todo-listo-para-la-copa-regional-de-natacion-2025">
+            <div class="bg-[url('/media/pool.png')] bg-cover bg-center p-4 md:p-6 rounded-xl h-52 sm:h-56 md:h-64 lg:h-72 relative overflow-hidden">
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="relative flex flex-col h-full justify-between">
+                    <div class="flex justify-between items-center gap-x-3">
+                        <span class="bg-purple-500 text-white rounded-full px-4 py-1 text-xs sm:text-sm font-extrabold">
+                            Próximo evento
+                        </span>
+                        <span class="rounded-full px-3 py-1 text-xs sm:text-sm backdrop-blur-md bg-white/30 text-white flex items-center gap-x-2 font-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 6v6l4 2"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                            </svg> Inicia en 2 hrs
+                        </span>
                     </div>
-                    <div>
-                        <p class="text-xs md:text-base text-gray-500 dark:text-white font-extralight">
-                            Maraton Poseidón <span class="block text-black dark:text-white text-sm md:text-lg font-normal mt-1"> Participa en el reto de 10 km y forma parte de una experiencia épica.</span>
-                        </p>
-                        <div>
-                            <p class="text-xs mt-1 text-gray-500 dark:text-white font-extralight"> 26 Septiembre, 2025 - 09:00 a 16:00 </p>
-                        </div>
+                    <div class="space-y-1">
+                        <h4 class="text-white font-bold text-xl sm:text-2xl md:text-3xl leading-tight">
+                            Todo Listo para la Copa Regional de Natación 2025
+                        </h4>
+                        <span class="inline-flex items-center gap-x-2 text-sm text-white/90">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 2v4"/>
+                                <path d="M16 2v4"/>
+                                <rect width="18" height="18" x="3" y="4" rx="2"/>
+                                <path d="M3 10h18"/>
+                            </svg> Hoy, 08:00 AM · King dreams, Nextlalpan, Edo. de México
+                        </span>
                     </div>
                 </div>
             </div>
         </NuxtLink>
-        
     </section>
 </template>
