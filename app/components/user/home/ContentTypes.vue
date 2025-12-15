@@ -1,108 +1,48 @@
 <script setup lang="ts">
-    import CoverCardNews from '~/assets/media/card-news.png';
-    import CoverCardEvents from '~/assets/media/card-events.png';
-    import CoverCardTips from '~/assets/media/card-tips.png';
-    import CoverCardNutrition from '~/assets/media/card-nutrition.png';
-    import SectionTitle from '~/components/user/shared/SectionTitle.vue';
+
 </script>
 
 <template>
-    <section>
-        
-        <SectionTitle
-            title="Para ti"
-            :showIcon="true"
-            align="between"/>
-
+    <section class="mt-6 space-y-3">
+        <div class="flex justify-between items-center">
+            <h2 class="dark:text-white font-extrabold text-xl"> Explora </h2>
+        </div>
         <div class="flex gap-6 overflow-x-auto">
-            <NuxtLink
-                to="/contents/news"
-                class="relative w-76 h-76 overflow-hidden rounded-xl shadow-lg flex-shrink-0">
-                    <picture>
-                        <img 
-                            :src="CoverCardNews" 
-                            alt="Noticias" 
-                            class="absolute inset-0 w-full h-full object-cover brightness-50"
-                            loading="lazy"/>
-                    </picture>
-                    <div class="absolute inset-x-0 bottom-4 mx-4 p-4 rounded-xl backdrop-blur-md bg-white/30 text-white">
-                        
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="font-bold text-lg"> Noticias </h3>
-                                <p class="text-xs md:text-md font-light"> Novedades del mundo deportivo </p>
-                            </div>
-                            <button class="flex items-center justify-center w-10 h-10 bg-white/40 rounded-full shadow-md cursor-pointer hover:opacity-75">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
-                            </button>
-                        </div>
-                    </div>
+            <NuxtLink to="/contents/news" class="w-auto h-36 bg-white dark:bg-dark-light rounded-lg overflow-hidden flex-shrink-0 p-4 cursor-pointer hover:opacity-75 shadow dark:shadow-none">
+                <div class="text-amber-500 drop-shadow drop-shadow-amber-500 mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper-icon lucide-newspaper"><path d="M15 18h-5"/><path d="M18 14h-8"/><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="10" y="6" rx="1"/></svg>
+                </div>
+                <div class="mt-4">
+                    <h4 class="dark:text-white font-extrabold text-xl"> Noticias </h4>
+                    <span class="text-sm text-gray-500 dark:text-gray-400"> Novedades del mundo deportivo </span>
+                </div>
             </NuxtLink>
-            <NuxtLink 
-                to="/contents/events"
-                class="relative w-76 h-76 overflow-hidden rounded-xl shadow-lg flex-shrink-0">
-                    <picture>
-                        <img 
-                            :src="CoverCardEvents" 
-                            alt="Eventos" 
-                            class="absolute inset-0 w-full h-full object-cover brightness-50"
-                            loading="lazy"/>
-                    </picture>
-                    <div class="absolute inset-x-0 bottom-4 mx-4 p-4 rounded-xl backdrop-blur-md bg-white/30 text-white">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="font-bold text-lg"> Eventos </h3>
-                                <p class="text-xs md:text-md font-light"> No te pierdas ningún evento </p>
-                            </div>
-                            <button class="flex items-center justify-center w-10 h-10 bg-white/40 rounded-full shadow-md cursor-pointer hover:opacity-75">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
-                            </button>
-                        </div>
-                    </div>
+            <NuxtLink to="/contents/events" class="w-auto h-36 bg-white dark:bg-dark-light rounded-lg overflow-hidden flex-shrink-0 p-4 cursor-pointer hover:opacity-75 shadow dark:shadow-none">
+                <div class="text-purple-500 drop-shadow drop-shadow-purple-500 mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-fold-icon lucide-calendar-fold"><path d="M3 20a2 2 0 0 0 2 2h10a2.4 2.4 0 0 0 1.706-.706l3.588-3.588A2.4 2.4 0 0 0 21 16V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M15 22v-5a1 1 0 0 1 1-1h5"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/></svg>
+                </div>
+                <div class="mt-4">
+                    <h4 class="dark:text-white font-extrabold text-xl"> Eventos </h4>
+                    <span class="text-sm text-gray-500 dark:text-gray-400"> No te pierdas ningún evento </span>
+                </div>
             </NuxtLink>
-            <NuxtLink 
-                to="/contents/tips"
-                class="relative w-76 h-76 overflow-hidden rounded-xl shadow-lg flex-shrink-0">
-                    <picture>
-                        <img 
-                            :src="CoverCardTips" 
-                            alt="Tips" 
-                            class="absolute inset-0 w-full h-full object-cover brightness-50"
-                            loading="lazy"/>
-                    </picture>
-                    <div class="absolute inset-x-0 bottom-4 mx-4 p-4 rounded-xl backdrop-blur-md bg-white/30 text-white">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="font-bold text-lg"> Tips </h3>
-                                <p class="text-xs md:text-md font-light"> Domina el arte de nadar</p>
-                            </div>
-                            <button class="flex items-center justify-center w-10 h-10 bg-white/40 rounded-full shadow-md cursor-pointer hover:opacity-75">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
-                            </button>
-                        </div>
-                    </div>
+            <NuxtLink to="/contents/tips" class="w-auto h-36 bg-white dark:bg-dark-light rounded-lg overflow-hidden flex-shrink-0 p-4 cursor-pointer hover:opacity-75 shadow dark:shadow-none">
+                <div class="text-pink-500 drop-shadow drop-shadow-pink-500 mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb-icon lucide-lightbulb"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+                </div>
+                <div class="mt-4">
+                    <h4 class="dark:text-white font-extrabold text-xl"> Tips </h4>
+                    <span class="text-sm text-gray-500 dark:text-gray-400"> Domina el arte de nadar </span>
+                </div>
             </NuxtLink>
-            <NuxtLink
-                to="/contents/nutrition"
-                class="relative w-76 h-76 overflow-hidden rounded-xl shadow-lg flex-shrink-0">
-                    <picture>
-                        <img 
-                            :src="CoverCardNutrition" 
-                            alt="Nutricion" 
-                            class="absolute inset-0 w-full h-full object-cover brightness-50"
-                            loading="lazy"/>
-                    </picture>
-                    <div class="absolute inset-x-0 bottom-4 mx-4 p-4 rounded-xl backdrop-blur-md bg-white/30 text-white">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="font-bold text-lg"> Alimentación </h3>
-                                <p class="text-xs md:text-md font-light"> Cuida tu alimentación </p>
-                            </div>
-                            <button class="flex items-center justify-center w-10 h-10 bg-white/40 rounded-full shadow-md cursor-pointer hover:opacity-75">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
-                            </button>
-                        </div>
-                    </div>
+            <NuxtLink to="/contents/nutrition" class="w-auto h-36 bg-white dark:bg-dark-light rounded-lg overflow-hidden flex-shrink-0 p-4 cursor-pointer hover:opacity-75 shadow dark:shadow-none">
+                <div class="text-lime-500 drop-shadow drop-shadow-lime-500 mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-apple-icon lucide-apple"><path d="M12 6.528V3a1 1 0 0 1 1-1h0"/><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"/></svg>
+                </div>
+                <div class="mt-4">
+                    <h4 class="dark:text-white font-extrabold text-xl"> Alimentación </h4>
+                    <span class="text-sm text-gray-500 dark:text-gray-400"> Cuida tu alimentación </span>
+                </div>
             </NuxtLink>
         </div>
     </section>

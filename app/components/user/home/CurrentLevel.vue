@@ -1,23 +1,29 @@
 <script setup lang="ts">
-    import SectionTitle from '~/components/user/shared/SectionTitle.vue';
 </script>
 
 <template>
-    <section class="mt-6">
-
-        <SectionTitle
-            title="Tu nivel actual"/>
-
-        <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-dark-soft rounded-lg p-4 cursor-pointer hover:opacity-75 shadow">
+    <section class="mt-6 space-y-3">
+        <div class="flex justify-between items-center">
+            <h2 class="dark:text-white font-extrabold text-xl"> Mi progreso </h2>
+            <NuxtLink to="/my-progress" class="text-blue-500 text-sm md:text-base cursor-pointer"> Ver detalle </NuxtLink>
+        </div>
+        <div class="bg-white dark:bg-dark-light p-4 rounded-lg shadow dark:shadow-none">
             <div class="flex justify-between items-center">
-                <div class="flex items-start gap-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-star-icon lucide-circle-star text-amber-300"><path d="M11.051 7.616a1 1 0 0 1 1.909.024l.737 1.452a1 1 0 0 0 .737.535l1.634.256a1 1 0 0 1 .588 1.806l-1.172 1.168a1 1 0 0 0-.282.866l.259 1.613a1 1 0 0 1-1.541 1.134l-1.465-.75a1 1 0 0 0-.912 0l-1.465.75a1 1 0 0 1-1.539-1.133l.258-1.613a1 1 0 0 0-.282-.867l-1.156-1.152a1 1 0 0 1 .572-1.822l1.633-.256a1 1 0 0 0 .737-.535z"/><circle cx="12" cy="12" r="10"/></svg>
-                    <p class="text-sm font-light dark:text-white"> Nivel actual <span class="block text-xl font-bold"> Tortuga </span> </p>
+                <div class="flex gap-x-3">
+                    <div class="bg-blue-500 text-white rounded-full p-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-waves-icon lucide-waves"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+                    </div>
+                    <h4 class="text-gray-600 dark:text-gray-400 text-sm"> 
+                        Nivel actual 
+                            <span class="block font-extrabold text-xl text-black dark:text-white"> Foca </span>
+                    </h4>
                 </div>
-                <div class="border-6 border-gray-200 dark:border-dark-soft rounded-full px-2 py-3">
-                    <span class="font-light dark:text-white text-lg"> 20% </span>
-                </div>
+                <span class="font-extrabold dark:text-blue-500 text-3xl"> 20% </span>
             </div>
+            <div class="w-full bg-gray-200 dark:bg-dark-extralight rounded-full h-3 overflow-hidden mt-4 mb-1">
+                <div class="h-full bg-blue-500 rounded-full transition-all duration-500" style="width: 60%"></div>
+            </div>
+            <span class="text-sm dark:text-gray-400"> Próximo nivel: Tortuga </span>
         </div>
     </section>
 </template>

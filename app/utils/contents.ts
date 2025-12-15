@@ -20,7 +20,7 @@ export const contentTitle = (type: ContentTypeSlug = 'news') => {
         news: 'noticias',
         events: 'eventos',
         tips: 'tips',
-        nutrition: 'nutrición'
+        nutrition: 'alimentación'
     }
 
     return contentType[type]  || contentType.news
