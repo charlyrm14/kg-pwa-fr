@@ -45,7 +45,7 @@
         </section>
     
         <section class="mt-6">
-            <div v-if="(contentFilter || []).length > 0">
+            <div v-if="(contentFilter || []).length > 0" class="space-y-4" v-gsap.whenVisible.stagger.from='{ opacity: 0, y: 50, stagger: 0.4 }'>
                 <ContentItem
                     v-for="content in contentFilter"
                     :key="content?.slug"
@@ -65,7 +65,7 @@
                 <button
                     @click="uploadContent"
                     :disabled="isUploading"
-                    class="w-full md:w-120 p-3 rounded-lg hover:opacity-75 text-lg transition"
+                    class="w-full md:w-120 p-3 rounded-4xl hover:opacity-75 text-lg transition"
                     :class="!isUploading ? 'bg-blue-500 text-white cursor-pointer' : 'bg-blue-400 text-white cursor-not-allowed'">
                         {{ !isUploading ? 'Cargar más' : 'Cargando...'}}
                 </button>
