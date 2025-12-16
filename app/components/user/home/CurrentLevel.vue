@@ -20,8 +20,8 @@
                 </div>
                 <span class="font-extrabold dark:text-blue-500 text-3xl"> 20% </span>
             </div>
-            <div class="w-full bg-gray-200 dark:bg-dark-extralight rounded-full h-3 overflow-hidden mt-4 mb-1">
-                <div class="h-full bg-blue-500 rounded-full transition-all duration-500" style="width: 60%"></div>
+            <div class="w-full h-3 rounded-full bg-gray-200 dark:bg-dark-extralight overflow-hidden mt-4 mb-2">
+                <div class="h-full w-[20%] rounded-full bg-blue-500"></div>
             </div>
             <span class="text-sm dark:text-gray-400"> Próximo nivel: Tortuga </span>
         </div>
