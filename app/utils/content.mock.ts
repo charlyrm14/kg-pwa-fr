@@ -24,7 +24,7 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             type: "EVENTS",
             status: "PUBLISHED",
             event: {
-                location: "King dreams, Nextlalpan, Edo. de México",
+                location: "Nextlalpan, Edo. de México",
                 start_date: "2026-04-26",
                 start_hour: "09:00",
                 end_date: "2026-04-26",
@@ -74,7 +74,7 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             type: "EVENTS",
             status: "PUBLISHED",
             event: {
-                location: "King dreams, Nextlalpan, Edo. de México",
+                location: "Nextlalpan, Edo. de México",
                 start_date: "2025-12-06",
                 start_hour: "08:00",
                 end_date: "2025-12-06",
