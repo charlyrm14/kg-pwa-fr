@@ -49,8 +49,8 @@
 
 <template>
     <div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-        <div class="bg-white dark:bg-dark rounded-2xl shadow-xl w-[85%] max-w-md md:w-4/5 md:max-w-xl mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4 border-b border-gray-200 dark:border-dark-light px-6 py-4">
+        <div class="bg-white dark:bg-dark rounded-2xl shadow-xl w-[85%] max-w-md md:w-4/5 md:max-w-xl mx-4 max-h-[90dvh] flex flex-col">
+            <div class="flex justify-between items-center mb-4 border-b border-gray-200 dark:border-dark-light px-6 py-4 shrink-0">
                 <h2 class="text-xl font-extralight text-slate-800 dark:text-white flex items-center gap-2"> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-checks-icon lucide-list-checks"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></svg>
                         Agregar hobbies
@@ -64,7 +64,7 @@
                 </button>
             </div>
 
-            <div class="mt-2 px-6 py-2">
+            <div class="mt-2 px-6 py-2 flex-1 overflow-y-auto">
                 <h4 class="text-slate-800 dark:text-gray-300 mb-4"> Selecciona tus pasatiempos favoritos </h4>
                 <div v-if="error"
                     class="my-4">
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-end items-center gap-x-4 px-6 py-4">
+            <div class="flex justify-end items-center gap-x-4 px-6 py-4 bg-white dark:bg-dark border-t border-gray-200 dark:border-dark-light shrink-0 sticky bottom-0">
                 <button
                     class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-lg px-4 py-2"
                     :class="isSubmitting ? 'cursor-not-allowed' : 'cursor-pointer hover:text-red-500'"
