@@ -5,7 +5,9 @@ import type {
 import type { 
     SkillType, 
     SkillDescription, 
-    SkillIndex 
+    SkillIndex,
+    LevelType,
+    LevelColors 
 } from '~~/shared/types/Swimming'
 import type { 
     Gender, 
@@ -180,4 +182,61 @@ export const attendanceBgColor = (typeAttendance: AttendanceType = 'PRESENT'): A
     }
 
     return ATTENDANCE_STATUS_MAP.PRESENT.color;
+}
+
+
+/**
+ * This TypeScript function maps swimming levels to corresponding colors based on a provided level
+ * string or defaulting to 'TORTUGA'.
+ * @param {string | LevelType} [level=TORTUGA] - The `swimmingLevelColors` function takes a `level`
+ * parameter, which is a string representing the swimming level. If no level is provided, it defaults
+ * to `'TORTUGA'`. The function then normalizes and transforms the input level string to match the keys
+ * in the `colors`
+ * @returns The function `swimmingLevelColors` returns an object containing background, text, and
+ * border colors based on the input `level`. The input `level` is normalized and used to look up the
+ * corresponding colors in the `colors` object. If a matching color set is found, it is returned;
+ * otherwise, the default color set for 'foca' is returned.
+ */
+export const swimmingLevelColors = (level: string | LevelType = 'TORTUGA'): LevelColors => {
+
+    const normalized = level
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[-\s]/g, '_')
+
+    const colors: Record<string, LevelColors> = {
+        foca: {
+            bg: 'bg-slate-500',
+            text: 'text-slate-500',
+            border: 'border-slate-500',
+            gradient: 'bg-gradient-to-t from-slate-600 to-slate-400 text-white',
+        },
+        tortuga: {
+            bg: 'bg-green-500',
+            text: 'text-green-500',
+            border: 'border-green-500',
+            gradient: 'bg-gradient-to-t from-green-600 to-green-400 text-white',
+        },
+        mantarraya: {
+            bg: 'bg-orange-500',
+            text: 'text-orange-500',
+            border: 'border-orange-500',
+            gradient: 'bg-gradient-to-t from-orange-600 to-orange-400 text-white',
+        },
+        pez_vela: {
+            bg: 'bg-blue-500',
+            text: 'text-blue-500',
+            border: 'border-blue-500',
+            gradient: 'bg-gradient-to-t from-blue-600 to-blue-400 text-white',
+        },
+        tiburon: {
+            bg: 'bg-red-500',
+            text: 'text-red-500',
+            border: 'border-red-500',
+            gradient: 'bg-gradient-to-t from-red-600 to-red-400 text-white',
+        }
+    }
+
+    return colors[normalized] ?? colors.foca as LevelColors
 }
