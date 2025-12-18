@@ -1,9 +1,15 @@
 <script setup lang="ts">
+    import type { TodayBirthdays } from '#imports';
+    import { getFirstLetterUppercase } from '#imports';
+
+    defineProps<{
+        todaysBirthdays: TodayBirthdays[]
+    }>()
 
 </script>
 
 <template>
-    <section class="my-6 space-y-3">
+    <section class="my-8 space-y-3">
         <div class="relative rounded-lg overflow-hidden shadow dark:shadow-none">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 to-purple-500"></div>
             <div class="bg-white dark:bg-dark-light rounded-lg p-4">
@@ -16,20 +22,20 @@
                 </div>
                 <span class="text-gray-600 dark:text-gray-400 text-sm"> ¡Feliz cumpleaños a nuestros nadadores! </span>
                 <div class="flex gap-6 overflow-x-auto mt-3">
-                    <div class="flex flex-col items-center rounded-lg">
+                    <div v-for="(user, index) in todaysBirthdays.slice(0, 5)" :key="index" class="flex flex-col items-center rounded-lg">
                         <div class="relative flex-shrink-0">
                             <div class="overflow-hidden w-20 h-20 flex justify-center items-center rounded-full border-4 border-fuchsia-500">
                                 <div class="w-full h-full rounded-full bg-gradient-to-r from-purple-500 to-purple-800 flex items-center justify-center">
-                                    <h4 class="text-2xl font-extrabold text-white"> CR </h4>
+                                    <h4 class="text-2xl font-extrabold text-white"> {{ getFirstLetterUppercase(user?.name) }}{{ getFirstLetterUppercase(user?.last_name) }} </h4>
                                 </div>
                             </div>                        
                             <div class="absolute -bottom-1 -right-1 z-10">
                                 <span class="inline-flex items-center justify-center bg-purple-400 text-white text-xs font-bold leading-none rounded-full px-2 py-1">
-                                    35
+                                    {{ user?.age }}
                                 </span>
                             </div>
                         </div>                    
-                        <h4 class="mt-3 text-xs md:text-base font-semibold text-gray-600 dark:text-gray-400 text-center"> Carlos Ramos </h4>
+                        <h4 class="mt-3 text-xs md:text-base font-semibold text-gray-600 dark:text-gray-400 text-center"> {{ user?.name ?? 'Unknown' }}</h4>
                     </div>
                 </div>
             </div>

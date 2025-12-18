@@ -1,4 +1,10 @@
 <script setup lang="ts">
+    import type { LastReminderHome } from '#imports';
+
+    defineProps<{
+        reminder: LastReminderHome
+    }>()
+
 </script>
 
 <template>
@@ -14,11 +20,9 @@
                     </svg>
                 </div>                    
                 <div class="flex flex-col">
-                    <h3 class="text-white text-sm md:text-base"> Próximo pago </h3>                        
+                    <h3 class="text-white text-sm md:text-base"> {{ reminder?.title ?? 'Unknown' }} </h3>                        
                     <p class="text-sm md:text-lg text-gray-300 font-extrabold">
-                        Pago de mensualidad 
-                            <span class="text-gray-400 mx-1">•</span> 
-                                $120.00
+                        {{ reminder?.subtitle ?? 'Unknown' }}
                     </p>
                 </div>
             </div>

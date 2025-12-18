@@ -240,3 +240,19 @@ export const swimmingLevelColors = (level: string | LevelType = 'TORTUGA'): Leve
 
     return colors[normalized] ?? colors.foca as LevelColors
 }
+
+/**
+ * The function `getFirstLetterUppercase` takes a string as input and returns the first letter of the
+ * string in uppercase, or an empty string if the input is null or undefined.
+ * @param {string | null} [value] - The `value` parameter in the `getFirstLetterUppercase` function is
+ * a string that represents the input value for which we want to get the first letter in uppercase. It
+ * is an optional parameter that can be either a string or `null`. If the `value` is `null
+ * @returns An empty string will be returned if the `value` parameter is falsy (null, undefined, or an
+ * empty string). Otherwise, the function will return the first letter of the trimmed `value` parameter
+ * in uppercase.
+ */
+export const getFirstLetterUppercase = (text?: string | null): string => {
+    if (!text) return ''
+
+    return text.trim().charAt(0).toUpperCase()
+}
