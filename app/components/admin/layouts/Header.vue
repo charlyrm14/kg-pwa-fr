@@ -11,18 +11,18 @@
             </button>
             
             <a href="#" class="flex items-center space-x-2">
-                <div class="w-10 h-10 rounded-lg bg-pink-600 text-white flex items-center justify-center font-bold text-xl"> KG </div>
+                <div class="w-8 h-8 rounded-lg bg-pink-600 text-white flex items-center justify-center font-bold text-xl"> KG </div>
                 <span class="text-lg font-semibold text-white"> Dashboard </span>
             </a>
 
             <nav class="flex items-center space-x-4 ml-auto">
                 <NuxtLink 
                     to="/"
-                    class="bg-dark-soft text-white py-2 px-4 rounded-lg transition inline-flex gap-x-2 cursor-pointer hover:opacity-75">
+                    class="bg-dark-soft text-white py-1 px-4 rounded-lg transition inline-flex gap-x-2 cursor-pointer hover:opacity-75">
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
-                            width="24" 
-                            height="24" 
+                            width="20" 
+                            height="20" 
                             viewBox="0 0 24 24" 
                             fill="none" 
                             stroke="currentColor" 

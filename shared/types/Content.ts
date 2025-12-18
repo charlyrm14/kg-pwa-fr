@@ -1,3 +1,5 @@
+export type ContentStatus = 'DRAFT' | 'PENDING REVIEW' | 'REJECTED' | 'SCHEDULED' | 'PUBLISHED' | 'UNPUBLISHED' | 'DELETED'
+
 export type ContentTypeSlug = 'news' | 'events' | 'tips' | 'nutrition';
 
 export interface EventDetails {

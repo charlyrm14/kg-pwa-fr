@@ -16,6 +16,7 @@ import type {
     ColorBorderGender 
 } from "~~/shared/types/User"
 import { ATTENDANCE_STATUS_MAP } from "~~/shared/types/Attendance"
+import type { ContentStatus } from "~~/shared/types/Content"
 
 
 /**
@@ -255,4 +256,33 @@ export const getFirstLetterUppercase = (text?: string | null): string => {
     if (!text) return ''
 
     return text.trim().charAt(0).toUpperCase()
+}
+
+/**
+ * The function `contentStatusColor` returns a color code based on the provided content status.
+ * @param {string | ContentStatus} [status] - The `contentStatusColor` function takes a `status`
+ * parameter, which can be a string or a `ContentStatus` enum. The function normalizes the status value
+ * by converting it to lowercase and replacing any spaces with underscores. It then maps the normalized
+ * status to a corresponding color class from the `
+ * @returns The function `contentStatusColor` returns a string representing the background color class
+ * based on the provided status. If the status is one of the predefined values (draft, pending_review,
+ * rejected, scheduled, published, unpublished, deleted), it will return the corresponding background
+ * color class. If the status is not recognized, it will default to 'bg-slate-100'.
+ */
+export const contentStatusColor = (status?: string | ContentStatus): string => {
+    const normalized = status
+        ?.toLowerCase()
+        .replace(/\s+/g, '_') as string
+
+    const colors: Record<string, string> = {
+        draft: 'text-slate-500',
+        pending_review: 'text-amber-500',
+        rejected: 'text-red-500',
+        scheduled: 'text-sky-500',
+        published: 'text-emerald-500',
+        unpublished: 'text-gray-500',
+        deleted: 'text-rose-500',
+    }
+
+    return colors[normalized] ?? 'text-slate-500'
 }
