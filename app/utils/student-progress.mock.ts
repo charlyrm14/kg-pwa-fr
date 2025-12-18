@@ -12,8 +12,8 @@ export const STUDENT_PROGRESS: ApiResponse<StudentProgress> = {
         current_level: {
             category_name: "TORTUGA",
             category_description: "¡Ya estás avanzando firme como una tortuga en su travesía! Tu técnica mejora y se nota tu esfuerzo. Sigue con esa constancia, que cada brazada te acerca a tu próxima meta.",
-            total_progress: 25,
-            total_progress_formatted: "25%",
+            total_progress: 50,
+            total_progress_formatted: "50%",
             completed_level_date: null,
             category_skills: [
                 {
