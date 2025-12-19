@@ -15,15 +15,17 @@
     const { isOpen, close } = useModalManager()
     const contentStore = useContentStore()
 
-    const { data: contents } = await useAsyncData('dashboardContents', async() => {
+    await useAsyncData('dashboardContents', async() => {
         await contentStore.fetchContents()
         return contentStore?.contents ?? { data: [] }
     })
 
+    const contents = computed(() => contentStore.filteredContents)
+
 </script>
 
 <template>
-    <section>
+    <section class="p-0 md:p-6">
         
         <section class="p-2">
             <Breadcrumb
@@ -39,7 +41,7 @@
                 <!-- Beginning Content Header -->
                 <ContentHeader/>
                 <!-- End Content Header -->
-                
+                <!-- <p class="text-white"> {{ contents?.data }} </p> -->
                 <!-- Beginning Content Table -->
                 <section v-if="contents?.data">
                     <ContentTable :contents="contents?.data"/>

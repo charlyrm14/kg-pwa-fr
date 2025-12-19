@@ -8,6 +8,7 @@ export const useContentStore = defineStore('contents', () => {
 
     const contents = ref<PaginationContent<Content> | null>(null)
     const contentDetail = ref<Content | null>(null)
+    const contentTypeFilter = ref<'ALL' | 'NEWS' | 'EVENTS' | 'TIPS' | 'NUTRITION'>('ALL')
 
     const fetchContents = async(page = 1) => {
         try {
@@ -15,7 +16,6 @@ export const useContentStore = defineStore('contents', () => {
             if(IS_MOCK_API_MODE) {
 
                 contents.value = MOCK_CONTENT_LIST
-                return contents.value
 
             } else {
                 
@@ -24,8 +24,9 @@ export const useContentStore = defineStore('contents', () => {
                 )
 
                 contents.value = response.data
-                return contents.value
             }
+
+            return contents.value
             
         } catch (error) {
             console.error('Error trying to get contents')
@@ -64,10 +65,26 @@ export const useContentStore = defineStore('contents', () => {
         }
     }
 
+    const filteredContents = computed(() => {
+
+        if (!contents.value) return null
+
+        if (contentTypeFilter.value === 'ALL') {
+            return contents.value
+        }
+
+        return {
+            ...contents.value,
+            data: contents.value.data.filter(content => content.type === contentTypeFilter.value)
+        }
+    })
+
     return {
         contents,
         contentDetail,
+        contentTypeFilter,
         fetchContents,
-        fetchContentBySlug
+        fetchContentBySlug,
+        filteredContents
     }
 })

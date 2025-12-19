@@ -1,9 +1,16 @@
 <script setup lang="ts">
     import { useModalManager } from '#imports';
+    import { useContentStore } from '~/stores/contents';
 
     const { open } = useModalManager()
+    const contentStore = useContentStore()
 
     const showFilterContent = ref<boolean>(false)
+    const selectContentType = ref<'ALL' | 'NEWS' | 'EVENTS' | 'TIPS' | 'NUTRITION'>('ALL')
+
+    const onContentTypeChange = () => {
+        contentStore.contentTypeFilter = selectContentType.value
+    }
 
 </script>
 
@@ -32,11 +39,11 @@
                 </svg>
         </div>
         
-        <div class="flex flex-wrap gap-2 sm:space-x-4">
-            <div class="relative">
+        <div class="flex justify-between md:flex-wrap gap-2 sm:space-x-4 w-full md:w-auto">
+            <div class="relative w-full md:w-auto">
                 <button
                     @click="showFilterContent = !showFilterContent"
-                    class="inline-flex items-center gap-x-2  px-4 py-2 rounded-lg cursor-pointer"
+                    class="inline-flex items-center gap-x-2  px-4 py-2 rounded-lg cursor-pointer w-full"
                     :class="showFilterContent ? 'bg-pink-500 text-white' : 'bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-400 cursor-pointer hover:opacity-75'">
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
@@ -54,72 +61,89 @@
                 </button>
                 <div 
                     v-if="showFilterContent"
-                    class="absolute -bottom-90 md:-left-54 bg-white dark:bg-dark-extralight border border-gray-100 dark:border-dark-soft rounded-xl w-80 shadow z-50">
-                        <div class="border-b border-gray-100 dark:border-dark-soft p-4">
-                            <p class="dark:text-gray-400"> Opciones de filtro </p>
+                    class="absolute -bottom-95 md:-left-54 bg-white dark:bg-dark-extralight border border-gray-100 dark:border-dark-soft rounded-xl w-80 shadow z-50">
+                        <div class="border-b border-gray-100 dark:border-dark-soft p-4 flex justify-between items-center">
+                            <p class="dark:text-white font-bold"> Opciones de filtro </p>
+                            <button 
+                                class="dark:text-gray-400 cursor-pointer hover:opacity-75"
+                                @click="showFilterContent = !showFilterContent">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                            </button>
                         </div>
                         <div class="p-4 m-1">
-                            <p class="dark:text-gray-400 font-bold mb-3"> Tipo de contenido: </p>
+                            <p class="dark:text-gray-300 font-bold mb-3"> Tipo de contenido: </p>
 
-                            <label for="admin" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                            <label for="all" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
                                 <input 
                                     type="radio" 
-                                    id="admin" 
-                                    name="rol" 
-                                    value="admin" 
-                                    class="h-5 w-5 text-indigo-500 focus:ring-indigo-500 ">
-                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-gray-300"> Noticias </span>
+                                    id="all" 
+                                    name="filter" 
+                                    value="ALL" 
+                                    class="h-5 w-5 accent-blue-500"
+                                    v-model="selectContentType">
+                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Todo </span>
                             </label>
 
-                            <label for="teacher" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                            <label for="news" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
                                 <input 
                                     type="radio" 
-                                    id="teacher" 
-                                    name="rol" 
-                                    value="teacher" 
+                                    id="news" 
+                                    name="filter" 
+                                    value="NEWS" 
+                                    class="h-5 w-5 accent-amber-500"
+                                    v-model="selectContentType">
+                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Noticias </span>
+                            </label>
+
+                            <label for="events" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                                <input 
+                                    type="radio" 
+                                    id="events" 
+                                    name="filter" 
+                                    value="EVENTS" 
                                     checked 
-                                    class="h-5 w-5 text-indigo-500 focus:ring-indigo-500">
-                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-gray-300"> Eventos </span>
+                                    class="h-5 w-5 accent-purple-500"
+                                    v-model="selectContentType">
+                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Eventos </span>
                             </label>
 
-                            <label for="student" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                            <label for="tips" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
                                 <input 
                                     type="radio" 
-                                    id="student" 
-                                    name="rol" 
-                                    value="student" 
-                                    class="h-5 w-5 text-indigo-500 focus:ring-indigo-500">
-                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-gray-300"> Tips </span>
+                                    id="tips" 
+                                    name="filter" 
+                                    value="TIPS" 
+                                    class="h-5 w-5 accent-pink-500"
+                                    v-model="selectContentType">
+                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Tips </span>
                             </label>
 
-                            <label for="student" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                            <label for="nutrition" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
                                 <input 
                                     type="radio" 
-                                    id="student" 
-                                    name="rol" 
-                                    value="student" 
-                                    class="h-5 w-5 text-indigo-500 focus:ring-indigo-500">
-                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-gray-300"> Nutrición </span>
+                                    id="nutrition" 
+                                    name="filter" 
+                                    value="NUTRITION" 
+                                    class="h-5 w-5 accent-lime-500"
+                                    v-model="selectContentType">
+                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Nutrición </span>
                             </label>
 
                         </div>
                         <div class="flex justify-end items-center gap-x-4 p-4">
                             <button
-                                class="bg-gray-100 dark:bg-dark-soft text-gray-400 dark:text-gray-400 px-4 py-2 rounded-lg cursor-pointer hover:opacity-75"> 
-                                    Restablecer 
-                            </button>
-                            <button
-                                class="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-75"> 
+                                class="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-75 w-full font-bold"
+                                @click="onContentTypeChange"> 
                                     Aplicar 
                             </button>
                         </div>
                 </div>
             </div>
             <button
-                class="inline-flex items-center gap-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-75"
+                class="inline-flex items-center gap-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-75 w-full md:w-auto"
                 @click="open('SelectContentTypeModal')"> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus2-icon lucide-file-plus-2"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M3 15h6"/><path d="M6 12v6"/></svg>
-                        Agregar <span class="hidden md:block"> contenido </span> 
+                        Agregar contenido
             </button>
         </div>
     </div>

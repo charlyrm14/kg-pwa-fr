@@ -27,7 +27,7 @@
 
             <!-- Beginning Select content type -->
             <div class="mt-2 px-6 py-2 flex-1 overflow-y-auto space-y-4">
-                <div class="bg-gray-100 dark:bg-dark-light rounded-4xl px-4 py-2.5 shadow dark:shadow-none cursor-pointer hover:opacity-75">
+                <div class="bg-gray-100 dark:bg-dark-light rounded-3xl px-4 py-2.5 shadow dark:shadow-none cursor-pointer hover:opacity-75">
                     <div class="flex justify-between items-center">
                         <div class="flex justify-between items-center gap-x-4">
                             <div class="bg-amber-100 text-amber-500 rounded-2xl p-2 w-12 h-12">
@@ -35,7 +35,7 @@
                             </div>
                             <div>
                                 <h4 class="text-lg md:text-xl dark:text-white font-extrabold"> Noticias </h4>
-                                <span class="dark:text-gray-400 text-sm md:text-base"> Novedades del mundo deportivo </span>
+                                <span class="dark:text-gray-400 text-sm md:text-base"> Novedades deportivas </span>
                             </div>
                         </div>
                         <div class="dark:text-gray-400">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-100 dark:bg-dark-light rounded-4xl px-4 py-2.5 shadow dark:shadow-none cursor-pointer hover:opacity-75">
+                <div class="bg-gray-100 dark:bg-dark-light rounded-3xl px-4 py-2.5 shadow dark:shadow-none cursor-pointer hover:opacity-75">
                     <div class="flex justify-between items-center">
                         <div class="flex justify-between items-center gap-x-4">
                             <div class="bg-purple-100 text-purple-500 rounded-2xl p-2 w-12 h-12">
@@ -51,7 +51,7 @@
                             </div>
                             <div>
                                 <h4 class="text-lg md:text-xl dark:text-white font-extrabold"> Eventos </h4>
-                                <span class="dark:text-gray-400 text-sm md:text-base"> Maratones, competencias </span>
+                                <span class="dark:text-gray-400 text-sm md:text-base"> Eventos deportivos </span>
                             </div>
                         </div>
                         <div class="dark:text-gray-400">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-100 dark:bg-dark-light rounded-4xl px-4 py-2.5 shadow dark:shadow-none cursor-pointer hover:opacity-75">
+                <div class="bg-gray-100 dark:bg-dark-light rounded-3xl px-4 py-2.5 shadow dark:shadow-none cursor-pointer hover:opacity-75">
                     <div class="flex justify-between items-center">
                         <div class="flex justify-between items-center gap-x-4">
                             <div class="bg-pink-100 text-pink-500 rounded-2xl p-2 w-12 h-12">
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-100 dark:bg-dark-light rounded-4xl px-4 py-2.5 shadow dark:shadow-none cursor-pointer hover:opacity-75">
+                <div class="bg-gray-100 dark:bg-dark-light rounded-3xl px-4 py-2.5 shadow dark:shadow-none cursor-pointer hover:opacity-75">
                     <div class="flex justify-between items-center">
                         <div class="flex justify-between items-center gap-x-4">
                             <div class="bg-lime-100 text-lime-500 rounded-2xl p-2 w-12 h-12">
