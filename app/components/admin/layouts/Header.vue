@@ -1,4 +1,7 @@
 <script setup lang="ts">
+    import { useAdminSidebar } from '#imports';
+
+    const { toggle } = useAdminSidebar()
 
 </script>
 
@@ -6,8 +9,11 @@
     <header class="bg-dark shadow-md/5 sticky top-0 z-20 h-16 flex items-center px-4">
         <div class="flex items-center justify-between w-full">
             
-            <button id="menu-toggle" class="md:hidden text-gray-500 dark:text-white hover:text-gray-700 p-2 rounded-full transition mr-3">
-                <svg class="icon w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+            <button 
+                id="menu-toggle" 
+                class="md:hidden text-gray-500 dark:text-white hover:text-gray-700 p-2 rounded-full transition mr-3 cursor-pointer"
+                @click="toggle">
+                    <svg class="icon w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
             </button>
             
             <a href="#" class="flex items-center space-x-2">
