@@ -1,11 +1,16 @@
 <script setup lang="ts">
+    import { useAdminSidebar } from '#imports';
 
     const route = useRoute();
+    const { isOpen, close } = useAdminSidebar()
 
 </script>
 
 <template>
-    <aside id="sidebar" class="w-65 flex-shrink-0 bg-white dark:bg-dark-light shadow-xl/10 md:shadow-lg/10 rounded-xl md:m-4 md:h-auto overflow-y-auto hidden md:flex flex-col fixed top-16 bottom-0 left-0 z-30 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+    <aside 
+        id="sidebar" 
+        class="w-65 flex-shrink-0 bg-white dark:bg-dark-light shadow-xl/10 md:shadow-lg/10 rounded-xl md:m-4 md:h-auto overflow-y-auto flex flex-col fixed top-16 bottom-0 left-0 z-30 transform transition-transform duration-300 px-3 md:px-0"
+        :class="[isOpen ? 'translate-x-0' : '-translate-x-full', 'md:translate-x-0 md:flex']">
         <nav class="p-4 space-y-4">
             
             <div class="pb-2">
@@ -51,5 +56,5 @@
             </div>
         </nav>
     </aside> 
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden"></div>
+    <div id="sidebar-overlay" v-if="isOpen" class="fixed inset-0 dark:bg-black bg-opacity-50 z-20 hidden md:hidden" @click="close"></div>
 </template>
