@@ -7,7 +7,7 @@ export function useFavorites () {
     const { showAlert } = useAlert()
 
     type Favorite = {
-        title: string
+        name: string
         slug: string
         content: string
         author: string | null

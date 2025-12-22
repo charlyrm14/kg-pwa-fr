@@ -15,14 +15,14 @@
         <div class="flex justify-between items-center gap-x-3">
             <div class="flex gap-x-3">
                 <NuxtLink :to="`/contents/${route.params.typeSlug}/${content?.slug}`" class="shrink-0">
-                    <img :src="contentTypeImage(content?.type)" :alt="content?.title ?? 'unknown'" class="w-30 h-20 object-cover rounded-2xl brightness-60"/>
+                    <img :src="contentTypeImage(content?.type)" :alt="content?.name ?? 'unknown'" class="w-30 h-20 object-cover rounded-2xl brightness-60"/>
                 </NuxtLink>
                 <div>
                     <NuxtLink :to="`/contents/${route.params.typeSlug}/${content?.slug}`">
-                        <h2 class="text-pink-500 text-sm md:text-base font-extrabold md:hidden"> {{ content?.title.slice(0, 75)  ?? 'unknown' }} </h2>
+                        <h2 class="text-pink-500 text-sm md:text-base font-extrabold md:hidden"> {{ content?.name.slice(0, 75)  ?? 'unknown' }} </h2>
                     </NuxtLink>
                     <NuxtLink :to="`/contents/${route.params.typeSlug}/${content?.slug}`">
-                        <h2 class="text-pink-500 text-sm md:text-base font-extrabold break-words hidden md:block"> {{ content?.title  ?? 'unknown' }} </h2>
+                        <h2 class="text-pink-500 text-sm md:text-base font-extrabold break-words hidden md:block"> {{ content?.name  ?? 'unknown' }} </h2>
                     </NuxtLink>
                     <span class="hidden md:block text-gray-400"> {{ content?.content.slice(0, 100) ?? 'unknown' }} ... </span>
                     <p class="inline-flex items-center gap-x-2 text-xs md:text-sm text-gray-400 font-light mt-4 md:mt-2">

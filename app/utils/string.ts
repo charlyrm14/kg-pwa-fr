@@ -286,3 +286,28 @@ export const contentStatusColor = (status?: string | ContentStatus): string => {
 
     return colors[normalized] ?? 'text-slate-500'
 }
+
+
+/**
+ * The `toSlug` function takes a string input, normalizes it, removes accents, converts it to
+ * lowercase, trims it, removes special characters, replaces spaces with hyphens, and ensures single
+ * hyphens between words to create a slug.
+ * @param {string} text - The `text` parameter is a string that represents the text you want to convert
+ * into a slug. The function `toSlug` takes this text as input and returns a slug version of the text,
+ * which is a URL-friendly version with spaces replaced by hyphens and special characters removed.
+ * @returns The `toSlug` function takes a string input, normalizes it by separating letters and
+ * accents, removes accents, converts it to lowercase, trims any leading or trailing whitespace,
+ * removes special characters, replaces spaces with hyphens, and ensures there are no consecutive
+ * hyphens. The function then returns the processed string as a slug, which is a URL-friendly version
+ * of the input text.
+ */
+export function toSlug(text: string): string {
+    return text
+        .normalize('NFD') // separa letras y acentos
+        .replace(/[\u0300-\u036f]/g, '') // elimina acentos
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, '') // elimina caracteres especiales
+        .replace(/\s+/g, '-') // espacios → guiones
+        .replace(/-+/g, '-') // evita guiones dobles
+}
