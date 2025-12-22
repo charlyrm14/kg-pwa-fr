@@ -97,3 +97,50 @@ export const contentSectionTitle = (type: string = 'news'): string => {
 
     return contentType[normalized]  || contentType.news
 }
+
+/**
+ * The function `statusName` takes a status ID as input and returns the corresponding status name from
+ * a predefined mapping, defaulting to 'PUBLISHED' if no match is found.
+ * @param {number} statusId - The `statusId` parameter is a number that represents the status of a
+ * certain item. The `statusName` function takes this `statusId` as input and returns the corresponding
+ * status name as a string.
+ * @returns The function `statusName` takes a `statusId` as input and returns the corresponding status
+ * name from the `text` object. If the `statusId` is not found in the `text` object, it defaults to
+ * returning the status name associated with the key `5`, which is 'PUBLISHED'.
+ */
+export const statusName = (statusId: number): string => {
+
+    const text: Record<number, string> = {
+        1: 'DRAFT',
+        2: 'PENDING REVIEW',
+        3: 'REJECTED',
+        4: 'SCHEDULED',
+        5: 'PUBLISHED',
+        6: 'UNPUBLISHED',
+        7: 'DELETED',
+    }
+
+    return (text[statusId as number]  ?? text[5]) as string
+}
+
+/**
+ * This TypeScript function returns the content type based on the provided content type ID, with a
+ * default value of 'NEWS' if the ID is not found in the mapping.
+ * @param {number} contentTypeId - The `contentTypeId` parameter is a number that represents the type
+ * of content. It is used to look up the corresponding text value in the `text` object and return it.
+ * @returns The function `textTypeContentById` returns the content type based on the `contentTypeId`
+ * provided. If the `contentTypeId` matches one of the keys in the `text` object, it returns the
+ * corresponding content type (e.g., 'NEWS', 'EVENTS', 'TIPS', 'NUTRITION'). If the `contentTypeId`
+ * does not match any key in the `
+ */
+export const textTypeContentById = (contentTypeId: number): string => {
+
+    const text: Record<number, string> = {
+        1: 'NEWS',
+        2: 'EVENTS',
+        3: 'TIPS',
+        4: 'NUTRITION',
+    }
+
+    return (text[contentTypeId as number]  ?? text[5]) as string
+}

@@ -27,14 +27,14 @@
                     <NuxtLink 
                         :to="`/contents/${favorite?.type.toLowerCase()}/${favorite?.slug}`"
                         class="group overflow-hidden rounded-full aspect-square w-25 transition-all duration-300 hover:bg-gray-200/30 dark:hover:bg-dark-light/40">
-                            <img :src="CoverCard" :alt="favorite?.title" class="w-full h-full object-cover"/>
+                            <img :src="CoverCard" :alt="favorite?.name" class="w-full h-full object-cover"/>
                     </NuxtLink>
                     <div class="border-b border-gray-200 dark:border-dark-soft w-full pb-2">
                         <div class="flex justify-between">
                             <div>
                                 <NuxtLink :to="`/contents/${favorite?.type.toLowerCase()}/${favorite?.slug}`">
                                     <h1 class="dark:text-white">
-                                        {{ favorite?.title.slice(0, 30) ?? 'unknown' }}...
+                                        {{ favorite?.name.slice(0, 30) ?? 'unknown' }}...
                                     </h1>
                                 </NuxtLink>
                                 <span class="text-sm text-white my-2 rounded-lg px-2" :class="`${colorByContentType(favorite?.type)}`">

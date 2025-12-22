@@ -11,7 +11,7 @@ export interface EventDetails {
 }
 
 export interface Content {
-    title: string
+    name: string
     slug: string
     content: string
     created_at: string
@@ -21,3 +21,26 @@ export interface Content {
     status: string
     event: EventDetails | null
 }
+
+interface BaseCreateContent {
+    name: string
+    content: string
+    content_status_id: number
+    author_id: number
+} 
+
+export interface CreateEventContent extends BaseCreateContent {
+    content_type_id: 2
+    location: string
+    start_date: string
+    end_date: string
+}
+
+export interface CreateGenericContent extends BaseCreateContent {
+    content_type_id: 1 | 3 | 4
+    location?: null
+    start_date?: null
+    end_date?: null
+}
+
+export type CreateContentPayload = CreateEventContent | CreateGenericContent

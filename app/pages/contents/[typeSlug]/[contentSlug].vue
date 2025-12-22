@@ -62,7 +62,7 @@
                 <button
                     v-if="content"
                     @click="addToFavorites({
-                        title: content?.title,
+                        name: content?.name,
                         slug: content?.slug,
                         content: content?.content,
                         author: content?.author,
@@ -93,11 +93,11 @@
             <div class="relative">
                 <img 
                     :src="Training"
-                    :alt="content?.title ?? 'unknown'" 
+                    :alt="content?.name ?? 'unknown'" 
                     class="w-full h-60 md:h-120 object-cover brightness-20 rounded-4xl"/>
                 <div class="absolute bottom-6 left-4 right-4">
                     <span class="inline-block px-4 py-0.5 text-white rounded-full text-sm" :class="`${colorByContentType(content?.type)}`"> {{ contentSectionTitle(content?.type) }} </span>
-                    <h1 v-gsap.whenVisible.animateText.once.fast class="text-white font-bold text-lg md:text-4xl mt-2 whitespace-normal break-words"> {{ content?.title ?? 'unknown' }} </h1>
+                    <h1 v-gsap.whenVisible.animateText.once.fast class="text-white font-bold text-lg md:text-4xl mt-2 whitespace-normal break-words"> {{ content?.name ?? 'unknown' }} </h1>
                 </div>
             </div>
         </section>

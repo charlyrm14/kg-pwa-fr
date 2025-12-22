@@ -85,6 +85,13 @@ export const daysByCurrentWeek = (): WeekDay[] => {
     return result;
 }
 
+/**
+ * The function `currentMonthsOfYear` returns an array of objects representing the months of the
+ * current year up to the current month in Spanish.
+ * @returns An array of objects representing the months of the current year up to the current month.
+ * Each object has properties `id` (index + 1), `month` (name of the month), and `year` (current year).
+ * The array is sorted in reverse order.
+ */
 export const currentMonthsOfYear = (): MonthItem[] => {
 
     const months = [
@@ -100,4 +107,43 @@ export const currentMonthsOfYear = (): MonthItem[] => {
         month: month,
         year: date.getFullYear()
     })).reverse()
+}
+
+/**
+ * The function `getTodayDate` returns the current date in the format "YYYY-MM-DD".
+ * @returns The function `getTodayDate` returns the current date in the format "YYYY-MM-DD".
+ */
+export function getTodayDate(): string {
+    const today = new Date()
+
+    const year = today.getFullYear()
+    const month = String(today.getMonth() + 1).padStart(2, '0')
+    const day = String(today.getDate()).padStart(2, '0')
+
+    return `${year}-${month}-${day}`
+}
+
+/**
+ * The function `extractHourMinutes` extracts and returns the time in HH:mm format from a given
+ * date-time string.
+ * @param {string} dateTime - The `dateTime` parameter is a string representing a date and time in the
+ * format "YYYY-MM-DD HH:mm:ss".
+ * @returns The function `extractHourMinutes` takes a `dateTime` string as input, extracts the time
+ * part (HH:mm) from it, and returns the extracted time as a string if it is in the correct format
+ * (HH:mm). If the input `dateTime` is invalid or does not contain a valid time format, the function
+ * returns `null`.
+ */
+export function extractHourMinutes(dateTime: string): string | null {
+    if (!dateTime) return null
+
+    const parts = dateTime.split(' ')
+    if (parts.length !== 2) return null
+
+    const time = parts[1] ?? '00:00'
+
+    // Validación básica HH:mm
+    const timeRegex = /^\d{2}:\d{2}$/
+    if (!timeRegex.test(time)) return null
+
+    return time
 }

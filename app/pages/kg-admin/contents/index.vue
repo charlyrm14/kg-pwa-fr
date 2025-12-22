@@ -7,6 +7,8 @@
     import SelectContentTypeModal from '~/components/admin/contents/SelectContentTypeModal.vue';
     import { useModalManager } from '#imports';
     import { useContentStore } from '~/stores/contents';
+    import Alert from '~/components/common/Alert.vue';
+    import { useAlert } from '#imports';
 
     definePageMeta({
         layout: 'admin'
@@ -14,6 +16,7 @@
 
     const { isOpen, close } = useModalManager()
     const contentStore = useContentStore()
+    const { alert, closeAlert } = useAlert()
 
     await useAsyncData('dashboardContents', async() => {
         await contentStore.fetchContents()
@@ -26,6 +29,13 @@
 
 <template>
     <section class="p-0 md:p-6">
+
+        <Alert 
+            v-if="alert.status" 
+            :title="alert.title" 
+            :description="alert.description" 
+            :type="alert.type" 
+            @closeAlert="closeAlert"/>
         
         <section class="p-2">
             <Breadcrumb
