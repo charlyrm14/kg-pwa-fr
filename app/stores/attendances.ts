@@ -1,14 +1,40 @@
 import type { ApiResponse } from "#imports"
-import type { UserAttendance } from "~~/shared/types/Attendance"
-import type { AttendanceReport } from "~~/shared/types/Attendance"
+import type { AttendanceCurrentDay, UserAttendance, AttendanceReport } from "~~/shared/types/Attendance"
+import type { PaginationContent } from "#imports"
 import { downloadMockReport, triggerFileDownload } from "#imports"
+import { MOCK_USER_ATTENDANCES_CURRENT_MONTH, MOCK_USER_ATTENDANCES_CURRENT_DAY } from "~/utils/mocks/attendances.mock"
 
 export const useAttendanceStore = defineStore('attendances', () => {
 
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
+    const attendancesToday = ref<PaginationContent<AttendanceCurrentDay> | null>(null)
     const monthlyAttendance = ref<ApiResponse<UserAttendance> | null>(null)
+
+    const fetchAttendancesToday = async() => {
+        try {
+
+            if(IS_MOCK_API_MODE) {
+
+                attendancesToday.value = MOCK_USER_ATTENDANCES_CURRENT_DAY
+
+            } else {
+
+                const response = await $fetch<PaginationContent<AttendanceCurrentDay>>(
+                    `${config.public.apiBaseUrl}/attendances/today`
+                )
+
+                attendancesToday.value = response
+
+            }
+
+            return attendancesToday.value
+            
+        } catch (error) {
+            console.error('Error to get today attendances')
+        }
+    }
 
     /**
      * The function `fetchMonthlyAttendance` retrieves monthly attendance data either from a mock API
@@ -26,7 +52,7 @@ export const useAttendanceStore = defineStore('attendances', () => {
             } else {
 
                 const response = await $fetch<ApiResponse<UserAttendance>>(
-                    `${config.public.apiBaseUrl}/attendances/users`
+                    `${config.public.apiBaseUrl}/attendances/history`
                 )
 
                 monthlyAttendance.value = response
@@ -58,7 +84,7 @@ export const useAttendanceStore = defineStore('attendances', () => {
                 return
             } 
 
-            const blob = await $fetch<Blob>('/api/reports', {
+            const blob = await $fetch<Blob>(`${config.public.apiBaseUrl}/reports`, {
                 method: 'POST',
                 body: data
             })
@@ -71,7 +97,9 @@ export const useAttendanceStore = defineStore('attendances', () => {
     }
 
     return {
+        attendancesToday,
         monthlyAttendance,
+        fetchAttendancesToday,
         fetchMonthlyAttendance,
         generateAttendanceReport
     }
