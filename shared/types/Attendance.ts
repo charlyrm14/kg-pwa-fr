@@ -66,3 +66,24 @@ export interface AttendanceReport {
     month: number
     user_id: string | null
 }
+
+export interface UserAttendanceCurrentDay {
+    name: string
+    last_name: string
+    mother_last_name: string | null
+    email: string
+    uuid: string
+    student_code: string | null
+    role_name: string
+}
+
+export interface AttendanceCurrentDay {
+    user: UserAttendanceCurrentDay
+    day_name: string
+    shorting_day: string
+    day_formatted_name: string
+    entry_time: string
+    departure_time: string
+    created_at: string
+    updated_at: string
+}

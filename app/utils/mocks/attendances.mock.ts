@@ -1,5 +1,7 @@
 import type { ApiResponse } from "#imports"
 import type { UserAttendance } from "#imports"
+import type { AttendanceCurrentDay } from "~~/shared/types/Attendance"
+import type { PaginationContent } from "#imports"
 
 export const MOCK_USER_ATTENDANCES_CURRENT_MONTH: ApiResponse<UserAttendance> = {
     data: {
@@ -74,4 +76,57 @@ export const MOCK_USER_ATTENDANCES_CURRENT_MONTH: ApiResponse<UserAttendance> = 
             }
         ]
     }
+}
+
+export const MOCK_USER_ATTENDANCES_CURRENT_DAY: PaginationContent<AttendanceCurrentDay> = {
+    current_page: 1,
+    data: [
+        {
+            user: {
+                name: "Carlos I.",
+                last_name: "Ramos",
+                mother_last_name: null,
+                email: "charlyrm14@gmail.com",
+                uuid: "771f8eb5-a52e-40e4-af21-af947bf76048",
+                student_code: null,
+                role_name: "ADMIN"
+            },
+            day_name: "MARTES",
+            shorting_day: "M",
+            day_formatted_name: "Martes",
+            entry_time: "10:00:00",
+            departure_time: "11:00:00",
+            created_at: "2025-12-03",
+            updated_at: "2025-12-03"
+        },
+        {
+            user: {
+                name: "Valentina E",
+                last_name: "Hérnandez",
+                mother_last_name: null,
+                email: "vhernandezkg@gmail.com",
+                uuid: "4f507188-2b7e-4263-9e06-dcb01ea9c0e4",
+                student_code: "STU-20251013-8656",
+                role_name: "STUDENT"
+            },
+            day_name: "MARTES",
+            shorting_day: "M",
+            day_formatted_name: "Martes",
+            entry_time: "10:00:00",
+            departure_time: "11:00:00",
+            created_at: "2025-12-03",
+            updated_at: "2025-12-03"
+        }
+    ],
+    last_page: 1,
+    links: {
+        first: "http://127.0.0.1:8000/api/v1/attendances/today?page=1",
+        last: "http://127.0.0.1:8000/api/v1/attendances/today?page=1",
+        prev: null,
+        next: null
+    },
+    next_page_url: null,
+    per_page: 15,
+    prev_page_url: null,
+    total: 1
 }
