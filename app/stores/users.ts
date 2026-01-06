@@ -18,7 +18,7 @@ export const useUserStore = defineStore('users', () => {
             } else {
 
                 const response = await $fetch<ApiResponse<UserProfileData>>(
-                    `${config.public.apiBaseUrl}/users/profile/info`
+                    `${config.public.apiBaseUrl}/profile`
                 )
 
                 user.value = response.data
