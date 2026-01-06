@@ -3,14 +3,17 @@ import Achievement from "~/components/user/profile/Achievement.vue";
 import Hobby from "~/components/user/profile/Hobby.vue";
 import Personal from "~/components/user/profile/Personal.vue";
 import ShareProfile from "~/components/user/profile/ShareProfile.vue";
+import type { ProfileTab } from '~~/shared/types/Tabs'
 
-export const profileTabs = () => {
+export const profileTabs = (): ProfileTab[] => {
 
     return [
         { 
             id: 1, 
             title: 'Logros', 
-            components: [ Achievement] 
+            components: [
+                { component: Achievement }
+            ] 
         },
         { 
             id: 2, 
