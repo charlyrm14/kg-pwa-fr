@@ -71,7 +71,9 @@
                         </div>
                         <div>
                             <h4 class="dark:text-white text-xl font-extrabold"> {{ user?.name}} </h4>
-                            <span class="font-bold" :class="textColorByGender(user?.profile?.gender)"> {{ user?.profile?.age }} años <span class="text-gray-400 dark:text-gray-500"> · Nivel Tortuga </span> </span>
+                            <span class="font-bold" :class="textColorByGender(user?.profile?.gender)"> {{ user?.profile?.age }} años 
+                                <span class="text-gray-400 dark:text-gray-500"> · {{ user?.current_level }}  </span> 
+                            </span>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,6 @@ export default defineEventHandler(async(event) => {
     const config = useRuntimeConfig()
 
     return await $fetch<ApiResponse<UserBirthday[]>>(
-        `${config.public.apiBaseUrl}/users/birthdays/current`
+        `${config.public.apiBaseUrl}/birthdays/today`
     )
 })
