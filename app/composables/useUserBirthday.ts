@@ -1,5 +1,5 @@
 import type { ApiResponse, UserBirthday } from "#imports"
-import { MOCK_USER_BIRTHDAY } from "#imports"
+import { MOCK_USER_BIRTHDAY } from "~/utils/mocks/users.mock";
 
 export function useUserBirthday() {
 
@@ -17,7 +17,7 @@ export function useUserBirthday() {
             } else {
 
                 const response = await $fetch<ApiResponse<UserBirthday[]>>(
-                    `${config.public.apiBaseUrl}/users/birthdays/current`
+                    `${config.public.apiBaseUrl}/birthdays/today`
                 )
 
                 usersBirthday.value = response

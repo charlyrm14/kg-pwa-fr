@@ -14,7 +14,8 @@ export const MOCK_USER_BIRTHDAY: ApiResponse<UserBirthday[]> = {
                 birthdate: "1990-12-03",
                 age: 35,
                 gender: "MASCULINO"
-            }
+            },
+            current_level: "Nivel Foca"
         }, 
         {
             name: "Valentina E.",
@@ -28,7 +29,8 @@ export const MOCK_USER_BIRTHDAY: ApiResponse<UserBirthday[]> = {
                 birthdate: "2015-12-03",
                 age: 10,
                 gender: "FEMENINO"
-            }
+            },
+            current_level: "Nivel Foca"
         }
     ]
 }
