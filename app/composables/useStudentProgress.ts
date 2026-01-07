@@ -13,11 +13,16 @@ export function useStudentProgress () {
         try {
 
             if(IS_MOCK_API_MODE) {
+
                 studentProgress.value = STUDENT_PROGRESS
+
             } else {
-                studentProgress.value = await $fetch<ApiResponse<StudentProgress>>(
-                    `${config.public.apiBaseUrl}/student-progress/${config.public.userTestUuid}`
+
+                const response = await $fetch<ApiResponse<StudentProgress>>(
+                    `${config.public.apiBaseUrl}/student-progress`
                 )
+
+                studentProgress.value = response
             }
 
             return studentProgress.value
