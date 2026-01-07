@@ -6,6 +6,6 @@ export default defineEventHandler(async(event) => {
     const config = useRuntimeConfig()
 
     return await $fetch<ApiResponse<UserAttendance>>(
-        `${config.public.apiBaseUrl}/attendances/users`
+        `${config.public.apiBaseUrl}/attendances/history`
     )
 })
