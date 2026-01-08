@@ -33,8 +33,8 @@
             </div>
         </div>
         <div class="w-1/5 flex-shrink-0 px-2">
-            <p class="font-bold" :class="attendance?.attendance_status ? textAttendanceStatusColors(attendance?.attendance_status) : 'dark:text-gray-400'"> 
-                {{ attendance?.attendance_status ?? 'NO ASIGNADA' }}
+            <p class="font-bold" :class="attendance?.attendance_status_id ? textAttendanceStatusColors(attendance?.attendance_status_id) : 'dark:text-gray-400'"> 
+                {{ attendance?.attendance_status ?? 'No asignada' }}
                     <span class="text-xs dark:text-gray-400 text-gray-500 block"> {{ getTodayDate() }} </span>
             </p>
         </div>

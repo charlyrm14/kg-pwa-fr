@@ -1,10 +1,21 @@
 <script setup lang="ts">
+    import { useAttendanceStore } from '~/stores/attendances';
 
     const emit = defineEmits<{
         (e: 'closeSearchUserAttendanceModal'): void
     }>();
 
+    const attendanceStore = useAttendanceStore()
+
     const isSubmitting = ref<boolean>(false)
+
+    onMounted(async() => {
+        try {
+            await attendanceStore?.fetchAttendanceStatuses()
+        } catch (error) {
+            console.error('Hubo un error al obtener los tipos de asistencia')
+        }
+    })
 
     const handleSubmit = () => {
 
@@ -78,6 +89,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="space-y-4">
                     <div class="mt-4">
                         <label for="date" class="text-gray-500 dark:text-white font-bold mb-2"> Selecciona una fecha </label>
@@ -92,12 +104,11 @@
                             name="attendance_status_id" 
                             id="attendance_status_id"
                             class="w-full p-4 rounded-lg border border-gray-200 dark:border-dark-extralight text-black dark:text-white focus:outline-none">
-                                <option :value="1"> PRESENT </option>
-                                <option :value="2"> ABSENT UNJUSTIFIED </option>
-                                <option :value="3"> ABSENT JUSTIFIED </option>
-                                <option :value="4"> LATE </option>
-                                <option :value="5"> EXCUSED </option>
-                                <option :value="6"> UNASSIGNED </option>
+                                <option :value="0" selected> -- Selecciona -- </option>
+                                <option 
+                                    v-for="status in attendanceStore?.attendanceStatuses?.data"
+                                    :key="status.id" 
+                                    :value="status.id"> {{ status?.name }} </option>
                         </select>
                     </div>
                 </div>

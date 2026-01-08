@@ -8,32 +8,32 @@ export const MOCK_ATTENDANCES_STATUSES: ApiResponse<AttendanceStatus[]> = {
     data: [
         {
             id: 1,
-            name: "PRESENT",
+            name: "Asistió",
             description: "El alumno o participante asistió a la sesión."
         },
         {
             id: 2,
-            name: "ABSENT_UNJUSTIFIED",
+            name: "Ausencia no justificada",
             description: "Ausencia sin previo aviso ni justificación."
         },
         {
             id: 3,
-            name: "ABSENT_JUSTIFIED",
+            name: "Ausencia justificada",
             description: "Ausencia justificada (ej. enfermedad, cita médica)."
         },
         {
             id: 4,
-            name: "LATE",
+            name: "Tarde",
             description: "El alumno llegó tarde."
         },
         {
             id: 5,
-            name: "EXCUSED",
+            name: "Exento",
             description: "Exento de asistir por parte del entrenador (ej. lesión, descanso)."
         },
         {
             id: 6,
-            name: "UNASSIGNED",
+            name: "No asignado",
             description: "Día no asignado como asistencia."
         }
     ]
@@ -132,6 +132,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_DAY: PaginationContent<AttendanceCurr
             day_formatted_name: "Martes",
             entry_time: "10:00:00",
             departure_time: "11:00:00",
+            attendance_status_id: null,
             attendance_status: null,
             created_at: "2025-12-03",
             updated_at: "2025-12-03"
@@ -151,7 +152,8 @@ export const MOCK_USER_ATTENDANCES_CURRENT_DAY: PaginationContent<AttendanceCurr
             day_formatted_name: "Martes",
             entry_time: "10:00:00",
             departure_time: "11:00:00",
-            attendance_status: "PRESENT",
+            attendance_status_id: null,
+            attendance_status: null,
             created_at: "2025-12-03",
             updated_at: "2025-12-03"
         }
