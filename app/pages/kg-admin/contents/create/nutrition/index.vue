@@ -59,7 +59,7 @@
 
         <section class="md:px-5">
             <Breadcrumb
-                heading="Creación contenido - Nutrición (Recetas, Tip)"
+                heading="Creación contenido - Nutrición (Recetas, tips de alimentación)"
                 primary-section="Contenidos"
                 primary-link="/kg-admin/contents"
                 secondary-section="Crear Nutrición (Recetas, Tip)"/>

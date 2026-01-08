@@ -6,7 +6,7 @@
     const contentStore = useContentStore()
 
     const showFilterContent = ref<boolean>(false)
-    const selectContentType = ref<'ALL' | 'NEWS' | 'EVENTS' | 'TIPS' | 'NUTRITION'>('ALL')
+    const selectContentType = ref<'todo' | 'noticias' | 'eventos' | 'consejos' | 'nutricion'>('todo')
 
     const onContentTypeChange = () => {
         contentStore.contentTypeFilter = selectContentType.value
@@ -73,57 +73,57 @@
                         <div class="p-4 m-1">
                             <p class="dark:text-gray-300 font-bold mb-3"> Tipo de contenido: </p>
 
-                            <label for="all" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                            <label for="todo" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
                                 <input 
                                     type="radio" 
-                                    id="all" 
+                                    id="todo" 
                                     name="filter" 
-                                    value="ALL" 
+                                    value="todo" 
                                     class="h-5 w-5 accent-blue-500"
                                     v-model="selectContentType">
                                 <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Todo </span>
                             </label>
 
-                            <label for="news" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                            <label for="noticias" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
                                 <input 
                                     type="radio" 
-                                    id="news" 
+                                    id="noticias" 
                                     name="filter" 
-                                    value="NEWS" 
+                                    value="noticias" 
                                     class="h-5 w-5 accent-amber-500"
                                     v-model="selectContentType">
                                 <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Noticias </span>
                             </label>
 
-                            <label for="events" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                            <label for="eventos" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
                                 <input 
                                     type="radio" 
-                                    id="events" 
+                                    id="eventos" 
                                     name="filter" 
-                                    value="EVENTS" 
+                                    value="eventos" 
                                     checked 
                                     class="h-5 w-5 accent-purple-500"
                                     v-model="selectContentType">
                                 <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Eventos </span>
                             </label>
 
-                            <label for="tips" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                            <label for="consejos" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
                                 <input 
                                     type="radio" 
-                                    id="tips" 
+                                    id="consejos" 
                                     name="filter" 
-                                    value="TIPS" 
+                                    value="consejos" 
                                     class="h-5 w-5 accent-pink-500"
                                     v-model="selectContentType">
-                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Tips </span>
+                                <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Consejos </span>
                             </label>
 
-                            <label for="nutrition" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
+                            <label for="nutricion" class="flex items-center px-3 py-1 rounded-lg cursor-pointer transition-colors font-light">
                                 <input 
                                     type="radio" 
-                                    id="nutrition" 
+                                    id="nutricion" 
                                     name="filter" 
-                                    value="NUTRITION" 
+                                    value="nutricion" 
                                     class="h-5 w-5 accent-lime-500"
                                     v-model="selectContentType">
                                 <span class="ml-3 text-base font-medium text-gray-700 dark:text-white"> Nutrición </span>

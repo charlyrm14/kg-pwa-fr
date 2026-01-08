@@ -1,4 +1,4 @@
-import type { ContentTypeSlug, Content } from "#imports"
+import type { ContentTypeSlug } from "#imports"
 
 export function useContentFilter(contents?: any[]) {
 
@@ -10,19 +10,20 @@ export function useContentFilter(contents?: any[]) {
     })
 
     const pageHeaderTitle = computed<ContentTypeSlug>(() => {
-        const validTypes: ContentTypeSlug[] = ['news', 'events', 'tips', 'nutrition']
+        const validTypes: ContentTypeSlug[] = ['noticias', 'eventos', 'consejos', 'nutricion']
 
         if(validTypes.includes(typeSlugParam.value as ContentTypeSlug)) {
             return typeSlugParam.value as ContentTypeSlug
         }
 
-        return 'news'
+        return 'noticias'
     })
 
     const contentFilter = computed(() => {
+        
         if (!typeSlugParam.value) return []
-
-        return contents?.filter(content => content.type === typeSlugParam.value!.toUpperCase())
+        
+        return contents?.filter(content => content.type.toUpperCase().normalize('NFD').replace(/\p{Diacritic}/gu, '') === typeSlugParam.value!.toUpperCase())
     })
 
     return {

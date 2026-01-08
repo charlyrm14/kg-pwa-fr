@@ -43,7 +43,7 @@
                     class="w-full pl-10 p-3 border rounded-full focus:outline-none border-gray-100 bg-white dark:bg-dark-extralight dark:border-dark-extralight dark:text-white shadow" />
             </div>
         </section>
-    
+
         <section class="mt-6">
             <div v-if="(contentFilter || []).length > 0" class="space-y-4" v-gsap.whenVisible.stagger.from='{ opacity: 0, y: 50, stagger: 0.4 }'>
                 <ContentItem

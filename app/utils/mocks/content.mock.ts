@@ -10,8 +10,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             created_at: "2025-12-19",
             updated_at: "2025-12-19",
             author: "Virginia",
-            type: "EVENTS",
-            status: "PUBLISHED",
+            type: "Eventos",
+            status: "Publicado",
             event: {
                 location: "Acapulco, Guerrero, México.",
                 start_date: "2025-12-20",
@@ -27,8 +27,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             created_at: "2025-12-19",
             updated_at: "2025-12-19",
             author: "Virginia",
-            type: "NUTRITION",
-            status: "PUBLISHED",
+            type: "Nutrición",
+            status: "Publicado",
             event: null
         },
         {
@@ -38,8 +38,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             created_at: "2025-12-19",
             updated_at: "2025-12-19",
             author: "Virginia",
-            type: "TIPS",
-            status: "PUBLISHED",
+            type: "Consejos",
+            status: "Publicado",
             event: null
         },
         {
@@ -49,8 +49,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             created_at: "2025-12-19",
             updated_at: "2025-12-19",
             author: "Virginia",
-            type: "EVENTS",
-            status: "PUBLISHED",
+            type: "Eventos",
+            status: "Publicado",
             event: {
                 location: "Nextlalpan, Edo. de México",
                 start_date: "2025-12-20",
@@ -66,8 +66,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             created_at: "2025-12-19",
             updated_at: "2025-12-19",
             author: "Virginia",
-            type: "NEWS",
-            status: "PUBLISHED",
+            type: "Noticias",
+            status: "Publicado",
             event: null
         },
         {
@@ -77,8 +77,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             created_at: "2025-12-19",
             updated_at: "2025-12-19",
             author: "Virginia",
-            type: "NUTRITION",
-            status: "PUBLISHED",
+            type: "Nutrición",
+            status: "Publicado",
             event: null
         },
         {
@@ -88,8 +88,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             created_at: "2025-12-19",
             updated_at: "2025-12-19",
             author: "Virginia",
-            type: "TIPS",
-            status: "PUBLISHED",
+            type: "Consejos",
+            status: "Publicado",
             event: null
         },
         {
@@ -99,8 +99,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             created_at: "2025-12-19",
             updated_at: "2025-12-19",
             author: "Virginia",
-            type: "EVENTS",
-            status: "PUBLISHED",
+            type: "Eventos",
+            status: "Publicado",
             event: {
                 location: "Nextlalpan, Edo. de México",
                 start_date: "2025-12-20",
@@ -116,8 +116,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             created_at: "2025-12-19",
             updated_at: "2025-12-19",
             author: "Virginia",
-            type: "NEWS",
-            status: "PUBLISHED",
+            type: "Noticias",
+            status: "Publicado",
             event: null
         }
     ],
