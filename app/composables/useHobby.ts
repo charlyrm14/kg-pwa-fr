@@ -1,4 +1,4 @@
-import { MOCK_HOBBIES_LIST } from "#imports";
+import { MOCK_HOBBIES_LIST } from "~/utils/mocks/hobby.mock";
 import type { ApiResponse, HobbyData } from "#imports";
 
 export function useHobby () {
