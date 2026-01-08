@@ -13,7 +13,7 @@ export const useContentStore = defineStore('contents', () => {
 
     const contents = ref<PaginationContent<Content> | null>(null)
     const contentDetail = ref<Content | null>(null)
-    const contentTypeFilter = ref<'ALL' | 'NEWS' | 'EVENTS' | 'TIPS' | 'NUTRITION'>('ALL')
+    const contentTypeFilter = ref<'todo' | 'noticias' | 'eventos' | 'consejos' | 'nutricion'>('todo')
 
     /**
      * The function fetches contents either from a mock API or a real API endpoint and returns the
@@ -132,13 +132,15 @@ export const useContentStore = defineStore('contents', () => {
 
         if (!contents.value) return null
 
-        if (contentTypeFilter.value === 'ALL') {
+        if (contentTypeFilter.value === 'todo') {
             return contents.value
         }
 
         return {
             ...contents.value,
-            data: contents.value.data.filter(content => content.type === contentTypeFilter.value)
+            data: contents.value.data.filter(content => 
+                content.type.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '') === contentTypeFilter.value
+            )
         }
     })
 

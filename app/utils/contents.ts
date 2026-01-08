@@ -14,16 +14,18 @@ import type { ContentTypeSlug } from '#imports'
  * content type slug. If the provided content type slug is not found in the `contentType` object, it
  * defaults to returning the value for the 'news' content type, which is 'noticias'.
  */
-export const contentTitle = (type: ContentTypeSlug = 'news') => {
+export const contentTitle = (type: ContentTypeSlug = 'noticias') => {
+
+    const normalized = type?.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '') as ContentTypeSlug;
 
     const contentType: Record<string, string> = {
-        news: 'noticias',
-        events: 'eventos',
-        tips: 'tips',
-        nutrition: 'alimentación'
+        noticias: 'noticias',
+        eventos: 'eventos',
+        consejos: 'consejos',
+        nutricion: 'alimentación'
     }
 
-    return contentType[type]  || contentType.news
+    return contentType[normalized]  || contentType.news
 }
 
 /**
@@ -36,18 +38,18 @@ export const contentTitle = (type: ContentTypeSlug = 'news') => {
  * provided. If the `type` parameter is not provided or is not one of the specified content types
  * (news, events, tips, nutrition), it will default to returning the image URL for news.
  */
-export const contentTypeImage = (type: string = 'news'): string => {
+export const contentTypeImage = (type: string = 'noticias'): string => {
 
-    const normalized = type?.toLowerCase() as ContentTypeSlug;
+    const normalized = type?.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '') as ContentTypeSlug;
 
     const imageURL: Record<ContentTypeSlug, string> = {
-        news: CardNews,
-        events: CardEvents,
-        tips: CardTips,
-        nutrition: CardNutrition
+        noticias: CardNews,
+        eventos: CardEvents,
+        consejos: CardTips,
+        nutricion: CardNutrition
     }
 
-    return imageURL[normalized] ?? imageURL.news
+    return imageURL[normalized] ?? imageURL.noticias
 }
 
 /**
@@ -59,18 +61,18 @@ export const contentTypeImage = (type: string = 'news'): string => {
  * based on the content type provided. If the provided content type is not found in the predefined
  * color mappings, it defaults to the color for news content type ('bg-amber-500').
  */
-export const colorByContentType = (type: string = 'news'): string => {
+export const colorByContentType = (type: string = 'noticias'): string => {
 
-    const normalized = type?.toLowerCase() as ContentTypeSlug;
+    const normalized = type?.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '') as ContentTypeSlug;
 
     const color: Record<ContentTypeSlug, string> = {
-        news: 'bg-amber-500',
-        events: 'bg-purple-500',
-        tips: 'bg-pink-500',
-        nutrition: 'bg-lime-500'
+        noticias: 'bg-amber-500',
+        eventos: 'bg-purple-500',
+        consejos: 'bg-pink-500',
+        nutricion: 'bg-lime-500'
     }
 
-    return color[normalized]  || color.news
+    return color[normalized]  || color.noticias
 }
 
 /**
@@ -84,18 +86,18 @@ export const colorByContentType = (type: string = 'news'): string => {
  * types (news, events, tips, nutrition), it defaults to returning the title for the 'news' content
  * type, which is 'Noticias'.
  */
-export const contentSectionTitle = (type: string = 'news'): string => {
+export const contentSectionTitle = (type: string = 'noticias'): string => {
 
-    const normalized = type?.toLowerCase() as ContentTypeSlug;
+    const normalized = type?.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '') as ContentTypeSlug;
 
     const contentType: Record<ContentTypeSlug, string> = {
-        news: 'Noticias',
-        events: 'Eventos',
-        tips: 'Tips',
-        nutrition: 'Nutrición'
+        noticias: 'Noticias',
+        eventos: 'Eventos',
+        consejos: 'Consejos',
+        nutricion: 'Nutrición'
     }
 
-    return contentType[normalized]  || contentType.news
+    return contentType[normalized]  || contentType.noticias
 }
 
 /**
@@ -111,13 +113,13 @@ export const contentSectionTitle = (type: string = 'news'): string => {
 export const statusName = (statusId: number): string => {
 
     const text: Record<number, string> = {
-        1: 'DRAFT',
-        2: 'PENDING REVIEW',
-        3: 'REJECTED',
-        4: 'SCHEDULED',
-        5: 'PUBLISHED',
-        6: 'UNPUBLISHED',
-        7: 'DELETED',
+        1: 'Borrador',
+        2: 'Pendiente de revisión',
+        3: 'Rechazado',
+        4: 'Programado',
+        5: 'Publicado',
+        6: 'No publicado',
+        7: 'Eliminado',
     }
 
     return (text[statusId as number]  ?? text[5]) as string
@@ -136,10 +138,10 @@ export const statusName = (statusId: number): string => {
 export const textTypeContentById = (contentTypeId: number): string => {
 
     const text: Record<number, string> = {
-        1: 'NEWS',
-        2: 'EVENTS',
-        3: 'TIPS',
-        4: 'NUTRITION',
+        1: 'Noticias',
+        2: 'Eventos',
+        3: 'Consejos',
+        4: 'Nutrición',
     }
 
     return (text[contentTypeId as number]  ?? text[5]) as string

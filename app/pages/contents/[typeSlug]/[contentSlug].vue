@@ -46,7 +46,7 @@
     
     const typeSlugParam = computed(() => {
         const param = route.params.typeSlug
-        return Array.isArray(param) ? param[0] : param ?? 'news'
+        return Array.isArray(param) ? param[0] : param ?? 'noticias'
     })
 
 </script>
@@ -124,7 +124,7 @@
                         Información 
                 </button>
                 <button
-                    v-if="route.params.typeSlug === 'events'"
+                    v-if="route.params.typeSlug === 'eventos'"
                     @click="contentTab = 2" 
                     class="cursor-pointer hover:opacity-75 text-lg"
                     :class="contentTab === 2 ? 'border-b-4 border-blue-500 dark:text-white font-extrabold' : 'text-gray-400'"> 

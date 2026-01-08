@@ -1,6 +1,6 @@
-export type ContentStatus = 'DRAFT' | 'PENDING REVIEW' | 'REJECTED' | 'SCHEDULED' | 'PUBLISHED' | 'UNPUBLISHED' | 'DELETED'
+export type ContentStatus = 'borrador' | 'pendiente-de-revision' | 'rechazado' | 'programado' | 'publicado' | 'no-publicado' | 'eliminado'
 
-export type ContentTypeSlug = 'news' | 'events' | 'tips' | 'nutrition';
+export type ContentTypeSlug = 'noticias' | 'eventos' | 'consejos' | 'nutricion';
 
 export interface EventDetails {
     location: string | null
