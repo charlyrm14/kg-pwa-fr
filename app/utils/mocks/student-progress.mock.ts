@@ -7,13 +7,13 @@ export const STUDENT_PROGRESS: ApiResponse<StudentProgress> = {
         last_name: "Ramos",
         mother_last_name: null,
         email: "charlyrm14@gmail.com",
-        uuid: "771f8eb5-a52e-40e4-af21-af947bf76048",
+        uuid: "9fc11977-5ee9-4f00-b279-9778797b06c3",
         student_code: null,
         current_level: {
-            category_name: "TORTUGA",
+            category_name: "Tortuga",
             category_description: "¡Ya estás avanzando firme como una tortuga en su travesía! Tu técnica mejora y se nota tu esfuerzo. Sigue con esa constancia, que cada brazada te acerca a tu próxima meta.",
-            total_progress: 50,
-            total_progress_formatted: "50%",
+            total_progress: 45,
+            total_progress_formatted: "45%",
             completed_level_date: null,
             category_skills: [
                 {
@@ -51,7 +51,7 @@ export const STUDENT_PROGRESS: ApiResponse<StudentProgress> = {
             {
                 category_id: 2,
                 category_name: "TORTUGA",
-                total_progress: 25
+                total_progress: 45
             }
         ]
     }

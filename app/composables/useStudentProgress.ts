@@ -1,6 +1,6 @@
 import type { ApiResponse } from "#imports";
 import type { StudentProgress } from "#imports";
-import { STUDENT_PROGRESS } from "#imports";
+import { STUDENT_PROGRESS } from "~/utils/mocks/student-progress.mock";
 
 export function useStudentProgress () {
 

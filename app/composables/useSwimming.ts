@@ -1,4 +1,4 @@
-import { SWIM_CATEGORIES_LIST } from "#imports";
+import { SWIM_CATEGORIES_LIST } from "~/utils/mocks/swimming.mock";
 import type { ApiResponse, SwimCategory } from "#imports";
 
 export function useSwimming () {
@@ -12,11 +12,15 @@ export function useSwimming () {
         try {
 
             if(IS_MOCK_API_MODE) {
+
                 swimCategories.value = SWIM_CATEGORIES_LIST
+
             } else {
+
                 swimCategories.value = await $fetch<ApiResponse<SwimCategory[]>>(
                     `${config.public.apiBaseUrl}/swim-categories`
                 )
+
             }
 
             return swimCategories.value
