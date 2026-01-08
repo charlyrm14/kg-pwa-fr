@@ -1,4 +1,4 @@
-import { MOCK_USER_SCHEDULE } from "#imports";
+import { MOCK_USER_SCHEDULE } from "~/utils/mocks/schedules.mock";
 import type { ApiResponse, UserSchedule } from "#imports";
 
 export function useSchedule () {
@@ -17,7 +17,7 @@ export function useSchedule () {
             } else {
 
                 const response = await $fetch<ApiResponse<UserSchedule>>(
-                    `${config.public.apiBaseUrl}/schedules/user`
+                    `${config.public.apiBaseUrl}/schedules`
                 )
 
                 schedule.value = response

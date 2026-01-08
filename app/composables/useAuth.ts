@@ -1,4 +1,4 @@
-import { MOCK_USER_CREDENTIALS, MOCK_TOKEN_COOKIE } from "#imports"
+import { MOCK_USER_CREDENTIALS, MOCK_TOKEN_COOKIE } from "~/utils/mocks/auth.mock";
 
 export function useAuth() {
 
