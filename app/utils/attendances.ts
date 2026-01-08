@@ -51,20 +51,16 @@ export const bgAttendanceStatusColors = (statusId: number) => {
     return colors[statusId] ?? 'bg-pink-500'
 }
 
-export const textAttendanceStatusColors = (status: string) => {
-
-    const normalized = status
-        ?.toLowerCase()
-        .replace(/\s+/g, '_') as string
+export const textAttendanceStatusColors = (statusId: number) => {
 
     const colors: Record<string, string> = {
-        present: 'text-lime-500',
-        absent_unjustified: 'text-red-500',
-        absent_justified: 'text-yellow-500',
-        late: 'text-orange-400',
-        excused: 'text-teal-600',
-        unassigned: 'text-slate-400'
+        1: 'text-lime-500',
+        2: 'text-red-500',
+        3: 'text-yellow-500',
+        4: 'text-orange-400',
+        5: 'text-teal-600',
+        6: 'text-slate-400'
     }
 
-    return colors[normalized] ?? 'bg-pink-500'
+    return colors[statusId] ?? 'bg-pink-500'
 }

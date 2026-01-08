@@ -107,6 +107,7 @@ export const useAttendanceStore = defineStore('attendances', () => {
                     )
 
                     if(status) {
+                        user.attendance_status_id = status.id
                         user.attendance_status = status.name
                     }
                 }

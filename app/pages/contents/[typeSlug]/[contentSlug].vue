@@ -192,7 +192,7 @@
         </section>
         <!-- End Tab Event Content -->
 
-        <section v-if="content?.type === 'NUTRITION'">
+        <section v-if="content?.type === 'Nutrición'">
             <p class="text-pink-500 inline-flex items-center gap-x-2 font-extrabold"> 
                     Para resultados reales, consulta siempre a un especialista en nutrición. 
                 </p>

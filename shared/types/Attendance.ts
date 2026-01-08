@@ -84,6 +84,7 @@ export interface AttendanceCurrentDay {
     day_formatted_name: string
     entry_time: string
     departure_time: string
+    attendance_status_id: number | null
     attendance_status: string | null
     created_at: string
     updated_at: string
