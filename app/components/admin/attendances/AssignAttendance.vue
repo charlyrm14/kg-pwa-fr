@@ -1,8 +1,11 @@
 <script setup lang="ts">
     import { useModalManager } from '#imports';
     import type { AttendanceCurrentDay } from '#imports';
+    import { useAttendanceStore } from '~/stores/attendances';
+    import { bgAttendanceStatusColors } from '#imports';
 
     const { getPayload } = useModalManager()
+    const attendanceStore = useAttendanceStore()
 
     const emit = defineEmits<{
         (e: 'closeAssignAttendanceModal'): void
@@ -14,14 +17,47 @@
 
     const user = getPayload<AttendanceCurrentDay>()
     const isSubmitting = ref<boolean>(false)
+    const statusSelected = ref<number>(0)
+    const errorMessage = ref<boolean>(false)
 
-    const handleSubmit = () => {
+    onMounted(async() => {
+        try {
 
-        isSubmitting.value = true
+            await attendanceStore?.fetchAttendanceStatuses()
+            
+        } catch (error) {
+            console.error('Error to get attendance statuses')
+        }
+    })
 
-        setTimeout(() => {
+    const statuses = computed(() => attendanceStore.attendanceStatuses?.data ?? [])
+
+
+    const handleSubmit = async() => {
+
+        if(statusSelected.value === 0){
+            errorMessage.value = true
+            return
+        }
+
+        try {
+
+            isSubmitting.value = true
+            
+            const payload = {
+                user_uuid: user?.user?.uuid,
+                attendance_status_id: statusSelected.value
+            }
+
+            await attendanceStore?.assignUserAttendance(payload)
+            emit('closeAssignAttendanceModal')
+            
+        } catch (error) {
+            console.error('Hubo un error al asignar la asistencia')
+
+        } finally {
             isSubmitting.value = false
-        }, 4000);
+        }
     }
 
 </script>
@@ -61,64 +97,22 @@
                         </div>
                     </div>
                     <div>
-                        <h4 class="text-gray-500 dark:text-white font-bold mb-2"> Selecciona una opción </h4>
-                        <div class="space-y-3">
-                            <div class="w-full bg-gray-200 dark:bg-dark-light border border-gray-200 dark:border-dark-soft rounded-lg p-3 flex justify-between items-center cursor-pointer hover:opacity-75 overflow-hidden flex-shrink-0">
+                        <h4 class="text-gray-500 dark:text-white"> Selecciona una opción </h4>
+                        <span v-if="errorMessage">
+                            <p class="text-red-500 font-bold mb-2 text-sm"> Debes seleccionar una opción </p>
+                        </span>
+                        <div v-if="statuses"  class="space-y-3 my-2">
+                            <div 
+                                v-for="status in statuses" 
+                                :key="status?.id" 
+                                @click="statusSelected = status.id"
+                                class="w-full bg-gray-200 dark:bg-dark-light  rounded-lg px-4 py-2 flex justify-between items-center cursor-pointer hover:opacity-75 overflow-hidden flex-shrink-0"
+                                :class="statusSelected === status.id ? 'border-2 border-blue-500' : 'border border-gray-200 dark:border-dark-soft'">
                                 <div class="flex justify-between items-center gap-x-4">
-                                    <div class="w-8 h-8 bg-lime-500 rounded-full"></div>
+                                    <div class="w-8 h-8 rounded-full" :class="bgAttendanceStatusColors(status.id)"></div>
                                     <div>
                                         <p class="dark:text-white font-extrabold"> 
-                                            Presente <span class="block text-sm text-gray-500 dark:text-gray-400"> El alumno o participante asistió a la sesión. </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-dark-light border border-gray-200 dark:border-dark-soft rounded-lg p-3 flex justify-between items-center cursor-pointer hover:opacity-75 overflow-hidden flex-shrink-0">
-                                <div class="flex justify-between items-center gap-x-4">
-                                    <div class="w-8 h-8 bg-red-500 rounded-full"></div>
-                                    <div>
-                                        <p class="dark:text-white font-extrabold"> 
-                                            Ausencia sin justificación <span class="block text-sm text-gray-500 dark:text-gray-400"> Ausencia sin previo aviso ni justificación. </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-dark-light border border-gray-200 dark:border-dark-soft rounded-lg p-3 flex justify-between items-center cursor-pointer hover:opacity-75 overflow-hidden flex-shrink-0">
-                                <div class="flex justify-between items-center gap-x-4">
-                                    <div class="w-8 h-8 bg-yellow-400 rounded-full"></div>
-                                    <div>
-                                        <p class="dark:text-white font-extrabold"> 
-                                            Ausencia justificada <span class="block text-sm text-gray-500 dark:text-gray-400"> Ausencia justificada (ej. enfermedad, etc). </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-dark-light border border-gray-200 dark:border-dark-soft rounded-lg p-3 flex justify-between items-center cursor-pointer hover:opacity-75 overflow-hidden flex-shrink-0">
-                                <div class="flex justify-between items-center gap-x-4">
-                                    <div class="w-8 h-8 bg-orange-400 rounded-full"></div>
-                                    <div>
-                                        <p class="dark:text-white font-extrabold"> 
-                                            Tarde <span class="block text-sm text-gray-500 dark:text-gray-400"> El alumno llegó tarde. </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-dark-light border border-gray-200 dark:border-dark-soft rounded-lg p-3 flex justify-between items-center cursor-pointer hover:opacity-75 overflow-hidden flex-shrink-0">
-                                <div class="flex justify-between items-center gap-x-4">
-                                    <div class="w-8 h-8 bg-teal-600 rounded-full"></div>
-                                    <div>
-                                        <p class="dark:text-white font-extrabold"> 
-                                            Exento <span class="block text-sm text-gray-500 dark:text-gray-400"> Exento de asistir (ej. lesión, descanso). </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-dark-light border border-gray-200 dark:border-dark-soft rounded-lg p-3 flex justify-between items-center cursor-pointer hover:opacity-75 overflow-hidden flex-shrink-0">
-                                <div class="flex justify-between items-center gap-x-4">
-                                    <div class="w-8 h-8 bg-slate-400 rounded-full"></div>
-                                    <div>
-                                        <p class="dark:text-white font-extrabold"> 
-                                            Día no asignado <span class="block text-sm text-gray-500 dark:text-gray-400"> Día no asignado como asistencia. </span>
+                                            {{ status?.name.replace('_', ' ') }} <span class="block text-xs text-gray-500 dark:text-gray-400"> {{ status.description }} </span>
                                         </p>
                                     </div>
                                 </div>
@@ -139,7 +133,8 @@
                 <button
                     @click="handleSubmit"
                     class="text-white px-4 py-2 rounded-lg hover:opacity-75 font-extrabold"
-                    :class="!isSubmitting ? 'bg-blue-500 cursor-pointer' : 'bg-blue-300 cursor-progress'"> 
+                    :class="statusSelected !== 0 ? 'bg-blue-500 cursor-pointer' : 'bg-blue-300'"
+                    :disabled="statusSelected === 0"> 
                         {{ !isSubmitting ? 'Guardar' : 'Guardando...' }} 
                 </button>
             </div>

@@ -36,3 +36,35 @@ export const triggerFileDownload = (blob: Blob, filename: string) => {
     a.remove()
     window.URL.revokeObjectURL(url)
 }
+
+export const bgAttendanceStatusColors = (statusId: number) => {
+
+    const colors: Record<string, string> = {
+        1: 'bg-lime-500',
+        2: 'bg-red-500',
+        3: 'bg-yellow-500',
+        4: 'bg-orange-400',
+        5: 'bg-teal-600',
+        6: 'bg-slate-400'
+    }
+
+    return colors[statusId] ?? 'bg-pink-500'
+}
+
+export const textAttendanceStatusColors = (status: string) => {
+
+    const normalized = status
+        ?.toLowerCase()
+        .replace(/\s+/g, '_') as string
+
+    const colors: Record<string, string> = {
+        present: 'text-lime-500',
+        absent_unjustified: 'text-red-500',
+        absent_justified: 'text-yellow-500',
+        late: 'text-orange-400',
+        excused: 'text-teal-600',
+        unassigned: 'text-slate-400'
+    }
+
+    return colors[normalized] ?? 'bg-pink-500'
+}
