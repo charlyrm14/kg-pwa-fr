@@ -1,6 +1,6 @@
 import type { ApiResponse } from "#imports"
 import type { HomeUser } from "#imports"
-import { HOME_OVERVIEW } from "#imports";
+import { HOME_OVERVIEW } from "~/utils/mocks/home-overview.mock";
 
 export function useHomeOverview () {
 

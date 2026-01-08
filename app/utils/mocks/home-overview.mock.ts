@@ -7,15 +7,15 @@ export const HOME_OVERVIEW: ApiResponse<HomeUser> = {
         last_name: "Ramos",
         mother_last_name: null,
         email: "charlyrm14@gmail.com",
-        uuid: "771f8eb5-a52e-40e4-af21-af947bf76048",
+        uuid: "9fc11977-5ee9-4f00-b279-9778797b06c3",
         student_code: null,
-        role: "ADMIN",
+        role: "Admin",
         current_level: {
-            category_name: "TORTUGA",
-            total_progress: 50,
-            total_progress_formatted: "50%"
+            category_name: "Tortuga",
+            total_progress: 45,
+            total_progress_formatted: "45%"
         },
-        next_level: "MANTARRAYA",
+        next_level: "Mantarraya",
         last_event: {
             title: "Todo Listo para la Copa Regional de Natación 2025",
             slug: "todo-listo-para-la-copa-regional-de-natacion-2025",
