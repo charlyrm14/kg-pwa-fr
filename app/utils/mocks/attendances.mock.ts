@@ -2,6 +2,42 @@ import type { ApiResponse } from "#imports"
 import type { UserAttendance } from "#imports"
 import type { AttendanceCurrentDay } from "~~/shared/types/Attendance"
 import type { PaginationContent } from "#imports"
+import type { AttendanceStatus } from "~~/shared/types/Attendance"
+
+export const MOCK_ATTENDANCES_STATUSES: ApiResponse<AttendanceStatus[]> = {
+    data: [
+        {
+            id: 1,
+            name: "PRESENT",
+            description: "El alumno o participante asistió a la sesión."
+        },
+        {
+            id: 2,
+            name: "ABSENT_UNJUSTIFIED",
+            description: "Ausencia sin previo aviso ni justificación."
+        },
+        {
+            id: 3,
+            name: "ABSENT_JUSTIFIED",
+            description: "Ausencia justificada (ej. enfermedad, cita médica)."
+        },
+        {
+            id: 4,
+            name: "LATE",
+            description: "El alumno llegó tarde."
+        },
+        {
+            id: 5,
+            name: "EXCUSED",
+            description: "Exento de asistir por parte del entrenador (ej. lesión, descanso)."
+        },
+        {
+            id: 6,
+            name: "UNASSIGNED",
+            description: "Día no asignado como asistencia."
+        }
+    ]
+}
 
 export const MOCK_USER_ATTENDANCES_CURRENT_MONTH: ApiResponse<UserAttendance> = {
     data: {
@@ -9,7 +45,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_MONTH: ApiResponse<UserAttendance> = 
         last_name: "Ramos",
         mother_last_name: null,
         email: "charlyrm14@gmail.com",
-        uuid: "771f8eb5-a52e-40e4-af21-af947bf76048",
+        uuid: "c01ae65b-823b-428b-ab65-5f07b8aa4b98",
         student_code: null,
         current_month: "Diciembre",
         current_year: 2025,
@@ -96,6 +132,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_DAY: PaginationContent<AttendanceCurr
             day_formatted_name: "Martes",
             entry_time: "10:00:00",
             departure_time: "11:00:00",
+            attendance_status: null,
             created_at: "2025-12-03",
             updated_at: "2025-12-03"
         },
@@ -105,7 +142,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_DAY: PaginationContent<AttendanceCurr
                 last_name: "Hérnandez",
                 mother_last_name: null,
                 email: "vhernandezkg@gmail.com",
-                uuid: "4f507188-2b7e-4263-9e06-dcb01ea9c0e4",
+                uuid: "314f6587-5371-41bc-b77a-62c6a7e20ec8",
                 student_code: "STU-20251013-8656",
                 role_name: "STUDENT"
             },
@@ -114,6 +151,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_DAY: PaginationContent<AttendanceCurr
             day_formatted_name: "Martes",
             entry_time: "10:00:00",
             departure_time: "11:00:00",
+            attendance_status: "PRESENT",
             created_at: "2025-12-03",
             updated_at: "2025-12-03"
         }

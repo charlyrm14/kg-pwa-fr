@@ -7,6 +7,8 @@
     import AttendancePagination from '~/components/admin/attendances/AttendancePagination.vue';
     import { useAttendanceStore } from '~/stores/attendances';
     import AssignAttendance from '~/components/admin/attendances/AssignAttendance.vue';
+    import Alert from '~/components/common/Alert.vue';
+    import { useAlert } from '~/composables/useAlert';
     
     definePageMeta({
         layout: 'admin'
@@ -14,6 +16,7 @@
 
     const { modalPayload, close, isOpen } = useModalManager()
     const attendanceStore = useAttendanceStore()
+    const { alert, closeAlert } = useAlert()
 
     await useAsyncData('dashboardAttendancesToday', async() => {
         await attendanceStore.fetchAttendancesToday()
@@ -24,6 +27,8 @@
 
 <template>
     <section>
+
+        <Alert v-if="alert.status" :title="alert.title" :description="alert.description" :type="alert.type" @closeAlert="closeAlert"/>
         
         <section class="md:px-5">
             <Breadcrumb

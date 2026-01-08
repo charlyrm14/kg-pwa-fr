@@ -1,8 +1,9 @@
 <script setup lang="ts">
     import type { AttendanceCurrentDay } from '#imports';
-    import { getTodayDate } from '#imports';
     import { getFirstLetterUppercase } from '#imports';
     import { useModalManager } from '#imports';
+    import { textAttendanceStatusColors } from '#imports';
+    import { getTodayDate } from '#imports';
 
     const props = defineProps<{
         attendance: AttendanceCurrentDay
@@ -32,7 +33,10 @@
             </div>
         </div>
         <div class="w-1/5 flex-shrink-0 px-2">
-            <p class="text-green-500 font-bold"> Hoy <span class="block text-gray-600 dark:text-white font-extrabold"> {{ getTodayDate() }} </span> </p>
+            <p class="font-bold" :class="attendance?.attendance_status ? textAttendanceStatusColors(attendance?.attendance_status) : 'dark:text-gray-400'"> 
+                {{ attendance?.attendance_status ?? 'NO ASIGNADA' }}
+                    <span class="text-xs dark:text-gray-400 text-gray-500 block"> {{ getTodayDate() }} </span>
+            </p>
         </div>
         <div class="w-1/5 flex-shrink-0 px-2 relative">
             <div class="inline-flex items-center gap-x-3">
