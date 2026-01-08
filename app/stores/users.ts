@@ -1,5 +1,5 @@
 import type { UserProfileData } from "~~/shared/types/User"
-import { MOCK_USER_AUTH_PROFILE_DATA } from "#imports"
+import { MOCK_USER_AUTH_PROFILE_DATA } from "~/utils/mocks/user-auth.mock"
 
 export const useUserStore = defineStore('users', () => {
 
