@@ -5,23 +5,23 @@ export const ATTENDANCE_STATUS_MAP = {
     },
     ABSENT_UNJUSTIFIED: { 
         color: 'bg-red-500', 
-        status: 'Ausencia sin justificación.'
+        status: 'Ausencia no justificada.'
     },
     ABSENT_JUSTIFIED: { 
-        color: 'bg-orange-500', 
+        color: 'bg-yellow-500', 
         status: 'Ausencia justificada' 
     },
     LATE: { 
-        color: 'bg-amber-500',
+        color: 'bg-orange-400',
         status: 'Retardo' 
     },
     EXCUSED: { 
-        color: 'bg-teal-500', 
-        status: 'Exento de asistir.' 
+        color: 'bg-teal-600', 
+        status: 'Exento' 
     },
     UNASSIGNED: { 
-        color: 'bg-gray-600', 
-        status: 'Día no asignado' 
+        color: 'bg-slate-400', 
+        status: 'No asignado' 
     },
 } as const;
 

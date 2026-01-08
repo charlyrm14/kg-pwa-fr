@@ -11,7 +11,7 @@ export const MOCK_USER_SCHEDULE: ApiResponse<UserSchedule> = {
         schedules: [
             {
                 day_id: 1,
-                day_name: "LUNES",
+                day_name: "Lunes",
                 shorting_day: "L",
                 day_formatted_name: "Lunes",
                 entry_time: "09:00",
@@ -19,7 +19,7 @@ export const MOCK_USER_SCHEDULE: ApiResponse<UserSchedule> = {
             },
             {
                 day_id: 3,
-                day_name: "MIÉRCOLES",
+                day_name: "Miércoles",
                 shorting_day: "M",
                 day_formatted_name: "Miércoles",
                 entry_time: "09:00",
@@ -27,7 +27,7 @@ export const MOCK_USER_SCHEDULE: ApiResponse<UserSchedule> = {
             },
             {
                 day_id: 5,
-                day_name: "VIERNES",
+                day_name: "Viernes",
                 shorting_day: "V",
                 day_formatted_name: "Viernes",
                 entry_time: "09:00",
@@ -35,7 +35,7 @@ export const MOCK_USER_SCHEDULE: ApiResponse<UserSchedule> = {
             },
             {
                 day_id: 6,
-                day_name: "SÁBADO",
+                day_name: "Sábado",
                 shorting_day: "S",
                 day_formatted_name: "Sábado",
                 entry_time: "09:00",
