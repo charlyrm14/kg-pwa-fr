@@ -51,7 +51,7 @@
                 <!-- Beginning Content Header -->
                 <ContentHeader/>
                 <!-- End Content Header -->
-                <!-- <p class="text-white"> {{ contents?.data }} </p> -->
+                
                 <!-- Beginning Content Table -->
                 <section v-if="contents?.data">
                     <ContentTable :contents="contents?.data"/>

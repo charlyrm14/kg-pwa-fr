@@ -3,6 +3,18 @@ export type ColorBgGender = 'bg-blue-100' | 'bg-pink-100'
 export type ColorTextGender = 'text-blue-500' | 'text-pink-500'
 export type ColorBorderGender = 'border-blue-500' | 'border-pink-500'
 
+export interface User {
+    name: string
+    last_name: string
+    mother_last_name: string | null
+    email: string
+    uuid: string
+    student_code: string | null
+    role_id: number
+    created_at: string
+    role_name: string
+}
+
 export interface ProfileData {
     about_me: string | null
     birthdate: string | null
