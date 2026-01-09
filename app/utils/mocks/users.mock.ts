@@ -1,4 +1,5 @@
 import type { ApiResponse, PaginationContent, UserBirthday, User } from "#imports"
+import type { UserFilters } from "~~/shared/types/User"
 
 export const MOCK_USERS: PaginationContent<User> = {
     current_page: 1,
@@ -116,4 +117,19 @@ export const MOCK_USER_BIRTHDAY: ApiResponse<UserBirthday[]> = {
             current_level: "Nivel Foca"
         }
     ]
+}
+
+export const fetchUsersMock = async(filters: UserFilters): Promise<ApiResponse<PaginationContent<User>>> => {
+    const filtered = MOCK_USERS.data.filter(user => {
+        if (filters.email) return user.email === filters.email
+        return true
+    })
+
+    return {
+        data: {
+            ...MOCK_USERS,
+            data: filtered,
+            total: filtered.length
+        }
+    }
 }

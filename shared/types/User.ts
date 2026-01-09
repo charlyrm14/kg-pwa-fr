@@ -61,3 +61,9 @@ export interface UserBirthday {
     profile: UserProfileBirthday
     current_level: string | null
 }
+
+export interface UserFilters {
+    email?: string
+    role?: string
+    student_code?: string
+}
