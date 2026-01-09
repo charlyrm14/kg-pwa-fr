@@ -50,3 +50,12 @@ export const bgRoleUserColor = (roleId: number) => {
 
     return colors[roleId] ?? 'bg-pink-500'
 }
+
+export const excludeUserFromDele = (email: string): boolean => {
+
+    return ![
+        'charlyrm14@gmail.com',
+        'aiassistant@kg-dreams.com',
+        'gusi_allison@gmail.com'
+    ].includes(email)
+}

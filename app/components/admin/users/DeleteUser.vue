@@ -1,18 +1,39 @@
 <script setup lang="ts">
+    import type { User } from '#imports';
+    import { useModalManager } from '#imports';
+    import { useUserStore } from '~/stores/users';
+
+    const { getPayload } = useModalManager()
+    const userStore = useUserStore()
 
     const emit = defineEmits<{
         (e: 'closeDeleteUserModal'): void
     }>();
 
+    const props = defineProps<{
+        user: User
+    }>()
+
+    const user = getPayload<User>()
     const isSubmitting = ref<boolean>(false)
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async() => {
         isSubmitting.value = true
+        try {
 
-        setTimeout(() => {
+            if(!user) return
+
+            
+            await userStore?.deleteUser(user)
+            
+        } catch (error) {
+
+            console.error('Hubo un error al eliminar a este usuario')
+
+        } finally {
             isSubmitting.value = false
-        }, 4000);
+            emit('closeDeleteUserModal')
+        }
     }
 
 </script>
@@ -35,9 +56,10 @@
                 </button>
             </div>
 
-            <div class="px-6 pb-4">
-                <h4 class="dark:text-white font-bold"> 
-                    Esto acción eliminara a <span class="text-blue-500"> Jhon W </span> y perdera su acceso a la app 
+            <div class="px-6 pb-4 space-y-3">
+                <h4 class="dark:text-white font-bold text-base md:text-xl md:text-center"> 
+                    Esto acción eliminara a 
+                        <span class="text-blue-500"> {{ user?.name }} </span> y perdera su acceso a la app 
                 </h4>
             </div>
 
@@ -52,7 +74,7 @@
                 <button
                     :disabled="isSubmitting"
                     @click="handleSubmit"
-                    class="text-white px-4 py-2 rounded-lg hover:opacity-75"
+                    class="text-white px-4 py-2 rounded-lg hover:opacity-75 font-medium"
                     :class="isSubmitting ? 'bg-red-300 cursor-progress' : 'bg-red-500 cursor-pointer'"> 
                         {{ !isSubmitting ? 'Eliminar usuario' : 'Eliminando usuario' }} 
                 </button>
