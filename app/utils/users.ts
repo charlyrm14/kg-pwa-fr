@@ -39,3 +39,14 @@ export const profileTabs = (): ProfileTab[] => {
         },
     ];
 }
+
+export const bgRoleUserColor = (roleId: number) => {
+
+    const colors: Record<string, string> = {
+        1: 'bg-blue-500',
+        2: 'bg-purple-500',
+        3: 'bg-emerald-500'
+    }
+
+    return colors[roleId] ?? 'bg-pink-500'
+}

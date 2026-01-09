@@ -1,13 +1,58 @@
-import type { UserProfileData } from "~~/shared/types/User"
+import type { ApiResponse } from "#imports"
+import type { User, UserProfileData } from "~~/shared/types/User"
 import { MOCK_USER_AUTH_PROFILE_DATA } from "~/utils/mocks/user-auth.mock"
+import type { PaginationContent } from "#imports"
+import { MOCK_USERS } from "~/utils/mocks/users.mock"
 
 export const useUserStore = defineStore('users', () => {
 
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
+    const users = ref<PaginationContent<User> | null>(null)
     const user = ref<UserProfileData | null>(null)
+    
+    /**
+     * The function fetches users either from a mock API or a real API based on a condition and returns
+     * the fetched users.
+     * @param [page=1] - The `page` parameter in the `fetchUsers` function is used to specify the page
+     * number of users to fetch. By default, it is set to 1, meaning that if no page number is provided
+     * when calling the function, it will fetch the users from the first page. If a different
+     * @returns The `fetchUsers` function is returning the `users.value` after fetching and setting the
+     * user data.
+     */
+    const fetchUsers = async(page = 1) => {
+        try {
 
+            if (IS_MOCK_API_MODE) {
+
+                users.value = MOCK_USERS
+                
+            } else {
+                
+                const response = await $fetch<ApiResponse<PaginationContent<User>>>(`
+                    ${config.public.apiBaseUrl}/users`
+                )
+                
+                users.value = response.data
+
+            }
+
+            return users.value
+            
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    /**
+     * The function `fetchUserProfileData` retrieves user profile data either from a mock API or a real
+     * API endpoint.
+     * @returns The `fetchUserProfileData` function is returning the user profile data stored in the
+     * `user.value` variable. This data is either fetched from a mock API if `IS_MOCK_API_MODE` is
+     * true, or from a real API endpoint if `IS_MOCK_API_MODE` is false. The function returns the user
+     * profile data after it has been fetched and stored in the `user.value` variable
+     */
     const fetchUserProfileData = async() => {
         try {
 
@@ -32,7 +77,9 @@ export const useUserStore = defineStore('users', () => {
     }
 
     return {
+        users,
         user,
+        fetchUsers,
         fetchUserProfileData
     }
 })
