@@ -3,11 +3,13 @@ import type { User, UserProfileData } from "~~/shared/types/User"
 import { MOCK_USER_AUTH_PROFILE_DATA } from "~/utils/mocks/user-auth.mock"
 import type { PaginationContent } from "#imports"
 import { MOCK_USERS } from "~/utils/mocks/users.mock"
+import { useAlert } from "#imports"
 
 export const useUserStore = defineStore('users', () => {
 
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
+    const { showAlert } = useAlert()
 
     const users = ref<PaginationContent<User> | null>(null)
     const user = ref<UserProfileData | null>(null)
@@ -76,10 +78,43 @@ export const useUserStore = defineStore('users', () => {
         }
     }
 
+    /**
+     * The function `deleteUser` asynchronously deletes a user by their UUID, either through a fetch
+     * request to an API or by filtering the local data, and displays a success or error message
+     * accordingly.
+     * @param {User} user - The `user` parameter in the `deleteUser` function is an object of type
+     * `User` that contains information about the user to be deleted. It likely includes properties
+     * such as `uuid` which is used to identify the specific user to be deleted.
+     */
+    const deleteUser = async(user: User) => {
+        try {
+
+            const { uuid } = user
+
+            if(!IS_MOCK_API_MODE) {
+
+                await $fetch<User>(`${config.public.apiBaseUrl}/users/${uuid}`, {
+                        method: 'DELETE'
+                })
+            } 
+
+            if(users.value) {
+                users.value.data = users.value.data.filter(usr => usr.uuid !== uuid)
+            }
+
+            showAlert('Éxito', 'Usuario eliminado con éxito', 'success')
+            
+        } catch (error) {
+            console.error(error)
+            showAlert('Error', 'Error al eliminar usuario', 'error')
+        }
+    }
+
     return {
         users,
         user,
         fetchUsers,
-        fetchUserProfileData
+        fetchUserProfileData,
+        deleteUser
     }
 })

@@ -7,13 +7,15 @@
     import UserTable from '~/components/admin/users/UserTable.vue';
     import UserPagination from '~/components/admin/users/UserPagination.vue';
     import { useUserStore } from '~/stores/users';
-    import type { User } from '#imports';
+    import Alert from '~/components/common/Alert.vue';
+    import { useAlert } from '#imports';
     
     definePageMeta({
         layout: 'admin'
     });
 
-    const { close, isOpen } = useModalManager()
+    const { modalPayload, close, isOpen } = useModalManager()
+    const { alert } = useAlert()
     const userStore = useUserStore()
 
     await useAsyncData('users', async() => {
@@ -25,6 +27,8 @@
 
 <template>
     <section>
+
+        <Alert v-if="alert.status" :title="alert.title" :description="alert.description" :type="alert.type"/>
 
         <section class="md:px-5">
             <Breadcrumb
@@ -61,6 +65,7 @@
 
         <DeleteUser
             v-if="isOpen('DeleteUserModal')"
+            :user="modalPayload?.user"
             @closeDeleteUserModal="close"/>
 
     </section>

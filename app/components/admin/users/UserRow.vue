@@ -2,6 +2,7 @@
     import { useModalManager } from '#imports';
     import type { User } from '#imports';
     import { bgRoleUserColor } from '#imports';
+    import { excludeUserFromDele } from '#imports';
 
     const { open } = useModalManager()
 
@@ -56,7 +57,7 @@
                         class="absolute -bottom-26 -left-9 bg-white border border-gray-200 dark:border-none dark:bg-dark-extralight rounded-lg shadow-xl w-40 z-50">
                             <div class="px-2 py-2 ">
                                 <NuxtLink
-                                    to="/kg-admin/users/edit/4f507188-2b7e-4263-9e06-dcb01ea9c0e4"
+                                    :to="`/kg-admin/users/edit/${user?.uuid}`"
                                     class="dark:text-gray-400 text-base inline-flex items-center gap-x-2 font-light px-3 py-1 cursor-pointer hover:text-blue-500  rounded-lg w-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen-icon lucide-user-round-pen"><path d="M2 21a8 8 0 0 1 10.821-7.487"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="8" r="5"/></svg>
                                             Editar
@@ -64,7 +65,8 @@
                             </div> 
                             <div class="px-2 py-2">
                                 <button
-                                    @click="open('DeleteUserModal')"
+                                    v-if="excludeUserFromDele(user?.email)"
+                                    @click="open('DeleteUserModal', user)"
                                     class="dark:text-gray-400 text-base inline-flex items-center gap-x-2 font-light px-3 py-1 cursor-pointer hover:text-red-500  rounded-lg w-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                                             Eliminar
