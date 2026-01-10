@@ -11,7 +11,7 @@
 
     const { data: user } = await useAsyncData('getProfileData', async() => {
         await userStore.fetchUserProfileData()
-        return userStore.user ?? null
+        return userStore.userProfile ?? null
     })
 
     const activeTab = ref<number>(1)

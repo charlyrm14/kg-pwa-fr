@@ -95,3 +95,18 @@ export interface AttendanceStatus {
     name: string
     description: string
 }
+
+export interface AttendanceUserInfo {
+    day_id: number
+    day_name: string
+    shorting_day: string
+    day_with_number: string
+    day_number: number
+    entry_time: string
+    departure_time: string
+    attendance_description: string
+    attendance_name: string
+    attendance_month: string
+    attendance_status_id: number
+    created_at: string
+}

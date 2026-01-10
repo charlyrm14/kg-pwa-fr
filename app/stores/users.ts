@@ -1,10 +1,17 @@
 import type { ApiResponse } from "#imports"
-import type { User, UserProfileData, UserFilters } from "~~/shared/types/User"
+import type { 
+    User, 
+    UserProfileData, 
+    UserFilters, 
+    UserInfo 
+} from "~~/shared/types/User"
 import { MOCK_USER_AUTH_PROFILE_DATA } from "~/utils/mocks/user-auth.mock"
 import type { PaginationContent } from "#imports"
-import { MOCK_USERS } from "~/utils/mocks/users.mock"
 import { useAlert } from "#imports"
-import { fetchUsersDataSource } from "~/data/users/users.datasource"
+import { 
+    fetchUserInfoDataSource, 
+    fetchUsersDataSource 
+} from "~/data/users/users.datasource"
 
 export const useUserStore = defineStore('users', () => {
 
@@ -13,7 +20,8 @@ export const useUserStore = defineStore('users', () => {
     const { showAlert } = useAlert()
 
     const users = ref<PaginationContent<User> | null>(null)
-    const user = ref<UserProfileData | null>(null)
+    const userInfo = ref<UserInfo | null>(null) 
+    const userProfile = ref<UserProfileData | null>(null)
     
     /**
      * The function fetches users either from a mock API or a real API based on a condition and returns
@@ -38,6 +46,27 @@ export const useUserStore = defineStore('users', () => {
     }
 
     /**
+     * The function fetchUserInfo asynchronously fetches user information using a provided UUID.
+     * @param {string} uuid - The `uuid` parameter in the `fetchUserInfo` function is a string
+     * representing a unique identifier for a user. This identifier is used to fetch user information
+     * from a data source.
+     * @returns The `userInfo.value` is being returned from the `fetchUserInfo` function.
+     */
+    const fetchUserInfo = async(uuid: string) => {
+        try {
+
+            const response = await fetchUserInfoDataSource(uuid)
+
+            userInfo.value = response.data
+
+            return userInfo.value
+            
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    /**
      * The function `fetchUserProfileData` retrieves user profile data either from a mock API or a real
      * API endpoint.
      * @returns The `fetchUserProfileData` function is returning the user profile data stored in the
@@ -50,7 +79,7 @@ export const useUserStore = defineStore('users', () => {
 
             if(IS_MOCK_API_MODE) {
 
-                user.value = MOCK_USER_AUTH_PROFILE_DATA.data
+                userProfile.value = MOCK_USER_AUTH_PROFILE_DATA.data
 
             } else {
 
@@ -58,10 +87,10 @@ export const useUserStore = defineStore('users', () => {
                     `${config.public.apiBaseUrl}/profile`
                 )
 
-                user.value = response.data
+                userProfile.value = response.data
             }
 
-            return user.value
+            return userProfile.value
 
         } catch(error) {
             console.error('Error getting user profile data')
@@ -102,8 +131,10 @@ export const useUserStore = defineStore('users', () => {
 
     return {
         users,
-        user,
+        userInfo,
+        userProfile,
         fetchUsers,
+        fetchUserInfo,
         fetchUserProfileData,
         deleteUser
     }

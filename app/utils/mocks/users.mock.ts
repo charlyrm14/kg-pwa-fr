@@ -1,5 +1,5 @@
 import type { ApiResponse, PaginationContent, UserBirthday, User } from "#imports"
-import type { UserFilters } from "~~/shared/types/User"
+import type { UserFilters, UserInfo } from "~~/shared/types/User"
 
 export const MOCK_USERS: PaginationContent<User> = {
     current_page: 1,
@@ -117,6 +117,76 @@ export const MOCK_USER_BIRTHDAY: ApiResponse<UserBirthday[]> = {
             current_level: "Nivel Foca"
         }
     ]
+}
+
+export const MOCK_USER_INFO: ApiResponse<UserInfo> = {
+    data: {
+        name: "Carlos I",
+        last_name: "Ramos",
+        mother_last_name: null,
+        email: "charlyrm14@gmail.com",
+        uuid: "9fc11977-5ee9-4f00-b279-9778797b06c3",
+        student_code: null,
+        role_id: 1,
+        created_at: "2026-01-08",
+        role_name: "Admin",
+        schedules: [
+            {
+                day_id: 1,
+                day_name: "Lunes",
+                shorting_day: "L",
+                day_formatted_name: "Lunes",
+                entry_time: "19:00:00",
+                departure_time: "20:00:00"
+            },
+            {
+                day_id: 3,
+                day_name: "Miércoles",
+                shorting_day: "M",
+                day_formatted_name: "Miércoles",
+                entry_time: "19:00:00",
+                departure_time: "20:00:00"
+            },
+            {
+                day_id: 5,
+                day_name: "Viernes",
+                shorting_day: "V",
+                day_formatted_name: "Viernes",
+                entry_time: "19:00:00",
+                departure_time: "20:00:00"
+            }
+        ],
+        attendances: [
+            {
+                day_id: 5,
+                day_name: "Viernes",
+                shorting_day: "V",
+                day_with_number: "Viernes, 09",
+                day_number: 9,
+                entry_time: "19:00:00",
+                departure_time: "20:00:00",
+                attendance_description: "El alumno o participante asistió a la sesión.",
+                attendance_name: "Asistió",
+                attendance_month: "Enero",
+                attendance_status_id: 1,
+                created_at: "2026-01-09"
+            },
+            {
+                day_id: 3,
+                day_name: "Miércoles",
+                shorting_day: "M",
+                day_with_number: "Miércoles, 07",
+                day_number: 7,
+                entry_time: "19:00:00",
+                departure_time: "20:00:00",
+                attendance_description: "El alumno o participante asistió a la sesión.",
+                attendance_name: "Asistió",
+                attendance_month: "Enero",
+                attendance_status_id: 1,
+                created_at: "2026-01-07"
+            }
+        ]
+    }
 }
 
 export const fetchUsersMock = async(filters: UserFilters): Promise<ApiResponse<PaginationContent<User>>> => {
