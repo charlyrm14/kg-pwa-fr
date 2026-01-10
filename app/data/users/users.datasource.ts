@@ -6,7 +6,7 @@ export const fetchUsersDataSource = async(filters: UserFilters) => {
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
-    if(!IS_MOCK_API_MODE) {
+    if(IS_MOCK_API_MODE) {
         return fetchUsersMock(filters)
     }
 
