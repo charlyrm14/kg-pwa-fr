@@ -1,9 +1,10 @@
 import type { ApiResponse } from "#imports"
-import type { User, UserProfileData } from "~~/shared/types/User"
+import type { User, UserProfileData, UserFilters } from "~~/shared/types/User"
 import { MOCK_USER_AUTH_PROFILE_DATA } from "~/utils/mocks/user-auth.mock"
 import type { PaginationContent } from "#imports"
 import { MOCK_USERS } from "~/utils/mocks/users.mock"
 import { useAlert } from "#imports"
+import { fetchUsersDataSource } from "~/data/users/users.datasource"
 
 export const useUserStore = defineStore('users', () => {
 
@@ -23,25 +24,14 @@ export const useUserStore = defineStore('users', () => {
      * @returns The `fetchUsers` function is returning the `users.value` after fetching and setting the
      * user data.
      */
-    const fetchUsers = async(page = 1) => {
+    const fetchUsers = async(page = 1, filters: UserFilters = {}) => {
         try {
 
-            if (IS_MOCK_API_MODE) {
+            const response = await fetchUsersDataSource(filters)
 
-                users.value = MOCK_USERS
-                
-            } else {
-                
-                const response = await $fetch<ApiResponse<PaginationContent<User>>>(`
-                    ${config.public.apiBaseUrl}/users`
-                )
-                
-                users.value = response.data
-
-            }
-
+            users.value = response.data
             return users.value
-            
+
         } catch (error) {
             console.error(error)
         }

@@ -1,13 +1,23 @@
 <script setup lang="ts">
     import { useAttendanceStore } from '~/stores/attendances';
+    import { useForm } from 'vee-validate'
+    import { searchUserEmailSchema } from '~/validations/attendances/search-user-email.schema';
+    import type { UserFilters } from '~~/shared/types/User';
+    import { useUserStore } from '~/stores/users';
+    import type { User } from '~~/shared/types/User';
+
+    type MessageType = 'success' | 'error' | 'none'
 
     const emit = defineEmits<{
         (e: 'closeSearchUserAttendanceModal'): void
     }>();
 
     const attendanceStore = useAttendanceStore()
+    const userStore = useUserStore()
 
     const isSubmitting = ref<boolean>(false)
+    const user = ref<User | null>(null)
+    const messageType = ref<MessageType>('none')
 
     onMounted(async() => {
         try {
@@ -17,13 +27,36 @@
         }
     })
 
-    const handleSubmit = () => {
+    const { defineField,  handleSubmit,  errors} = useForm<UserFilters>({
+        validationSchema: searchUserEmailSchema,
+        validateOnMount: false
+    })
 
-        isSubmitting.value = true
+    const [ email, emailAttrs ] = defineField('email')
 
-        setTimeout(() => {
-            isSubmitting.value = false
-        }, 4000);
+
+    const onSearchSubmit = handleSubmit(async ({email}) => {
+        try {
+
+            const result = await userStore?.fetchUsers(1, {email})   
+            
+            if(result?.data) {
+                user.value = result?.data?.[0] ?? null
+                messageType.value = 'success'
+            } else {
+                user.value = null
+                messageType.value = 'error'
+            }
+
+        } catch (error) {
+            console.error(error)
+            user.value = null
+        }
+    })
+
+    const cleanFoundUser = () => {
+        user.value = null
+        messageType.value = 'none'
     }
 
 </script>
@@ -46,74 +79,82 @@
                 </button>
             </div>
 
-            <div class="px-6 pb-4 space-y-4">
+            <form @submit.prevent="onSearchSubmit" class="px-6 pb-4">
+                <div class="space-y-4">
                 <h4 class="text-gray-500 dark:text-white font-bold"> Buscar usuario </h4>
-                <div class="grid grid-cols-[1fr_auto] gap-2 mt-2">
-                    <input 
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Ej: correo@correo.com"
-                        class="w-full rounded-lg px-4 py-3 sm:py-4 border border-gray-200 dark:border-dark-extralight dark:text-gray-400 text-sm sm:text-base"/>
+                    <div class="grid grid-cols-[1fr_auto] gap-2 mt-2">
+                        <input 
+                            type="email"
+                            id="email"
+                            name="email"
+                            v-model="email"
+                            v-bind="emailAttrs"
+                            placeholder="Ej: correo@correo.com"
+                            autocomplete="email"
+                            class="w-full rounded-lg px-4 py-3 sm:py-4 border border-gray-200 dark:border-dark-extralight dark:text-gray-400 text-base md:text-sm focus:outline-none focus:ring-none"/>
 
-                    <button class="bg-indigo-500 text-white rounded-lg px-3 sm:px-4 flex items-center justify-center cursor-pointer hover:opacity-75">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            class="w-5 h-5 sm:w-6 sm:h-6"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path d="m21 21-4.34-4.34"/>
-                            <circle cx="11" cy="11" r="8"/>
-                        </svg>
-                    </button>
+                        <button type="submit" class="bg-pink-500 text-white rounded-xl px-3 sm:px-4 flex items-center justify-center cursor-pointer hover:opacity-75">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                class="w-5 h-5 sm:w-6 sm:h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m21 21-4.34-4.34"/>
+                                <circle cx="11" cy="11" r="8"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <span v-if="errors.email" class="text-red-500 text-sm px-2 font-bold"> 
+                        {{ errors.email  }}
+                    </span>
                 </div>
+            </form>
 
-                <div>
-                    <h4 class="dark:text-white"> Resultados de busqueda </h4>
+            <div class="px-6 py-4">
+                <div v-if="messageType !== 'none'">
+                    <h4 class="font-semibold" :class="messageType === 'success' ? 'text-blue-500' : 'dark:text-gray-400'"> 
+                        {{ messageType === 'success' ? 'Resultados de tú busqueda' : 'No se encontraron resultados' }} 
+                    </h4>
                 </div>
-                <div class="border-l-4 border-blue-500">
-                    <div class="flex justify-between items-center pl-3">
+                <div v-if="user" class="border-l-4 border-blue-500 dark:bg-dark-light my-3 rounded-xl py-3">
+                    <div class="flex justify-between items-start pl-3">
                         <div class="flex justify-start items-start gap-x-4">
-                            <div class="bg-gray-100 dark:bg-dark-extralight p-4 rounded-full dark:text-gray-400">
+                            <div class="bg-gray-100 dark:bg-dark p-4 rounded-xl dark:text-gray-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                             </div>
                             <div>
-                                <p class="text-blue-500 font-extrabold"> 
-                                    Jhon W 
-                                        <span class="block text-sm text-gray-500 dark:text-gray-400"> correo@correo.com </span> 
+                                <p class="text-blue-500 font-extrabold text-sm"> 
+                                    {{ user?.name }} {{ user?.last_name }}
+                                        <span class="block text-base text-gray-500 dark:text-gray-400"> {{ user?.email }} · {{ user?.role_name }} </span> 
                                 </p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="space-y-4">
-                    <div class="mt-4">
-                        <label for="date" class="text-gray-500 dark:text-white font-bold mb-2"> Selecciona una fecha </label>
-                        <input 
-                            type="date"
-                            name="date"
-                            class="w-full p-4 rounded-lg border border-gray-200 dark:border-dark-extralight text-black dark:text-white focus:outline-none mt-2">
-                    </div>
-                    <div>
-                        <h4 class="text-gray-500 dark:text-white font-bold mb-2"> Selecciona una opción </h4>
-                        <select 
-                            name="attendance_status_id" 
-                            id="attendance_status_id"
-                            class="w-full p-4 rounded-lg border border-gray-200 dark:border-dark-extralight text-black dark:text-white focus:outline-none">
-                                <option :value="0" selected> -- Selecciona -- </option>
-                                <option 
-                                    v-for="status in attendanceStore?.attendanceStatuses?.data"
-                                    :key="status.id" 
-                                    :value="status.id"> {{ status?.name }} </option>
-                        </select>
+                        <button @click="cleanFoundUser" class="text-red-500 p-0.5 cursor-pointer hover:opacity-75 px-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </button>
                     </div>
                 </div>
             </div>
 
+            <div v-if="messageType === 'success'" class="px-6 py-4 space-y-4">
+                <div>
+                    <h4 class="text-gray-500 dark:text-white font-bold mb-2"> Selecciona una opción </h4>
+                    <select 
+                        name="attendance_status_id" 
+                        id="attendance_status_id"
+                        class="w-full p-4 rounded-lg border border-gray-200 dark:border-dark-extralight text-black dark:text-white focus:outline-none">
+                            <option :value="0" selected> -- Selecciona -- </option>
+                            <option 
+                                v-for="status in attendanceStore?.attendanceStatuses?.data"
+                                :key="status.id" 
+                                :value="status.id"> {{ status?.name }} </option>
+                    </select>
+                </div>
+            </div>
+                
             <div class="flex justify-end items-center gap-x-4 px-6 py-4">
                 <button
                     class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-lg px-4 py-2"
@@ -123,7 +164,7 @@
                         Cancelar 
                 </button>
                 <button
-                    @click="handleSubmit"
+                    type="submit"
                     class="text-white px-4 py-2 rounded-lg hover:opacity-75 font-extrabold"
                     :class="!isSubmitting ? 'bg-blue-500 cursor-pointer' : 'bg-blue-300 cursor-progress'"> 
                         {{ !isSubmitting ? 'Guardar' : 'Guardando...' }} 
@@ -133,3 +174,7 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+    
+</style>
