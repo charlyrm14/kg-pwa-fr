@@ -1,5 +1,5 @@
 import type { UserFilters } from "~~/shared/types/User";
-import type { ApiResponse, PaginationContent, User } from "#imports";
+import type { ApiResponse, PaginationContent, User, UserInfo } from "#imports";
 
 export const fetchUsersApi = async(filters: UserFilters) => {
     const config = useRuntimeConfig()
@@ -11,5 +11,13 @@ export const fetchUsersApi = async(filters: UserFilters) => {
                 ...filters
             }
         }
+    )
+}
+
+export const fetchUserInfoApi = async(uuid: string) => {
+    const config = useRuntimeConfig()
+    
+    return await $fetch<ApiResponse<UserInfo>>(`
+        ${config.public.apiBaseUrl}/users/${uuid}`
     )
 }

@@ -9,13 +9,24 @@
     import EditUserSchedule from '~/components/admin/users/EditUserSchedule.vue';
     import DeleteUser from '~/components/admin/users/DeleteUser.vue';
     import ProgressUser from '~/components/admin/users/ProgressUser.vue';
+    import { useUserStore } from '~/stores/users';
+    import { bgRoleUserColor } from '#imports';
     
     definePageMeta({
         layout: 'admin'
     })
 
+    const route = useRoute()
+    const uuidParam = route.params.uuid
+
     const tab = ref<number>(1)
     const { open, close, isOpen } = useModalManager()
+    const userStore = useUserStore()
+
+    const { data: user } = await useAsyncData('user-edit', async() => {
+        await userStore?.fetchUserInfo(uuidParam as string)
+        return userStore?.userInfo
+    })
 
 </script>
 
@@ -29,7 +40,7 @@
                 primary-link="/kg-admin/users"
                 secondary-section="Editar"/>
         </section>
-
+        
         <section class="md:px-5 mt-7">
             <div class="flex flex-col gap-6 md:flex-row">
                 <aside class="md:basis-[20%]">
@@ -41,10 +52,14 @@
                                 </div>
                             </div>
                             <div class="flex justify-center items-center mt-2">
-                                <p class="dark:text-white text-lg"> Jhon W <span class="block text-center text-base dark:text-gray-400"> Smith </span> </p>
+                                <p class="dark:text-white text-lg"> {{ user?.name }}
+                                    <span class="block text-center text-base dark:text-gray-400"> {{ user?.last_name }} </span> 
+                                </p>
                             </div>
                             <div class="mt-4 flex justify-center items-center">
-                                <span class="bg-lime-400 text-white px-4 py-0.5 rounded-xl text-sm"> Estudiante </span>
+                                <span 
+                                    class="text-white px-4 py-0.5 rounded-xl text-sm font-bold" 
+                                    :class="user?.role_id ? bgRoleUserColor(user?.role_id) : 'bg-lime-500'"> {{ user?.role_name }} </span>
                             </div>
                         </div>
                         <div class="p-5">
@@ -57,16 +72,28 @@
                         </div>
                         <div class="px-5 pb-4 space-y-3">
                             <div>
-                                <p class="dark:text-white"> Nombre <span class="block text-gray-600 dark:text-gray-400"> Carlos I. </span> </p>
+                                <p class="text-gray-600 dark:text-gray-400 font-normal"> 
+                                    Nombre 
+                                        <span class="block dark:text-white font-extrabold"> {{ user?.name }} </span> 
+                                </p>
                             </div>
                             <div class="my-2">
-                                <p class="dark:text-white"> Apellido paterno <span class="block text-gray-600 dark:text-gray-400"> Ramos </span> </p>
+                                <p class="text-gray-600 dark:text-gray-400 font-normal"> 
+                                    Apellido paterno 
+                                        <span class="block dark:text-white font-extrabold"> {{ user?.last_name }} </span> 
+                                </p>
                             </div>
                             <div class="my-2">
-                                <p class="dark:text-white"> Apellido materno <span class="block text-gray-600 dark:text-gray-400"> Morales </span> </p>
+                                <p class="text-gray-600 dark:text-gray-400 font-normal"> 
+                                    Apellido materno 
+                                        <span class="block dark:text-white font-extrabold"> {{ user?.mother_last_name ?? '' }} </span> 
+                                </p>
                             </div>
                             <div class="my-2">
-                                <p class="dark:text-white"> Correo electrónico <span class="block text-gray-600 dark:text-gray-400"> correo@correo.com </span> </p>
+                                <p class="text-gray-600 dark:text-gray-400 font-normal"> 
+                                    Correo electrónico 
+                                        <span class="block dark:text-white font-extrabold"> {{ user?.email }} </span> 
+                                </p>
                             </div>
                         </div>
                         <div class="px-5 pb-4">
@@ -122,9 +149,9 @@
             v-if="isOpen('EditUserSchedule')"
             @closeEditUserScheduleModal="close"/>
         
-        <DeleteUser
+        <!-- <DeleteUser
             v-if="isOpen('DeleteUser')"
-            @closeDeleteUserModal="close"/>
+            @closeDeleteUserModal="close"/> -->
 
         <AddUserPayment
             v-if="isOpen('AddUserPayment')"

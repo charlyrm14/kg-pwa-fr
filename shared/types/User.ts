@@ -1,3 +1,6 @@
+import type { Schedule } from "./Schedule"
+import type { AttendanceUserInfo } from "./Attendance"
+
 export type Gender = 'MASCULINO' | 'FEMENINO'
 export type ColorBgGender = 'bg-blue-100' | 'bg-pink-100'
 export type ColorTextGender = 'text-blue-500' | 'text-pink-500'
@@ -66,4 +69,18 @@ export interface UserFilters {
     email?: string
     role?: string
     student_code?: string
+}
+
+export interface UserInfo {
+    name: string
+    last_name: string
+    mother_last_name: string | null
+    email: string
+    uuid: string
+    student_code: string | null
+    role_id: number
+    created_at: string
+    role_name: string
+    schedules: Schedule[] | null
+    attendances: AttendanceUserInfo[] | null
 }
