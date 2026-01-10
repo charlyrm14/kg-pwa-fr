@@ -84,3 +84,9 @@ export interface UserInfo {
     schedules: Schedule[] | null
     attendances: AttendanceUserInfo[] | null
 }
+
+export interface UserDelete {
+    name: string
+    last_name: string
+    uuid: string
+}

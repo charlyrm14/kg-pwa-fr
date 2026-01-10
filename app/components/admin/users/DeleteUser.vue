@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import type { User } from '#imports';
+    import type { UserDelete } from '~~/shared/types/User';
     import { useModalManager } from '#imports';
     import { useUserStore } from '~/stores/users';
 
@@ -11,20 +11,19 @@
     }>();
 
     const props = defineProps<{
-        user: User
+        user: UserDelete
     }>()
 
-    const user = getPayload<User>()
+    const user = getPayload<UserDelete>()
     const isSubmitting = ref<boolean>(false)
 
-    const handleSubmit = async() => {
+    const handleSubmit = async(userDelete: UserDelete) => {
         isSubmitting.value = true
         try {
 
             if(!user) return
-
             
-            await userStore?.deleteUser(user)
+            await userStore?.deleteUser(userDelete)
             
         } catch (error) {
 
@@ -72,8 +71,13 @@
                         Cancelar 
                 </button>
                 <button
+                    v-if="user"
                     :disabled="isSubmitting"
-                    @click="handleSubmit"
+                    @click="handleSubmit({
+                        name: user?.name,
+                        last_name: user?.last_name,
+                        uuid: user?.uuid
+                    })"
                     class="text-white px-4 py-2 rounded-lg hover:opacity-75 font-medium"
                     :class="isSubmitting ? 'bg-red-300 cursor-progress' : 'bg-red-500 cursor-pointer'"> 
                         {{ !isSubmitting ? 'Eliminar usuario' : 'Eliminando usuario' }} 
