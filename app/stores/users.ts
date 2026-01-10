@@ -3,7 +3,8 @@ import type {
     User, 
     UserProfileData, 
     UserFilters, 
-    UserInfo 
+    UserInfo,
+    UserDelete 
 } from "~~/shared/types/User"
 import { MOCK_USER_AUTH_PROFILE_DATA } from "~/utils/mocks/user-auth.mock"
 import type { PaginationContent } from "#imports"
@@ -105,7 +106,7 @@ export const useUserStore = defineStore('users', () => {
      * `User` that contains information about the user to be deleted. It likely includes properties
      * such as `uuid` which is used to identify the specific user to be deleted.
      */
-    const deleteUser = async(user: User) => {
+    const deleteUser = async(user: UserDelete) => {
         try {
 
             const { uuid } = user
