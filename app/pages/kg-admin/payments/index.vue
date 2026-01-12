@@ -16,6 +16,12 @@
         return paymentStore?.payments ?? { data: [] }
     })
 
+    const goToPage = async(url: string) => {
+        if (!url) return
+        
+        await paymentStore?.fetchPayments(url)
+    }
+
 </script>
 
 <template>
@@ -44,7 +50,13 @@
                 <!-- End Payment Table -->
 
                 <!-- Beginning Payment Pagination -->
-                <PaymentPagination/>
+                <section v-if="paymentStore?.payments?.prev_page_url || paymentStore?.payments?.next_page_url">
+                    <PaymentPagination
+                        :prevPageUrl="paymentStore?.payments?.prev_page_url"
+                        :nextPageUrl="paymentStore?.payments?.next_page_url"
+                        :totalPerPage="paymentStore?.payments?.per_page"
+                        @go="goToPage"/>
+                </section>
                 <!-- End Payment Pagination -->
                 
             </div>

@@ -4,6 +4,7 @@ import { fetchPaymentsDataSource } from '~/data/payments/payments.datasource'
 
 export const usePaymentStore = defineStore('payments', () => {
 
+    const config = useRuntimeConfig()
     const payments = ref<CursorPagination<Payment> | null>(null)
 
     /**
@@ -20,10 +21,15 @@ export const usePaymentStore = defineStore('payments', () => {
      * @returns The `fetchPayments` function is returning the `payments.value` after setting it to the
      * data retrieved from the `fetchPaymentsDataSource` function.
      */
-    const fetchPayments = async(page = 1, filters: PaymentFilters = {}) => {
+    const fetchPayments = async(
+        pageUrl: string | null = null, 
+        filters: PaymentFilters = {}
+    ) => {
         try {
 
-            const response = await fetchPaymentsDataSource(filters)
+            const endpoint = pageUrl ? pageUrl : `${config.public.apiBaseUrl}/payments`
+
+            const response = await fetchPaymentsDataSource(endpoint, filters)
             
             payments.value = response.data
             return payments.value
