@@ -3,9 +3,17 @@
     import PaymentPagination from '~/components/admin/payments/PaymentPagination.vue';
     import PaymentTable from '~/components/admin/payments/PaymentTable.vue';
     import Breadcrumb from '~/components/common/Breadcrumb.vue';
+    import { usePaymentStore } from '~/stores/payments';
     
     definePageMeta({
         layout: 'admin'
+    })
+
+    const paymentStore = usePaymentStore()
+
+    await useAsyncData('payments', async() => {
+        await paymentStore?.fetchPayments()
+        return paymentStore?.payments ?? { data: [] }
     })
 
 </script>
@@ -29,8 +37,9 @@
                 <!-- End Payment Header -->
 
                 <!-- Beginning Payment Table -->
-                <section>
-                    <PaymentTable/>
+                <section v-if="paymentStore?.payments?.data">
+                    <PaymentTable
+                        :payments="paymentStore?.payments?.data"/>
                 </section>
                 <!-- End Payment Table -->
 

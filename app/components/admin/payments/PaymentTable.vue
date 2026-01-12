@@ -1,5 +1,11 @@
 <script setup lang="ts">
     import PaymentRow from './PaymentRow.vue';
+    import type { Payment } from '#imports';
+
+    defineProps<{
+        payments: Payment[]
+    }>()
+
 </script>
 
 <template>
@@ -15,7 +21,10 @@
             </div>
 
             <!-- Beginning Payment Item -->
-            <PaymentRow/>
+            <PaymentRow
+                v-for="payment in payments"
+                :key="payment.id"
+                :payment="payment"/>
             <!-- End Payment Item -->
             
         </div>

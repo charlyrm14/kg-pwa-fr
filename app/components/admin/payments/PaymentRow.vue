@@ -1,4 +1,9 @@
 <script setup lang="ts">
+    import type { Payment } from '#imports';
+
+    defineProps<{
+        payment: Payment
+    }>()
 
     const showActionsPayment = ref<boolean>(false)
 
@@ -10,28 +15,28 @@
             <div class="flex items-start gap-x-4">
                 <div>
                     <p class="font-bold text-base text-blue-500 cursor-pointer"> 
-                        Carlos I.
+                        {{ payment?.user?.name }}
                     </p>
                     <p class="inline-flex gap-x-2 text-sm dark:text-gray-500 mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-pen-icon lucide-user-pen"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
-                            Estudiante
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+                            {{ payment?.user?.email }}
                     </p>
                 </div>
             </div>
         </div>
         <div class="w-1/6 flex-shrink-0 px-2">
             <span class="inline-flex items-center rounded-full px-2 py-0.5 text-base font-bold bg-indigo-500 text-white">
-                $1200
+                ${{ payment?.amount }}
             </span>
         </div>
         <div class="w-1/6 flex-shrink-0 px-2">
             <span class="text-base font-bold  dark:text-white">
-                Visita
+                {{ payment?.type?.name }}
             </span>
         </div>
         <div class="w-1/6 flex-shrink-0 px-2">
             <p class="font-bold text-base dark:text-gray-400"> 
-                2026-01-12
+                {{ payment?.payment_date }}
             </p>
         </div>
         <div class="w-1/6 flex-shrink-0 px-2 relative">
