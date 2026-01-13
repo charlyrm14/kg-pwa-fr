@@ -1,6 +1,22 @@
 <script setup lang="ts">
+    import { usePaymentStore } from '~/stores/payments';
+
+    const paymentTypes = [
+        { id: 0, label: 'Todo'},
+        { id: 1, label: 'Mensual básica'},
+        { id: 2, label: 'Anual'},
+        { id: 3, label: 'Visita' },
+        { id: 4, label: 'Familiar'}
+    ] as const
+
+    const paymentStore = usePaymentStore()
 
     const showFilterPayments = ref<boolean>(false)
+    const selectedTypeFilter = ref<0 | 1 | 2 | 3 | 4>(0)
+    
+    const filter = () => {
+        paymentStore.typeFilter = selectedTypeFilter.value
+    }
 
 </script>
 
@@ -60,15 +76,21 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                             </button>
                         </div>
-                        <div class="p-4 m-1">
+                        <div class="p-4 m-1 space-y-2">
                             <p class="dark:text-gray-300 font-bold mb-3"> Tipo de contenido: </p>
-
-                            
-
+                            <div
+                                v-for="type in paymentTypes"
+                                :key="type.id"
+                                class="bg-gray-200 dark:bg-dark-light rounded-lg py-2 px-4 cursor-pointer hover:opacity-75"
+                                :class="selectedTypeFilter === type.id ? 'border-2 border-blue-500' : 'border-2 border-dark-light'"
+                                @click="selectedTypeFilter = type.id">
+                                    <span class="text-blue-500 font-bold"> {{ type.label }} </span>
+                            </div>
                         </div>
                         <div class="flex justify-end items-center gap-x-4 p-4">
                             <button
-                                class="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-75 w-full font-bold"> 
+                                class="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-75 w-full font-bold"
+                                @click="filter()"> 
                                     Aplicar 
                             </button>
                         </div>
