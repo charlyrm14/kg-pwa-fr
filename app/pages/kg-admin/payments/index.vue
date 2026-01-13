@@ -16,6 +16,8 @@
         return paymentStore?.payments ?? { data: [] }
     })
 
+    const payments = computed(() => paymentStore.filteredPayments)
+
     const goToPage = async(url: string) => {
         if (!url) return
         
@@ -43,9 +45,9 @@
                 <!-- End Payment Header -->
 
                 <!-- Beginning Payment Table -->
-                <section v-if="paymentStore?.payments?.data">
+                <section v-if="payments?.length">
                     <PaymentTable
-                        :payments="paymentStore?.payments?.data"/>
+                        :payments="payments"/>
                 </section>
                 <!-- End Payment Table -->
 
