@@ -1,6 +1,6 @@
 import type { UserFilters } from "~~/shared/types/User"
 import { fetchUserInfoApi, fetchUsersApi } from "./users.api"
-import { fetchUsersMock, MOCK_USER_INFO } from "~/utils/mocks/users.mock"
+import { fetchUsersMock, fetchUserInfoMock } from "~/utils/mocks/users.mock"
 
 export const fetchUsersDataSource = async(filters: UserFilters) => {
     const config = useRuntimeConfig()
@@ -13,13 +13,13 @@ export const fetchUsersDataSource = async(filters: UserFilters) => {
     return fetchUsersApi(filters)
 }
 
-export const fetchUserInfoDataSource = async(uuid: string) => {
+export const fetchUserInfoDataSource = async(uuid: string): Promise<ApiResponse<UserInfo>> => {
     const config = useRuntimeConfig()
 
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
     if(IS_MOCK_API_MODE) {
-        return MOCK_USER_INFO
+        return fetchUserInfoMock(uuid)
     }
 
     return fetchUserInfoApi(uuid)
