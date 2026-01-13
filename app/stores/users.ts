@@ -59,7 +59,7 @@ export const useUserStore = defineStore('users', () => {
             const response = await fetchUserInfoDataSource(uuid)
 
             userInfo.value = response.data
-
+            
             return userInfo.value
             
         } catch (error) {

@@ -119,74 +119,141 @@ export const MOCK_USER_BIRTHDAY: ApiResponse<UserBirthday[]> = {
     ]
 }
 
-export const MOCK_USER_INFO: ApiResponse<UserInfo> = {
-    data: {
-        name: "Carlos I",
-        last_name: "Ramos",
-        mother_last_name: null,
-        email: "charlyrm14@gmail.com",
-        uuid: "9fc11977-5ee9-4f00-b279-9778797b06c3",
-        student_code: null,
-        role_id: 1,
-        created_at: "2026-01-08",
-        role_name: "Admin",
-        schedules: [
-            {
-                day_id: 1,
-                day_name: "Lunes",
-                shorting_day: "L",
-                day_formatted_name: "Lunes",
-                entry_time: "19:00:00",
-                departure_time: "20:00:00"
-            },
-            {
-                day_id: 3,
-                day_name: "Miércoles",
-                shorting_day: "M",
-                day_formatted_name: "Miércoles",
-                entry_time: "19:00:00",
-                departure_time: "20:00:00"
-            },
-            {
-                day_id: 5,
-                day_name: "Viernes",
-                shorting_day: "V",
-                day_formatted_name: "Viernes",
-                entry_time: "19:00:00",
-                departure_time: "20:00:00"
-            }
-        ],
-        attendances: [
-            {
-                day_id: 5,
-                day_name: "Viernes",
-                shorting_day: "V",
-                day_with_number: "Viernes, 09",
-                day_number: 9,
-                entry_time: "19:00:00",
-                departure_time: "20:00:00",
-                attendance_description: "El alumno o participante asistió a la sesión.",
-                attendance_name: "Asistió",
-                attendance_month: "Enero",
-                attendance_status_id: 1,
-                created_at: "2026-01-09"
-            },
-            {
-                day_id: 3,
-                day_name: "Miércoles",
-                shorting_day: "M",
-                day_with_number: "Miércoles, 07",
-                day_number: 7,
-                entry_time: "19:00:00",
-                departure_time: "20:00:00",
-                attendance_description: "El alumno o participante asistió a la sesión.",
-                attendance_name: "Asistió",
-                attendance_month: "Enero",
-                attendance_status_id: 1,
-                created_at: "2026-01-07"
-            }
-        ]
-    }
+export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
+    data: [ 
+        {
+            name: "Carlos I",
+            last_name: "Ramos",
+            mother_last_name: null,
+            email: "charlyrm14@gmail.com",
+            uuid: "9fc11977-5ee9-4f00-b279-9778797b06c3",
+            student_code: null,
+            role_id: 1,
+            created_at: "2026-01-08",
+            role_name: "Admin",
+            schedules: [
+                {
+                    day_id: 1,
+                    day_name: "Lunes",
+                    shorting_day: "L",
+                    day_formatted_name: "Lunes",
+                    entry_time: "19:00:00",
+                    departure_time: "20:00:00"
+                },
+                {
+                    day_id: 3,
+                    day_name: "Miércoles",
+                    shorting_day: "M",
+                    day_formatted_name: "Miércoles",
+                    entry_time: "19:00:00",
+                    departure_time: "20:00:00"
+                },
+                {
+                    day_id: 5,
+                    day_name: "Viernes",
+                    shorting_day: "V",
+                    day_formatted_name: "Viernes",
+                    entry_time: "19:00:00",
+                    departure_time: "20:00:00"
+                }
+            ],
+            attendances: [
+                {
+                    day_id: 5,
+                    day_name: "Viernes",
+                    shorting_day: "V",
+                    day_with_number: "Viernes, 09",
+                    day_number: 9,
+                    entry_time: "19:00:00",
+                    departure_time: "20:00:00",
+                    attendance_description: "El alumno o participante asistió a la sesión.",
+                    attendance_name: "Asistió",
+                    attendance_month: "Enero",
+                    attendance_status_id: 1,
+                    created_at: "2026-01-09"
+                },
+                {
+                    day_id: 3,
+                    day_name: "Miércoles",
+                    shorting_day: "M",
+                    day_with_number: "Miércoles, 07",
+                    day_number: 7,
+                    entry_time: "19:00:00",
+                    departure_time: "20:00:00",
+                    attendance_description: "El alumno o participante asistió a la sesión.",
+                    attendance_name: "Asistió",
+                    attendance_month: "Enero",
+                    attendance_status_id: 1,
+                    created_at: "2026-01-07"
+                }
+            ]
+        },
+        {
+            name: "AI",
+            last_name: "Assistant",
+            mother_last_name: null,
+            email: "aiassistant@kg-dreams.com",
+            uuid: "d8fbc7e2-1ca7-4b2b-b1a5-6249dbf8186c",
+            student_code: null,
+            role_id: 2,
+            created_at: "2026-01-10",
+            role_name: "Profesor",
+            schedules: [],
+            attendances: []
+        },
+        {
+            name: "Virginia",
+            last_name: "Morales",
+            mother_last_name: null,
+            email: "gusi_allison@gmail.com",
+            uuid: "9418476f-b9c4-46aa-8cbb-ad97ee7cb460",
+            student_code: null,
+            role_id: 1,
+            created_at: "2026-01-10",
+            role_name: "Admin",
+            schedules: [],
+            attendances: []
+        },
+        {
+            name: "Gregorio",
+            last_name: "Morales",
+            mother_last_name: null,
+            email: "gmoraleskg@gmail.com",
+            uuid: "236e703d-2d2d-4326-98af-bfe82934d6aa",
+            student_code: null,
+            role_id: 2,
+            created_at: "2026-01-10",
+            role_name: "Profesor",
+            schedules: [],
+            attendances: []
+        },
+        {
+            name: "Valentina E",
+            last_name: "Hérnandez",
+            mother_last_name: null,
+            email: "vhernandezkg@gmail.com",
+            uuid: "63595e9c-d9d5-4a09-a683-8818192f21b2",
+            student_code: "STU-20260110-7808",
+            role_id: 3,
+            created_at: "2026-01-10",
+            role_name: "Estudiante",
+            schedules: [],
+            attendances: []
+        },
+        {
+            name: "Héctor A",
+            last_name: "Hérnandez",
+            mother_last_name: null,
+            email: "handrekg@gmail.com",
+            uuid: "1a008647-6544-42e5-a3d0-42a4e54a5c92",
+            student_code: "STU-20260110-2791",
+            role_id: 3,
+            created_at: "2026-01-10",
+            role_name: "Estudiante",
+            schedules: [],
+            attendances: []
+        }
+    ]
 }
 
 export const fetchUsersMock = async(filters: UserFilters): Promise<ApiResponse<PaginationContent<User>>> => {
@@ -201,5 +268,17 @@ export const fetchUsersMock = async(filters: UserFilters): Promise<ApiResponse<P
             data: filtered,
             total: filtered.length
         }
+    }
+}
+
+export const fetchUserInfoMock = async (uuid: string): Promise<ApiResponse<UserInfo>> => {
+    const user = MOCK_USER_INFO.data.find(usr => usr.uuid === uuid)
+
+    if (!user) {
+        throw new Error('User not found')
+    }
+
+    return {
+        data: user
     }
 }
