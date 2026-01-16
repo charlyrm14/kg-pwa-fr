@@ -45,8 +45,6 @@
                 <AttendanceHeader/>
                 <!-- End Attendances Header -->
                 
-                <!-- {{ attendanceStore.attendancesToday.data }} -->
-                
                 <!-- Beginning Attendances Table -->
                 <section v-if="attendanceStore?.attendancesToday?.data">
                     <AttendanceTable
