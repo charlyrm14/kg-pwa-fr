@@ -1,11 +1,12 @@
 import type { ApiResponse, CursorPagination, UserNotification } from "#imports"
+import type { NotificationRead } from "~~/shared/types/Notification"
 
 export const MOCK_NOTIFICATION_LIST: ApiResponse<CursorPagination<UserNotification>> = {
     data: {
         data: [
             {
                 id: 1,
-                is_read: 0,
+                is_read: 1,
                 read_at: null,
                 delivered_at: null,
                 channel: null,
@@ -119,4 +120,31 @@ export const MOCK_NOTIFICATION_LIST: ApiResponse<CursorPagination<UserNotificati
 
 export const fetchUserNotificationsMock = async(): Promise<ApiResponse<CursorPagination<UserNotification>>> => {
     return MOCK_NOTIFICATION_LIST
+}
+
+export const markAsReadFromMock = (notificationId:  number): NotificationRead | null => {
+
+    const notification = MOCK_NOTIFICATION_LIST.data.data.find(
+        notif => notif.id === notificationId
+    )
+
+    if(!notification) {
+        return null
+    }
+
+    if(notification.is_read === 1) {
+        return null
+    }
+
+    notification.is_read = 1
+    notification.read_at = new Date().toISOString()
+
+    return {
+        message: 'Notification mark as read',
+        data: {
+            id: notification?.id,
+            is_read: notification?.is_read,
+            read_at: notification?.read_at
+        }
+    }
 }
