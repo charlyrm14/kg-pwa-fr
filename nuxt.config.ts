@@ -31,7 +31,11 @@ export default defineNuxtConfig({
       mockApiMode: process.env.NUXT_PUBLIC_MOCK_API_MODE === 'true',
       tokenAccessName: process.env.NUXT_PUBLIC_TOKEN_ACCESS_NAME || 'auth-token',
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000/api/v1',
-      userTestUuid: process.env.NUXT_USER_TEST_UUID || 'a52e'
+      userTestUuid: process.env.NUXT_USER_TEST_UUID || 'a52e',
+      pusherKey: process.env.NUXT_PUBLIC_PUSHER_KEY,
+      pusherCluster: process.env.NUXT_PUBLIC_PUSHER_CLUSTER,
+      pusherHost: process.env.NUXT_PUBLIC_PUSHER_HOST,
+      pusherPort: process.env.NUXT_PUBLIC_PUSHER_PORT
     },
   },
   alias: {

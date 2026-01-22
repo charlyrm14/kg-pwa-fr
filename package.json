@@ -14,6 +14,7 @@
     "@tailwindcss/vite": "^4.1.13",
     "nuxt": "^4.1.2",
     "pinia": "^3.0.4",
+    "pusher-js": "^8.4.0",
     "tailwindcss": "^4.1.13",
     "v-gsap-nuxt": "^1.4.4",
     "vee-validate": "^4.15.1",
