@@ -6,7 +6,7 @@
     
     const { data: notifications, pending, error } = await useAsyncData('user-notifications', 
         () => fetchUserNotifications(),
-        { server: true }
+        { server: false }
     )
 
     const userNotifications = computed(() => {
