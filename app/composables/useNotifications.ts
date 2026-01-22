@@ -11,13 +11,7 @@ export function useNotifications () {
      * asynchronous function that fetches user notifications data.
      */
     const fetchUserNotifications = async(pageUrl: string | null = null) => {
-        try {
-
-            return await fetchUserNotificationsDataSource(pageUrl)
-
-        } catch (error) {
-            console.error(error)
-        }
+        return await fetchUserNotificationsDataSource(pageUrl)
     }
 
     return {

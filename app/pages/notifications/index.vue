@@ -4,12 +4,13 @@
 
     const { fetchUserNotifications } = useNotifications()
     
-    const { data: notifications } = useAsyncData('user-notifications', async() => {
-        return await fetchUserNotifications()
-    })
+    const { data: notifications, pending, error } = await useAsyncData('user-notifications', 
+        () => fetchUserNotifications(),
+        { server: true }
+    )
 
     const userNotifications = computed(() => {
-        return notifications?.value?.data?.data
+        return notifications?.value?.data?.data ?? []
     })
 
 </script>
@@ -17,7 +18,7 @@
 <template>
     <section>
         
-        <section v-if="userNotifications" class="space-y-3">
+        <section v-if="userNotifications.length" class="space-y-3">
             <NotificationItem
                 v-for="notification in userNotifications"
                 :key="notification.id"
@@ -31,7 +32,7 @@
             </p>
         </section>
 
-        <section v-if="userNotifications" class="mt-12">
+        <section v-if="userNotifications.length" class="mt-12">
             <button class="w-full bg-blue-500 text-white rounded-lg px-4 py-3 cursor-pointer hover:opacity-75">
                 Cargar más notificaciones
             </button>
