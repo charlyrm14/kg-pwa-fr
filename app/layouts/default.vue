@@ -4,17 +4,17 @@
     import { useNotificationChannel } from '#imports';
     import { useBrowserNotifications } from '#imports';
 
-    const config = useRuntimeConfig()
-    const IS_MOCK_API_MODE = config.public.mockApiMode
-    const { $pusher } = useNuxtApp()
-    const { requestPermission } = useBrowserNotifications()
-    const { subscribe } = useNotificationChannel($pusher)
+    // const config = useRuntimeConfig()
+    // const IS_MOCK_API_MODE = config.public.mockApiMode
+    // const { $pusher } = useNuxtApp()
+    // const { requestPermission } = useBrowserNotifications()
+    // const { subscribe } = useNotificationChannel($pusher)
 
-    onMounted(async() => {
-        if(IS_MOCK_API_MODE) return
-        await requestPermission()
-        subscribe()
-    })
+    // onMounted(async() => {
+    //     if(IS_MOCK_API_MODE) return
+    //     await requestPermission()
+    //     subscribe()
+    // })
 
 </script>
 <template>
