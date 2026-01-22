@@ -1,8 +1,8 @@
 import type { ApiResponse, PaginationContent, Content } from "#imports"
 import type { CreateContentPayload } from "~~/shared/types/Content"
-import { MOCK_CONTENT_LIST } from "~/utils/mocks/content.mock"
 import { useAlert } from "#imports"
 import { adaptContent } from '~~/server/adapters/content.adapter'
+import { fetchContentsDataSource, fetchContentBySlugDataSource } from "~/data/contents/contents.datasource"
 
 export const useContentStore = defineStore('contents', () => {
 
@@ -27,18 +27,8 @@ export const useContentStore = defineStore('contents', () => {
     const fetchContents = async(page = 1) => {
         try {
 
-            if(IS_MOCK_API_MODE) {
-
-                contents.value = MOCK_CONTENT_LIST
-
-            } else {
-                
-                const response = await $fetch<ApiResponse<PaginationContent<Content>>>(
-                    `${config.public.apiBaseUrl}/contents`
-                )
-                
-                contents.value = response.data
-            }
+            const response = await fetchContentsDataSource()
+            contents.value = response.data
 
             return contents.value
             
@@ -57,32 +47,14 @@ export const useContentStore = defineStore('contents', () => {
      * object. The `filteredContents` computed property returns filtered content based on the
      * `contentTypeFilter` value.
      */
-    const fetchContentBySlug = async(slug: string): Promise<Content> => {
+    const fetchContentBySlug = async(slug: string) => {
         try {
 
-            if(IS_MOCK_API_MODE) {
+            const response = await fetchContentBySlugDataSource(slug)
 
-                const contentBySlug = MOCK_CONTENT_LIST.data.find(cont => cont.slug === slug)
-                
-                if (!contentBySlug) {
-                    throw createError({
-                        statusCode: 404,
-                        statusMessage: 'Page not found'
-                    })
-                }
-                
-                return contentDetail.value = contentBySlug
-
-            } else {
-
-                const response = await $fetch<ApiResponse<Content>>(
-                    `${config.public.apiBaseUrl}/contents/${slug}`
-                )
-
-                contentDetail.value = response.data
-                return contentDetail.value
-            }
-
+            contentDetail.value = response.data
+            return contentDetail.value
+            
         } catch (error) {
             contentDetail.value = null
             throw error 

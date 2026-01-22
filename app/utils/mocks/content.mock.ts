@@ -1,4 +1,8 @@
-import type { PaginationContent, Content } from "#imports"
+import type { 
+    PaginationContent, 
+    Content, 
+    ApiResponse
+} from "#imports"
 
 export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
     current_page: 1,
@@ -132,4 +136,29 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
     per_page: 15,
     prev_page_url: null,
     total: 2
+}
+
+export const fetchContentsMock = async(): Promise<ApiResponse<PaginationContent<Content>>> => {
+    
+    return {
+        data: {
+            ...MOCK_CONTENT_LIST 
+        }
+    }
+}
+
+export const fetchContentBySlugMock = (slug: string): ApiResponse<Content>  => {
+
+    const contentBySlug = MOCK_CONTENT_LIST.data.find(cont => cont.slug === slug)
+
+    if (!contentBySlug) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'Page not found'
+        })
+    }
+
+    return {
+        data: contentBySlug
+    }
 }
