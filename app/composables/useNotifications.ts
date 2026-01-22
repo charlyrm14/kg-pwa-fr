@@ -1,4 +1,8 @@
-import { fetchUserNotificationsDataSource } from "~/data/notifications/notifications.datasource"
+import { 
+    fetchUserNotificationsDataSource,
+    markNotificationAsReadDataSource 
+} from "~/data/notifications/notifications.datasource"
+
 export function useNotifications () {
 
     /**
@@ -14,7 +18,21 @@ export function useNotifications () {
         return await fetchUserNotificationsDataSource(pageUrl)
     }
 
-    return {
-        fetchUserNotifications
+    /**
+     * The function `markAsRead` marks a notification as read by calling an asynchronous data source
+     * function.
+     * @param {number} notificationId - The `notificationId` parameter is a number that represents the
+     * unique identifier of a notification that you want to mark as read.
+     * @returns The `markAsRead` function is returning the result of the
+     * `markNotificationAsReadDataSource(notificationId)` function call, which is awaited using the
+     * `await` keyword.
+     */
+    const markAsRead = async(notificationId: number) => {
+        return await markNotificationAsReadDataSource(notificationId)
     }
+
+    return {
+        fetchUserNotifications,
+        markAsRead
+    }    
 }

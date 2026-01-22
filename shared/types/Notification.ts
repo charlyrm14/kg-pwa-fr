@@ -28,3 +28,12 @@ export interface UserNotification {
     updated_at: string
     notification: NotificationDetail
 }
+
+export interface NotificationRead {
+    message: string
+    data: {
+        id: number
+        is_read: number
+        read_at: string
+    }
+}

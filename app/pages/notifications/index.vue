@@ -18,19 +18,8 @@
 <template>
     <section>
 
-        <section v-if="pending">
-            <p class="text-center dark:text-gray-400">
-                Cargando notificaciones...
-            </p>
-        </section>
-
-        <section v-else-if="error">
-            <p class="text-center text-red-500">
-                Ocurrió un error al cargar las notificaciones
-            </p>
-        </section>
         
-        <section v-else-if="userNotifications.length" class="space-y-3">
+        <section v-if="userNotifications.length" class="space-y-3">
             <NotificationItem
                 v-for="notification in userNotifications"
                 :key="notification.id"
