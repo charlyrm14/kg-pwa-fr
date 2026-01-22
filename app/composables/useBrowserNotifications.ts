@@ -1,10 +1,16 @@
 export function useBrowserNotifications () {
 
-    const permission = ref<NotificationPermission | null>(
-        process.client ? Notification.permission : null
-    )
+    const permission = ref<NotificationPermission | null>(null)
+    const isSupported = ref<boolean>(false)
 
-    const isSupported = process.client && 'Notification' in window
+    onMounted(() => {
+        if (typeof window === 'undefined') return
+
+        if ('Notification' in window) {
+            isSupported.value = true
+            permission.value = Notification.permission
+        }
+    })
 
     const requestPermission = async () => {
 
@@ -18,8 +24,7 @@ export function useBrowserNotifications () {
 
     const notify = (title: string, url: string, options?: NotificationOptions) => {
 
-        if(!isSupported) return null
-
+        if(!isSupported.value) return null
         if(permission.value !== 'granted') return
 
         const notification = new Notification(title, options)

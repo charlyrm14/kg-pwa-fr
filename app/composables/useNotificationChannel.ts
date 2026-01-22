@@ -5,13 +5,13 @@ import SharkNotification from '~~/public/media/notification.png'
 export function useNotificationChannel(pusher: Pusher) {
 
     const channelName = 'notifications' //`private-users.${MOCK_USER_ID}`
-    const { notify } = useBrowserNotifications()
     
     const subscribe = () => {
+        const { notify } = useBrowserNotifications()
         const channel = pusher.subscribe(channelName)
 
         channel.bind('notification.received', (data: any) => {
-            console.log(data)
+            
             const { title, body, action_url } = data;
 
             notify(title, action_url, {
@@ -25,7 +25,7 @@ export function useNotificationChannel(pusher: Pusher) {
         const channel = pusher.subscribe(channelName)
         if (channel) {
             channel.unbind_all();
-            pusher.unsubscribe('channel-notifications');
+            pusher.unsubscribe(channelName);
         }
     }
 
