@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', 'v-gsap-nuxt'],
+  modules: ['@pinia/nuxt', 'v-gsap-nuxt', '@vite-pwa/nuxt'],
   pinia: {
     /**
      * @default `['stores']`
@@ -47,5 +47,46 @@ export default defineNuxtConfig({
   },
   nitro: {
     logLevel: 'debug'
-  }
+  },
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'KG App',
+      short_name: 'KG',
+      description: 'King Dreams',
+      theme_color: '#2b7fff',
+      background_color: '#0f0f0f',
+      display: 'standalone',
+      start_url: '/',
+      icons: [
+        {
+          src: '/assets/media/icon-64x64.png',
+          sizes: '64x64',
+          type: 'image/png'
+        },
+        {
+          src: '/assets/media/icon-180x180.png',
+          sizes: '180x180',
+          type: 'image/png'
+        },
+        {
+          src: '/assets/media/icon-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: '/assets/media/icon-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ],
+    },
+    workbox: {
+      navigateFallback: '/',
+    },
+    devOptions: {
+      enabled: true,
+      type: 'module',
+    },
+  }  
 })
