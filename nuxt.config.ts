@@ -35,7 +35,8 @@ export default defineNuxtConfig({
       pusherKey: process.env.NUXT_PUBLIC_PUSHER_KEY,
       pusherCluster: process.env.NUXT_PUBLIC_PUSHER_CLUSTER,
       pusherHost: process.env.NUXT_PUBLIC_PUSHER_HOST,
-      pusherPort: process.env.NUXT_PUBLIC_PUSHER_PORT
+      pusherPort: process.env.NUXT_PUBLIC_PUSHER_PORT,
+      vapidKey: process.env.NUXT_PUBLIC_VAPID_KEY
     },
   },
   alias: {
@@ -50,6 +51,9 @@ export default defineNuxtConfig({
   },
   pwa: {
     registerType: 'autoUpdate',
+    strategies: 'injectManifest',
+    srcDir: '../public',
+    filename: 'sw.js',
     manifest: {
       name: 'KG App',
       short_name: 'KG',
