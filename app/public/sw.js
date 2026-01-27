@@ -1,3 +1,10 @@
+import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching'
+
+cleanupOutdatedCaches()
+precacheAndRoute(self.__WB_MANIFEST)
+
+self.skipWaiting()
+
 self.addEventListener('push', function (event) {
 
     if (!event.data) return
@@ -12,7 +19,8 @@ self.addEventListener('push', function (event) {
         badge: '/assets/media/icon-64x64.png',
         data: {
             url: data.data.url || '/'
-        }
+        },
+        vibrate: [100, 50, 100],
     }
     
     event.waitUntil(self.registration.showNotification(title, options))

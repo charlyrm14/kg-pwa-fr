@@ -52,8 +52,6 @@ export default defineNuxtConfig({
   pwa: {
     registerType: 'autoUpdate',
     strategies: 'injectManifest',
-    srcDir: '../public',
-    filename: 'sw.js',
     manifest: {
       name: 'KG App',
       short_name: 'KG',
@@ -85,12 +83,8 @@ export default defineNuxtConfig({
         }
       ],
     },
-    workbox: {
-      navigateFallback: '/',
-    },
     devOptions: {
       enabled: true,
-      type: 'module',
     },
   }  
 })
