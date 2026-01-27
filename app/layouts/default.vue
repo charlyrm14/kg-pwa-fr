@@ -1,19 +1,20 @@
 <script setup lang="ts">
     import Footer from '~/components/user/layouts/Footer.vue';
     import Header from '~/components/user/layouts/Header.vue';
-    import { useNotificationChannel } from '#imports';
     import { useBrowserNotifications } from '#imports';
+    import { usePushNotifications } from '#imports';
 
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
-    const { $pusher } = useNuxtApp()
+
     const { requestPermission } = useBrowserNotifications()
-    const { subscribe } = useNotificationChannel($pusher)
+    const { subscribeUser } = usePushNotifications()
 
     onMounted(async() => {
         if(IS_MOCK_API_MODE) return
-        await requestPermission()
-        subscribe()
+        
+        if (await requestPermission() !== 'granted') return
+        await subscribeUser()
     })
 
 </script>

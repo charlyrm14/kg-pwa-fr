@@ -14,7 +14,7 @@ export function useBrowserNotifications () {
 
     const requestPermission = async () => {
 
-        if(!isSupported) return null
+        if(!isSupported.value) return null
         if (permission.value === 'granted') return permission.value
 
         const result = await Notification.requestPermission()
