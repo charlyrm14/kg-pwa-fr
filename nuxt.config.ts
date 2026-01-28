@@ -45,6 +45,11 @@ export default defineNuxtConfig({
   },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
+    head: {
+      link: [
+        { rel: 'manifest', href: '/manifest.webmanifest' }
+      ]
+    }
   },
   nitro: {
     logLevel: 'debug'
@@ -53,35 +58,37 @@ export default defineNuxtConfig({
     registerType: 'autoUpdate',
     strategies: 'injectManifest',
     manifest: {
-      name: 'KG App',
-      short_name: 'KG',
-      description: 'King Dreams',
+      name: 'King Dreams',
+      short_name: 'King Dreams',
+      description: 'Promovemos el aprendizaje de la natación como seguro de vida',
       theme_color: '#2b7fff',
       background_color: '#0f0f0f',
       display: 'standalone',
+      id: '/',
       start_url: '/',
+      scope: '/',
+      lang: 'es',
+      orientation: 'portrait',
       icons: [
-        {
-          src: '/assets/media/icon-64x64.png',
-          sizes: '64x64',
-          type: 'image/png'
-        },
-        {
-          src: '/assets/media/icon-180x180.png',
-          sizes: '180x180',
-          type: 'image/png'
-        },
-        {
-          src: '/assets/media/icon-192x192.png',
-          sizes: '192x192',
-          type: 'image/png'
-        },
-        {
-          src: '/assets/media/icon-512x512.png',
-          sizes: '512x512',
-          type: 'image/png'
-        }
+        { src: '/assets/media/icon-64x64.png', sizes: '64x64', type: 'image/png' },
+        { src: '/assets/media/icon-180x180.png', sizes: '180x180', type: 'image/png' },
+        { src: '/assets/media/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+        { src: '/assets/media/icon-512x512.png', sizes: '512x512', type: 'image/png' }
       ],
+      screenshots: [
+        {
+          src: "/assets/screenshots/home-mobile.png",
+          type: "image/png",
+          sizes: "540x720",
+          form_factor: "narrow"
+        },
+        {
+          src: "/assets/screenshots/home-desktop.png",
+          type: "image/png",
+          sizes: "720x540",
+          form_factor: "wide"
+        }
+      ]
     },
     devOptions: {
       enabled: true,
