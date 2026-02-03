@@ -1,5 +1,6 @@
 import type { ApiResponse, PaginationContent, UserBirthday, User } from "#imports"
-import type { UserFilters, UserInfo } from "~~/shared/types/User"
+import type { UserFilters, UserInfo, UserProfileGeneralInfo } from "~~/shared/types/User"
+import Shark from '~/assets/media/shark.png'
 
 export const MOCK_USERS: PaginationContent<User> = {
     current_page: 1,
@@ -256,6 +257,32 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
     ]
 }
 
+export const MOCK_UPDATE_PROFILE_DATA: ApiResponse<UserProfileGeneralInfo> = {
+    data: {
+        name: "Carlos I",
+        last_name: "Ramos",
+        mother_last_name: null,
+        email: "charlyrm14@gmail.com",
+        uuid: "37aef404-90ff-46a8-a352-eca7fbd3a84b",
+        student_code: null,
+        profile: {
+            about_me: null,
+            birthdate: null,
+            phone_number: null,
+            address: null,
+            gender_name: null           
+        },
+        profile_image: {
+            id: 1,
+            uuid: "eca7fbd3a84b-a352-46a8-90ff-37aef404",
+            path: Shark,
+            mime_type: "image/png",
+            context: "avatar",
+            created_at: "2026-01-10"
+        }
+    }
+}
+
 export const fetchUsersMock = async(filters: UserFilters): Promise<ApiResponse<PaginationContent<User>>> => {
     const filtered = MOCK_USERS.data.filter(user => {
         if (filters.email) return user.email === filters.email
@@ -281,4 +308,8 @@ export const fetchUserInfoMock = async (uuid: string): Promise<ApiResponse<UserI
     return {
         data: user
     }
+}
+
+export const updateUserProfileMock = async(): Promise<ApiResponse<UserProfileGeneralInfo>> => {
+    return MOCK_UPDATE_PROFILE_DATA
 }

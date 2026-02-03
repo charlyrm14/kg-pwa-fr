@@ -36,7 +36,8 @@ export default defineNuxtConfig({
       pusherCluster: process.env.NUXT_PUBLIC_PUSHER_CLUSTER,
       pusherHost: process.env.NUXT_PUBLIC_PUSHER_HOST,
       pusherPort: process.env.NUXT_PUBLIC_PUSHER_PORT,
-      vapidKey: process.env.NUXT_PUBLIC_VAPID_KEY
+      vapidKey: process.env.NUXT_PUBLIC_VAPID_KEY,
+      apiMediaBaseUrl: process.env.NUXT_PUBLIC_API_MEDIA_BASE_URL
     },
   },
   alias: {

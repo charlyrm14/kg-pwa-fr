@@ -1,9 +1,9 @@
 <script setup lang="ts">
     import SectionTitle from '~/components/user/shared/SectionTitle.vue';
-    import type { UserProfileData } from '#imports';
+    import type { UserProfileResponse } from '#imports';
 
     defineProps<{
-        user: UserProfileData | null
+        user: UserProfileResponse | null
     }>()
 
 </script>

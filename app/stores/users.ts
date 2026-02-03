@@ -1,4 +1,3 @@
-import type { ApiResponse } from "#imports"
 import type { 
     User, 
     UserProfileData, 
@@ -6,7 +5,6 @@ import type {
     UserInfo,
     UserDelete 
 } from "~~/shared/types/User"
-import { MOCK_USER_AUTH_PROFILE_DATA } from "~/utils/mocks/user-auth.mock"
 import type { PaginationContent } from "#imports"
 import { useAlert } from "#imports"
 import { 
@@ -67,36 +65,6 @@ export const useUserStore = defineStore('users', () => {
         }
     }
 
-    /**
-     * The function `fetchUserProfileData` retrieves user profile data either from a mock API or a real
-     * API endpoint.
-     * @returns The `fetchUserProfileData` function is returning the user profile data stored in the
-     * `user.value` variable. This data is either fetched from a mock API if `IS_MOCK_API_MODE` is
-     * true, or from a real API endpoint if `IS_MOCK_API_MODE` is false. The function returns the user
-     * profile data after it has been fetched and stored in the `user.value` variable
-     */
-    const fetchUserProfileData = async() => {
-        try {
-
-            if(IS_MOCK_API_MODE) {
-
-                userProfile.value = MOCK_USER_AUTH_PROFILE_DATA.data
-
-            } else {
-
-                const response = await $fetch<ApiResponse<UserProfileData>>(
-                    `${config.public.apiBaseUrl}/profile`
-                )
-
-                userProfile.value = response.data
-            }
-
-            return userProfile.value
-
-        } catch(error) {
-            console.error('Error getting user profile data')
-        }
-    }
 
     /**
      * The function `deleteUser` asynchronously deletes a user by their UUID, either through a fetch
@@ -136,7 +104,6 @@ export const useUserStore = defineStore('users', () => {
         userProfile,
         fetchUsers,
         fetchUserInfo,
-        fetchUserProfileData,
         deleteUser
     }
 })

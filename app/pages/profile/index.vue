@@ -1,21 +1,25 @@
 <script setup lang="ts">
     import CoverUserProfile from '~/assets/media/pool.png';
     import { profileTabs } from '#imports';
-    import { useUserStore } from '~/stores/users';
-    import AddHobbies from '~/components/user/profile/AddHobbies.vue';
+    import { useProfile } from '#imports';
     import { useModalManager } from '#imports';
+    import AddHobbies from '~/components/user/profile/AddHobbies.vue';    
     import SelectProfileImage from '~/components/user/profile/SelectProfileImage.vue';
+    import ProfileAvatar from '~/assets/media/training.png'
+
+    const config = useRuntimeConfig();
     
-    const userStore = useUserStore()
+    const { fetchUserProfileData} = useProfile()
     const { open, isOpen, close } = useModalManager()
 
-    const { data: user } = await useAsyncData('getProfileData', async() => {
-        await userStore.fetchUserProfileData()
-        return userStore.userProfile ?? null
-    })
+    const { data: userData } = await useAsyncData(
+        'user-profile-data',
+        fetchUserProfileData
+    )
 
-    const activeTab = ref<number>(1)
     const tabs = profileTabs()
+    const activeTab = ref<number>(1)
+    
 
     const toggleActiveTab = (id: number) => {
         activeTab.value = id
@@ -26,11 +30,26 @@
         return tab?.components ?? []
     })
 
+    const user = computed(() => userData?.value?.data ?? null)
+    const setAvatar = ref<string | null>(null)
+
+    const avatar = computed(() => {
+        if (setAvatar.value) return setAvatar.value
+
+        return userData?.value?.data?.profile_image 
+            ? `${config.public.apiMediaBaseUrl}/${userData?.value?.data?.profile_image?.path}`
+            : ProfileAvatar
+    })
+
+    const onAvatarUpdated = (newAvatar: string) => {
+        setAvatar.value = newAvatar
+    }
+
 </script>
 
 <template>
     <section>
-
+    
         <section>
             <div class="relative w-full">
                 <div class="w-full h-50 md:h-72 lg:h-96 rounded-2xl overflow-hidden shadow-lg">
@@ -41,12 +60,14 @@
                             class="w-full h-full object-cover brightness-60"/>
                     </ClientOnly>
                 </div>
+                
                 <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 translate-y-1/2">
                     <div class="p-1 rounded-full bg-white dark:bg-dark-soft border-3 border-white dark:border-dark-extralight shadow-lg relative">
                         <img 
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThAM8Jck2fkmmr1OMvbM0JQaG0yaaJaNFZmaKt2n4YWYvfsHvQhvpr0gVA3cj87723MyU&usqp=CAU" 
+                            :src="avatar" 
                             alt="Profile"
-                            class="w-30 h-30 md:w-40 md:h-40 rounded-full object-cover"/>
+                            class="w-30 h-30 md:w-40 md:h-40 rounded-full object-cover"
+                            loading="lazy"/>
                         <button @click="open('SelectProfileImageModal')" class="absolute -bottom-1 right-2 bg-white text-black dark:bg-dark-soft p-2 rounded-full dark:text-white cursor-pointer hover:opacity-75">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
                         </button>
@@ -92,6 +113,7 @@
 
         <SelectProfileImage
             v-if="isOpen('SelectProfileImageModal')"
+            @avatar-updated="onAvatarUpdated"
             @closeSelectProfileImageModal="close"/>
 
         <AddHobbies

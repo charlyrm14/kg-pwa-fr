@@ -32,7 +32,7 @@ export interface Hobby {
     name: string
 }
 
-export interface UserProfileData {
+export interface UserProfileResponse {
     name: string
     last_name: string
     mother_last_name: string | null
@@ -41,8 +41,9 @@ export interface UserProfileData {
     uuid: string
     student_code: string | null
     role: string
-    profile: ProfileData | null,
-    hobbies: Hobby[],
+    profile: ProfileData | null
+    hobbies: Hobby[]
+    profile_image: UserProfileImage | null
     created_at: string
     updated_at: string
 }
@@ -89,4 +90,41 @@ export interface UserDelete {
     name: string
     last_name: string
     uuid: string
+}
+
+export interface UserProfileBasicInfo {
+    about_me: string | null
+    birthdate: string | null
+    phone_number: string | null
+    address: string | null
+    gender_name: string | null
+}
+
+export interface UserProfileImage {
+    id: number
+    uuid: string
+    path: string
+    mime_type: string
+    context: string
+    created_at: string
+}
+
+export interface UserProfileGeneralInfo {
+    name: string
+    last_name: string
+    mother_last_name: string | null
+    email: string
+    uuid: string
+    student_code: string | null
+    profile: UserProfileBasicInfo
+    profile_image: UserProfileImage | null
+}
+
+export interface UserProfilePayload {
+    about_me?: string | null
+    birthdate?: string | null
+    phone_number?: string | null
+    address?: string | null
+    gender_id?: number | null
+    profile_image?: number[]
 }
