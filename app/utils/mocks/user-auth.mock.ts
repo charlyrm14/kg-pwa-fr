@@ -1,6 +1,6 @@
-import type { ApiResponse, UserProfileData } from '#imports'
+import type { ApiResponse, UserProfileResponse } from '#imports'
 
-export const MOCK_USER_AUTH_PROFILE_DATA: ApiResponse<UserProfileData> = {
+export const MOCK_USER_AUTH_PROFILE_DATA: ApiResponse<UserProfileResponse> = {
     data: {
         name: "Carlos",
         last_name: "Ramos",
@@ -28,6 +28,7 @@ export const MOCK_USER_AUTH_PROFILE_DATA: ApiResponse<UserProfileData> = {
                 name: "Correr o Trotar"
             }
         ],
+        profile_image: null,
         created_at: "2025-10-13",
         updated_at: "2025-10-13"
     }
