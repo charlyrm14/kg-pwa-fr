@@ -18,3 +18,15 @@ export const uploadMediaApi = async(files: File[]): Promise<ApiResponse<MediaUpl
         }
     )
 }
+
+export const deleteMediaApi = async(mediaId: number) => {
+
+    const config = useRuntimeConfig()
+
+    return await $fetch(
+        `${config.public.apiBaseUrl}/media/${mediaId}`,
+        {
+            method: 'DELETE'
+        }
+    )
+}

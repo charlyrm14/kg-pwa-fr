@@ -3,7 +3,7 @@ import { useMedia } from "#imports"
 
 export const useMediaUploadStore = defineStore('mediaUpload', () => {
 
-    const { uploadMedia } = useMedia()
+    const { uploadMedia, deleteMedia } = useMedia()
 
     const items = ref<UploadItem[]>([])
     const confirmedIds = ref<number[]>([])
@@ -45,7 +45,16 @@ export const useMediaUploadStore = defineStore('mediaUpload', () => {
         }
     }
 
-    const removeItem = (tempId: string) => {
+    const removeItem = async(tempId: string) => {
+
+        const media = items.value.find(med => med.tempId === tempId)
+
+        if(!media) return
+
+        if(!media.uploadedMedia) return
+
+        await deleteMedia(media.uploadedMedia?.id)
+
         items.value = items.value.filter(i => i.tempId !== tempId)
     }
 
@@ -60,7 +69,14 @@ export const useMediaUploadStore = defineStore('mediaUpload', () => {
         items.value = []
     }
 
-    const discardFile = () => {
+    const discardFile = async(mediaId: number) => {
+
+        const media = confirmedMedia.value.find(med => med.id)
+        
+        if(!media) return
+
+        await deleteMedia(media.id)
+
         confirmedMedia.value = []
         confirmedIds.value = []
     }

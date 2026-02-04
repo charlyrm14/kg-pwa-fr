@@ -19,6 +19,8 @@ export interface MediaUploadResponse {
     variants: MediaVariantResponse [] | null
 }
 
+export type MediaDeletePayload = Omit<MediaUploadResponse, 'variants'>
+
 export interface UploadItem {
     tempId: string
     file: File

@@ -10,6 +10,10 @@
     
     const mediaStore = useMediaUploadStore()
 
+    const deleteFile = async(tempId: string) => {
+        await mediaStore?.removeItem(tempId)
+    }
+
 </script>
 
 <template>
@@ -35,8 +39,11 @@
                             </p>
                         </div>
                     </div>
-                    <button class="dark:text-gray-400 cursor-pointer hover:text-red-500 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    <button
+                        v-if="item.status === 'done' && item.uploadedMedia"
+                        class="dark:text-gray-400 cursor-pointer hover:text-red-500 transition-colors"
+                        @click="deleteFile(item.tempId)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                     </button>
                 </div>
                 <div class="w-full mt-2 h-2 rounded-xl overflow-hidden bg-gray-200">
