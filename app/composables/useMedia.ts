@@ -1,4 +1,8 @@
-import { uploadMediaDataSource } from "~/data/media/media.datasource"
+import { 
+    uploadMediaDataSource, 
+    deleteMediaDataSource 
+} from "~/data/media/media.datasource"
+
 
 export function useMedia () {
 
@@ -6,7 +10,12 @@ export function useMedia () {
         return await uploadMediaDataSource(files)
     }
 
+    const deleteMedia = async(mediaId: number) => {
+        return await deleteMediaDataSource(mediaId)
+    }
+
     return {
-        uploadMedia
+        uploadMedia,
+        deleteMedia
     }
 }
