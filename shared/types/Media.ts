@@ -18,3 +18,23 @@ export interface MediaUploadResponse {
     created_at: string
     variants: MediaVariantResponse [] | null
 }
+
+export interface UploadItem {
+    tempId: string
+    file: File
+    progress: number
+    status: 'pending' | 'uploading' | 'done' | 'error'
+    uploadedMedia?: MediaUploadResponse
+}
+
+export interface UploaderConfig {
+    maxFiles: number
+    accept: string[]
+    maxSizeMB: number
+    context?: string
+}
+
+export interface DropzoneError {
+    type: 'max-files' | 'max-size' | 'invalid-type'
+    message: string
+}
