@@ -20,3 +20,8 @@ export interface SwimCategory {
     description: string
     category_skills: CategorySkill[]
 }
+
+export interface CategoryWithProgress extends SwimCategory {
+    progress: number
+    status: string
+}

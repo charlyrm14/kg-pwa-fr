@@ -10,6 +10,7 @@ export const STUDENT_PROGRESS: ApiResponse<StudentProgress> = {
         uuid: "9fc11977-5ee9-4f00-b279-9778797b06c3",
         student_code: null,
         current_level: {
+            category_slug: "tortuga",
             category_name: "Tortuga",
             category_description: "¡Ya estás avanzando firme como una tortuga en su travesía! Tu técnica mejora y se nota tu esfuerzo. Sigue con esa constancia, que cada brazada te acerca a tu próxima meta.",
             total_progress: 45,
@@ -28,6 +29,7 @@ export const STUDENT_PROGRESS: ApiResponse<StudentProgress> = {
             ]
         },
         next_level: {
+            category_slug: "mantarraya",
             category_name: "MANTARRAYA",
             category_description: "¡Deslizas en el agua como una mantarraya! Has mejorado mucho tu fluidez y control. Mantén tu concentración y disciplina, vas por excelente camino. ¡Sigue brillando!",
             category_skills: [
@@ -46,11 +48,13 @@ export const STUDENT_PROGRESS: ApiResponse<StudentProgress> = {
             {
                 category_id: 1,
                 category_name: "FOCA",
+                category_slug: "foca",
                 total_progress: 100
             },
             {
                 category_id: 2,
                 category_name: "TORTUGA",
+                category_slug: "tortuga",
                 total_progress: 45
             }
         ]

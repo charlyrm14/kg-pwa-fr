@@ -1,9 +1,9 @@
 <script setup lang="ts">
-    import type { SwimCategory } from '#imports';
+    import type { CategoryWithProgress } from '~~/shared/types/Swimming';
     import { swimmingLevelColors } from '#imports';
 
     const props = defineProps<{
-        level: SwimCategory
+        level: CategoryWithProgress
     }>()
     
     const showLevelContent = ref<boolean>(false)
@@ -19,7 +19,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-waves-arrow-up-icon lucide-waves-arrow-up"><path d="M12 2v8"/><path d="M2 15c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="m8 6 4-4 4 4"/></svg>
                 </div>
                 <h4 class="text-gray-700 dark:text-gray-200 font-extrabold text-lg"> 
-                    Nivel: {{ level?.name ?? 'Unknown' }} <span class="block text-blue-500 text-xs"> En progreso </span>
+                    Nivel: {{ level?.name ?? 'Unknown' }} 
+                        <span class="block text-xs" :class="level?.status === 'Completado' ? 'text-green-500' : 'text-gray-500 dark:text-gray-400'"> {{ level?.status }} </span>
                 </h4>
             </div>
             <button @click="showLevelContent = !showLevelContent" class="dark:text-white cursor-pointer hover:opacity-75">
@@ -40,10 +41,10 @@
             <div class="mt-6 mb-3">
                 <div class="flex items-center justify-between">
                     <p class="dark:text-gray-400 tracking-widest text-xs font-semibold"> PROGRESO </p>
-                    <p class="text-xl font-extrabold text-blue-500"> 100% </p>
+                    <p class="text-xl font-extrabold" :class="level?.status === 'Completado' ? 'text-green-500' : 'text-gray-500 dark:text-gray-400'"> {{ level?.progress }}% </p>
                 </div>
                 <div class="w-full h-2 rounded-full bg-gray-200 dark:bg-dark-extralight overflow-hidden">
-                    <div class="h-full w-[100%] rounded-full bg-blue-500"></div>
+                    <div class="h-full rounded-full" :class="level?.status === 'Completado' ? 'bg-green-500' : 'bg-gray-500 dark:bg-gray-400' " :style="`width: ${level?.progress}%`"></div>
                 </div>
             </div>
         </div>
