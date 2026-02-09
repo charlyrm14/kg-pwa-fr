@@ -1,6 +1,7 @@
 import type { CategorySkill } from "./Swimming"
 
 export interface CurrentLevel {
+    category_slug: string
     category_name: string
     category_description: string
     total_progress: number
@@ -10,14 +11,16 @@ export interface CurrentLevel {
 }
 
 export interface NextLevel {
+    category_slug: string
     category_name: string
     category_description: string
     category_skills: CategorySkill[]
 }
 
 export interface ProgressionHistory {
-    category_id: number,
-    category_name: string,
+    category_id: number
+    category_name: string
+    category_slug: string
     total_progress: number
 }
 

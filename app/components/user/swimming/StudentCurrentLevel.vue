@@ -1,7 +1,6 @@
 <script setup lang="ts">
     import Seal from '~/assets/media/seal.png'
     import type { StudentProgress } from '#imports';
-    import { capitalizeFirstLetter } from '#imports';
 
     const props = defineProps<{
         progress: StudentProgress
