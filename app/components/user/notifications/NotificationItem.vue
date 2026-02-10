@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import SharkNotification from '~/assets/media/notification.png'
+    import SharkNotification from '~/assets/media/notification.webp'
     import type { UserNotification } from '#imports';
     import { useNotifications } from '#imports';
 

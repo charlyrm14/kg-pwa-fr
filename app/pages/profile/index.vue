@@ -1,11 +1,11 @@
 <script setup lang="ts">
-    import CoverUserProfile from '~/assets/media/pool.png';
+    import CoverUserProfile from '~/assets/media/pool.webp';
     import { profileTabs } from '#imports';
     import { useProfile } from '#imports';
     import { useModalManager } from '#imports';
     import AddHobbies from '~/components/user/profile/AddHobbies.vue';    
     import SelectProfileImage from '~/components/user/profile/SelectProfileImage.vue';
-    import ProfileAvatar from '~/assets/media/training.png'
+    import ProfileAvatar from '~/assets/media/training.webp'
 
     const config = useRuntimeConfig();
     

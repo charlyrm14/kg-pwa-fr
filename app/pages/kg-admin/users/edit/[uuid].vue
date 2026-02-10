@@ -43,7 +43,7 @@
         
         <section class="md:px-5 mt-7">
             <div class="flex flex-col gap-6 md:flex-row">
-                <aside class="md:basis-[20%]">
+                <aside class="md:basis-[25%]">
                     <div class="bg-white dark:bg-dark-light shadow-lg rounded-lg">
                         <div class="p-5">
                             <div class="flex justify-center items-center">
@@ -65,7 +65,7 @@
                         <div class="p-5">
                             <div class="border-b border-gray-200 dark:border-dark-soft flex justify-between items-center">
                                 <h4 class="dark:text-gray-400 mb-2"> Información </h4>
-                                <button class="bg-blue-500 px-2 py-0.5 mb-2 text-sm text-white rounded cursor-pointer hover:opacity-75">
+                                <button class="bg-blue-500 px-2 py-0.5 mb-2 text-sm text-white rounded-4xl cursor-pointer hover:opacity-75">
                                     Editar
                                 </button>
                             </div>
@@ -100,7 +100,7 @@
                             <div class="flex justify-end items-center">
                                 <button 
                                     @click="open('DeleteUser', user)"
-                                    class="dark:bg-dark-extralight px-3 py-0.5 rounded dark:text-gray-500 hover:text-red-400 cursor-pointer inline-flex items-center gap-x-2">
+                                    class="dark:bg-dark-extralight px-3 py-0.5 rounded-4xl dark:text-gray-500 hover:text-red-400 cursor-pointer inline-flex items-center gap-x-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                                         Eliminar
                                 </button>
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                 </aside>
-                <main class="md:basis-[80%]">
+                <main class="md:basis-[75%]">
                     <div>
                         <nav class="flex justify-start items-start gap-x-6">
                             <button
@@ -121,12 +121,6 @@
                                 @click="tab = 2"
                                 class="cursor-pointer hover:opacity-75 text-lg text-gray-400"
                                 :class="tab === 2 ? 'border-b-3 border-blue-500 dark:text-white pb-2': 'text-gray-400'"> 
-                                    Pagos
-                            </button>
-                            <button 
-                                @click="tab = 3"
-                                class="cursor-pointer hover:opacity-75 text-lg text-gray-400"
-                                :class="tab === 3 ? 'border-b-3 border-blue-500 dark:text-white pb-2': 'text-gray-400'"> 
                                     Progreso
                             </button>
                         </nav>
@@ -136,9 +130,6 @@
                         <AttendanceUser/>
                     </div>
                     <div v-if="tab === 2">
-                        <PaymentUser/>
-                    </div>
-                    <div v-if="tab === 3">
                         <ProgressUser/>
                     </div>
                 </main>

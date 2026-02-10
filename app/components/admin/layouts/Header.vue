@@ -24,11 +24,11 @@
             <nav class="flex items-center space-x-4 ml-auto">
                 <NuxtLink 
                     to="/"
-                    class="bg-dark-soft text-white py-1 px-4 rounded-lg transition inline-flex gap-x-2 cursor-pointer hover:opacity-75">
+                    class="bg-dark-soft text-white py-0.5 px-2 rounded-4xl transition inline-flex items-center gap-x-2 cursor-pointer hover:opacity-75">
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
-                            width="20" 
-                            height="20" 
+                            width="18" 
+                            height="18" 
                             viewBox="0 0 24 24" 
                             fill="none" 
                             stroke="currentColor" 

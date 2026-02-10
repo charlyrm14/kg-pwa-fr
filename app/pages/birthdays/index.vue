@@ -33,7 +33,7 @@
 
         <!-- Beginning Banner -->
         <section>
-            <div class="bg-[url('/media/birthdays-balloons.png')] bg-cover bg-center p-4 md:p-6 rounded-4xl h-52 sm:h-56 md:h-70 lg:h-72 relative overflow-hidden brightness-60">
+            <div class="bg-[url('/media/birthdays-balloons.webp')] bg-cover bg-center p-4 md:p-6 rounded-4xl h-56 md:h-70 lg:h-72 relative overflow-hidden brightness-60">
                 <div class="absolute inset-0 bg-black/40"></div>
                 <div class="relative flex flex-col h-full justify-between">
                     <div class="flex justify-between items-center gap-x-3 p-4">
