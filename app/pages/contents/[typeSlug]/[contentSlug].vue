@@ -5,7 +5,7 @@
     import { useContentStore } from '~/stores/contents'
     import { useFavorites } from '#imports'
     import { useAlert } from '#imports'
-    import Training from '~/assets/media/training.png'
+    import Training from '~/assets/media/training.webp'
     
     const route = useRoute()
     const slugParam = route.params.contentSlug

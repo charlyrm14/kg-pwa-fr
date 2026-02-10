@@ -10,7 +10,7 @@
 <template>
     <section>
         <NuxtLink :to="`/contents/eventos/${lastEvent?.slug}`">
-            <div class="bg-[url('/media/pool.png')] bg-cover bg-center p-4 md:p-6 rounded-xl h-52 sm:h-56 md:h-64 lg:h-72 relative overflow-hidden">
+            <div class="bg-[url('/media/pool.webp')] bg-cover bg-center p-4 md:p-6 rounded-xl h-52 sm:h-56 md:h-64 lg:h-72 relative overflow-hidden">
                 <div class="absolute inset-0 bg-black/40"></div>
                 <div class="relative flex flex-col h-full justify-between">
                     <div class="flex justify-between items-center gap-x-3">
