@@ -9,10 +9,10 @@
 <template>
     <div class="bg-white dark:bg-dark-light shadow-lg rounded-lg mt-6">
         <div class="p-5 flex justify-between items-center">
-            <h4 class="text-xl dark:text-white"> Horario de Jhon W <span class="block text-base text-gray-600 dark:text-gray-400"> Días, horario de entrada y salida </span> </h4>
+            <h4 class="text-xl dark:text-white"> Horario <span class="block text-base text-gray-600 dark:text-gray-400"> Días y horario </span> </h4>
             <button
                 @click="open('EditUserSchedule')"
-                class="bg-indigo-500 text-white px-4 py-2 rounded cursor-pointer hover:opacity-75">
+                class="bg-indigo-500 text-white px-4 py-2 rounded-4xl cursor-pointer hover:opacity-75">
                     Editar horario
             </button>
         </div>
