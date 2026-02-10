@@ -65,7 +65,7 @@
 </script>
 
 <template>
-    <section>
+    <section class="md:px-5">
 
         <Alert 
             v-if="alert.status" 
@@ -74,7 +74,7 @@
             :type="alert.type" 
             @closeAlert="closeAlert"/>
         
-        <section class="md:px-5">
+        <section>
             <Breadcrumb
                 heading="Creación contenido - Noticia"
                 primary-section="Contenidos"
@@ -82,7 +82,7 @@
                 secondary-section="Crear Noticia"/>
         </section>
 
-        <section class="md:px-5 mt-7">
+        <section class="mt-7">
             <form @submit.prevent="onSubmit">
                 <div class="flex flex-col md:flex-row">
                     <main class="md:basis-[70%]">

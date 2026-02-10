@@ -28,7 +28,7 @@
 </script>
 
 <template>
-    <section class="p-0 md:p-6">
+    <section class="md:px-5">
 
         <Alert 
             v-if="alert.status" 
@@ -37,7 +37,7 @@
             :type="alert.type" 
             @closeAlert="closeAlert"/>
         
-        <section class="p-2">
+        <section>
             <Breadcrumb
                 heading="Lista contenidos"
                 primary-section="Contenidos"
@@ -45,8 +45,8 @@
                 secondary-section="Lista"/>
         </section>
 
-        <section class="mt-6 p-2">
-            <div class="bg-white shadow-lg rounded-lg px-2 pt-10 pb-6 dark:bg-dark-light">
+        <section class="mt-6">
+            <div class="bg-white shadow-lg rounded-lg pt-4 pb-6 dark:bg-dark-light">
 
                 <!-- Beginning Content Header -->
                 <ContentHeader/>

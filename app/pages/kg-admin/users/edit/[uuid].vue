@@ -31,9 +31,9 @@
 </script>
 
 <template>
-    <section>
+    <section class="md:px-5">
 
-        <section class="md:px-5">
+        <section>
             <Breadcrumb
                 heading="Edición usuario"
                 primary-section="Usuarios"
@@ -41,7 +41,7 @@
                 secondary-section="Editar"/>
         </section>
         
-        <section class="md:px-5 mt-7">
+        <section class="mt-7">
             <div class="flex flex-col gap-6 md:flex-row">
                 <aside class="md:basis-[25%]">
                     <div class="bg-white dark:bg-dark-light shadow-lg rounded-lg">

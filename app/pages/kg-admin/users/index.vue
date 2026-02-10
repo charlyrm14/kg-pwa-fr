@@ -26,11 +26,11 @@
 </script>
 
 <template>
-    <section>
+    <section class="md:px-5">
 
         <Alert v-if="alert.status" :title="alert.title" :description="alert.description" :type="alert.type"/>
 
-        <section class="md:px-5">
+        <section>
             <Breadcrumb
                 heading="Lista usuarios"
                 primary-section="Usuarios"
@@ -38,8 +38,8 @@
                 secondary-section="Lista"/>
         </section>
 
-        <section class="mt-6 md:px-5">
-            <div class="bg-white shadow-lg rounded-lg px-6 pt-10 pb-6 dark:bg-dark-light">
+        <section class="mt-6">
+            <div class="bg-white shadow-lg rounded-lg px-4 pt-4 pb-6 dark:bg-dark-light">
                 
                 <!-- Beginning User Header -->
                 <UserHeader/>
