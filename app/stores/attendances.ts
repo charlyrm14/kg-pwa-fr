@@ -12,10 +12,10 @@ import {
 } from "#imports"
 import { 
     MOCK_ATTENDANCES_STATUSES,
-    MOCK_USER_ATTENDANCES_CURRENT_MONTH, 
     MOCK_USER_ATTENDANCES_CURRENT_DAY 
 } from "~/utils/mocks/attendances.mock"
 import { useAlert } from "#imports"
+import { fetchAttendanceStatusesDataSource, fetchMonthlyAttendanceDataSource } from "~/data/attendances/attendance.datasource"
 
 export const useAttendanceStore = defineStore('attendances', () => {
 
@@ -67,19 +67,9 @@ export const useAttendanceStore = defineStore('attendances', () => {
      */
     const fetchAttendanceStatuses = async() => {
         try {
-                if(IS_MOCK_API_MODE) {
+                const response = await fetchAttendanceStatusesDataSource()
 
-                    attendanceStatuses.value = MOCK_ATTENDANCES_STATUSES
-
-                } else {
-
-                    const response = await $fetch<ApiResponse<AttendanceStatus[]>>(
-                        `${config.public.apiBaseUrl}/attendances/statuses`
-                    )
-
-                    attendanceStatuses.value = response
-                }
-
+                attendanceStatuses.value = response
                 return attendanceStatuses.value
             
         } catch (error) {
@@ -143,18 +133,9 @@ export const useAttendanceStore = defineStore('attendances', () => {
     const fetchMonthlyAttendance = async() => {
         try {
 
-            if(IS_MOCK_API_MODE) {
-
-                monthlyAttendance.value = MOCK_USER_ATTENDANCES_CURRENT_MONTH
-
-            } else {
-
-                const response = await $fetch<ApiResponse<UserAttendance>>(
-                    `${config.public.apiBaseUrl}/attendances/history`
-                )
-
-                monthlyAttendance.value = response
-            }
+            const response = await fetchMonthlyAttendanceDataSource()
+            
+            monthlyAttendance.value = response
 
             return monthlyAttendance.value
 
