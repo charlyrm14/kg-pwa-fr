@@ -1,4 +1,8 @@
-import type { ApiResponse, PaginationContent, Content } from "#imports"
+import type { 
+    ApiResponse, 
+    PaginationContent, 
+    Content 
+} from "#imports"
 
 export const fetchContentsApi = async(): Promise<ApiResponse<PaginationContent<Content>>> => {
 
@@ -14,5 +18,16 @@ export const fetchContentBySlugApi = async(slug: string): Promise<ApiResponse<Co
     
     return await $fetch<ApiResponse<Content>>(`
         ${config.public.apiBaseUrl}/contents/${slug}`
+    )
+}
+
+export const deleteContentApi = async(slug: string) => {
+    const config = useRuntimeConfig()
+    
+    return await $fetch<ApiResponse<Content>>(`
+        ${config.public.apiBaseUrl}/contents/${slug}`,
+        {
+            method: 'DELETE'
+        }
     )
 }

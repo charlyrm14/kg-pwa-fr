@@ -5,16 +5,16 @@
     import ContentTable from '~/components/admin/contents/ContentTable.vue';
     import ContentPagination from '~/components/admin/contents/ContentPagination.vue';
     import SelectContentTypeModal from '~/components/admin/contents/SelectContentTypeModal.vue';
-    import { useModalManager } from '#imports';
+    import DeleteContent from '~/components/admin/contents/DeleteContent.vue';
+    import { useModalManager, useAlert } from '#imports';
     import { useContentStore } from '~/stores/contents';
     import Alert from '~/components/common/Alert.vue';
-    import { useAlert } from '#imports';
 
     definePageMeta({
         layout: 'admin'
     })
 
-    const { isOpen, close } = useModalManager()
+    const { isOpen, close, modalPayload } = useModalManager()
     const contentStore = useContentStore()
     const { alert, closeAlert } = useAlert()
 
@@ -68,6 +68,11 @@
         <SelectContentTypeModal
             v-if="isOpen('SelectContentTypeModal')"
             @closeSelectContentTypeModal="close"/>
+
+        <DeleteContent
+            v-if="isOpen('DeleteContentModal')"
+            :content="modalPayload?.content"
+            @closeDeleteContentModal="close"/>
 
     </section>
 </template>

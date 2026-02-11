@@ -1,8 +1,19 @@
-import type { ApiResponse, PaginationContent, Content } from "#imports"
-import type { CreateContentPayload } from "~~/shared/types/Content"
+import type { 
+    ApiResponse, 
+    PaginationContent, 
+    Content 
+} from "#imports"
+import type { 
+    ContentDelete, 
+    CreateContentPayload 
+} from "~~/shared/types/Content"
 import { useAlert } from "#imports"
 import { adaptContent } from '~~/server/adapters/content.adapter'
-import { fetchContentsDataSource, fetchContentBySlugDataSource } from "~/data/contents/contents.datasource"
+import { 
+    fetchContentsDataSource, 
+    fetchContentBySlugDataSource, 
+    deleteContentDataSource 
+} from "~/data/contents/contents.datasource"
 
 export const useContentStore = defineStore('contents', () => {
 
@@ -97,6 +108,36 @@ export const useContentStore = defineStore('contents', () => {
         }
     }
 
+    /**
+     * The function `deleteContent` asynchronously deletes content using the provided slug.
+     * @param {ContentDelete} content - The `content` parameter is an object of type `ContentDelete`.
+     * It likely contains information about the content that needs to be deleted, such as the content's
+     * slug or other identifying information.
+     */
+    const deleteContent = async(content: ContentDelete) => {
+        try {
+
+            const { slug } = content
+            
+            await deleteContentDataSource(slug)
+
+            contents.value = {
+                ...contents.value!,
+                data: contents.value!.data.filter(
+                    content => content.slug !== slug
+                ),
+                total: contents.value!.total - 1
+            }
+
+            setTimeout(() => {
+                showAlert('Éxito', 'Contenido eliminado con éxito', 'success') 
+            }, 500); 
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     /* The `filteredContents` constant is using the `computed` function to create a reactive computed
     property. This computed property is dependent on the values of `contents.value` and
     `contentTypeFilter.value`. */
@@ -123,6 +164,7 @@ export const useContentStore = defineStore('contents', () => {
         fetchContents,
         fetchContentBySlug,
         createContent,
+        deleteContent,
         filteredContents
     }
 })
