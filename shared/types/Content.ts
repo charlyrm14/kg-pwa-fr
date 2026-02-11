@@ -1,6 +1,8 @@
 export type ContentStatus = 'borrador' | 'pendiente-de-revision' | 'rechazado' | 'programado' | 'publicado' | 'no-publicado' | 'eliminado'
 
-export type ContentTypeSlug = 'noticias' | 'eventos' | 'consejos' | 'nutricion';
+export type ContentTypeSlug = 'noticias' | 'eventos' | 'consejos' | 'nutricion'
+
+export type ContentTypeFilter = 'todo' | 'noticias' | 'eventos' | 'consejos' | 'nutricion'
 
 export interface EventDetails {
     location: string | null
@@ -45,3 +47,8 @@ export interface CreateGenericContent extends BaseCreateContent {
 }
 
 export type CreateContentPayload = CreateEventContent | CreateGenericContent
+
+export interface ContentDelete {
+    name: string
+    slug: string
+}

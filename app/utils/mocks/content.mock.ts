@@ -135,7 +135,7 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
     next_page_url: null,
     per_page: 15,
     prev_page_url: null,
-    total: 2
+    total: 9
 }
 
 export const fetchContentsMock = async(): Promise<ApiResponse<PaginationContent<Content>>> => {
@@ -161,4 +161,9 @@ export const fetchContentBySlugMock = (slug: string): ApiResponse<Content>  => {
     return {
         data: contentBySlug
     }
+}
+
+export const deleteContentMock = async(slug: string) => {
+
+    return { success: true }
 }
