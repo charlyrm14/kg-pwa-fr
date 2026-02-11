@@ -1,5 +1,4 @@
-import type { 
-    ApiResponse, 
+import type {  
     PaginationContent, 
     Content 
 } from "#imports"
@@ -7,20 +6,17 @@ import type {
     ContentDelete, 
     CreateContentPayload 
 } from "~~/shared/types/Content"
-import { useAlert } from "#imports"
-import { adaptContent } from '~~/server/adapters/content.adapter'
 import { 
     fetchContentsDataSource, 
-    fetchContentBySlugDataSource, 
+    fetchContentBySlugDataSource,
+    createContentDataSource, 
     deleteContentDataSource 
 } from "~/data/contents/contents.datasource"
+import { useAlert } from "#imports"
 
 export const useContentStore = defineStore('contents', () => {
 
     const { showAlert } = useAlert()
-
-    const config = useRuntimeConfig()
-    const IS_MOCK_API_MODE = config.public.mockApiMode
 
     const contents = ref<PaginationContent<Content> | null>(null)
     const contentDetail = ref<Content | null>(null)
@@ -44,7 +40,7 @@ export const useContentStore = defineStore('contents', () => {
             return contents.value
             
         } catch (error) {
-            console.error('Error trying to get contents')
+            console.error(error)
         }
     }
 
@@ -74,36 +70,25 @@ export const useContentStore = defineStore('contents', () => {
 
     
     /**
-     * The function `createContent` asynchronously creates content, logs the payload, pushes the
+     * The function `create` asynchronously creates content, logs the payload, pushes the
      * payload to a data array, navigates to a specific URL, and shows a success alert.
-     * @param {CreateContentPayload} payload - The `payload` parameter in the `createContent` function
+     * @param {CreateContentPayload} payload - The `payload` parameter in the `create` function
      * is an object of type `CreateContentPayload`. It contains the data necessary to create new
      * content, such as the title, description, and any other relevant information needed for the
      * content creation process. This payload is used to add new content to
      */
-    const createContent = async(payload: CreateContentPayload) => {
+    const create = async(payload: CreateContentPayload) => {
         try {
 
-            if(IS_MOCK_API_MODE) {
-
-                await navigateTo('/kg-admin/contents')
-
-                contents?.value?.data.unshift(adaptContent(payload))
-
-            } else {
-
-                await $fetch<ApiResponse<CreateContentPayload>>(`${config.public.apiBaseUrl}/contents/`, {
-                    method: 'POST',
-                    body: payload
-                })
-            }
-
+            await createContentDataSource(payload)
+            await navigateTo('/kg-admin/contents')
+            
             setTimeout(() => {
-                showAlert('Éxito', 'Contenido creado con éxito', 'success') 
-            }, 500);
+                showAlert('Éxito', 'Contenido creado con éxito', 'success')
+            }, 1000);
 
         } catch (error) {
-            console.error('Error to create content')
+            console.error(error)
             showAlert('Error', 'Algo salio mal al crear tu contenido :(', 'error') 
         }
     }
@@ -163,7 +148,7 @@ export const useContentStore = defineStore('contents', () => {
         contentTypeFilter,
         fetchContents,
         fetchContentBySlug,
-        createContent,
+        create,
         deleteContent,
         filteredContents
     }

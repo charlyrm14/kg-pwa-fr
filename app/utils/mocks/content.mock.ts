@@ -3,6 +3,7 @@ import type {
     Content, 
     ApiResponse
 } from "#imports"
+import { adaptContent } from "~~/server/adapters/content.adapter"
 
 export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
     current_page: 1,
@@ -160,6 +161,12 @@ export const fetchContentBySlugMock = (slug: string): ApiResponse<Content>  => {
 
     return {
         data: contentBySlug
+    }
+}
+
+export const createContentMock = (payload: CreateContentPayload) => {
+    return {
+        data: MOCK_CONTENT_LIST.data.unshift(adaptContent(payload))
     }
 }
 

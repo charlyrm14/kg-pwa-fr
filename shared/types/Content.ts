@@ -29,7 +29,7 @@ interface BaseCreateContent {
     content: string
     content_status_id: number
     author_id: number
-    cover_content?: number[]
+    cover_image?: number[] | null
 } 
 
 export interface CreateEventContent extends BaseCreateContent {

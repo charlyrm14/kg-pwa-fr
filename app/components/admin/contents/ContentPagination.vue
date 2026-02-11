@@ -16,11 +16,11 @@
         </div>
         <div class="flex justify-between items-center gap-x-2 sm:gap-x-4">
             <button
-                class="p-1 rounded-lg cursor-pointer bg-gray-100 text-gray-500 hover:opacity-75 dark:bg-dark-extralight dark:text-gray-400">
+                class="p-1 rounded-full cursor-pointer bg-gray-100 text-gray-500 hover:opacity-75 dark:bg-dark-extralight dark:text-gray-400">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             </button>
             <button
-                class="bg-blue-500 text-white px-2.5 py-0.5 rounded-lg cursor-pointer hover:opacity-75">
+                class="bg-blue-500 text-white px-2.5 py-0.5 rounded-full cursor-pointer hover:opacity-75">
                     1
             </button>
             <button
@@ -36,7 +36,7 @@
                     4
             </button>
             <button
-                class="p-1 rounded-lg cursor-pointer bg-gray-100 text-gray-500 hover:opacity-75 dark:bg-dark-extralight dark:text-gray-400">
+                class="p-1 rounded-full cursor-pointer bg-gray-100 text-gray-500 hover:opacity-75 dark:bg-dark-extralight dark:text-gray-400">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
             </button>
         </div>
