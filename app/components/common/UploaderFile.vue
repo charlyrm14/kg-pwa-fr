@@ -42,7 +42,7 @@
         <div class="bg-white dark:bg-dark rounded-2xl shadow-xl w-[85%] max-w-md md:w-4/5 md:max-w-xl mx-4 max-h-[90vh] overflow-y-auto">
             
             <div class="flex justify-between items-center mb-4 border-b border-gray-200 dark:border-dark-light px-6 py-4">
-                <h2 class="text-xl font-extralight text-slate-800 dark:text-white flex items-center gap-2"> 
+                <h2 class="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2"> 
                         Cargar archivos
                 </h2>
                 <button 
@@ -64,12 +64,12 @@
 
             <div class="flex justify-end items-center gap-x-4 px-6 py-4 bg-white dark:bg-dark border-t border-gray-200 dark:border-dark-light shrink-0 sticky bottom-0">
                 <button
-                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-lg px-4 py-2 cursor-pointer"
+                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-4xl px-4 py-2 cursor-pointer font-bold border border-gray-200 dark:border-dark-light hover:border-red-500 hover:text-red-500"
                     @click.prevent="$emit('closeUploaderFile')"> 
                         Cancelar 
                 </button>
                 <button
-                    class="text-white px-4 py-2 rounded-lg transition"
+                    class="text-white px-4 py-2 rounded-4xl transition font-bold"
                     :disabled="hasPendingOrUploading || !hasDone"
                     :class="[
                         hasPendingOrUploading || !hasDone

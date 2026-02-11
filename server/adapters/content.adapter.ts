@@ -1,5 +1,4 @@
-import type { CreateContentPayload } from "~~/shared/types/Content";
-import type { Content } from "~~/shared/types/Content";
+import type { Content, CreateContentPayload } from "~~/shared/types/Content";
 import { statusName, textTypeContentById } from '~/utils/contents'
 import { toSlug } from '~/utils/string'
 import { getTodayDate, extractHourMinutes } from '~/utils/date'

@@ -1,7 +1,8 @@
 import type { 
     ApiResponse, 
     PaginationContent, 
-    Content 
+    Content,
+    CreateContentPayload 
 } from "#imports"
 
 export const fetchContentsApi = async(): Promise<ApiResponse<PaginationContent<Content>>> => {
@@ -18,6 +19,19 @@ export const fetchContentBySlugApi = async(slug: string): Promise<ApiResponse<Co
     
     return await $fetch<ApiResponse<Content>>(`
         ${config.public.apiBaseUrl}/contents/${slug}`
+    )
+}
+
+export const createContentApi = async(payload: CreateContentPayload) => {
+
+    const config = useRuntimeConfig()
+
+    await $fetch<ApiResponse<CreateContentPayload>>(
+        `${config.public.apiBaseUrl}/contents/`, 
+        {
+            method: 'POST',
+            body: payload
+        }
     )
 }
 
