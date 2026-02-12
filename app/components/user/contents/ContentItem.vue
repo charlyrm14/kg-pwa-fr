@@ -2,27 +2,42 @@
     import type { Content } from '#imports';
     import { contentTypeImage } from '#imports';
 
+    const config = useRuntimeConfig()
+
     const route = useRoute()
 
-    defineProps<{
+    const props = defineProps<{
         content: Content
     }>()
+
+    const thumbnail = computed(() => {
+        return `${config.public.apiMediaBaseUrl}/${props.content?.thumbnail?.path}`
+    })
 
 </script>
 
 <template>
     <div class="bg-white dark:bg-dark-light rounded-4xl p-3.5 shadow dark:shadow-none">
-        <div class="flex justify-between items-center gap-x-3">
+        <div class="flex justify-between items-start md:items-center gap-x-3">
             <div class="flex gap-x-3">
                 <NuxtLink :to="`/contents/${route.params.typeSlug}/${content?.slug}`" class="shrink-0">
-                    <img :src="contentTypeImage(content?.type)" :alt="content?.name ?? 'unknown'" class="w-30 h-20 object-cover rounded-2xl brightness-60"/>
+                    <img 
+                        v-if="content?.thumbnail"
+                        :src="thumbnail" 
+                        :alt="content?.name ?? 'unknown'" 
+                        class="w-30 h-auto object-cover rounded-2xl brightness-60"/>
+                    <img 
+                        v-else
+                        :src="contentTypeImage(content?.type)" 
+                        :alt="content?.name ?? 'unknown'"
+                        class="w-30 h-auto object-cover rounded-2xl brightness-60">
                 </NuxtLink>
                 <div>
                     <NuxtLink :to="`/contents/${route.params.typeSlug}/${content?.slug}`">
-                        <h2 class="text-pink-500 text-sm md:text-base font-extrabold md:hidden"> {{ content?.name.slice(0, 75)  ?? 'unknown' }} </h2>
+                        <h2 class="text-pink-500 text-sm md:text-base font-extrabold md:hidden"> {{ content?.name.slice(0, 40)  ?? 'unknown' }} </h2>
                     </NuxtLink>
                     <NuxtLink :to="`/contents/${route.params.typeSlug}/${content?.slug}`">
-                        <h2 class="text-pink-500 text-sm md:text-base font-extrabold break-words hidden md:block"> {{ content?.name  ?? 'unknown' }} </h2>
+                        <h2 class="text-pink-500 text-sm md:text-base font-extrabold hidden md:block"> {{ content?.name ?? 'unknown' }} </h2>
                     </NuxtLink>
                     <span class="hidden md:block text-gray-400"> {{ content?.content.slice(0, 100) ?? 'unknown' }} ... </span>
                     <p class="inline-flex items-center gap-x-2 text-xs md:text-sm text-gray-400 font-light mt-4 md:mt-2">

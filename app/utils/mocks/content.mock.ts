@@ -4,6 +4,7 @@ import type {
     ApiResponse
 } from "#imports"
 import { adaptContent } from "~~/server/adapters/content.adapter"
+import type { ContentDetail } from "~~/shared/types/Content"
 
 export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
     current_page: 1,
@@ -23,7 +24,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
                 start_hour: "08:00",
                 end_date: "2025-12-20",
                 end_hour: "16:00"
-            }
+            },
+            thumbnail: null
         },
         {
             name: "Alimenta tu energía con comidas equilibradas antes y después del entrenamiento",
@@ -34,7 +36,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             author: "Virginia",
             type: "Nutrición",
             status: "Publicado",
-            event: null
+            event: null,
+            thumbnail: null
         },
         {
             name: "Mejora tu alineación y respiración para nadar más eficiente",
@@ -45,7 +48,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             author: "Virginia",
             type: "Consejos",
             status: "Publicado",
-            event: null
+            event: null,
+            thumbnail: null
         },
         {
             name: "Triatlón Copa del Océano 2026",
@@ -62,7 +66,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
                 start_hour: "08:00",
                 end_date: "2025-12-20",
                 end_hour: "16:00"
-            }
+            },
+            thumbnail: null
         },
         {
             name: "¡Épico! Los 'Dragones' Rompen Récord y Aseguran el Liderato en un Partido No Apto para Cardiacos",
@@ -73,7 +78,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             author: "Virginia",
             type: "Noticias",
             status: "Publicado",
-            event: null
+            event: null,
+            thumbnail: null
         },
         {
             name: "Mantén un Balance Óptimo de Energía",
@@ -84,7 +90,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             author: "Virginia",
             type: "Nutrición",
             status: "Publicado",
-            event: null
+            event: null,
+            thumbnail: null
         },
         {
             name: "Mejora tu Propulsión con un Mejor Batido de Piernas",
@@ -95,7 +102,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             author: "Virginia",
             type: "Consejos",
             status: "Publicado",
-            event: null
+            event: null,
+            thumbnail: null
         },
         {
             name: "Todo Listo para la Copa Regional de Natación 2025",
@@ -112,7 +120,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
                 start_hour: "08:00",
                 end_date: "2025-12-20",
                 end_hour: "16:00"
-            }
+            },
+            thumbnail: null
         },
         {
             name: "Récord histórico en la final de natación: la nueva promesa del deporte sorprende al mundo",
@@ -123,7 +132,8 @@ export const MOCK_CONTENT_LIST: PaginationContent<Content> = {
             author: "Virginia",
             type: "Noticias",
             status: "Publicado",
-            event: null
+            event: null,
+            thumbnail: null
         }
     ],
     last_page: 1,
@@ -148,9 +158,11 @@ export const fetchContentsMock = async(): Promise<ApiResponse<PaginationContent<
     }
 }
 
-export const fetchContentBySlugMock = (slug: string): ApiResponse<Content>  => {
+export const fetchContentBySlugMock = (slug: string): ApiResponse<ContentDetail>  => {
 
-    const contentBySlug = MOCK_CONTENT_LIST.data.find(cont => cont.slug === slug)
+    const contentBySlug = MOCK_CONTENT_LIST.data.find(
+        cont => cont.slug === slug
+    )
 
     if (!contentBySlug) {
         throw createError({
@@ -160,7 +172,19 @@ export const fetchContentBySlugMock = (slug: string): ApiResponse<Content>  => {
     }
 
     return {
-        data: contentBySlug
+        data: {
+            ...contentBySlug,
+            cover_image: contentBySlug.thumbnail
+                ? {
+                    id: contentBySlug.thumbnail.id,
+                    uuid: crypto.randomUUID(),
+                    path: contentBySlug.thumbnail.path,
+                    mime_type: 'image/jpeg',
+                    context: 'content_cover',
+                    created_at: contentBySlug.thumbnail.created_at
+                }
+                : null
+        }
     }
 }
 

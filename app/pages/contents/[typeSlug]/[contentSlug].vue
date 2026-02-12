@@ -1,14 +1,13 @@
 <script setup lang="ts">
     import Alert from '~/components/common/Alert.vue'
     import ShareContent from '~/components/user/contents/ShareContent.vue'
-    import { contentTypeImage, colorByContentType, contentSectionTitle } from '#imports'
+    import { colorByContentType, contentSectionTitle, contentTypeImage } from '#imports'
     import { useContentStore } from '~/stores/contents'
-    import { useFavorites } from '#imports'
-    import { useAlert } from '#imports'
-    import Training from '~/assets/media/training.webp'
+    import { useFavorites, useAlert } from '#imports'
     
     const route = useRoute()
     const slugParam = route.params.contentSlug
+    const config = useRuntimeConfig()
 
     let slugContent: string
 
@@ -92,7 +91,13 @@
         <section class="mt-6">
             <div class="relative">
                 <img 
-                    :src="Training"
+                    v-if="content?.cover_image"
+                    :src="`${config.public.apiMediaBaseUrl}/${content?.cover_image?.path}`"
+                    :alt="content?.name ?? 'unknown'" 
+                    class="w-full h-60 md:h-120 object-cover brightness-20 rounded-4xl"/>
+                <img 
+                    v-else
+                    :src="contentTypeImage(content?.type)"
                     :alt="content?.name ?? 'unknown'" 
                     class="w-full h-60 md:h-120 object-cover brightness-20 rounded-4xl"/>
                 <div class="absolute bottom-6 left-4 right-4">

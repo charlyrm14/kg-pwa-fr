@@ -4,7 +4,8 @@ import type {
 } from "#imports"
 import type { 
     ContentDelete, 
-    CreateContentPayload 
+    CreateContentPayload,
+    ContentDetail 
 } from "~~/shared/types/Content"
 import { 
     fetchContentsDataSource, 
@@ -19,7 +20,7 @@ export const useContentStore = defineStore('contents', () => {
     const { showAlert } = useAlert()
 
     const contents = ref<PaginationContent<Content> | null>(null)
-    const contentDetail = ref<Content | null>(null)
+    const contentDetail = ref<ContentDetail | null>(null)
     const contentTypeFilter = ref<'todo' | 'noticias' | 'eventos' | 'consejos' | 'nutricion'>('todo')
 
     /**
