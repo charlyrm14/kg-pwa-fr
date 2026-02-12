@@ -21,6 +21,7 @@ export function adaptContent (payload: CreateContentPayload): Content {
                 end_date: payload.end_date ?? 'Unknown',
                 end_hour: extractHourMinutes(payload.end_date)
             } 
-            : null
+            : null,
+        thumbnail: null
     }
 }

@@ -4,6 +4,17 @@ export type ContentTypeSlug = 'noticias' | 'eventos' | 'consejos' | 'nutricion'
 
 export type ContentTypeFilter = 'todo' | 'noticias' | 'eventos' | 'consejos' | 'nutricion'
 
+export interface ContentThumbnail {
+    id: number
+    path: string
+    variant: string
+    is_main: boolean
+    width: number
+    height: number
+    media_id: number
+    created_at: string
+}
+
 export interface EventDetails {
     location: string | null
     start_date: string | null
@@ -22,6 +33,7 @@ export interface Content {
     type: string
     status: string
     event: EventDetails | null
+    thumbnail: ContentThumbnail | null
 }
 
 interface BaseCreateContent {
@@ -51,4 +63,26 @@ export type CreateContentPayload = CreateEventContent | CreateGenericContent
 export interface ContentDelete {
     name: string
     slug: string
+}
+
+export interface CoverContentDetail {
+    id: number
+    uuid: string
+    path: string
+    mime_type: string
+    context: string
+    created_at: string
+}
+
+export interface ContentDetail {
+    name: string
+    slug: string
+    content: string
+    created_at: string
+    updated_at: string
+    author: string | null
+    type: string
+    status: string
+    event: EventDetails | null
+    cover_image: CoverContentDetail | null
 }
