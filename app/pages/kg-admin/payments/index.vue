@@ -4,12 +4,14 @@
     import PaymentTable from '~/components/admin/payments/PaymentTable.vue';
     import Breadcrumb from '~/components/common/Breadcrumb.vue';
     import { usePaymentStore } from '~/stores/payments';
-    
+    import { useModalManager } from '#imports';
+
     definePageMeta({
         layout: 'admin'
     })
 
     const paymentStore = usePaymentStore()
+    const { isOpen, getPayload, close } = useModalManager()
 
     await useAsyncData('payments', async() => {
         await paymentStore?.fetchPayments()

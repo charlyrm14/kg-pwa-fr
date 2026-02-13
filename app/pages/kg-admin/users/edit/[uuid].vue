@@ -1,6 +1,5 @@
 <script setup lang="ts">
     
-    import AddUserPayment from '~/components/admin/users/AddUserPayment.vue';
     import AttendanceUser from '~/components/admin/users/AttendanceUser.vue';
     import PaymentUser from '~/components/admin/users/PaymentUser.vue';
     import ScheduleUser from '~/components/admin/users/ScheduleUser.vue';
@@ -123,6 +122,12 @@
                                 :class="tab === 2 ? 'border-b-3 border-blue-500 dark:text-white pb-2': 'text-gray-400'"> 
                                     Progreso
                             </button>
+                            <button 
+                                @click="tab = 3"
+                                class="cursor-pointer hover:opacity-75 text-lg text-gray-400"
+                                :class="tab === 3 ? 'border-b-3 border-blue-500 dark:text-white pb-2': 'text-gray-400'"> 
+                                    Pagos
+                            </button>
                         </nav>
                     </div>
                     <div v-if="tab === 1">
@@ -131,6 +136,9 @@
                     </div>
                     <div v-if="tab === 2">
                         <ProgressUser/>
+                    </div>
+                    <div v-if="tab === 3">
+                        <PaymentUser/>
                     </div>
                 </main>
             </div>
