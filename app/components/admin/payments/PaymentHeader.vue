@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { usePaymentStore } from '~/stores/payments';
+    import { useModalManager } from '#imports';
 
     const paymentTypes = [
         { id: 0, label: 'Todo'},
@@ -10,6 +11,7 @@
     ] as const
 
     const paymentStore = usePaymentStore()
+    const { open } = useModalManager()
 
     const showFilterPayments = ref<boolean>(false)
     const selectedTypeFilter = ref<0 | 1 | 2 | 3 | 4>(0)
@@ -28,7 +30,7 @@
                 id="search"
                 name="search"
                 placeholder="Search payments" 
-                class="w-full sm:w-auto bg-gray-100 border border-gray-100 px-10 py-2 rounded-lg text-gray-600 focus:outline-none dark:bg-dark-extralight dark:border-none dark:text-gray-400">
+                class="w-full sm:w-auto bg-gray-200 border border-gray-100 px-10 py-2 rounded-4xl text-gray-600 focus:outline-none dark:bg-dark-extralight dark:border-none dark:text-gray-400">
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     width="22" 
@@ -49,7 +51,7 @@
             <div class="relative w-full md:w-auto">
                 <button
                     @click="showFilterPayments = !showFilterPayments"
-                    class="inline-flex items-center gap-x-2  px-4 py-2 rounded-lg cursor-pointer w-full"
+                    class="inline-flex items-center gap-x-2  px-4 py-2 rounded-4xl cursor-pointer w-full"
                     :class="showFilterPayments ? 'bg-pink-500 text-white' : 'bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-400 cursor-pointer hover:opacity-75'">
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
@@ -67,7 +69,7 @@
                 </button>
                 <div 
                     v-if="showFilterPayments"
-                    class="absolute -bottom-95 md:-left-54 bg-white dark:bg-dark-extralight border border-gray-100 dark:border-dark-soft rounded-xl w-80 shadow z-50">
+                    class="absolute -bottom-95 md:-left-54 bg-white dark:bg-dark-light border border-gray-100 dark:border-dark-soft rounded-4xl w-80 shadow z-50">
                         <div class="border-b border-gray-100 dark:border-dark-soft p-4 flex justify-between items-center">
                             <p class="dark:text-white font-bold"> Opciones de filtro </p>
                             <button 
@@ -81,26 +83,20 @@
                             <div
                                 v-for="type in paymentTypes"
                                 :key="type.id"
-                                class="bg-gray-200 dark:bg-dark-light rounded-lg py-2 px-4 cursor-pointer hover:opacity-75"
-                                :class="selectedTypeFilter === type.id ? 'border-2 border-blue-500' : 'border-2 border-dark-light'"
+                                class="px-3 py-1 md:py-2 bg-gray-200 dark:bg-dark-extralight rounded-4xl w-full text-start cursor-pointer hover:opacity-75"
+                                :class="selectedTypeFilter === type.id ? 'text-blue-500 border border-blue-500 font-extrabold' : 'dark:text-white'"
                                 @click="selectedTypeFilter = type.id">
-                                    <span class="text-blue-500 font-bold"> {{ type.label }} </span>
+                                    {{ type.label }}
                             </div>
-                        </div>
-                        <div class="flex justify-end items-center gap-x-4 p-4">
-                            <button
-                                class="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-75 w-full font-bold"
-                                @click="filter()"> 
-                                    Aplicar 
-                            </button>
                         </div>
                 </div>
             </div>
-            <button
-                class="inline-flex justify-center items-center gap-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-75 w-full md:w-auto"> 
+            <NuxtLink
+                class="inline-flex justify-center items-center gap-x-2 bg-blue-600 text-white px-4 py-2 rounded-4xl cursor-pointer hover:opacity-75 w-full md:w-auto"
+                to="/kg-admin/payments/create"> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet-icon lucide-wallet"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>
-                        Agregar
-            </button>
+                        Registrar
+            </NuxtLink>
         </div>
     </div>
 </template>

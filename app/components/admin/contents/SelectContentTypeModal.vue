@@ -4,8 +4,6 @@
         (e: 'closeSelectContentTypeModal'): void
     }>()
 
-    const isSubmitting = ref<boolean>(false)
-
     const goToCreatePage = async(link: string) => {
         emit('closeSelectContentTypeModal')
         await navigateTo(link)
@@ -99,17 +97,9 @@
 
             <div class="flex justify-end items-center gap-x-4 px-6 py-4 bg-white dark:bg-dark border-t border-gray-200 dark:border-dark-light shrink-0 sticky bottom-0 mt-4">
                 <button
-                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-lg px-4 py-2"
-                    :class="isSubmitting ? 'cursor-not-allowed' : 'cursor-pointer hover:text-red-500'"
-                    @click="$emit('closeSelectContentTypeModal')"
-                    :disabled="isSubmitting"> 
+                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-4xl px-4 py-2 cursor-pointer font-bold border border-gray-200 dark:border-dark-light hover:border-red-500 hover:text-red-500"
+                    @click="$emit('closeSelectContentTypeModal')"> 
                         Cancelar 
-                </button>
-                <button
-                    class="text-white px-4 py-2 rounded-lg hover:opacity-75"
-                    :class="isSubmitting ? 'bg-blue-300 cursor-progress' : 'bg-blue-500 cursor-pointer'"
-                    :disabled="isSubmitting"> 
-                        {{ !isSubmitting ? 'Guardar' : 'Guardando' }} 
                 </button>
             </div>
 
