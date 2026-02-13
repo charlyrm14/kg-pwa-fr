@@ -13,6 +13,11 @@
     }>()
 
     const showActionsContent = ref<boolean>(false)
+
+    const linkContent = computed(() => {
+        return props.content.type.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim()
+    })
+
 </script>
 
 <template>
@@ -21,12 +26,12 @@
             <span 
                 class="text-xs rounded-4xl px-2 font-bold text-white"
                 :class="colorByContentType(content?.type)"> 
-                    {{ contentSectionTitle(content?.type) }} 
+                    {{ contentSectionTitle(content?.type) }}
             </span>
             <span class="text-xs inline-flex items-center gap-x-1 dark:text-gray-400"> 
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-fold-icon lucide-calendar-fold"><path d="M3 20a2 2 0 0 0 2 2h10a2.4 2.4 0 0 0 1.706-.706l3.588-3.588A2.4 2.4 0 0 0 21 16V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M15 22v-5a1 1 0 0 1 1-1h5"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/></svg>
                     {{ content?.created_at }} 
-                </span>
+            </span>
         </div>
         <div class="flex justify-between items-start">
             <div>
@@ -46,17 +51,25 @@
                 </button>
                 <div 
                     v-if="showActionsContent"
-                    class="absolute -bottom-24 right-2 bg-white border border-gray-200 dark:border-none dark:bg-dark rounded-4xl shadow-xl w-40 z-50">
-                        <div class="px-2 py-2 ">
-                            <button class="dark:text-gray-400 text-base inline-flex items-center gap-x-2 font-light px-3 py-1 cursor-pointer hover:text-blue-500 hover:font-bold rounded-lg w-full">
+                    class="absolute -bottom-24 right-6 bg-white border border-gray-200 dark:border-none dark:bg-dark rounded-4xl shadow-xl w-40 z-50">
+                        <div class="px-2 py-1">
+                            <button class="dark:text-gray-300 text-gray-700 text-base inline-flex items-center gap-x-2 font-bold px-3 py-1 cursor-not-allowed hover:text-blue-500 hover:font-bold rounded-lg w-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-pen-line-icon lucide-file-pen-line"><path d="m18 5-2.414-2.414A2 2 0 0 0 14.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/><path d="M21.378 12.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><path d="M8 18h1"/></svg>
                                         Editar
                             </button>
                         </div> 
-                        <div class="px-2 py-2">
+                        <div class="px-2 py-1">
+                            <NuxtLink
+                                class="dark:text-gray-300 text-gray-700 text-base inline-flex items-center gap-x-2 font-bold px-3 py-1 cursor-pointer hover:text-blue-500 hover:font-bold rounded-lg w-full"
+                                :to="`/contents/${linkContent}/${content?.slug}`">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                                        Ver
+                            </NuxtLink>
+                        </div>
+                        <div class="px-2 py-1">
                             <button
                                 v-if="content"
-                                class="dark:text-gray-400 text-base inline-flex items-center gap-x-2 font-light px-3 py-1 cursor-pointer hover:text-red-500 hover:font-bold rounded-lg w-full"
+                                class="dark:text-gray-400 text-gray-500 text-base inline-flex items-center gap-x-2 font-semibold px-3 py-1 cursor-pointer hover:text-red-500 hover:font-bold rounded-lg w-full"
                                 @click="open('DeleteContentModal', {
                                     content: { 
                                         name: content?.name, 
