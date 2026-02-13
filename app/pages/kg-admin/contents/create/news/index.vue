@@ -51,6 +51,9 @@
         try {
             
             await contentStore.create(payload)
+
+            mediaStore.confirmedMedia = []
+            mediaStore.confirmedIds = []
             
         } catch (error) {
             console.error(error)
@@ -77,7 +80,7 @@
         
         <section>
             <Breadcrumb
-                heading="Creación contenido - Noticia"
+                heading="Noticia"
                 primary-section="Contenidos"
                 primary-link="/kg-admin/contents"
                 secondary-section="Crear Noticia"/>
