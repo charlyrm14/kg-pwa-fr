@@ -1,8 +1,15 @@
 import type { CursorPagination } from '~~/shared/types/Pagination'
-import type { Payment, PaymentFilters } from '~~/shared/types/Payment'
-import { fetchPaymentsDataSource } from '~/data/payments/payments.datasource'
+import type { 
+    Payment, 
+    PaymentFilters, 
+    CreatePaymentPayload 
+} from '~~/shared/types/Payment'
+import { createPaymentDataSource, fetchPaymentsDataSource } from '~/data/payments/payments.datasource'
+import { useAlert } from '#imports'
 
 export const usePaymentStore = defineStore('payments', () => {
+
+    const { showAlert } = useAlert()
 
     const config = useRuntimeConfig()
     const payments = ref<CursorPagination<Payment> | null>(null)
@@ -22,10 +29,7 @@ export const usePaymentStore = defineStore('payments', () => {
      * @returns The `fetchPayments` function is returning the `payments.value` after setting it to the
      * data retrieved from the `fetchPaymentsDataSource` function.
      */
-    const fetchPayments = async(
-        pageUrl: string | null = null, 
-        filters: PaymentFilters = {}
-    ) => {
+    const fetchPayments = async(pageUrl: string | null = null, filters: PaymentFilters = {}) => {
         try {
 
             const endpoint = pageUrl ? pageUrl : `${config.public.apiBaseUrl}/payments`
@@ -40,6 +44,34 @@ export const usePaymentStore = defineStore('payments', () => {
         }
     }
 
+    /**
+     * The function `create` asynchronously creates a payment, navigates to a specific page, and
+     * displays a success or error alert message.
+     * @param {CreatePaymentPayload} payload - The `payload` parameter in the `create` function likely
+     * contains data needed to create a payment. It is of type `CreatePaymentPayload`, which suggests
+     * it may include information such as payment amount, payment method, recipient details, and any
+     * other relevant data required to process a payment.
+     */
+    const create = async(payload: CreatePaymentPayload) => {
+        try {
+
+            await createPaymentDataSource(payload)
+            await navigateTo('/kg-admin/payments')
+
+            setTimeout(() => {
+                showAlert('Éxito', 'Pago registrado con éxito', 'success')
+            }, 1000);
+            
+    
+        } catch (error) {
+            console.error(error)
+            showAlert('Error', 'Algo salio mal al registrar tu pago :(', 'error') 
+        }
+    }
+
+    /* The `filteredPayments` constant is using the `computed` function to create a reactive computed
+    property based on the values of `payments` and `typeFilter`. Here's a breakdown of what it's
+    doing: */
     const filteredPayments = computed(() => {
         
         if(!payments.value) return null
@@ -55,6 +87,7 @@ export const usePaymentStore = defineStore('payments', () => {
         payments,
         typeFilter,
         fetchPayments,
+        create,
         filteredPayments
     }
 })

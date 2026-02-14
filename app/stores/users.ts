@@ -1,9 +1,9 @@
 import type { 
     User, 
-    UserProfileData, 
     UserFilters, 
     UserInfo,
-    UserDelete 
+    UserDelete, 
+    UserLookUpError
 } from "~~/shared/types/User"
 import type { PaginationContent } from "#imports"
 import { useAlert } from "#imports"
@@ -20,7 +20,11 @@ export const useUserStore = defineStore('users', () => {
 
     const users = ref<PaginationContent<User> | null>(null)
     const userInfo = ref<UserInfo | null>(null) 
-    const userProfile = ref<UserProfileData | null>(null)
+    const userLookUp = ref<User | null>(null)
+    const errorsUserLookUp = reactive<UserLookUpError>({
+        type: 'default',
+        message: ''
+    })
     
     /**
      * The function fetches users either from a mock API or a real API based on a condition and returns
@@ -65,6 +69,29 @@ export const useUserStore = defineStore('users', () => {
         }
     }
 
+    /**
+     * The function fetchUserLookUp asynchronously fetches user data based on specified filters and
+     * updates the userLookUp value accordingly.
+     * @param {UserFilters} filters - The `filters` parameter in the `fetchUserLookUp` function likely
+     * contains criteria or conditions that will be used to filter the users when fetching them. These
+     * filters could include things like user IDs, usernames, email addresses, or any other attributes
+     * that can be used to narrow down the search for a
+     */
+    const fetchUserLookUp = async(filters: UserFilters) => {
+        try {
+
+            const response = await fetchUsers(1, filters) 
+            
+            userLookUp.value = response?.data?.[0] ?? null
+
+            errorsUserLookUp.type = response?.data?.[0] ? 'found' : 'not-found'
+            errorsUserLookUp.message = response?.data?.[0] ? 'Resultados de tu busqueda' : 'No se encontraron resultados'
+            
+        } catch (error) {
+            console.error(error)
+            userLookUp.value = null
+        }
+    }
 
     /**
      * The function `deleteUser` asynchronously deletes a user by their UUID, either through a fetch
@@ -101,9 +128,11 @@ export const useUserStore = defineStore('users', () => {
     return {
         users,
         userInfo,
-        userProfile,
+        userLookUp,
+        errorsUserLookUp,
         fetchUsers,
         fetchUserInfo,
+        fetchUserLookUp,
         deleteUser
     }
 })

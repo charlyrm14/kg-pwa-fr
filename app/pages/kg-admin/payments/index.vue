@@ -5,12 +5,15 @@
     import Breadcrumb from '~/components/common/Breadcrumb.vue';
     import { usePaymentStore } from '~/stores/payments';
     import { useModalManager } from '#imports';
+    import Alert from '~/components/common/Alert.vue';
 
     definePageMeta({
         layout: 'admin'
     })
 
     const paymentStore = usePaymentStore()
+
+    const { alert, closeAlert } = useAlert()
     const { isOpen, getPayload, close } = useModalManager()
 
     await useAsyncData('payments', async() => {
@@ -31,6 +34,13 @@
 <template>
     <section class="md:px-5">
 
+        <Alert 
+            v-if="alert.status" 
+            :title="alert.title" 
+            :description="alert.description" 
+            :type="alert.type" 
+            @closeAlert="closeAlert"/>
+
         <section>
             <Breadcrumb
                 heading="Lista pagos"
@@ -50,6 +60,11 @@
                 <section v-if="payments?.length">
                     <PaymentTable
                         :payments="payments"/>
+                </section>
+                <section 
+                    v-else
+                    class="p-4 text-pink-500 text-center font-bold">
+                        No hay contenido disponible
                 </section>
                 <!-- End Payment Table -->
 

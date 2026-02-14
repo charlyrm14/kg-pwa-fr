@@ -32,3 +32,23 @@ export interface Payment {
     type: PaymentType
     reference: PaymentReference
 }
+
+export interface CreatePaymentPayload {
+    user_uuid: string | null
+    payment_type_id: number
+    amount: number
+    payment_date: string
+    payment_reference_id: number
+    notes: string | null
+}
+
+export interface CreatePaymentResponse {
+    amount: number
+    payment_date: string
+    covered_until_date: string
+    payment_reference: string
+    payment_type: string
+    notes: string
+    created_at: string
+    created_at_formatted: string
+}
