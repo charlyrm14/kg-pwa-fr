@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export const searchUserEmailSchema = yup.object({
+export const userLookupEmailSchema = yup.object({
     email: yup
             .string()
             .email('Ingresa un correo electrónico valido')

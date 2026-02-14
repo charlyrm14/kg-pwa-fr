@@ -1,7 +1,10 @@
-import type { ApiResponse } from "#imports"
-import type { CursorPagination } from "#imports"
-import type { Payment } from "#imports"
-import type { PaymentFilters } from "#imports"
+import type { 
+    ApiResponse, 
+    CreatePaymentPayload, 
+    CursorPagination, 
+    Payment
+} from "#imports"
+import { adaptPayment} from '~~/server/adapters/payment.adapter'
 
 export const MOCK_PAYMENTS: ApiResponse<CursorPagination<Payment>> = {
     data: {
@@ -123,5 +126,11 @@ export const MOCK_PAYMENTS: ApiResponse<CursorPagination<Payment>> = {
         next_page_url: null,
         prev_cursor: null,
         prev_page_url: null
+    }
+}
+
+export const createPaymentMock = (payload: CreatePaymentPayload) => {
+    return {
+        data: MOCK_PAYMENTS.data.data.unshift(adaptPayment(payload))
     }
 }

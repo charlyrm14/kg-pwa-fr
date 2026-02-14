@@ -5,10 +5,9 @@
     import { useContentStore } from '~/stores/contents';
     import type { CreateEventContent } from '~~/shared/types/Content';
     import Alert from '~/components/common/Alert.vue';
-    import { useAlert, useModalManager } from '#imports';
+    import { useAlert, useModalManager, useMediaPreview } from '#imports';
     import UploaderFile from '~/components/common/UploaderFile.vue';
     import { useMediaUploadStore } from '~/stores/mediaUpload';
-    import { useMediaPreview } from '#imports';
 
     definePageMeta({
         layout: 'admin'

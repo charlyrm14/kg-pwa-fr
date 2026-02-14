@@ -128,3 +128,8 @@ export interface UserProfilePayload {
     gender_id?: number | null
     profile_image?: number[]
 }
+
+export interface UserLookUpError {
+    type: 'default' | 'found' | 'not-found' 
+    message: string
+}
