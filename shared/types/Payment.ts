@@ -3,22 +3,16 @@ export interface UserPayment {
     last_name: string
     mother_last_name: string | null
     email: string
-    uuid: string
-    student_code: string | null
 }
 
 export interface PaymentType {
-    id: number
     name: string
-    description: string
-    base_amount: string
-    coverage_days: number
+    slug: string
 }
 
 export interface PaymentReference {
-    id: number
     name: string
-    description: string
+    slug: string
 }
 
 export interface PaymentFilters {
@@ -33,7 +27,8 @@ export interface Payment {
     covered_until_date: string 
     notes: string | null
     created_at: string
-    user: UserPayment
+    created_at_formatted: string
+    user: UserPayment | null
     type: PaymentType
     reference: PaymentReference
 }

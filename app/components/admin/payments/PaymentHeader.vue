@@ -3,22 +3,18 @@
     import { useModalManager } from '#imports';
 
     const paymentTypes = [
-        { id: 0, label: 'Todo'},
-        { id: 1, label: 'Mensual básica'},
-        { id: 2, label: 'Anual'},
-        { id: 3, label: 'Visita' },
-        { id: 4, label: 'Familiar'}
+        { id: 0, label: 'Todo', slug: 'todo' },
+        { id: 1, label: 'Visita', slug: 'visita' },
+        { id: 2, label: 'Mensual básica', slug: 'mensual-basica'},
+        { id: 3, label: 'Anual', slug: 'anual' }
     ] as const
 
     const paymentStore = usePaymentStore()
     const { open } = useModalManager()
 
     const showFilterPayments = ref<boolean>(false)
-    const selectedTypeFilter = ref<0 | 1 | 2 | 3 | 4>(0)
+    const selectedTypeFilter = ref<'todo' |'visita' | 'mensual-basica' | 'anual'>('todo')
     
-    const filter = () => {
-        paymentStore.typeFilter = selectedTypeFilter.value
-    }
 
 </script>
 
@@ -69,7 +65,7 @@
                 </button>
                 <div 
                     v-if="showFilterPayments"
-                    class="absolute -bottom-95 md:-left-54 bg-white dark:bg-dark-light border border-gray-100 dark:border-dark-soft rounded-4xl w-80 shadow z-50">
+                    class="absolute -bottom-83 md:-left-54 bg-white dark:bg-dark-light border border-gray-100 dark:border-dark-soft rounded-4xl w-80 shadow z-50">
                         <div class="border-b border-gray-100 dark:border-dark-soft p-4 flex justify-between items-center">
                             <p class="dark:text-white font-bold"> Opciones de filtro </p>
                             <button 
@@ -84,8 +80,8 @@
                                 v-for="type in paymentTypes"
                                 :key="type.id"
                                 class="px-3 py-1 md:py-2 bg-gray-200 dark:bg-dark-extralight rounded-4xl w-full text-start cursor-pointer hover:opacity-75"
-                                :class="selectedTypeFilter === type.id ? 'text-blue-500 border border-blue-500 font-extrabold' : 'dark:text-white'"
-                                @click="selectedTypeFilter = type.id">
+                                :class="paymentStore.typeFilter === type.slug ? 'text-blue-500 border border-blue-500 font-extrabold' : 'dark:text-white'"
+                                @click="paymentStore.typeFilter = type.slug">
                                     {{ type.label }}
                             </div>
                         </div>

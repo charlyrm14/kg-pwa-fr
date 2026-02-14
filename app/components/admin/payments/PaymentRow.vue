@@ -13,19 +13,25 @@
     <div class="w-full bg-gray-200 dark:bg-dark-extralight py-2 px-4 rounded-lg space-y-2 cursor-pointer hover:opacity-75">
         <div class="flex justify-between items-start md:items-center">
             <div class="flex flex-col">
-                <span class="text-gray-600 dark:text-white font-semibold text-lg">
-                    {{ payment?.user?.name }}
+                <span 
+                    class="text-lg"
+                    :class="payment?.user?.name ? 'text-gray-600 dark:text-white font-bold' : 'text-indigo-400 font-semibold'">
+                        {{ payment?.user?.name ?? 'No asignado' }}
                 </span>
                 <div class="inline-flex justify-between items-center gap-x-3 text-base">
-                    <span class="text-gray-400 font-bold"> {{ payment?.type?.name }} · </span>
-                    <span class="text-lime-500 font-bold"> ${{ payment?.amount }}  </span>
-                    <span class="text-gray-400 font-semibold"> · {{ payment?.payment_date }} </span>
+                    <span class="text-gray-500 dark:text-gray-400 font-semibold"> {{ payment?.type?.name.slice(0, 7) }} · </span>
+                    <span class="bg-lime-50 text-lime-500 font-extrabold px-1 py-0 rounded-xl"> ${{ payment?.amount }}  </span>
+                    <span class="text-gray-500 dark:text-gray-400 font-semibold inline-flex items-center gap-x-2"> 
+                        · <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                            {{ payment?.created_at_formatted.slice(0, 6) }} 
+                    </span>
                 </div>
             </div>
             <div class="relative">
                 <button 
                     class="dark:text-white cursor-pointer hover:opacity-75 rounded-full p-1"
-                    @click="showActionsPayment = !showActionsPayment">
+                    @click="showActionsPayment = !showActionsPayment"
+                    :class="showActionsPayment ? 'dark:bg-dark bg-gray-400/50' : ''">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                 </button>
                 <div 
@@ -41,7 +47,7 @@
                             <button
                                 class="dark:text-gray-300 text-gray-700 text-base inline-flex items-center gap-x-2 font-bold px-3 py-1 cursor-pointer hover:text-blue-500 hover:font-bold rounded-lg w-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
-                                        Ver
+                                        Ver detalle
                             </button>
                         </div>
                         <div class="px-2 py-1">
