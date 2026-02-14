@@ -6,7 +6,7 @@ export const usePaymentStore = defineStore('payments', () => {
 
     const config = useRuntimeConfig()
     const payments = ref<CursorPagination<Payment> | null>(null)
-    const typeFilter = ref<0 | 1 | 2 | 3 | 4>(0)
+    const typeFilter = ref<'todo' |'visita' | 'mensual-basica' | 'anual'>('todo')
 
     /**
      * The function fetchPayments asynchronously fetches payment data with optional filters and updates
@@ -44,11 +44,11 @@ export const usePaymentStore = defineStore('payments', () => {
         
         if(!payments.value) return null
 
-        if(typeFilter.value === 0) {
+        if(typeFilter.value === 'todo') {
             return payments.value.data
         }
         
-        return payments.value.data.filter(p => p.type.id === typeFilter.value)
+        return payments.value.data.filter(p => p.type.slug === typeFilter.value)
     })
 
     return {
