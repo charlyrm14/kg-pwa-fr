@@ -4,7 +4,8 @@ import type {
     CreatePaymentPayload, 
     CreatePaymentResponse, 
     Payment, 
-    PaymentFilters 
+    PaymentFilters,
+    PaymentDetail 
 } from "~~/shared/types/Payment"
 
 export const fetchPaymentsApi = async(pageUrl: string | null = null, filters: PaymentFilters) => {
@@ -19,6 +20,15 @@ export const fetchPaymentsApi = async(pageUrl: string | null = null, filters: Pa
                 ...filters
             }
         }
+    )
+}
+
+export const fetchPaymentByIdApi = async(paymentId: number): Promise<ApiResponse<PaymentDetail>> => {
+
+    const config = useRuntimeConfig()
+
+    return $fetch<ApiResponse<PaymentDetail>>(
+        `${config.public.apiBaseUrl}/payments/${paymentId}`
     )
 }
 

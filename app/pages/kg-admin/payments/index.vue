@@ -14,7 +14,7 @@
     const paymentStore = usePaymentStore()
 
     const { alert, closeAlert } = useAlert()
-    const { isOpen, getPayload, close } = useModalManager()
+    const { isOpen, close, modalPayload } = useModalManager()
 
     await useAsyncData('payments', async() => {
         await paymentStore?.fetchPayments()

@@ -2,7 +2,8 @@ import type {
     ApiResponse, 
     CreatePaymentPayload, 
     CursorPagination, 
-    Payment
+    Payment,
+    PaymentDetail
 } from "#imports"
 import { adaptPayment} from '~~/server/adapters/payment.adapter'
 
@@ -11,6 +12,7 @@ export const MOCK_PAYMENTS: ApiResponse<CursorPagination<Payment>> = {
         data: [
             {
                 id: 56,
+                folio: "PAY-000056",
                 amount: 250,
                 payment_date: "2026-01-10",
                 covered_until_date: "2026-01-10",
@@ -29,6 +31,7 @@ export const MOCK_PAYMENTS: ApiResponse<CursorPagination<Payment>> = {
             },
             {
                 id: 55,
+                folio: "PAY-000055",
                 amount: 250,
                 payment_date: "2026-01-09",
                 covered_until_date: "2026-01-09",
@@ -52,6 +55,7 @@ export const MOCK_PAYMENTS: ApiResponse<CursorPagination<Payment>> = {
             },
             {
                 id: 54,
+                folio: "PAY-000054",
                 amount: 250,
                 payment_date: "2026-01-07",
                 covered_until_date: "2026-01-07",
@@ -75,6 +79,7 @@ export const MOCK_PAYMENTS: ApiResponse<CursorPagination<Payment>> = {
             },
             {
                 id: 53,
+                folio: "PAY-000053",
                 amount: 250,
                 payment_date: "2026-01-05",
                 covered_until_date: "2026-01-05",
@@ -98,6 +103,7 @@ export const MOCK_PAYMENTS: ApiResponse<CursorPagination<Payment>> = {
             },
             {
                 id: 51,
+                folio: "PAY-000051",
                 amount: 1100,
                 payment_date: "2026-01-10",
                 covered_until_date: "2027-01-10",
@@ -126,6 +132,39 @@ export const MOCK_PAYMENTS: ApiResponse<CursorPagination<Payment>> = {
         next_page_url: null,
         prev_cursor: null,
         prev_page_url: null
+    }
+}
+
+export const fetchPaymentByIdMock = async(paymentId: number): Promise<ApiResponse<PaymentDetail>> => {
+
+    const payment = MOCK_PAYMENTS.data.data.find(
+        p => p.id === paymentId
+    )
+
+    if (!payment) {
+        throw new Error('Payment not found')
+    }
+
+    return {
+        data: {
+            ...payment,
+            updated_at: "2026-12-02",
+            updated_at_formatted: "1 day ago",
+            user: null,
+            type: {
+                name: "Visita",
+                slug: "visita",
+                description: "Pase de un día para una clase.",
+                base_amount: "250.00",
+                is_recurring: false,
+                coverage_days: 1
+            },
+            reference: {
+                name: "Efectivo",
+                slug: "efectivo",
+                description: "Pago en efectivo"
+            }
+        }
     }
 }
 

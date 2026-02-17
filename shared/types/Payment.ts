@@ -22,6 +22,7 @@ export interface PaymentFilters {
 
 export interface Payment {
     id: number
+    folio: string
     amount: number
     payment_date: string
     covered_until_date: string 
@@ -43,6 +44,7 @@ export interface CreatePaymentPayload {
 }
 
 export interface CreatePaymentResponse {
+    folio: string
     amount: number
     payment_date: string
     covered_until_date: string
@@ -51,4 +53,41 @@ export interface CreatePaymentResponse {
     notes: string
     created_at: string
     created_at_formatted: string
+}
+
+export interface PaymentDetail {
+    id: number
+    folio: string
+    amount: number
+    payment_date: string
+    covered_until_date: string
+    notes: string | null
+    created_at: string
+    created_at_formatted: string
+    updated_at: string
+    updated_at_formatted: string
+    user: {
+        name: string
+        last_name: string
+        mother_last_name: string| null
+        email: string
+    } | null,
+    type: {
+        name: string
+        slug: string
+        description: string
+        base_amount: string
+        is_recurring: boolean
+        coverage_days: number
+    },
+    reference: {
+        name: string
+        slug: string
+        description: string
+    }
+}
+
+export interface PaymentDeletePayload {
+    id: number
+    folio: string
 }

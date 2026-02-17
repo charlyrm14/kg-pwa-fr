@@ -112,7 +112,7 @@
                                             v-model="paymentOwner"
                                             class="sr-only peer">
 
-                                            <div class="flex items-center justify-between p-4 rounded-xl border border-gray-300 dark:border-dark-soft bg-gray-100 dark:bg-dark transition-all duration-200 peer-checked:border-lime-500 peer-checked:ring-2 peer-checked:ring-lime-500 hover:border-lime-400">
+                                            <div class="flex items-center justify-between p-4 rounded-xl border border-gray-300 dark:border-dark-soft bg-gray-100 dark:bg-dark-extralight transition-all duration-200 peer-checked:border-lime-500 peer-checked:ring-2 peer-checked:ring-lime-500 hover:border-lime-400">
                                                 <div>
                                                     <p class="font-semibold text-gray-700 dark:text-white">
                                                         Ingreso general
@@ -137,7 +137,7 @@
                                             v-model="paymentOwner"
                                             class="sr-only peer">
 
-                                            <div class="flex items-center justify-between p-4 rounded-xl border border-gray-300 dark:border-dark-soft bg-gray-100 dark:bg-dark transition-all duration-200 peer-checked:border-lime-500 peer-checked:ring-2 peer-checked:ring-lime-500 hover:border-lime-400">
+                                            <div class="flex items-center justify-between p-4 rounded-xl border border-gray-300 dark:border-dark-soft bg-gray-100 dark:bg-dark-extralight transition-all duration-200 peer-checked:border-lime-500 peer-checked:ring-2 peer-checked:ring-lime-500 hover:border-lime-400">
                                                 <div>
                                                     <p class="font-semibold text-gray-700 dark:text-white">
                                                         Asignar a usuario
