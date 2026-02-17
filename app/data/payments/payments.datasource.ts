@@ -6,12 +6,14 @@ import type {
 import { 
     fetchPaymentsApi, 
     createPaymentApi,
-    fetchPaymentByIdApi
+    fetchPaymentByIdApi,
+    deletePaymentByIdApi
 } from "./payments.api"
 import { 
     MOCK_PAYMENTS, 
     fetchPaymentByIdMock, 
-    createPaymentMock
+    createPaymentMock,
+    deletePaymentByIdMock
 } from "~/utils/mocks/payments.mock"
 
 export const fetchPaymentsDataSource = async(pageUrl: string | null = null, filters: PaymentFilters) => {
@@ -48,4 +50,16 @@ export const createPaymentDataSource = (payload: CreatePaymentPayload) => {
     }
 
     return createPaymentApi(payload)
+}
+
+export const deletePaymentByIdDataSource = (paymentId: number) => {
+
+    const config = useRuntimeConfig()
+    const IS_MOCK_API_MODE = config.public.mockApiMode
+
+    if(IS_MOCK_API_MODE) {
+        return deletePaymentByIdMock(paymentId)
+    }
+
+    return deletePaymentByIdApi(paymentId)
 }

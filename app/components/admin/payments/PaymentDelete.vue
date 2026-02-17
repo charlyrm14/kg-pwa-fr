@@ -1,15 +1,24 @@
 <script setup lang="ts">
     import type { PaymentDeletePayload } from '~~/shared/types/Payment';
+    import { usePaymentStore } from '~/stores/payments';
 
     defineProps<{
         paymentDelete: PaymentDeletePayload
     }>()
 
-    defineEmits<{
+    const emit = defineEmits<{
         (e: 'closeDeletePaymentModal'): void
     }>()
 
+    const paymentStore = usePaymentStore()
+
     const isSubmitting = ref<boolean>(false)
+
+    const handleSubmit = async(paymentId: number) => {
+        if(!paymentId) return
+        await paymentStore?.deletePayment(paymentId)
+        emit('closeDeletePaymentModal')
+    }
 
 </script>
 
@@ -46,9 +55,11 @@
                         Cancelar 
                 </button>
                 <button
+                    v-if="paymentDelete"
                     :disabled="isSubmitting"
                     class="text-white px-4 py-2 rounded-4xl hover:opacity-75 font-medium"
-                    :class="isSubmitting ? 'bg-red-300 cursor-progress' : 'bg-red-500 cursor-pointer'"> 
+                    :class="isSubmitting ? 'bg-red-300 cursor-progress' : 'bg-red-500 cursor-pointer'"
+                    @click.prevent="handleSubmit(paymentDelete?.id)"> 
                         {{ !isSubmitting ? 'Eliminar pago' : 'Eliminando pago' }} 
                 </button>
             </div>

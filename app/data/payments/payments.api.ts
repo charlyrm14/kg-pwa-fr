@@ -44,3 +44,15 @@ export const createPaymentApi = async(payload: CreatePaymentPayload) => {
         } 
     )
 }
+
+export const deletePaymentByIdApi = async(paymentId: number) => {
+
+    const config = useRuntimeConfig()
+
+    return $fetch<ApiResponse<Payment>>(
+        `${config.public.apiBaseUrl}/payments/${paymentId}`,
+        {
+            method: 'DELETE',
+        } 
+    )
+}

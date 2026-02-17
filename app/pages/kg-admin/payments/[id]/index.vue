@@ -83,7 +83,7 @@
                     </span>
                 </div>
                 <div class="my-3">
-                    <div class="flex justify-end items-center">
+                    <div class="flex justify-center md:justify-end items-center">
                         <div class="bg-gray-200 dark:bg-dark-extralight p-1 rounded-full">
                             <button
                                 class="px-4 py-1  cursor-pointer hover:opacity-75"
