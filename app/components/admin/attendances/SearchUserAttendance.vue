@@ -4,7 +4,6 @@
     import { useUserStore } from '~/stores/users';
     import UserLookup from '~/components/common/UserLookup.vue';
 
-
     const emit = defineEmits<{
         (e: 'closeSearchUserAttendanceModal'): void
     }>();
@@ -101,7 +100,3 @@
         </div>
     </div>
 </template>
-
-<style scoped>
-    
-</style>

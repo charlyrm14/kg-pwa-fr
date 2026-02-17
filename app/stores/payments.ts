@@ -2,10 +2,15 @@ import type { CursorPagination } from '~~/shared/types/Pagination'
 import type { 
     Payment, 
     PaymentFilters, 
-    CreatePaymentPayload 
+    CreatePaymentPayload, 
+    PaymentDetail
 } from '~~/shared/types/Payment'
-import { createPaymentDataSource, fetchPaymentsDataSource } from '~/data/payments/payments.datasource'
-import { useAlert } from '#imports'
+import { 
+        fetchPaymentsDataSource,
+        fetchPaymentByIdDataSource,
+        createPaymentDataSource
+} from '~/data/payments/payments.datasource'
+import { useAlert, type ApiResponse } from '#imports'
 
 export const usePaymentStore = defineStore('payments', () => {
 
@@ -13,6 +18,7 @@ export const usePaymentStore = defineStore('payments', () => {
 
     const config = useRuntimeConfig()
     const payments = ref<CursorPagination<Payment> | null>(null)
+    const paymentDetail = ref<PaymentDetail | null>(null)
     const typeFilter = ref<'todo' |'visita' | 'mensual-basica' | 'anual'>('todo')
 
     /**
@@ -38,6 +44,25 @@ export const usePaymentStore = defineStore('payments', () => {
             
             payments.value = response.data
             return payments.value
+            
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    /**
+     * The function fetches payment details by ID asynchronously using a data source and updates the
+     * paymentDetail value.
+     * @param {number} paymentId - The `paymentId` parameter is a number that is used to identify a
+     * specific payment for which you want to fetch details.
+     * @returns The `fetchPaymentById` function is returning the value of `paymentDetail.value`.
+     */
+    const fetchPaymentById = async(paymentId: number) => {
+        try {
+            const response = await fetchPaymentByIdDataSource(paymentId)
+            paymentDetail.value = response.data
+
+            return paymentDetail.value
             
         } catch (error) {
             console.error(error)
@@ -85,8 +110,10 @@ export const usePaymentStore = defineStore('payments', () => {
 
     return {
         payments,
+        paymentDetail,
         typeFilter,
         fetchPayments,
+        fetchPaymentById,
         create,
         filteredPayments
     }

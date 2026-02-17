@@ -34,7 +34,7 @@
 </script>
 
 <template>
-    <div class="space-y-3 mb-3 bg-gray-200 dark:bg-dark-soft p-2 rounded-xl">
+    <div class="space-y-3 mb-3 bg-gray-200 dark:bg-dark-extralight p-2 rounded-xl">
         <p class="text-gray-500 dark:text-gray-400 font-bold"> Buscar por correo electrónico </p>
         <form @submit.prevent="onSearchSubmit">
             <div class="grid grid-cols-[1fr_auto] gap-2 mt-2">
