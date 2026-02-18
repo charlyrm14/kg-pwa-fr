@@ -173,3 +173,23 @@ export const createPaymentMock = (payload: CreatePaymentPayload) => {
         data: MOCK_PAYMENTS.data.data.unshift(adaptPayment(payload))
     }
 }
+
+export const deletePaymentByIdMock = (paymentId: number) => {
+
+    const payment = MOCK_PAYMENTS.data.data.filter(
+        p => p.id === paymentId
+    )
+
+    if (!payment) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'Payment not found'
+        })
+    }
+
+    return {
+        data: {
+            ...MOCK_PAYMENTS.data.data.filter(p => p.id !== paymentId)
+        }
+    }
+}

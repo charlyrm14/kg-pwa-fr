@@ -8,7 +8,8 @@ import type {
 import { 
         fetchPaymentsDataSource,
         fetchPaymentByIdDataSource,
-        createPaymentDataSource
+        createPaymentDataSource,
+        deletePaymentByIdDataSource
 } from '~/data/payments/payments.datasource'
 import { useAlert, type ApiResponse } from '#imports'
 
@@ -94,6 +95,31 @@ export const usePaymentStore = defineStore('payments', () => {
         }
     }
 
+    /**
+     * The function `deletePayment` deletes a payment by its ID, navigates to a specific page, and
+     * shows a success or error message.
+     * @param {number} paymentId - The `paymentId` parameter is a number that represents the unique
+     * identifier of the payment that needs to be deleted. This identifier is used to locate and delete
+     * the specific payment record from the data source.
+     */
+    const deletePayment = async(paymentId: number) => {
+        try {
+
+            await deletePaymentByIdDataSource(paymentId)
+
+            await navigateTo('/kg-admin/payments')
+
+            setTimeout(() => {
+                showAlert('Éxito', 'Pago eliminado con éxito', 'success');
+            }, 1000);
+            
+        } catch (error) {
+            console.error(error)
+            showAlert('Erroro', 'Algo salio mal al eliminar :(', 'error');
+
+        }
+    }
+
     /* The `filteredPayments` constant is using the `computed` function to create a reactive computed
     property based on the values of `payments` and `typeFilter`. Here's a breakdown of what it's
     doing: */
@@ -115,6 +141,7 @@ export const usePaymentStore = defineStore('payments', () => {
         fetchPayments,
         fetchPaymentById,
         create,
+        deletePayment,
         filteredPayments
     }
 })

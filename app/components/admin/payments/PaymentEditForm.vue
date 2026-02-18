@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <div>
+    <div class="mt-3">
         <div class="space-y-3 mb-3 border-b border-gray-200 dark:border-dark-extralight">
             <div class="space-y-3">
                 <p class="text-lg font-semibold text-gray-500 dark:text-gray-400">
@@ -23,7 +23,7 @@
                             v-model="paymentOwner"
                             class="sr-only peer">
 
-                            <div class="flex items-center justify-between p-4 rounded-xl border border-gray-300 dark:border-dark-soft bg-gray-100 dark:bg-dark-extralight transition-all duration-200 peer-checked:border-lime-500 peer-checked:ring-2 peer-checked:ring-lime-500 hover:border-lime-400">
+                            <div class="flex items-center justify-between p-3 md:p-4 rounded-xl border border-gray-300 dark:border-dark-soft bg-gray-100 dark:bg-dark-extralight transition-all duration-200 peer-checked:border-lime-500 peer-checked:ring-2 peer-checked:ring-lime-500 hover:border-lime-400">
                                 <div>
                                     <p class="font-semibold text-gray-700 dark:text-white">
                                         Ingreso general
@@ -48,7 +48,7 @@
                             v-model="paymentOwner"
                             class="sr-only peer">
 
-                            <div class="flex items-center justify-between p-4 rounded-xl border border-gray-300 dark:border-dark-soft bg-gray-100 dark:bg-dark-extralight transition-all duration-200 peer-checked:border-lime-500 peer-checked:ring-2 peer-checked:ring-lime-500 hover:border-lime-400">
+                            <div class="flex items-center justify-between p-3 md:p-4 rounded-xl border border-gray-300 dark:border-dark-soft bg-gray-100 dark:bg-dark-extralight transition-all duration-200 peer-checked:border-lime-500 peer-checked:ring-2 peer-checked:ring-lime-500 hover:border-lime-400">
                                 <div>
                                     <p class="font-semibold text-gray-700 dark:text-white">
                                         Asignar a usuario
