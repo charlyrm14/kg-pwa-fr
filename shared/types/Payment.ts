@@ -71,8 +71,10 @@ export interface PaymentDetail {
         last_name: string
         mother_last_name: string| null
         email: string
+        uuid: string
     } | null,
     type: {
+        id: number
         name: string
         slug: string
         description: string
@@ -81,10 +83,20 @@ export interface PaymentDetail {
         coverage_days: number
     },
     reference: {
+        id: number
         name: string
         slug: string
         description: string
     }
+}
+
+export interface EditPaymentPayload {
+    user_uuid: string | null
+    payment_type_id: number
+    amount: number
+    payment_date: string
+    payment_reference_id: number
+    notes: string | null
 }
 
 export interface PaymentDeletePayload {

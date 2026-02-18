@@ -5,7 +5,8 @@ import type {
     CreatePaymentResponse, 
     Payment, 
     PaymentFilters,
-    PaymentDetail 
+    PaymentDetail, 
+    EditPaymentPayload
 } from "~~/shared/types/Payment"
 
 export const fetchPaymentsApi = async(pageUrl: string | null = null, filters: PaymentFilters) => {
@@ -40,6 +41,19 @@ export const createPaymentApi = async(payload: CreatePaymentPayload) => {
         `${config.public.apiBaseUrl}/payments/`,
         {
             method: 'POST',
+            body: payload
+        } 
+    )
+}
+
+export const editPaymentApi = async(paymentId: number, payload: EditPaymentPayload) => {
+
+    const config = useRuntimeConfig()
+
+    return $fetch<ApiResponse<CreatePaymentResponse>>(
+        `${config.public.apiBaseUrl}/payments/${paymentId}`,
+        {
+            method: 'PUT',
             body: payload
         } 
     )

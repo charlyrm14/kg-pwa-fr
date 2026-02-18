@@ -1,19 +1,22 @@
 
 import type { 
     PaymentFilters, 
-    CreatePaymentPayload 
+    CreatePaymentPayload, 
+    EditPaymentPayload
 } from "~~/shared/types/Payment"
 import { 
     fetchPaymentsApi, 
     createPaymentApi,
     fetchPaymentByIdApi,
-    deletePaymentByIdApi
+    deletePaymentByIdApi,
+    editPaymentApi
 } from "./payments.api"
 import { 
     MOCK_PAYMENTS, 
     fetchPaymentByIdMock, 
     createPaymentMock,
-    deletePaymentByIdMock
+    deletePaymentByIdMock,
+    editPaymentMock
 } from "~/utils/mocks/payments.mock"
 
 export const fetchPaymentsDataSource = async(pageUrl: string | null = null, filters: PaymentFilters) => {
@@ -50,6 +53,17 @@ export const createPaymentDataSource = (payload: CreatePaymentPayload) => {
     }
 
     return createPaymentApi(payload)
+}
+
+export const editPaymentDataSource = (paymentId: number, payload: EditPaymentPayload) => {
+    const config = useRuntimeConfig()
+    const IS_MOCK_API_MODE = config.public.mockApiMode
+
+    if(IS_MOCK_API_MODE) {
+        return editPaymentMock(paymentId, payload)
+    }
+
+    return editPaymentApi(paymentId, payload)
 }
 
 export const deletePaymentByIdDataSource = (paymentId: number) => {
