@@ -2,6 +2,7 @@ import type {
     ApiResponse, 
     CreatePaymentPayload, 
     CursorPagination, 
+    EditPaymentPayload, 
     Payment,
     PaymentDetail
 } from "#imports"
@@ -152,6 +153,7 @@ export const fetchPaymentByIdMock = async(paymentId: number): Promise<ApiRespons
             updated_at_formatted: "1 day ago",
             user: null,
             type: {
+                id: 1,
                 name: "Visita",
                 slug: "visita",
                 description: "Pase de un día para una clase.",
@@ -160,6 +162,7 @@ export const fetchPaymentByIdMock = async(paymentId: number): Promise<ApiRespons
                 coverage_days: 1
             },
             reference: {
+                id: 1,
                 name: "Efectivo",
                 slug: "efectivo",
                 description: "Pago en efectivo"
@@ -171,6 +174,31 @@ export const fetchPaymentByIdMock = async(paymentId: number): Promise<ApiRespons
 export const createPaymentMock = (payload: CreatePaymentPayload) => {
     return {
         data: MOCK_PAYMENTS.data.data.unshift(adaptPayment(payload))
+    }
+}
+
+export const editPaymentMock = (paymentId: number, payload: EditPaymentPayload) => {
+    
+    const payment = MOCK_PAYMENTS.data.data.find(
+        p => p.id === paymentId
+    )
+
+    if (!payment) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'Payment not found'
+        })
+    }
+
+    return {
+        data: {
+            amount: payment?.amount,
+            payment_date: payment?.payment_date,
+            covered_until_date: payment?.payment_date,
+            notes: payment?.notes,
+            created_at: getTodayDate(),
+            created_at_formatted: "53 minutes ago"
+        }
     }
 }
 
@@ -189,7 +217,8 @@ export const deletePaymentByIdMock = (paymentId: number) => {
 
     return {
         data: {
-            ...MOCK_PAYMENTS.data.data.filter(p => p.id !== paymentId)
+            ...payment,
+
         }
     }
 }

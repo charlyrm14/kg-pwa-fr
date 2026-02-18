@@ -3,15 +3,17 @@ import type {
     Payment, 
     PaymentFilters, 
     CreatePaymentPayload, 
-    PaymentDetail
+    PaymentDetail,
+    EditPaymentPayload
 } from '~~/shared/types/Payment'
 import { 
         fetchPaymentsDataSource,
         fetchPaymentByIdDataSource,
         createPaymentDataSource,
-        deletePaymentByIdDataSource
+        deletePaymentByIdDataSource,
+        editPaymentDataSource
 } from '~/data/payments/payments.datasource'
-import { useAlert, type ApiResponse } from '#imports'
+import { useAlert } from '#imports'
 
 export const usePaymentStore = defineStore('payments', () => {
 
@@ -96,6 +98,34 @@ export const usePaymentStore = defineStore('payments', () => {
     }
 
     /**
+     * The function `editPayment` updates a payment, navigates to a specific page, and displays a
+     * success or error message accordingly.
+     * @param {number} paymentId - The `paymentId` parameter is a number that represents the unique
+     * identifier of the payment that you want to edit.
+     * @param {EditPaymentPayload} payload - The `payload` parameter in the `editPayment` function
+     * likely contains data that needs to be updated for a specific payment identified by `paymentId`.
+     * This data could include information such as the payment amount, payment method, recipient
+     * details, or any other relevant details associated with the payment. The `Edit
+     */
+    const editPayment = async(paymentId: number, payload: EditPaymentPayload) => {
+        try {
+
+            await editPaymentDataSource(paymentId, payload)
+
+            await navigateTo('/kg-admin/payments')
+
+            setTimeout(() => {
+                showAlert('Éxito', 'Pago actualizado con éxito', 'success')
+            }, 1000);
+            
+
+        } catch (error) {
+            console.error(error)
+            showAlert('Error', 'Algo salio mal al actualizar :(', 'error') 
+        }
+    }
+
+    /**
      * The function `deletePayment` deletes a payment by its ID, navigates to a specific page, and
      * shows a success or error message.
      * @param {number} paymentId - The `paymentId` parameter is a number that represents the unique
@@ -141,6 +171,7 @@ export const usePaymentStore = defineStore('payments', () => {
         fetchPayments,
         fetchPaymentById,
         create,
+        editPayment,
         deletePayment,
         filteredPayments
     }

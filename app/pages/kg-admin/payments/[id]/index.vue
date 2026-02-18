@@ -111,7 +111,8 @@
                             :payment="payment"/>
 
                         <PaymentEditForm
-                            v-if="mode === 'edit'"/>
+                            v-if="mode === 'edit'"
+                            :payment="payment"/>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@
     }>()
     
     const showUserInfo = ref<boolean>(false)
+    const showNotes = ref<boolean>(false)
 
 </script>
 
@@ -106,6 +107,40 @@
                         </div>
                         <div>
                             <span class="text-sm md:text-xl text-emerald-500 font-extrabold"> {{ payment?.reference?.name }} </span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-dark-extralight rounded-4xl px-3 py-2">
+                        <div class="flex justify-between items-center" :class="showNotes ? 'border-b border-gray-200 dark:border-dark-soft' : ''">
+                            <div class="inline-flex items-center gap-x-2 md:gap-x-4" :class="showNotes ? 'mb-1' : ''">
+                                <span class="border-2 border-gray-200 dark:border-dark-soft p-1 rounded-xl text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-notebook-text-icon lucide-notebook-text"><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9.5 8h5"/><path d="M9.5 12H16"/><path d="M9.5 16H14"/></svg>
+                                </span>
+                                <span class="text-sm md:text-xl text-gray-400 dark:text-gray-400 font-semibold"> Notas </span>
+                            </div>
+                            <button
+                                v-if="payment?.notes !== null"
+                                class="dark:text-gray-400 cursor-pointer hover:opacity-75"
+                                @click.prevent="showNotes = !showNotes">
+                                    <svg 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        width="24" 
+                                        height="24" 
+                                        viewBox="0 0 24 24" 
+                                        fill="none" 
+                                        stroke="currentColor" 
+                                        stroke-width="2" 
+                                        stroke-linecap="round" 
+                                        stroke-linejoin="round" 
+                                        :class="!showNotes ? 'lucide lucide-chevron-down-icon lucide-chevron-down' : 'lucide lucide-chevron-up-icon lucide-chevron-up'">
+                                            <path :d="!showNotes ? 'm6 9 6 6 6-6' : 'm18 15-6-6-6 6'"/>
+                                    </svg>
+                            </button>
+                            <span v-else class="dark:text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-off-icon lucide-circle-off"><path d="m2 2 20 20"/><path d="M8.35 2.69A10 10 0 0 1 21.3 15.65"/><path d="M19.08 19.08A10 10 0 1 1 4.92 4.92"/></svg>
+                            </span>
+                        </div>
+                        <div v-if="showNotes" class="py-2 mt-2">
+                            <span class="dark:text-gray-300 text-gray-600 font-extrabold text-sm md:text-xl"> {{ payment?.notes }} </span>
                         </div>
                     </div>
                     <div class="bg-gray-100 dark:bg-dark-extralight rounded-4xl px-3 py-2">
