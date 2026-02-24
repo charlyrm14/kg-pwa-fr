@@ -1,13 +1,32 @@
 <script setup lang="ts">
-    import IncomeTypeStat from '~/components/admin/home/IncomeTypeStat.vue';
-    import AttendanceStat from '~/components/admin/home/AttendanceStat.vue';
-    import UsersStat from '~/components/admin/home/UsersStat.vue';
+    import PaymentDistribution from '~/components/admin/analytics/PaymentDistribution.vue';
+    import AttendancesSummary from '~/components/admin/analytics/AttendancesSummary.vue';
+    import UsersComposition from '~/components/admin/analytics/UsersComposition.vue';
     import Breadcrumb from '~/components/common/Breadcrumb.vue';
-    import IncomeDetailStat from '~/components/admin/home/IncomeDetailStat.vue';
+    import PaymentTimeline from '~/components/admin/analytics/PaymentTimeline.vue';
+    import { useAnalytic } from '#imports';
 
     definePageMeta({
         layout: 'admin'
     })
+
+    const { getAnalyticsData } = useAnalytic()
+
+    const selectedMonth = ref<string | undefined>()
+
+    const { data: dashboard, pending, refresh } = await useAsyncData(
+        'analytics',
+        () => getAnalyticsData(),
+        {
+            server: true,
+            lazy: false,
+            default: () => ({
+                payments: null
+            })
+        }
+    )
+
+    const paymentDistribution = computed(() => dashboard.value.payments ?? null)
 
 </script>
 
@@ -24,25 +43,27 @@
 
         <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-6">
 
-            <!-- Beginning IncomeType -->
-            <IncomeTypeStat/>
-            <!-- End IncomeType -->
+            <!-- Beginning Payment Distribution -->
+            <PaymentDistribution
+                v-if="paymentDistribution"
+                :payment-distribution="paymentDistribution?.data"/>
+            <!-- End Payment Distribution -->
             
-            <!-- Beginning Attendance -->
-            <AttendanceStat/>
-            <!-- End Attendance -->
+            <!-- Beginning Attendance Summary -->
+            <AttendancesSummary/>
+            <!-- End Attendance Summary -->
             
-            <!-- Beginning Users -->
-            <UsersStat/>
-            <!-- End Users -->
+            <!-- Beginning Users Composition -->
+            <UsersComposition/>
+            <!-- End Users Composition -->
 
             
         </section>
         
         <section class="grid grid-cols-1 gap-4 mt-6">
-            <!-- Beginning Income Detail -->
-            <IncomeDetailStat/>
-            <!-- End Income Detail -->
+            <!-- Beginning Payment Timeline -->
+            <PaymentTimeline/>
+            <!-- End Payment Timeline -->
         </section>
 
     </section>
