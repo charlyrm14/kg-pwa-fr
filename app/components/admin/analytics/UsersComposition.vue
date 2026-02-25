@@ -5,7 +5,7 @@
 <template>
     <div class="bg-white dark:bg-dark-light shadow-lg rounded-lg p-5">
         <div class="flex justify-between items-center">
-            <h4 class="text-gray-900 dark:text-gray-300 text-lg font-bold">
+            <h4 class="text-gray-500 dark:text-gray-300 text-lg">
                 Usuarios
             </h4>
         </div>

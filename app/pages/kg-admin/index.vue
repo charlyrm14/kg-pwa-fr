@@ -12,8 +12,6 @@
 
     const { getAnalyticsData } = useAnalytic()
 
-    const selectedMonth = ref<string | undefined>()
-
     const { data: dashboard, pending, refresh } = await useAsyncData(
         'analytics',
         () => getAnalyticsData(),
@@ -21,12 +19,14 @@
             server: true,
             lazy: false,
             default: () => ({
-                payments: null
+                payments: null,
+                attendances: null
             })
         }
     )
 
     const paymentDistribution = computed(() => dashboard.value.payments ?? null)
+    const attendancesSummary = computed(() => dashboard.value.attendances ?? null)
 
 </script>
 
@@ -50,7 +50,9 @@
             <!-- End Payment Distribution -->
             
             <!-- Beginning Attendance Summary -->
-            <AttendancesSummary/>
+            <AttendancesSummary
+                v-if="attendancesSummary"
+                :attendance-summary="attendancesSummary?.data"/>
             <!-- End Attendance Summary -->
             
             <!-- Beginning Users Composition -->

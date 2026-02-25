@@ -5,17 +5,9 @@
 <template>
     <div class="bg-white dark:bg-dark-light shadow-lg rounded-lg p-5">
         <div class="flex justify-between items-center">
-            <h4 class="text-gray-900 dark:text-gray-300 text-lg font-bold">
-                Ingresos
+            <h4 class="text-gray-500 dark:text-gray-300 text-lg">
+                Ingresos anuales
             </h4>
-            <select 
-                name="income_period" 
-                id="income_period"
-                class="bg-gray-100 dark:bg-dark-extralight rounded-4xl px-4 py-1 text-blue-500 focus:outline-none font-bold">
-                    <option value="semanal" selected> Semanal </option>
-                    <option value="mensual"> Mensual </option>
-                    <option value="anual"> Anual </option>
-            </select>
         </div>
         <div class="w-full mx-auto p-4">
             <div class="overflow-hidden">

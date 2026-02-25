@@ -1,5 +1,6 @@
 import { 
-    fetchPaymentDistributionDataSource 
+    fetchPaymentDistributionDataSource,
+    fetchAttendancesSummaryDataSource 
 } from "~/data/analytics/analytic.datasource"
 
 export function useAnalytic () {
@@ -8,12 +9,23 @@ export function useAnalytic () {
         return await fetchPaymentDistributionDataSource(month)
     }
 
+    const fetchAttendancesSummary = async(month?: string) => {
+        return await fetchAttendancesSummaryDataSource(month)
+    }
+
     const getAnalyticsData = async(params?: any) => {
 
-        const payments = await fetchPaymentDistribution(params)
+        const [
+            payments,
+            attendances
+        ] = await Promise.all([
+            fetchPaymentDistribution(params),
+            fetchAttendancesSummary(params)
+        ])
 
         return {
-            payments: payments
+            payments: payments,
+            attendances: attendances
         }
     }
 

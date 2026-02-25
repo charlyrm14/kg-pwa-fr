@@ -1,6 +1,7 @@
 import type { 
     ApiResponse, 
-    PaymentDistribution 
+    PaymentDistribution,
+    AttendanceSummary
 } from "#imports"
 
 export const fetchPaymentDistributionApi = async(month?: string): Promise<ApiResponse<PaymentDistribution>> => {
@@ -9,6 +10,18 @@ export const fetchPaymentDistributionApi = async(month?: string): Promise<ApiRes
 
     return $fetch<ApiResponse<PaymentDistribution>>(
         `${config.public.apiBaseUrl}/analytics/payments/distribution`,
+        {
+            params: { month }
+        }
+    )
+}
+
+export const fetchAttendancesSummaryApi = async(month?: string): Promise<ApiResponse<AttendanceSummary[]>> => {
+    
+    const config = useRuntimeConfig()
+
+    return $fetch<ApiResponse<AttendanceSummary[]>>(
+        `${config.public.apiBaseUrl}/analytics/attendances/summary`,
         {
             params: { month }
         }

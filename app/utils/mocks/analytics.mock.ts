@@ -1,4 +1,4 @@
-import type { ApiResponse, PaymentDistribution } from "#imports"
+import type { ApiResponse, AttendanceSummary, PaymentDistribution } from "#imports"
 
 export const MOCK_PAYMENT_DISTRIBUTION: ApiResponse<PaymentDistribution> = {
     data: {
@@ -20,4 +20,24 @@ export const MOCK_PAYMENT_DISTRIBUTION: ApiResponse<PaymentDistribution> = {
             }
         ]
     }
+}
+
+export const MOCK_ATTENDANCE_SUMMARY: ApiResponse<AttendanceSummary[]> = {
+    data: [
+        {
+            id: 4,
+            name: "Retardo",
+            total_students: 1
+        },
+        {
+            id: 1,
+            name: "Asistió",
+            total_students: 2
+        },
+        {
+            id: 3,
+            name: "Ausencia justificada",
+            total_students: 4
+        }
+    ]
 }
