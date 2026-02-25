@@ -31,3 +31,17 @@ export interface UserComposition {
         percentage: string
     }>
 }
+
+export interface RevenueTimeline {
+    meta: {
+        year: string
+    },
+    baseMonth: {
+        month: string
+        amount: number
+    },
+    growth: Array<{
+        month: string
+        percentage: number
+    }>
+}

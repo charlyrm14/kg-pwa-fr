@@ -27,7 +27,7 @@
                 v-if="attendanceSummary"
                 v-for="attendance in attendanceSummary"
                 :key="attendance.id"
-                class="flex justify-between items-start border-b border-dashed border-gray-300 dark:border-gray-400 space-y-3">
+                class="flex justify-between items-start border-b border-dashed border-gray-300 dark:border-dark-soft space-y-3">
                     <div class="flex justify-between items-center gap-x-3"> 
                         <span class="h-4 w-4 rounded-full" :class="bgAttendanceStatusColors(attendance?.id)"></span>
                         <span class="text-gray-600 dark:text-gray-400"> {{ attendance?.name ?? 'Unknown' }} </span>

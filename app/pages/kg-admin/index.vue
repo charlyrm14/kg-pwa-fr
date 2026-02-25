@@ -23,7 +23,8 @@
             default: () => ({
                 payments: null,
                 attendances: null,
-                users: null
+                users: null,
+                revenue: null
             })
         }
     )
@@ -31,6 +32,7 @@
     const paymentDistribution = computed(() => dashboard?.value?.payments ?? null)
     const attendancesSummary = computed(() => dashboard?.value?.attendances ?? null)
     const usersComposition = computed(() => dashboard?.value?.users ?? null)
+    const revenueTimeline = computed(() => dashboard?.value?.revenue ?? null)
 
 </script>
 
@@ -70,7 +72,9 @@
         
         <section class="grid grid-cols-1 gap-4 mt-6">
             <!-- Beginning Payment Timeline -->
-            <PaymentTimeline/>
+            <PaymentTimeline
+                v-if="revenueTimeline"
+                :revenue="revenueTimeline?.data"/>
             <!-- End Payment Timeline -->
         </section>
 

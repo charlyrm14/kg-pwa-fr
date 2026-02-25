@@ -16,11 +16,21 @@
             </h4>
         </div>
         <div class="my-3">
-            <p class="text-blue-500 font-bold"> {{ currentMonth() }} </p>
-        </div>
-        <div class="my-3">
-            <span class="block text-gray-500 dark:text-gray-400 font-semibold  text-base md:text-xl"> 
-                Total: <span class="font-extrabold text-lime-500"> ${{ paymentDistribution?.total }} MXN </span>  </span>
+            <div class="flex justify-start items-center">
+                <div class="bg-gray-100 dark:bg-dark-extralight rounded-full py-1 pl-1 pr-3">
+                    <div class="flex justify-between items-start gap-x-3">
+                        <div class="bg-gray-200 dark:bg-dark-soft rounded-full p-2 text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up-down-icon lucide-trending-up-down"><path d="M14.828 14.828 21 21"/><path d="M21 16v5h-5"/><path d="m21 3-9 9-4-4-6 6"/><path d="M21 8V3h-5"/></svg>
+                        </div>
+                        <div>
+                            <p class="dark:text-gray-200 text-xs md:text-sm font-semibold">
+                                {{ currentMonth() }}
+                                    <span class="block text-sm md:text-sm text-lime-500 font-extrabold"> ${{ paymentDistribution?.total }} MXN </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="space-y-2">
             <div 
