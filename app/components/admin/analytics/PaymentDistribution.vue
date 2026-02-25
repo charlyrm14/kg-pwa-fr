@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import type { PaymentDistribution } from '#imports';
-    import { bgColorByPaymentType } from '#imports';
+    import { bgColorByPaymentType, currentMonth } from '#imports';
 
     defineProps<{
         paymentDistribution: PaymentDistribution
@@ -14,6 +14,9 @@
             <h4 class="text-gray-500 dark:text-gray-300 text-lg">
                 Ingresos por tipo de pago
             </h4>
+        </div>
+        <div class="my-3">
+            <p class="text-blue-500 font-bold"> {{ currentMonth() }} </p>
         </div>
         <div class="my-3">
             <span class="block text-gray-500 dark:text-gray-400 font-semibold  text-base md:text-xl"> 
