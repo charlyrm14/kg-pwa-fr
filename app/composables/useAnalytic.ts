@@ -1,7 +1,8 @@
 import { 
     fetchPaymentDistributionDataSource,
     fetchAttendancesSummaryDataSource, 
-    fetchUsersCompositionDataSource
+    fetchUsersCompositionDataSource,
+    fetchRevenueTimelineDataSource
 } from "~/data/analytics/analytic.datasource"
 
 export function useAnalytic () {
@@ -18,22 +19,29 @@ export function useAnalytic () {
         return await fetchUsersCompositionDataSource()
     }
 
+    const fetchRevenueTimeline = async(year?: string) => {
+        return await fetchRevenueTimelineDataSource(year)
+    }
+
     const getAnalyticsData = async(params?: any) => {
 
         const [
             payments,
             attendances,
-            users
+            users,
+            revenue
         ] = await Promise.all([
             fetchPaymentDistribution(params),
             fetchAttendancesSummary(params),
-            fetchUsersComposition()
+            fetchUsersComposition(),
+            fetchRevenueTimeline(params)
         ])
 
         return {
             payments: payments,
             attendances: attendances,
-            users: users
+            users: users,
+            revenue: revenue
         }
     }
 

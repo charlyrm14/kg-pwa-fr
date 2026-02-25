@@ -1,12 +1,14 @@
 import { 
     MOCK_PAYMENT_DISTRIBUTION, 
     MOCK_ATTENDANCE_SUMMARY,
-    MOCK_USERS_COMPOSITION
+    MOCK_USERS_COMPOSITION,
+    MOCK_REVENUE_TIMELINE
 } from "~/utils/mocks/analytics.mock"
 import { 
     fetchPaymentDistributionApi,
     fetchAttendancesSummaryApi,
-    fetchUsersCompositionApi
+    fetchUsersCompositionApi,
+    fetchRevenueTimelineApi
 } from "./analytic.api"
 
 export const fetchPaymentDistributionDataSource = async(month?: string) => {
@@ -43,4 +45,16 @@ export const fetchUsersCompositionDataSource = async() => {
     }
 
     return fetchUsersCompositionApi()
+}
+
+export const fetchRevenueTimelineDataSource = async(year?: string) => {
+
+    const config = useRuntimeConfig()
+    const IS_MOCK_API_MODE = config.public.mockApiMode
+
+    if(IS_MOCK_API_MODE) {
+        return MOCK_REVENUE_TIMELINE;
+    }
+
+    return fetchRevenueTimelineApi(year)
 }

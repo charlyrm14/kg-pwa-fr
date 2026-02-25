@@ -1,4 +1,10 @@
-import type { ApiResponse, AttendanceSummary, PaymentDistribution, UserComposition } from "#imports"
+import type {
+    ApiResponse, 
+    AttendanceSummary, 
+    PaymentDistribution, 
+    RevenueTimeline, 
+    UserComposition 
+} from "#imports"
 
 export const MOCK_PAYMENT_DISTRIBUTION: ApiResponse<PaymentDistribution> = {
     data: {
@@ -66,6 +72,68 @@ export const MOCK_USERS_COMPOSITION: ApiResponse<UserComposition> = {
                 slug: "estudiante",
                 total_users: 2,
                 percentage: "33.33"
+            }
+        ]
+    }
+}
+
+export const MOCK_REVENUE_TIMELINE: ApiResponse<RevenueTimeline> = {
+    data: {
+        meta: {
+            year: "2026"
+        },
+        baseMonth: {
+            month: "Ene 2026",
+            amount: 500
+        },
+        growth: [
+            {
+                month: "Ene 2026",
+                percentage: 100
+            },
+            {
+                month: "Feb 2026",
+                percentage: 400
+            },
+            {
+                month: "Mar 2026",
+                percentage: 0
+            },
+            {
+                month: "Abr 2026",
+                percentage: 0
+            },
+            {
+                month: "May 2026",
+                percentage: 0
+            },
+            {
+                month: "Jun 2026",
+                percentage: 0
+            },
+            {
+                month: "Jul 2026",
+                percentage: 0
+            },
+            {
+                month: "Ago 2026",
+                percentage: 0
+            },
+            {
+                month: "Sep 2026",
+                percentage: 0
+            },
+            {
+                month: "Oct 2026",
+                percentage: 0
+            },
+            {
+                month: "Nov 2026",
+                percentage: 0
+            },
+            {
+                month: "Dic 2026",
+                percentage: 0
             }
         ]
     }

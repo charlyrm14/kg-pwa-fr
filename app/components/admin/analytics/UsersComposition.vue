@@ -38,7 +38,7 @@
             <div
                 v-for="user in users?.detail"
                 :key="user.id"
-                class="flex justify-between items-center gap-x-4">
+                class="flex justify-between items-center gap-x-4 border-b border-dashed border-gray-300 dark:border-dark-soft space-y-2">
                     <div class="flex justify-start items-center gap-x-4">
                         <span class="p-1 w-4 h-4 rounded-full" :class="bgRoleColorBySlug(user?.slug)"></span>
                         <span class="text-gray-600 dark:text-gray-300"> {{ user?.name }} </span>
