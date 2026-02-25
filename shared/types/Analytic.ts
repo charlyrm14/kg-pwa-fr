@@ -20,3 +20,14 @@ export interface AttendanceSummary {
     name: string
     total_students: number
 }
+
+export interface UserComposition {
+    total: number
+    detail: Array<{
+        id: number
+        name: string
+        slug: string
+        total_users: number
+        percentage: string
+    }>
+}

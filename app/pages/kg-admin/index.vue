@@ -10,23 +10,27 @@
         layout: 'admin'
     })
 
+    const route = useRoute()
+
     const { getAnalyticsData } = useAnalytic()
 
     const { data: dashboard, pending, refresh } = await useAsyncData(
-        'analytics',
-        () => getAnalyticsData(),
+        () => `analytics-${route.query.month ?? 'current'}`,
+        () => getAnalyticsData(route.query.month),
         {
             server: true,
             lazy: false,
             default: () => ({
                 payments: null,
-                attendances: null
+                attendances: null,
+                users: null
             })
         }
     )
 
-    const paymentDistribution = computed(() => dashboard.value.payments ?? null)
-    const attendancesSummary = computed(() => dashboard.value.attendances ?? null)
+    const paymentDistribution = computed(() => dashboard?.value?.payments ?? null)
+    const attendancesSummary = computed(() => dashboard?.value?.attendances ?? null)
+    const usersComposition = computed(() => dashboard?.value?.users ?? null)
 
 </script>
 
@@ -56,7 +60,9 @@
             <!-- End Attendance Summary -->
             
             <!-- Beginning Users Composition -->
-            <UsersComposition/>
+            <UsersComposition
+                v-if="usersComposition"
+                :users="usersComposition?.data"/>
             <!-- End Users Composition -->
 
             

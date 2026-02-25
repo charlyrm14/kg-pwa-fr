@@ -51,6 +51,17 @@ export const bgRoleUserColor = (roleId: number) => {
     return colors[roleId] ?? 'bg-pink-500'
 }
 
+export const bgRoleColorBySlug = (slugRole: string): string => {
+
+    const bgColor: Record<string, string> = {
+        admin: 'bg-blue-500',
+        profesor: 'bg-purple-500',
+        estudiante: 'bg-emerald-500'
+    }
+
+    return bgColor[slugRole] ?? 'bg-gray-200 dark:bg-dark-soft'
+}
+
 export const excludeUserFromDele = (email: string): boolean => {
 
     return ![
@@ -58,4 +69,14 @@ export const excludeUserFromDele = (email: string): boolean => {
         'aiassistant@kg-dreams.com',
         'gusi_allison@gmail.com'
     ].includes(email)
+}
+
+export const colorRoleDonut = (slug: string): string => {
+    const map: Record<string, string> = {
+        admin: 'stroke-blue-500',
+        profesor: 'stroke-purple-500',
+        estudiante: 'stroke-emerald-500'
+    }
+
+    return map[slug] ?? 'stroke-gray-400'
 }
