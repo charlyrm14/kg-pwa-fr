@@ -50,10 +50,17 @@
                     <AttendanceTable
                         :attendances="attendanceStore?.attendancesToday?.data"/>
                 </section>
+
+                <section v-else="attendanceStore?.attendancesToday">
+                    <h2 class="text-center text-pink-500 font-medium text-lg">
+                        No hay contenido disponible
+                    </h2>
+                </section>
                 <!-- End Attendances Table -->
 
                 <!-- Beginning Attendances Pagination -->
-                <AttendancePagination/>
+                <AttendancePagination
+                    v-if="attendanceStore?.attendancesToday"/>
                 <!-- End Attendances Pagination -->
                 
             </div>

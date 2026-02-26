@@ -1,8 +1,11 @@
 <script setup lang="ts">
-    import { useModalManager } from '#imports';
-    import type { AttendanceCurrentDay } from '#imports';
+    import { 
+        useModalManager, 
+        bgAttendanceStatusColors, 
+        type AttendanceCurrentDay
+    } from '#imports';
     import { useAttendanceStore } from '~/stores/attendances';
-    import { bgAttendanceStatusColors } from '#imports';
+    import type { AssignUserAttendancePayload } from '~~/shared/types/Attendance';
 
     const { getPayload } = useModalManager()
     const attendanceStore = useAttendanceStore()
@@ -35,6 +38,10 @@
 
     const handleSubmit = async() => {
 
+        if(!user?.user?.uuid) {
+            return
+        }
+
         if(statusSelected.value === 0){
             errorMessage.value = true
             return
@@ -43,13 +50,15 @@
         try {
 
             isSubmitting.value = true
-            
-            const payload = {
-                user_uuid: user?.user?.uuid,
-                attendance_status_id: statusSelected.value
+
+            const userUuid = user?.user?.uuid
+
+            const payload: AssignUserAttendancePayload = {
+                attendance_status_id: statusSelected.value,
+                attendance_date: null
             }
             
-            await attendanceStore?.assignUserAttendance(payload)
+            await attendanceStore?.assignUserAttendance(userUuid, payload)
             emit('closeAssignAttendanceModal')
             
         } catch (error) {

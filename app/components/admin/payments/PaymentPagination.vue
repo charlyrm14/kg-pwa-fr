@@ -13,11 +13,11 @@
 </script>
 
 <template>
-    <div class="flex justify-between items-center mt-12 flex-wrap gap-4 p-4">
+    <div class="flex justify-center md:justify-between items-center mt-6 flex-wrap gap-4 p-4">
         <div>
             <span class="dark:text-gray-300"> Por página <span class="font-extrabold"> {{ totalPerPage }} </span> </span>
         </div>
-        <div class="flex justify-between items-center gap-x-2 sm:gap-x-4">
+        <div class="flex justify-center md:justify-between items-center gap-x-2 sm:gap-x-4">
             <button
                 v-if="prevPageUrl"
                 class="bg-gray-100 text-gray-500 dark:bg-dark-extralight dark:text-gray-400 px-4 py-2 rounded-lg cursor-pointer hover:opacity-75 flex items-center gap-x-2 font-extrabold"
