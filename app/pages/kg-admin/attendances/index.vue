@@ -39,7 +39,7 @@
         </section>
 
         <section class="mt-6">
-            <div class="bg-white shadow-lg rounded-lg px-4 pt-4 pb-6 dark:bg-dark-light">
+            <div class="bg-white shadow-lg rounded-lg pt-4 pb-6 dark:bg-dark-light">
 
                 <!-- Beginning Attendances Header -->
                 <AttendanceHeader/>

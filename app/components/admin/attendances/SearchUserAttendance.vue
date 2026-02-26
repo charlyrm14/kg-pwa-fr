@@ -73,7 +73,7 @@
                     <select 
                         name="attendance_status_id" 
                         id="attendance_status_id"
-                        class="w-full p-4 rounded-lg border border-gray-200 dark:border-dark-extralight text-black dark:text-white focus:outline-none">
+                        class="w-full p-4 rounded-full border border-gray-200 dark:border-dark-extralight text-black dark:text-white focus:outline-none">
                             <option :value="0" selected> -- Selecciona -- </option>
                             <option 
                                 v-for="status in attendanceStore?.attendanceStatuses?.data"

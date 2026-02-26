@@ -12,12 +12,12 @@
 </script>
 
 <template>
-    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-        <div class="bg-white dark:bg-dark rounded-2xl shadow-xl w-[85%] max-w-md md:w-4/5 md:max-w-xl mx-4 max-h-[90dvh] flex flex-col">
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white dark:bg-dark rounded-2xl w-[95vw] h-[95vh] md:w-[35vw] md:h-[65vh] max-w-[1200px] flex flex-col overflow-hidden">
 
             <div class="flex justify-between items-center mb-4 border-b border-gray-200 dark:border-dark-light px-6 py-4 shrink-0">
                 <h2 class="text-xl font-extrabold text-slate-800 dark:text-white flex items-center gap-2"> 
-                        ¿Que quieres publicar?
+                    ¿Que quieres publicar?
                 </h2>
                 <button
                     class="text-gray-400 dark:text-gray-500 hover:text-red-500 transition cursor-pointer"
