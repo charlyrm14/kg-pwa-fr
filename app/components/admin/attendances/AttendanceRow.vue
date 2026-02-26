@@ -1,9 +1,6 @@
 <script setup lang="ts">
     import  { 
-        getFirstLetterUppercase, 
         useModalManager, 
-        textAttendanceStatusColors, 
-        getTodayDate, 
         type AttendanceCurrentDay 
     } from '#imports';
 
@@ -30,16 +27,29 @@
                     </div>
                     <div>
                         <span 
-                            class="text-sm font-bold"
-                            :class="attendance?.attendance_status_id ? textAttendanceStatusColors(attendance?.attendance_status_id) : 'dark:text-gray-300'"> 
-                                {{ attendance?.user?.name }}
+                            class="text-sm md:text-base font-bold text-gray-600 dark:text-gray-300"> 
+                                {{ attendance?.user?.name }} {{ attendance?.user?.last_name }}
                         </span>
-                        <span class="font-bold text-base block" :class=" attendance?.attendance_status ? 'text-lime-500' : 'text-gray-500 dark:text-gray-400'"> 
-                            {{ attendance?.attendance_status ?? 'Asistencia no asignada' }}
+                        <span class="hidden md:block dark:text-gray-400 text-xs md:text-sm"> 
+                            {{ attendance?.user?.email ?? 'Unknown' }}
+                        </span>
+                        <div class="flex items-center gap-2 md:hidden">
+                            <span class="w-2 h-2 rounded-full" :class="attendance?.attendance_status_id ? bgAttendanceStatusColors(attendance?.attendance_status_id) : 'bg-gray-400'"></span>
+                            <span class="text-gray-600 dark:text-gray-300 font-semibold text-sm">
+                                {{ attendance?.attendance_status ?? 'Asistencia no asignada' }} 
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full" :class="attendance?.attendance_status_id ? bgAttendanceStatusColors(attendance?.attendance_status_id) : 'bg-gray-400'"></span>
+                        <span class="text-gray-600 dark:text-gray-300 font-semibold">
+                            {{ attendance?.attendance_status ?? 'Asistencia no asignada' }} 
                         </span>
                     </div>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right dark:text-gray-400"><path d="m9 18 6-6-6-6"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right text-blue-500"><path d="m9 18 6-6-6-6"/></svg>
             </div>
     </div>
 </template>

@@ -1,8 +1,11 @@
-import type { ApiResponse } from "#imports"
-import type { UserAttendance } from "#imports"
-import type { AttendanceCurrentDay } from "~~/shared/types/Attendance"
-import type { PaginationContent } from "#imports"
-import type { AttendanceStatus } from "~~/shared/types/Attendance"
+import type { 
+    ApiResponse, 
+    UserAttendance, 
+    PaginationContent, 
+    AttendanceCurrentDay, 
+    AttendanceStatus, 
+    AssignUserAttendancePayload
+} from "#imports"
 
 export const MOCK_ATTENDANCES_STATUSES: ApiResponse<AttendanceStatus[]> = {
     data: [
@@ -169,4 +172,31 @@ export const MOCK_USER_ATTENDANCES_CURRENT_DAY: PaginationContent<AttendanceCurr
     per_page: 15,
     prev_page_url: null,
     total: 1
+}
+
+export const assignUserAttendanceMock = (userUuid: string, payload: AssignUserAttendancePayload) => {
+    const user = MOCK_USER_ATTENDANCES_CURRENT_DAY.data.find(
+        attendance => attendance.user.uuid === userUuid
+    )
+    
+    if (!user) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'Page not found'
+        })
+    }
+
+    const status = MOCK_ATTENDANCES_STATUSES.data.find(
+        status => status.id === payload.attendance_status_id
+    )
+
+    user.attendance_status_id = payload.attendance_status_id
+    user.attendance_status = status ? status.name : null
+
+    return {
+        data: {
+            ...MOCK_USER_ATTENDANCES_CURRENT_DAY,
+            user
+        }
+    }
 }

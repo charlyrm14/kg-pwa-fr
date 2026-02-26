@@ -1,21 +1,22 @@
-import type { ApiResponse } from "#imports"
-import type { 
-    AttendanceCurrentDay, 
-    UserAttendance, 
-    AttendanceReport,
-    AttendanceStatus 
-} from "~~/shared/types/Attendance"
-import type { PaginationContent } from "#imports"
 import { 
     downloadMockReport, 
-    triggerFileDownload 
+    triggerFileDownload,
+    useAlert,
+    type ApiResponse,
+    type AttendanceCurrentDay, 
+    type UserAttendance, 
+    type AttendanceReport,
+    type AttendanceStatus, 
+    type AssignUserAttendancePayload,
+    type PaginationContent 
 } from "#imports"
+
 import { 
-    MOCK_ATTENDANCES_STATUSES,
-    MOCK_USER_ATTENDANCES_CURRENT_DAY 
-} from "~/utils/mocks/attendances.mock"
-import { useAlert } from "#imports"
-import { fetchAttendanceStatusesDataSource, fetchMonthlyAttendanceDataSource } from "~/data/attendances/attendance.datasource"
+    assignUserAttendanceDataSource, 
+    fetchAttendanceStatusesDataSource, 
+    fetchAttendancesTodayDataSource, 
+    fetchMonthlyAttendanceDataSource 
+} from "~/data/attendances/attendance.datasource"
 
 export const useAttendanceStore = defineStore('attendances', () => {
 
@@ -38,24 +39,14 @@ export const useAttendanceStore = defineStore('attendances', () => {
     const fetchAttendancesToday = async() => {
         try {
 
-            if(IS_MOCK_API_MODE) {
+            const response = await fetchAttendancesTodayDataSource()
 
-                attendancesToday.value = MOCK_USER_ATTENDANCES_CURRENT_DAY
-
-            } else {
-
-                const response = await $fetch<PaginationContent<AttendanceCurrentDay>>(
-                    `${config.public.apiBaseUrl}/attendances/today`
-                )
-
-                attendancesToday.value = response
-
-            }
+            attendancesToday.value = response
 
             return attendancesToday.value
             
         } catch (error) {
-            console.error('Error to get today attendances')
+            console.error(error)
         }
     }
 
@@ -73,7 +64,7 @@ export const useAttendanceStore = defineStore('attendances', () => {
                 return attendanceStatuses.value
             
         } catch (error) {
-            console.error('Error to get attendance statuses')
+            console.error(error)
         }
     }
 
@@ -82,38 +73,10 @@ export const useAttendanceStore = defineStore('attendances', () => {
     * status using a PUT request.
     * @param {any} payload - The `payload` parameter is an object containing the following properties:
     */
-    const assignUserAttendance = async(payload: any) => {
+    const assignUserAttendance = async(userUuid: string, payload: AssignUserAttendancePayload) => {
         try {
 
-            if(IS_MOCK_API_MODE) {
-
-                const user = attendancesToday.value?.data.find(attendance => 
-                    attendance.user.uuid === payload.user_uuid
-                )
-                
-                if(user) {
-                    const status = MOCK_ATTENDANCES_STATUSES.data.find(status => 
-                        status.id === payload.attendance_status_id
-                    )
-
-                    if(status) {
-                        user.attendance_status_id = status.id
-                        user.attendance_status = status.name
-                    }
-                }
-
-            } else {
-
-                const { user_uuid, attendance_status_id } = payload
-
-                await $fetch(`${config.public.apiBaseUrl}/attendances/assign/${user_uuid}`, {
-                    method: 'PUT',
-                    body: {
-                        attendance_status_id
-                    }
-                })
-
-            }
+            await assignUserAttendanceDataSource(userUuid, payload)
 
             await fetchAttendancesToday()
             showAlert('Éxito', 'Asistencia asignada correctamente.', 'success')
@@ -121,6 +84,7 @@ export const useAttendanceStore = defineStore('attendances', () => {
         } catch (error) {
             console.error(error)
             showAlert('Error', 'Error al asignar la asistencia.', 'error')
+            throw error
         }
     }
 
@@ -140,7 +104,7 @@ export const useAttendanceStore = defineStore('attendances', () => {
             return monthlyAttendance.value
 
         } catch (error) {
-            console.log('Error to get user attendances by current month')
+            console.log(error)
         }
     }
 
@@ -171,7 +135,7 @@ export const useAttendanceStore = defineStore('attendances', () => {
             triggerFileDownload(blob, `reporte-${data.year}-${data.month}.xlsx`)
             
         } catch (error) {
-            console.error('Error generating attendance report')
+            console.error(error)
         }
     }
 

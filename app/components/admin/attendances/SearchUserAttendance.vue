@@ -3,6 +3,8 @@
     import { useForm } from 'vee-validate'
     import { useUserStore } from '~/stores/users';
     import UserLookup from '~/components/common/UserLookup.vue';
+    import { newRetroactiveAttendanceSchema } from '~/validations/attendances/retroactive-attendance.schema';
+    import type { AssignUserAttendancePayload } from '#imports';
 
     const emit = defineEmits<{
         (e: 'closeSearchUserAttendanceModal'): void
@@ -12,6 +14,7 @@
     const userStore = useUserStore()
 
     const isSubmitting = ref<boolean>(false)
+    const errorMessage = ref<string>('')
 
     onMounted(async() => {
         try {
@@ -21,18 +24,45 @@
         }
     })
 
-    const { defineField,  handleSubmit,  errors} = useForm({
-        validateOnMount: false
+    const { defineField,  handleSubmit,  errors} = useForm<AssignUserAttendancePayload>({
+        initialValues: {
+            attendance_status_id: 0
+        },
+        validateOnMount: false,
+        validationSchema: newRetroactiveAttendanceSchema
     })
 
+    const [ attendance_date, attendance_dateAttrs ] = defineField('attendance_date')
+    const [ attendance_status_id, attendance_status_idAttrs ] = defineField('attendance_status_id')
 
-    const onSearchSubmit = handleSubmit(async values => {
+    const onSubmit = handleSubmit(async values => {
+        if(!userStore?.userLookUp?.uuid) {
+            return
+        }
+
+        isSubmitting.value = true
+
         try {
+            
+            const userUuid = userStore?.userLookUp?.uuid
+            const payload: AssignUserAttendancePayload = { 
+                ...values,
+                attendance_date: values.attendance_date ?? null
+            }
 
-            console.log(values)
+            await attendanceStore?.assignUserAttendance(userUuid, payload)
+            closeAssignAttendanceModal()
 
-        } catch (error) {
+        } catch (error: any) {
+            if (error?.status === 422 || error?.statusCode === 422) {
+                errorMessage.value = 'El alumno no tiene horario asignado para ese día.'
+                setTimeout(() => {
+                    errorMessage.value = ''
+                }, 3000);
+            }
             console.error(error)
+        } finally {
+            isSubmitting.value = false
         }
     })
 
@@ -67,35 +97,60 @@
                 <UserLookup/>
             </div>
 
-            <div class="px-6 py-4 space-y-4">
-                <div>
-                    <h4 class="text-gray-500 dark:text-white font-bold mb-2"> Selecciona una opción </h4>
-                    <select 
-                        name="attendance_status_id" 
-                        id="attendance_status_id"
-                        class="w-full p-4 rounded-full border border-gray-200 dark:border-dark-extralight text-black dark:text-white focus:outline-none">
-                            <option :value="0" selected> -- Selecciona -- </option>
-                            <option 
-                                v-for="status in attendanceStore?.attendanceStatuses?.data"
-                                :key="status.id" 
-                                :value="status.id"> {{ status?.name }} </option>
-                    </select>
+            <div class="px-4 py-2">
+                <span class="text-red-500 text-sm px-2 font-bold"> {{ errorMessage }} </span>
+            </div>
+
+            <form @submit.prevent="onSubmit">
+                <div v-if="userStore?.userLookUp" class="px-6 space-y-2">
+                    <div >
+                        <h4 class="text-gray-500 dark:text-white font-bold mb-2"> Selecciona una opción </h4>
+                        <select 
+                            name="attendance_status_id" 
+                            id="attendance_status_id"
+                            v-model="attendance_status_id"
+                            v-bind="attendance_status_idAttrs"
+                            class="w-full px-4 py-2 rounded-full border border-gray-200 dark:border-dark-extralight text-black dark:text-white focus:outline-none">
+                                <option :value="0" selected> -- Selecciona -- </option>
+                                <option 
+                                    v-for="status in attendanceStore?.attendanceStatuses?.data"
+                                    :key="status.id" 
+                                    :value="status.id"> {{ status?.name }} </option>
+                        </select>
+                        <span v-if="errors.attendance_status_id" class="text-red-500 text-sm px-2 font-bold"> 
+                            {{ errors.attendance_status_id  }}
+                        </span>
+                    </div>
+                    <div>
+                        <label for="attendance_date" class="text-gray-500 dark:text-gray-300 font-bold"> Fecha de asistencia </label>
+                        <input 
+                            type="date"
+                            id="attendance_date"
+                            name="attendance_date"
+                            v-model="attendance_date"
+                            v-bind="attendance_dateAttrs"
+                            class="w-full mt-3 mb-1 border border-gray-300 dark:border-dark-soft text-gray-500 dark:text-gray-300 px-4 py-2 rounded-4xl focus:outline-none font-bold dark:[color-scheme:dark]">
+                        <span v-if="errors.attendance_date" class="text-red-500 text-sm px-2 font-bold"> 
+                            {{ errors.attendance_date  }}
+                        </span>
+                    </div>
                 </div>
-            </div>
-                
-            <div class="flex justify-end items-center gap-x-4 px-6 py-4">
-                <button
-                    class="border border-gray-300 dark:border-dark-extralight rounded-4xl px-4 py-2 transition-colors cursor-pointer hover:opacity-75 w-auto text-gray-400 dark:text-gray-500 font-bold hover:text-red-500 hover:border-red-500 text-center"
-                    @click="closeAssignAttendanceModal"> 
-                        Cancelar 
-                </button>
-                <button
-                    type="submit"
-                    class="text-white font-bold rounded-4xl px-4 py-2 transition-colors hover:opacity-75"
-                    :class="!isSubmitting ? 'bg-blue-500 cursor-pointer' : 'bg-blue-300 cursor-progress'"> 
-                        {{ !isSubmitting ? 'Guardar' : 'Guardando...' }} 
-                </button>
-            </div>
+                    
+                <div class="flex justify-end items-center gap-x-4 px-6 py-4">
+                    <button
+                        class="border border-gray-300 dark:border-dark-extralight rounded-4xl px-4 py-2 transition-colors cursor-pointer hover:opacity-75 w-auto text-gray-400 dark:text-gray-500 font-bold hover:text-red-500 hover:border-red-500 text-center"
+                        @click.prevent="closeAssignAttendanceModal"> 
+                            Cancelar 
+                    </button>
+                    <button
+                        v-if="userStore?.userLookUp"
+                        type="submit"
+                        class="text-white font-bold rounded-4xl px-4 py-2 transition-colors hover:opacity-75"
+                        :class="!isSubmitting ? 'bg-blue-500 cursor-pointer' : 'bg-blue-300 cursor-progress'"> 
+                            {{ !isSubmitting ? 'Guardar' : 'Guardando...' }} 
+                    </button>
+                </div>
+            </form>
 
         </div>
     </div>

@@ -110,3 +110,8 @@ export interface AttendanceUserInfo {
     attendance_status_id: number
     created_at: string
 }
+
+export interface AssignUserAttendancePayload {
+    attendance_status_id: number
+    attendance_date: string | null
+}
