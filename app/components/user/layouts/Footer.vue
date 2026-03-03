@@ -24,16 +24,19 @@
                 : 'flex-col'">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
-                        width="28" 
-                        height="28" 
+                        width="28" height="28" 
                         viewBox="0 0 24 24" 
                         fill="none" 
                         stroke="currentColor" 
                         stroke-width="2" 
                         stroke-linecap="round" 
                         stroke-linejoin="round" 
-                        class="lucide lucide-chart-line-icon lucide-chart-line">
-                            <path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>
+                        class="lucide lucide-waves-ladder-icon lucide-waves-ladder">
+                            <path d="M19 5a2 2 0 0 0-2 2v11"/>
+                            <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
+                            <path d="M7 13h10"/>
+                            <path d="M7 9h10"/>
+                            <path d="M9 5a2 2 0 0 0-2 2v11"/>
                     </svg>
                     <span v-if="route.path === '/my-progress'" class="text-sm font-medium"> Progreso </span>
         </NuxtLink>
