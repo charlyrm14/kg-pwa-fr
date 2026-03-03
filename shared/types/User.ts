@@ -5,6 +5,7 @@ export type Gender = 'MASCULINO' | 'FEMENINO'
 export type ColorBgGender = 'bg-blue-100' | 'bg-pink-100'
 export type ColorTextGender = 'text-blue-500' | 'text-pink-500'
 export type ColorBorderGender = 'border-blue-500' | 'border-pink-500'
+export type RoleType = 0 | 1 | 2 | 3 
 
 export interface User {
     name: string

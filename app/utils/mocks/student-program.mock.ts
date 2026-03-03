@@ -98,7 +98,7 @@ export const MOCK_STUDENT_PROGRAM_PROGRESS: ApiResponse<StudentProgram> = {
                         skill_id: 20,
                         skill_description: "Técnica básica de dorso",
                         skill_order: 2,
-                        skill_progress_percentage: 100,
+                        skill_progress_percentage: 0,
                         skill_progress_completed_at: null
                     },
                     {
