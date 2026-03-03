@@ -23,6 +23,8 @@
         return userStore?.users ?? { data: [] }
     }) 
 
+    const users = computed(() => userStore?.filteredUsers)
+
 </script>
 
 <template>
@@ -46,9 +48,9 @@
                 <!-- End User Header -->
 
                 <!-- Beginning User Table -->
-                <section v-if="userStore?.users?.data">
+                <section v-if="users?.data">
                     <UserTable
-                        :users="userStore?.users?.data"/>
+                        :users="users?.data"/>
                 </section>
                 <!-- End User Table -->
                 

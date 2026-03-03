@@ -3,7 +3,8 @@ import type {
     UserFilters, 
     UserInfo,
     UserDelete, 
-    UserLookUpError
+    UserLookUpError,
+    RoleType
 } from "~~/shared/types/User"
 import type { PaginationContent } from "#imports"
 import { useAlert } from "#imports"
@@ -21,6 +22,7 @@ export const useUserStore = defineStore('users', () => {
     const users = ref<PaginationContent<User> | null>(null)
     const userInfo = ref<UserInfo | null>(null) 
     const userLookUp = ref<User | null>(null)
+    const roleType = ref<RoleType>(0)
     const errorsUserLookUp = reactive<UserLookUpError>({
         type: 'default',
         message: ''
@@ -125,14 +127,31 @@ export const useUserStore = defineStore('users', () => {
         }
     }
 
+    const filteredUsers = computed(() => {
+        if(!users.value) return null
+
+        if(roleType.value === 0) {
+            return users.value
+        }
+
+        return {
+            ...users.value,
+            data: users.value.data.filter(
+                role => role.role_id === roleType.value
+            )
+        }
+    })
+
     return {
         users,
         userInfo,
         userLookUp,
+        roleType,
         errorsUserLookUp,
         fetchUsers,
         fetchUserInfo,
         fetchUserLookUp,
-        deleteUser
+        deleteUser,
+        filteredUsers
     }
 })
