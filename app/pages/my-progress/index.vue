@@ -18,8 +18,8 @@
             ]);
 
             return {
-                swimPrograms: swimPrograms,
-                studentProgram: studentProgram
+                swimPrograms,
+                studentProgram,
             };
         },
         {
@@ -33,7 +33,7 @@
     )
 
     const programSelected = ref<number>(
-        res?.value?.studentProgram ? res?.value?.studentProgram?.data?.program?.id : 1
+        res?.value?.studentProgram ? res?.value?.studentProgram?.program?.id : 1
     )
 
     const programs = computed(() => {
@@ -55,7 +55,7 @@
 
     const student = computed(() => {
         if(!res?.value?.studentProgram) return null
-        return { ...res?.value?.studentProgram?.data }
+        return { ...res?.value?.studentProgram }
     })
 
     const skillsCurrentLevel = computed(() => {
@@ -65,7 +65,7 @@
         return {
             ...res?.value?.swimPrograms?.data?.flatMap(
                     block => block.categories).find(
-                    category => category.id === res?.value?.studentProgram?.data?.current_level?.category_id
+                    category => category.id === res?.value?.studentProgram?.current_level?.category_id
                 ) ?? null
         }
     })
@@ -74,8 +74,8 @@
         if(!res?.value?.studentProgram) return null
 
         return {
-            ...res?.value?.studentProgram?.data?.progression_history?.find(
-                category => category.category_id === res?.value?.studentProgram?.data?.current_level?.category_id
+            ...res?.value?.studentProgram?.progression_history?.find(
+                category => category.category_id === res?.value?.studentProgram?.current_level?.category_id
             )
         }
     })
@@ -83,7 +83,7 @@
     const categoriesProgression = computed(() => {
         if(!res?.value?.studentProgram) return null
 
-        return res?.value?.studentProgram?.data?.progression_history ?? null
+        return res?.value?.studentProgram?.progression_history ?? null
     })
 
 </script>

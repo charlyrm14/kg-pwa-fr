@@ -60,3 +60,9 @@ export interface SkillCategoryProgress {
     skill_progress_percentage: number
     skill_progress_completed_at: string | null
 }
+
+export interface AssignStudentProgramPayload {
+    user_uuid: string | null
+    swim_program_id: number
+    swim_category_id: number | null
+}
