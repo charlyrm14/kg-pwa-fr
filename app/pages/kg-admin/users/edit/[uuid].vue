@@ -1,11 +1,13 @@
 <script setup lang="ts">
     import Avatar from '~/assets/media/training.webp'
     import Breadcrumb from '~/components/common/Breadcrumb.vue';
-    import { useModalManager  } from '#imports';
+    import { useModalManager, useAlert  } from '#imports';
     import { useUserStore } from '~/stores/users';
-    import Star from '~/assets/media/star.png'
-    import Axolotl from '~/assets/media/ajolote.png'
-    
+    import UserCurrentLevel from '~/components/admin/users/UserCurrentLevel.vue';
+    import EditUserProgress from '~/components/admin/users/EditUserProgress.vue';
+    import EditSkillProgress from '~/components/admin/users/EditSkillProgress.vue';
+    import Alert from '~/components/common/Alert.vue';
+
     definePageMeta({
         layout: 'admin'
     })
@@ -14,10 +16,11 @@
     const uuidParam = route.params.uuid
 
     const { open, close, isOpen, modalPayload } = useModalManager()
+    const { alert, closeAlert } = useAlert()
+
     const userStore = useUserStore()
 
-    const tab = ref<number>(3)
-    const assignProgress = ref<boolean>(true)
+    const tab = ref<number>(2)
 
     const { data: user } = await useAsyncData('user-edit', async() => {
         await userStore?.fetchUserInfo(uuidParam as string)
@@ -28,6 +31,13 @@
 
 <template>
     <section class="md:px-5">
+
+        <Alert 
+            v-if="alert.status" 
+            :title="alert.title" 
+            :description="alert.description" 
+            :type="alert.type" 
+            @closeAlert="closeAlert"/>
 
         <section>
             <Breadcrumb
@@ -103,7 +113,7 @@
                 <div class="space-y-3">
                     <div class="bg-white dark:bg-dark-light rounded-2xl p-4 shadow dark:shadow-none">
                         <div class="flex justify-between items-start border-b border-gray-200 dark:border-dark-extralight">
-                            <h4 class="text-gray-400 font-bold text-sm md:text-lg"> Horario semanal </h4>
+                            <h4 class="text-gray-500 dark:text-gray-400 font-bold text-sm md:text-lg"> Horario semanal </h4>
                             <button class="bg-purple-500 text-white rounded-full px-3 py-0.5 cursor-pointer hover:opacity-75 mb-2"> 
                                 Editar 
                             </button>
@@ -148,7 +158,7 @@
                     </div>
                     <div class="bg-white dark:bg-dark-light rounded-2xl p-4 space-y-3 shadow dark:shadow-none">
                         <div class="flex justify-between items-center border-b border-gray-200 dark:border-dark-extralight">
-                            <h4 class="text-gray-400 font-bold text-sm md:text-lg"> Historial asistencias </h4>
+                            <h4 class="text-gray-500 dark:text-gray-400 font-bold text-sm md:text-lg"> Historial asistencias </h4>
                             <span class="text-blue-500 font-bold text-sm md:text-lg"> Marzo 2026 </span>
                         </div>
                         <div class="flex justify-between items-center border-b border-gray-100 dark:border-dark-extralight my-1">
@@ -176,7 +186,7 @@
                 </div>
                 <div class="bg-white dark:bg-dark-light rounded-2xl p-4">
                     <div class="flex justify-between items-center border-b border-gray-200 dark:border-dark-extralight">
-                        <h4 class="text-gray-400 font-bold text-sm md:text-lg"> Historial por mes </h4>
+                        <h4 class="text-gray-500 dark:text-gray-400 font-bold text-sm md:text-lg"> Historial por mes </h4>
                         <span class="text-blue-500 font-bold text-sm md:text-lg"> 2026 </span>
                     </div>
                     <div class="space-y-2 mt-3">
@@ -213,137 +223,10 @@
         <section v-if="tab === 2" class="my-3">
             <!-- Beginning User Progress -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-white dark:bg-dark-light rounded-2xl p-4">
-                        <div class="flex justify-between items-start border-b border-gray-200 dark:border-dark-extralight">
-                            <h4 class="text-gray-400 font-bold text-sm md:text-lg mb-2"> Nivel actual </h4>
-                        </div>
-                        <div v-if="assignProgress" class="space-y-4 my-4">
-                            <div>
-                                <div class="bg-gray-100 dark:bg-dark-extralight rounded-xl p-2 shadow dark:shadow-none space-y-2 mt-2 relative">
-                                    <div class="flex gap-x-2">
-                                        <img :src="Star" alt="star" class="w-6 h-6">
-                                        <span class="font-bold dark:text-white text-lg"> Estrella de mar </span>
-                                    </div>
-                                    <div class="absolute right-1 top-4">
-                                        <img :src="Axolotl" alt="Axolotl" class="w-15 h-15 md:w-25 md:h-25 drop-shadow drop-shadow-pink-400">
-                                    </div>
-                                    <div class="flex items-center gap-2 text-slate-300 text-xs md:text-base mb-4">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge-icon lucide-gauge"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-                                        </span>
-                                        <span class="dark:text-gray-400 text-gray-500">
-                                            <strong class="text-green-400"> 
-                                                0 de 3 
-                                            </strong> habilidades completadas
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <p class="dark:text-gray-400 text-gray-800 text-sm leading-relaxed max-w-[75%] font-semibold"> Tu coordinación mejora y comienzas a nadar distancias más largas. </p>
-                                    </div>
-                                    <div class="flex justify-end">
-                                        <span class="text-green-500 font-extrabold"> 100% </span>
-                                    </div>
-                                    <div class="w-full dark:bg-dark-soft p-1 rounded-full">
-                                        <div class="p-1 bg-blue-500 rounded-full" style="width:100%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="dark:text-gray-400 font-semibold"> Habilidades de categoría </span>
-                                <div class="bg-gray-100 dark:bg-dark-extralight rounded-xl px-2 py-1 shadow dark:shadow-none space-y-2 mt-2">
-                                    <div class="flex justify-between items-start">
-                                        <div class="flex justify-between items-center gap-x-2 text-sm">
-                                            <span class="w-5 h-5 text-green-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg>
-                                            </span>
-                                            <span class="dark:text-gray-400"> 
-                                                Técnica básica de dorso 
-                                                    <span class="block text-green-500 font-bold text-xs"> Completado </span>
-                                            </span>
-                                        </div>
-                                        <span class="text-green-500 font-extrabold"> 100% </span>
-                                    </div>
-                                    <div class="w-full dark:bg-dark-soft p-1 rounded-full">
-                                        <div class="p-1 bg-blue-500 rounded-full" style="width:100%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex justify-center items-center">
-                                <button 
-                                    class="bg-blue-500 text-white font-bold rounded-full px-4 py-1 cursor-pointer hover:opacity-75"
-                                    @click="assignProgress = !assignProgress">
-                                        Asignar nivel
-                                </button>
-                            </div>
-                        </div>
-                        <div v-else>
-                            <div class="flex flex-col gap-4 space-y-4 my-4">
-                                <div class="flex justify-center dark:text-gray-400">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-waves-arrow-up-icon lucide-waves-arrow-up"><path d="M12 2v8"/><path d="M2 15c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="m8 6 4-4 4 4"/></svg>
-                                </div>
-                                <div class="flex justify-center space-y-4">
-                                    <button 
-                                        class="bg-blue-500 text-white font-bold rounded-full px-4 py-1 cursor-pointer hover:opacity-75"
-                                        @click="assignProgress = !assignProgress">
-                                            Asignar nivel
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-dark-light rounded-2xl p-4">
-                        <div class="flex justify-between items-start border-b border-gray-200 dark:border-dark-extralight">
-                            <h4 class="text-gray-400 font-bold text-sm md:text-lg mb-2"> Asignar progreso </h4>
-                        </div>
-                        <div class="mt-3 space-y-3">
-                            <div>
-                                <label for="swim_program_id" class="dark:text-gray-400 font-semibold text-lg"> Nivel </label>
-                                <select 
-                                    name="swim_program_id" 
-                                    id="swim_program_id"
-                                    class="w-full bg-gray-100 dark:bg-dark-extralight dark:text-white border border-gray-200 dark:border-dark-soft rounded-4xl px-4 py-2">
-                                        <option value="1"> Programa bebés </option>
-                                        <option value="2"> Programa Niños </option>
-                                        <option value="3"> Programa adolescentes </option>
-                                        <option value="4"> Programa adultos </option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="swim_program_id" class="dark:text-gray-400 font-semibold text-lg"> Categorías </label>
-                                <select 
-                                    name="swim_category_id" 
-                                    id="swim_category_id"
-                                    class="w-full bg-gray-100 dark:bg-dark-extralight dark:text-white border border-gray-200 dark:border-dark-soft rounded-4xl px-4 py-2">
-                                        <option value="1"> Estrella de mar </option>
-                                        <option value="2"> Tortuga </option>
-                                        <option value="3"> Tiburón </option>
-                                        <option value="4"> Foca </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="flex justify-center mt-8">
-                            <button 
-                                class="bg-blue-500 text-white font-bold rounded-full px-4 py-1 cursor-pointer hover:opacity-75">
-                                    Asignar progreso
-                            </button>
-                        </div>
-
-                        <div class="mt-6">
-                            <span class="dark:text-gray-400 font-bold "> Asignar progreso de habilidad </span>
-                            <div>
-                                <input 
-                                    type="number" 
-                                    name="progress_percentage" 
-                                    id="progress_percentage"
-                                    class="w-full bg-gray-100 dark:bg-dark-extralight dark:text-white border border-gray-200 dark:border-dark-soft rounded-4xl px-4 py-2 mt-3">
-                            </div>
-                        </div>
-                        <div class="flex justify-center mt-8">
-                            <button 
-                                class="bg-blue-500 text-white font-bold rounded-full px-4 py-1 cursor-pointer hover:opacity-75">
-                                    Asignar progreso de habilidad
-                            </button>
-                        </div>
+                    <UserCurrentLevel/>
+                    <div class="space-y-3">
+                        <EditUserProgress/>
+                        <EditSkillProgress/>
                     </div>
                 </div>
             <!-- Beginning User Progress -->
@@ -354,7 +237,7 @@
             <div>
                 <div class="bg-white dark:bg-dark-light rounded-2xl p-4">
                     <div class="flex justify-between items-start border-b border-gray-200 dark:border-dark-extralight">
-                        <h4 class="text-gray-400 font-bold text-sm md:text-lg mb-2"> Información de usuario </h4>
+                        <h4 class="text-gray-500 dark:text-gray-400 font-bold text-sm md:text-lg mb-2"> Información de usuario </h4>
                         <button class="text-sm md:text-base bg-blue-500 text-white font-semibold rounded-full px-4 py-1 cursor-pointer hover:opacity-75 mb-2"> Editar </button>
                     </div>
                     <div class="mt-3 flex justify-between items-center gap-x-4 border-b border-dashed border-gray-200 dark:border-dark-extralight">
@@ -392,7 +275,7 @@
             <div>
                 <div class="bg-white dark:bg-dark-light rounded-2xl p-4 mt-3">
                     <div class="flex justify-between items-start border-b border-gray-200 dark:border-dark-extralight">
-                        <h4 class="text-gray-400 font-bold text-sm md:text-lg mb-2"> Eliminar usuario </h4>
+                        <h4 class="text-gray-500 dark:text-gray-400 font-bold text-sm md:text-lg mb-2"> Eliminar usuario </h4>
                     </div>
                     <div class="bg-gray-200 dark:bg-dark-extralight rounded-xl p-4 mt-4">
                         <p class="text-gray-600 dark:text-gray-300 font-bold inline-flex items-center gap-x-4"> 
