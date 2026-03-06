@@ -7,14 +7,11 @@
     const userStore = useUserStore()
 
     const emit = defineEmits<{
-        (e: 'closeDeleteUserModal'): void
+        (e: 'closeUserConfirmDelete'): void
     }>();
 
-    const props = defineProps<{
-        user: UserDelete
-    }>()
-
     const user = getPayload<UserDelete>()
+
     const isSubmitting = ref<boolean>(false)
 
     const handleSubmit = async(userDelete: UserDelete) => {
@@ -26,12 +23,11 @@
             await userStore?.deleteUser(userDelete)
             
         } catch (error) {
-
-            console.error('Hubo un error al eliminar a este usuario')
+            console.error(error)
 
         } finally {
             isSubmitting.value = false
-            emit('closeDeleteUserModal')
+            emit('closeUserConfirmDelete')
         }
     }
 
@@ -50,7 +46,7 @@
                     :disabled="isSubmitting"
                     class="text-gray-400 dark:text-gray-500 hover:text-red-500 transition"
                     :class="isSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'"
-                    @click="$emit('closeDeleteUserModal')">
+                    @click="$emit('closeUserConfirmDelete')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
             </div>
@@ -64,23 +60,24 @@
 
             <div class="flex justify-end items-center gap-x-4 px-6 py-4">
                 <button
-                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-lg px-4 py-2"
+                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-full px-4 py-2 font-semibold"
                     :class="isSubmitting ? 'cursor-not-allowed' : 'cursor-pointer hover:text-red-500'"
                     :disabled="isSubmitting"
-                    @click="$emit('closeDeleteUserModal')"> 
+                    @click="$emit('closeUserConfirmDelete')"> 
                         Cancelar 
                 </button>
                 <button
                     v-if="user"
-                    :disabled="isSubmitting"
                     @click="handleSubmit({
                         name: user?.name,
                         last_name: user?.last_name,
                         uuid: user?.uuid
                     })"
-                    class="text-white px-4 py-2 rounded-lg hover:opacity-75 font-medium"
+                    type="button"
+                    :disabled="isSubmitting"
+                    class="text-white px-4 py-2 rounded-full hover:opacity-75 font-bold"
                     :class="isSubmitting ? 'bg-red-300 cursor-progress' : 'bg-red-500 cursor-pointer'"> 
-                        {{ !isSubmitting ? 'Eliminar usuario' : 'Eliminando usuario' }} 
+                        {{ !isSubmitting ? 'Si, eliminar usuario' : 'Eliminando usuario' }} 
                 </button>
             </div>
 

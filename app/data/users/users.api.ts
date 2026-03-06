@@ -17,7 +17,18 @@ export const fetchUsersApi = async(filters: UserFilters) => {
 export const fetchUserInfoApi = async(uuid: string) => {
     const config = useRuntimeConfig()
     
-    return await $fetch<ApiResponse<UserInfo>>(`
-        ${config.public.apiBaseUrl}/users/${uuid}`
+    return await $fetch<ApiResponse<UserInfo>>(
+        `${config.public.apiBaseUrl}/users/${uuid}`
+    )
+}
+
+export const deleteUserApi = async(uuid: string) => {
+    const config = useRuntimeConfig()
+
+    return await $fetch(
+        `${config.public.apiBaseUrl}/users/${uuid}`,
+        {
+            method: 'DELETE'
+        }
     )
 }

@@ -13,6 +13,7 @@
     import UserAssignSchedule from '~/components/admin/users/UserAssignSchedule.vue';
     import UserAttendanceCurrentMonth from '~/components/admin/users/UserAttendanceCurrentMonth.vue';
     import UserAttendanceReport from '~/components/admin/users/UserAttendanceReport.vue';
+    import ConfirmUserDelete from '~/components/admin/users/ConfirmUserDelete.vue';
 
     definePageMeta({
         layout: 'admin'
@@ -120,7 +121,7 @@
         <section v-if="tab === 3" class="my-3">
             <!-- Beginning User Settings -->
             <UserDetailInfo v-if="user" :user="user"/>
-            <UserDelete/>
+            <UserDelete v-if="user" :user="user"/>
             <!-- End User Settings -->
         </section>
 
@@ -132,6 +133,13 @@
             @refreshUserData="refreshData"
             @closeUserAssignScheduleModal="close"/>
         <!-- End User Assign Schedule -->
+
+        <!-- Beginning Confirm User Delete -->
+        <ConfirmUserDelete
+            v-if="isOpen('ConfirmUserDeleteModal')"
+            :user="modalPayload?.user"
+            @closeUserConfirmDelete="close"/>
+        <!-- Beginning Confirm User Delete -->
 
     </section>
 </template>

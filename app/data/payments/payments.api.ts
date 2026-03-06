@@ -28,7 +28,7 @@ export const fetchPaymentByIdApi = async(paymentId: number): Promise<ApiResponse
 
     const config = useRuntimeConfig()
 
-    return $fetch<ApiResponse<PaymentDetail>>(
+    return await $fetch<ApiResponse<PaymentDetail>>(
         `${config.public.apiBaseUrl}/payments/${paymentId}`
     )
 }
@@ -37,7 +37,7 @@ export const createPaymentApi = async(payload: CreatePaymentPayload) => {
 
     const config = useRuntimeConfig()
 
-    return $fetch<ApiResponse<CreatePaymentResponse>>(
+    return await $fetch<ApiResponse<CreatePaymentResponse>>(
         `${config.public.apiBaseUrl}/payments/`,
         {
             method: 'POST',
@@ -50,7 +50,7 @@ export const editPaymentApi = async(paymentId: number, payload: EditPaymentPaylo
 
     const config = useRuntimeConfig()
 
-    return $fetch<ApiResponse<CreatePaymentResponse>>(
+    return await $fetch<ApiResponse<CreatePaymentResponse>>(
         `${config.public.apiBaseUrl}/payments/${paymentId}`,
         {
             method: 'PUT',
@@ -63,7 +63,7 @@ export const deletePaymentByIdApi = async(paymentId: number) => {
 
     const config = useRuntimeConfig()
 
-    return $fetch<ApiResponse<Payment>>(
+    return await $fetch<ApiResponse<Payment>>(
         `${config.public.apiBaseUrl}/payments/${paymentId}`,
         {
             method: 'DELETE',
