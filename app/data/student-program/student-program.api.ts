@@ -7,7 +7,7 @@ import type {
 export const fetchStudentProgramApi = async(uuid?: string): Promise<ApiResponse<StudentProgram>> => {
     const config = useRuntimeConfig()
 
-    return $fetch<ApiResponse<StudentProgram>>(
+    return await $fetch<ApiResponse<StudentProgram>>(
         `${config.public.apiBaseUrl}/student-programs/`
     )
 }
@@ -15,7 +15,7 @@ export const fetchStudentProgramApi = async(uuid?: string): Promise<ApiResponse<
 export const assignUserProgressApi = async(payload: AssignStudentProgramPayload) => {
     const config = useRuntimeConfig()
 
-    return $fetch<ApiResponse<StudentProgram>>(
+    return await $fetch<ApiResponse<StudentProgram>>(
         `${config.public.apiBaseUrl}/student-programs`, 
         {
             method: 'POST',
@@ -28,7 +28,7 @@ export const updateSkillProgressApi = async(skillProgressId: number, percentage:
 
     const config = useRuntimeConfig()
 
-    return $fetch(
+    return await $fetch(
         `${config.public.apiBaseUrl}/student-skill-progress/${skillProgressId}`,
         {
             method: 'PATCH',

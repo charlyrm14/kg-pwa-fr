@@ -9,6 +9,7 @@ import type {
 import type { PaginationContent } from "#imports"
 import { useAlert } from "#imports"
 import { 
+    deleteUserDataSource,
     fetchUserInfoDataSource, 
     fetchUsersDataSource 
 } from "~/data/users/users.datasource"
@@ -16,7 +17,6 @@ import {
 export const useUserStore = defineStore('users', () => {
 
     const config = useRuntimeConfig()
-    const IS_MOCK_API_MODE = config.public.mockApiMode
     const { showAlert } = useAlert()
 
     const users = ref<PaginationContent<User> | null>(null)
@@ -108,18 +108,12 @@ export const useUserStore = defineStore('users', () => {
 
             const { uuid } = user
 
-            if(!IS_MOCK_API_MODE) {
+            await deleteUserDataSource(uuid)            
+            await navigateTo('/kg-admin/users')
 
-                await $fetch<User>(`${config.public.apiBaseUrl}/users/${uuid}`, {
-                        method: 'DELETE'
-                })
-            } 
-
-            if(users.value) {
-                users.value.data = users.value.data.filter(usr => usr.uuid !== uuid)
-            }
-
-            showAlert('Éxito', 'Usuario eliminado con éxito', 'success')
+            setTimeout(() => {
+                showAlert('Éxito', 'Usuario eliminado con éxito', 'success')
+            }, 1000);
             
         } catch (error) {
             console.error(error)

@@ -6,7 +6,7 @@ import type {
 export const fetchSwimProgramApi = async(): Promise<ApiResponse<Program[]>> => {
     const config = useRuntimeConfig()
 
-    return $fetch<ApiResponse<Program[]>>(
+    return await $fetch<ApiResponse<Program[]>>(
         `${config.public.apiBaseUrl}/swim-programs`
     )
 }

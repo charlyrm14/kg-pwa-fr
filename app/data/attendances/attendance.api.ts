@@ -42,7 +42,7 @@ export const fetchAttendanceStatusesApi = async() => {
 
     const config = useRuntimeConfig()
 
-    return $fetch<ApiResponse<AttendanceStatus[]>>(
+    return await $fetch<ApiResponse<AttendanceStatus[]>>(
         `${config.public.apiBaseUrl}/attendances/statuses`
     )
 }

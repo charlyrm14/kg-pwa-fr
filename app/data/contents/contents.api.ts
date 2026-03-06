@@ -27,7 +27,7 @@ export const createContentApi = async(payload: CreateContentPayload) => {
 
     const config = useRuntimeConfig()
 
-    await $fetch<ApiResponse<CreateContentPayload>>(
+    return await $fetch<ApiResponse<CreateContentPayload>>(
         `${config.public.apiBaseUrl}/contents/`, 
         {
             method: 'POST',

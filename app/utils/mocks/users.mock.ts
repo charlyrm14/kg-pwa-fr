@@ -341,3 +341,23 @@ export const fetchUserInfoMock = async (uuid: string): Promise<ApiResponse<UserI
 export const updateUserProfileMock = async(): Promise<ApiResponse<UserProfileGeneralInfo>> => {
     return MOCK_UPDATE_PROFILE_DATA
 }
+
+export const deleteUserMock = async(uuid: string) => {
+    const user = MOCK_USERS.data.find(usr => usr.uuid === uuid)
+
+    if (!user) {
+        throw new Error('User not found')
+    }
+
+    const remove = {
+        ...MOCK_USERS.data.filter(usr => usr.uuid !== user.uuid)
+    }
+
+    return {
+        data: {
+            ...MOCK_USERS,
+            data: remove,
+            total: MOCK_USERS.total - 1
+        }
+    }
+}

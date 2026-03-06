@@ -16,7 +16,7 @@ export const updateProfileApi = async(payload: UserProfilePayload): Promise<ApiR
 
     const config = useRuntimeConfig()
 
-    return $fetch<ApiResponse<UserProfileGeneralInfo>>(`
+    return await $fetch<ApiResponse<UserProfileGeneralInfo>>(`
         ${config.public.apiBaseUrl}/profile`,
         {
             method: 'PUT',
