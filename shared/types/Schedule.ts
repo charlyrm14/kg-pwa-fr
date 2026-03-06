@@ -16,3 +16,9 @@ export interface UserSchedule {
     student_code: string | null
     schedules: Schedule[] | null
 }
+
+export interface AssignUserSchedulePayload {
+    days: Array<number>
+    entry_time: string
+    departure_time: string
+}

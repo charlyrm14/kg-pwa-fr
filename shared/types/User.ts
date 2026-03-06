@@ -1,5 +1,6 @@
 import type { Schedule } from "./Schedule"
 import type { AttendanceUserInfo } from "./Attendance"
+import type { CurrentLevelCategory } from "./StudentProgram"
 
 export type Gender = 'MASCULINO' | 'FEMENINO'
 export type ColorBgGender = 'bg-blue-100' | 'bg-pink-100'
@@ -83,8 +84,12 @@ export interface UserInfo {
     role_id: number
     created_at: string
     role_name: string
+    profile: {
+        birthdate: string | null
+    } | null
     schedules: Schedule[] | null
-    attendances: AttendanceUserInfo[] | null
+    attendances: AttendanceUserInfo[] | null,
+    progress: CurrentLevelCategory | null
 }
 
 export interface UserDelete {
