@@ -4,11 +4,13 @@ import type {
     UserInfo,
     UserDelete, 
     UserLookUpError,
-    RoleType
+    RoleType,
+    CreateUserPayload
 } from "~~/shared/types/User"
 import type { PaginationContent } from "#imports"
 import { useAlert } from "#imports"
 import { 
+    createUserDataSource,
     deleteUserDataSource,
     fetchUserInfoDataSource, 
     fetchUsersDataSource 
@@ -16,7 +18,6 @@ import {
 
 export const useUserStore = defineStore('users', () => {
 
-    const config = useRuntimeConfig()
     const { showAlert } = useAlert()
 
     const users = ref<PaginationContent<User> | null>(null)
@@ -95,6 +96,18 @@ export const useUserStore = defineStore('users', () => {
         }
     }
 
+    const create = async(payload: CreateUserPayload) => {
+        try {
+            
+            await createUserDataSource(payload)
+            showAlert('Éxito', 'Usuario creado con éxito', 'success');
+
+        } catch (error) {
+            console.error(error)
+            showAlert('Error', 'Hubo un error al crear el usuario', 'error');
+        }
+    }
+
     /**
      * The function `deleteUser` asynchronously deletes a user by their UUID, either through a fetch
      * request to an API or by filtering the local data, and displays a success or error message
@@ -145,6 +158,7 @@ export const useUserStore = defineStore('users', () => {
         fetchUsers,
         fetchUserInfo,
         fetchUserLookUp,
+        create,
         deleteUser,
         filteredUsers
     }

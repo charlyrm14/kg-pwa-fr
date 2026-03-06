@@ -1,14 +1,13 @@
 <script setup lang="ts">
     import UserHeader from '~/components/admin/users/UserHeader.vue';
     import CreateUser from '~/components/admin/users/CreateUser.vue';
-    import { useModalManager } from '#imports';
     import Breadcrumb from '~/components/common/Breadcrumb.vue';
     import DeleteUser from '~/components/admin/users/ConfirmUserDelete.vue';
     import UserTable from '~/components/admin/users/UserTable.vue';
     import UserPagination from '~/components/admin/users/UserPagination.vue';
     import { useUserStore } from '~/stores/users';
     import Alert from '~/components/common/Alert.vue';
-    import { useAlert } from '#imports';
+    import { useAlert, useModalManager,  } from '#imports';
     
     definePageMeta({
         layout: 'admin'
@@ -18,12 +17,16 @@
     const { alert } = useAlert()
     const userStore = useUserStore()
 
-    await useAsyncData('users', async() => {
+    const { refresh } = await useAsyncData('users', async() => {
         await userStore?.fetchUsers()
         return userStore?.users ?? { data: [] }
     }) 
 
     const users = computed(() => userStore?.filteredUsers)
+
+    const refreshData = async() => {
+        await refresh()
+    } 
 
 </script>
 
@@ -63,6 +66,7 @@
 
         <CreateUser 
             v-if="isOpen('CreateUserModal')"
+            @refreshUsers="refreshData"
             @closeCreateUserModal="close"/>
 
         <DeleteUser
