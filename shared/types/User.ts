@@ -139,3 +139,22 @@ export interface UserLookUpError {
     type: 'default' | 'found' | 'not-found' 
     message: string
 }
+
+export interface CreateUserPayload {
+    name: string
+    last_name: string
+    mother_last_name: string | null
+    email: string
+    birthdate: string
+    role_id: number
+}
+
+export interface CreateUserResponse {
+    name: string
+    last_name: string
+    mother_last_name: string | null
+    email: string
+    uuid: string
+    student_code: string
+    role: string
+}

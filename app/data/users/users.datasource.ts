@@ -1,5 +1,6 @@
-import type { UserFilters } from "~~/shared/types/User"
+import type { CreateUserPayload, UserFilters } from "~~/shared/types/User"
 import { 
+    createUserApi,
     deleteUserApi, 
     fetchUserInfoApi, 
     fetchUsersApi 
@@ -7,7 +8,8 @@ import {
 import { 
     fetchUsersMock, 
     fetchUserInfoMock, 
-    deleteUserMock
+    deleteUserMock,
+    createUserMock
 } from "~/utils/mocks/users.mock"
 
 export const fetchUsersDataSource = async(filters: UserFilters) => {
@@ -33,11 +35,24 @@ export const fetchUserInfoDataSource = async(uuid: string): Promise<ApiResponse<
     return fetchUserInfoApi(uuid)
 }
 
+export const createUserDataSource = (payload: CreateUserPayload) => {
+
+    const config = useRuntimeConfig()
+
+    const IS_MOCK_API_MODE = config.public.mockApiMode
+
+    if(IS_MOCK_API_MODE) {
+        return createUserMock(payload)
+    }
+
+    return createUserApi(payload)
+}
+
 export const deleteUserDataSource = async(uuid: string) => {
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
-    if(IS_MOCK_API_MODE) {
+    if(!IS_MOCK_API_MODE) {
         return deleteUserMock(uuid)
     }
 

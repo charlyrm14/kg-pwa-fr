@@ -1,6 +1,7 @@
 import type { ApiResponse, PaginationContent, UserBirthday, User } from "#imports"
-import type { UserFilters, UserInfo, UserProfileGeneralInfo } from "~~/shared/types/User"
+import type { CreateUserPayload, UserFilters, UserInfo, UserProfileGeneralInfo } from "~~/shared/types/User"
 import Shark from '~/assets/media/shark.png'
+import { adaptUser } from '~~/server/adapters/user.adapter'
 
 export const MOCK_USERS: PaginationContent<User> = {
     current_page: 1,
@@ -340,6 +341,12 @@ export const fetchUserInfoMock = async (uuid: string): Promise<ApiResponse<UserI
 
 export const updateUserProfileMock = async(): Promise<ApiResponse<UserProfileGeneralInfo>> => {
     return MOCK_UPDATE_PROFILE_DATA
+}
+
+export const createUserMock = (payload: CreateUserPayload) => {
+    return {
+        data: MOCK_USERS.data.unshift(adaptUser(payload))
+    }
 }
 
 export const deleteUserMock = async(uuid: string) => {
