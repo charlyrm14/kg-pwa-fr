@@ -132,6 +132,9 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
             role_id: 1,
             created_at: "2026-01-08",
             role_name: "Admin",
+            profile: {
+                birthdate: "1990-12-01"
+            },
             schedules: [
                 {
                     day_id: 1,
@@ -160,6 +163,7 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
             ],
             attendances: [
                 {
+                    id: 1,
                     day_id: 5,
                     day_name: "Viernes",
                     shorting_day: "V",
@@ -174,6 +178,7 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
                     created_at: "2026-01-09"
                 },
                 {
+                    id: 2,
                     day_id: 3,
                     day_name: "Miércoles",
                     shorting_day: "M",
@@ -187,7 +192,8 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
                     attendance_status_id: 1,
                     created_at: "2026-01-07"
                 }
-            ]
+            ],
+            progress: null
         },
         {
             name: "AI",
@@ -199,8 +205,10 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
             role_id: 2,
             created_at: "2026-01-10",
             role_name: "Profesor",
+            profile: null,
             schedules: [],
-            attendances: []
+            attendances: [],
+            progress: null
         },
         {
             name: "Virginia",
@@ -212,8 +220,10 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
             role_id: 1,
             created_at: "2026-01-10",
             role_name: "Admin",
+            profile: null,
             schedules: [],
-            attendances: []
+            attendances: [],
+            progress: null
         },
         {
             name: "Gregorio",
@@ -225,8 +235,10 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
             role_id: 2,
             created_at: "2026-01-10",
             role_name: "Profesor",
+            profile: null,
             schedules: [],
-            attendances: []
+            attendances: [],
+            progress: null
         },
         {
             name: "Valentina E",
@@ -238,8 +250,22 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
             role_id: 3,
             created_at: "2026-01-10",
             role_name: "Estudiante",
+            profile: {
+                birthdate: "2015-04-17"
+            },
             schedules: [],
-            attendances: []
+            attendances: [],
+            progress: {
+                category_id: 7,
+                category_name: "Estrella de Mar",
+                category_slug: "estrella-de-mar",
+                category_description: "Tu coordinación mejora y comienzas a nadar distancias más largas.",
+                progress_percentage: 60,
+                skills_completed: 1,
+                skills_total: 3,
+                started_at: "2026-01-07",
+                completed_at: null
+            }
         },
         {
             name: "Héctor A",
@@ -251,8 +277,10 @@ export const MOCK_USER_INFO: ApiResponse<UserInfo[]> = {
             role_id: 3,
             created_at: "2026-01-10",
             role_name: "Estudiante",
+            profile: null,
             schedules: [],
-            attendances: []
+            attendances: [],
+            progress: null
         }
     ]
 }

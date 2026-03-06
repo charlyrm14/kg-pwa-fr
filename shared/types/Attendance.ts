@@ -97,6 +97,7 @@ export interface AttendanceStatus {
 }
 
 export interface AttendanceUserInfo {
+    id: number
     day_id: number
     day_name: string
     shorting_day: string

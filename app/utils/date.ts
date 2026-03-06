@@ -147,3 +147,15 @@ export function extractHourMinutes(dateTime: string): string | null {
 
     return time
 }
+
+export const getDaysOfWeek = () => {
+    return [
+        { id: 1, label: 'Lunes', shortName: 'Lun' },
+        { id: 2, label: 'Martes', shortName: 'Mar' },
+        { id: 3, label: 'Miércoles', shortName: 'Mié' },
+        { id: 4, label: 'Jueves', shortName: 'Jue' },
+        { id: 5, label: 'Viernes', shortName: 'Vie' },
+        { id: 6, label: 'Sábado', shortName: 'Sáb' },
+        { id: 7, label: 'Domingo', shortName: 'Dom' }
+    ];
+};

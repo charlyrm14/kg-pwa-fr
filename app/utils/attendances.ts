@@ -62,5 +62,19 @@ export const textAttendanceStatusColors = (statusId: number) => {
         6: 'text-slate-400'
     }
 
-    return colors[statusId] ?? 'bg-pink-500'
+    return colors[statusId] ?? 'text-pink-500'
+}
+
+export const borderColorByAttendanceStatus = (statusId: number) => {
+
+    const colors: Record<string, string> = {
+        1: 'border-lime-500',
+        2: 'border-red-500',
+        3: 'border-yellow-500',
+        4: 'border-orange-400',
+        5: 'border-teal-600',
+        6: 'border-slate-400'
+    }
+
+    return colors[statusId] ?? 'border-pink-500'
 }

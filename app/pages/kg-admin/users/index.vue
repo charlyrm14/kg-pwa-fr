@@ -3,7 +3,7 @@
     import CreateUser from '~/components/admin/users/CreateUser.vue';
     import { useModalManager } from '#imports';
     import Breadcrumb from '~/components/common/Breadcrumb.vue';
-    import DeleteUser from '~/components/admin/users/DeleteUser.vue';
+    import DeleteUser from '~/components/admin/users/ConfirmUserDelete.vue';
     import UserTable from '~/components/admin/users/UserTable.vue';
     import UserPagination from '~/components/admin/users/UserPagination.vue';
     import { useUserStore } from '~/stores/users';
