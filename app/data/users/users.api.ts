@@ -1,6 +1,8 @@
 import type { 
     CreateUserPayload, 
     CreateUserResponse, 
+    UpdateUserPayload, 
+    UpdateUserResponse, 
     UserFilters 
 } from "~~/shared/types/User";
 import type { 
@@ -38,6 +40,18 @@ export const createUserApi = async(payload: CreateUserPayload) => {
         `${config.public.apiBaseUrl}/users`,
         {
             method: 'POST',
+            body: payload
+        }
+    )
+}
+
+export const updateUserApi = async(uuid: string, payload: UpdateUserPayload) => {
+    const config = useRuntimeConfig()
+
+    return await $fetch<ApiResponse<UpdateUserResponse>>(
+        `${config.public.apiBaseUrl}/users/${uuid}`,
+        {
+            method: 'PUT',
             body: payload
         }
     )

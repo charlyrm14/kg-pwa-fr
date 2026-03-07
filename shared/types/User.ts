@@ -158,3 +158,6 @@ export interface CreateUserResponse {
     student_code: string
     role: string
 }
+
+export type UpdateUserPayload = CreateUserPayload
+export type UpdateUserResponse = CreateUserResponse
