@@ -120,8 +120,13 @@
 
         <section v-if="tab === 3" class="my-3">
             <!-- Beginning User Settings -->
-            <UserDetailInfo v-if="user" :user="user"/>
-            <UserDelete v-if="user" :user="user"/>
+            <UserDetailInfo 
+                v-if="user" 
+                :user="user"
+                @refreshUserData="refreshData"/>
+            <UserDelete 
+                v-if="user" 
+                :user="user"/>
             <!-- End User Settings -->
         </section>
 

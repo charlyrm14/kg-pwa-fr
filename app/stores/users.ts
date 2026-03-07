@@ -5,15 +5,16 @@ import type {
     UserDelete, 
     UserLookUpError,
     RoleType,
-    CreateUserPayload
+    CreateUserPayload,
+    UpdateUserPayload
 } from "~~/shared/types/User"
-import type { PaginationContent } from "#imports"
-import { useAlert } from "#imports"
+import { useAlert, type PaginationContent } from "#imports"
 import { 
     createUserDataSource,
     deleteUserDataSource,
     fetchUserInfoDataSource, 
-    fetchUsersDataSource 
+    fetchUsersDataSource, 
+    updateUserDataSource
 } from "~/data/users/users.datasource"
 
 export const useUserStore = defineStore('users', () => {
@@ -96,6 +97,14 @@ export const useUserStore = defineStore('users', () => {
         }
     }
 
+    /**
+     * The `create` function asynchronously creates a user using the provided payload and displays a
+     * success or error alert message accordingly.
+     * @param {CreateUserPayload} payload - The `payload` parameter in the `create` function is of type
+     * `CreateUserPayload`. It likely contains the data needed to create a new user, such as the user's
+     * name, email, password, etc. This payload is passed to the `createUserDataSource` function to
+     * actually create the
+     */
     const create = async(payload: CreateUserPayload) => {
         try {
             
@@ -105,6 +114,20 @@ export const useUserStore = defineStore('users', () => {
         } catch (error) {
             console.error(error)
             showAlert('Error', 'Hubo un error al crear el usuario', 'error');
+        }
+    }
+
+    const update = async(uuid: string, payload: UpdateUserPayload) => {
+        try {
+
+            await updateUserDataSource(uuid, payload)
+
+            showAlert('Éxito', 'Usuario actualizado con éxito', 'success')
+            
+        } catch (error) {
+            showAlert('Error', 'Hubo un error al actualizar la información', 'error')
+            console.error(error)
+            throw error
         }
     }
 
@@ -159,6 +182,7 @@ export const useUserStore = defineStore('users', () => {
         fetchUserInfo,
         fetchUserLookUp,
         create,
+        update,
         deleteUser,
         filteredUsers
     }
