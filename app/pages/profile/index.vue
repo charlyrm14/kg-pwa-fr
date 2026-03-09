@@ -1,18 +1,18 @@
 <script setup lang="ts">
     import CoverUserProfile from '~/assets/media/pool.webp';
-    import { profileTabs } from '#imports';
-    import { useProfile } from '#imports';
-    import { useModalManager } from '#imports';
+    import { profileTabs, useAlert, useProfile, useModalManager } from '#imports';
     import AddHobbies from '~/components/user/profile/AddHobbies.vue';    
     import SelectProfileImage from '~/components/user/profile/SelectProfileImage.vue';
     import ProfileAvatar from '~/assets/media/training.webp'
+    import Alert from '~/components/common/Alert.vue';
 
     const config = useRuntimeConfig();
     
     const { fetchUserProfileData} = useProfile()
     const { open, isOpen, close } = useModalManager()
+    const { alert, closeAlert } = useAlert()
 
-    const { data: userData } = await useAsyncData(
+    const { data: userData, refresh } = await useAsyncData(
         'user-profile-data',
         fetchUserProfileData
     )
@@ -30,6 +30,7 @@
         return tab?.components ?? []
     })
 
+
     const user = computed(() => userData?.value?.data ?? null)
     const setAvatar = ref<string | null>(null)
 
@@ -45,10 +46,19 @@
         setAvatar.value = newAvatar
     }
 
+    const refreshData = async() => await refresh()
+
 </script>
 
 <template>
     <section>
+
+        <Alert 
+            v-if="alert.status" 
+            :title="alert.title" 
+            :description="alert.description" 
+            :type="alert.type" 
+            @closeAlert="closeAlert"/>
     
         <section>
             <div class="relative w-full">
@@ -99,12 +109,15 @@
 
         <section class="mt-6">
             <template v-if="Array.isArray(activeComponents)">
-                <component 
-                    v-for="(item, index) in activeComponents"
-                    :key="index"
-                    :is="item.component ?? item"
-                    v-bind="item.props"
-                    :user="user"/>
+                <div>
+                    <component 
+                        v-for="(item, index) in activeComponents"
+                        :key="index"
+                        :is="item.component ?? item"
+                        v-bind="item.props"
+                        :user="user"
+                        v-on="item.emitsRefresh ? { refreshData } : {}"/>
+                </div>
             </template>
             <template v-else>
                 <component :is="activeComponents" />

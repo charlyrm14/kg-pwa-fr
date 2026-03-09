@@ -114,14 +114,14 @@
 
             <div class="flex justify-end items-center gap-x-4 px-6 py-4 bg-white dark:bg-dark border-t border-gray-200 dark:border-dark-light shrink-0 sticky bottom-0">
                 <button
-                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-lg px-4 py-2"
+                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-full px-4 py-2 hover:text-red-500"
                     :class="isSubmitting ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"
                     @click="closeModal"> 
                         Cancelar 
                 </button>
                 <button
                     @click="handleSubmit"
-                    class="text-white px-4 py-2 rounded-lg hover:opacity-75"
+                    class="text-white px-4 py-2 rounded-full hover:opacity-75"
                     :class="!isSubmitting ? 'bg-blue-500 cursor-pointer' : 'bg-blue-300 cursor-not-allowed'"> 
                         Guardar
                 </button>
