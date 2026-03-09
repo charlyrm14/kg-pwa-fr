@@ -1,11 +1,15 @@
 <script setup lang="ts">
     import SectionTitle from '~/components/user/shared/SectionTitle.vue';
-    import type { UserProfileData } from '#imports';
+    import type { UserProfileResponse } from '#imports';
 
     const { open } = useModalManager()
 
     defineProps<{
-        user: UserProfileData | null
+        user: UserProfileResponse | null
+    }>()
+
+    const emit = defineEmits<{
+        (e: 'refreshData'): void
     }>()
 
 </script>
@@ -30,7 +34,7 @@
             </span>
             <span 
                 v-else
-                class="text-gray-600 dark:text-gray-300">
+                class="text-gray-600 dark:text-gray-300 font-semibold">
                     No hay hobbies agregados aún, ¡agrega algunos!
             </span>
         </div>

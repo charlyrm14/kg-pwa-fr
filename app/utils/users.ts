@@ -12,30 +12,30 @@ export const profileTabs = (): ProfileTab[] => {
             id: 1, 
             title: 'Logros', 
             components: [
-                { component: Achievement }
+                { component: Achievement, emitsRefresh: false },
             ] 
         },
         { 
             id: 2, 
             title: 'Perfil', 
             components: [
-                { component: AboutMe, props: { user: true }},
-                { component: Hobby, props: { user: true }}
+                { component: AboutMe, props: { user: true }, emitsRefresh: true},
+                { component: Hobby, props: { user: true }, emitsRefresh: true}
             ]
         },
         { 
             id: 3, 
             title: 'Información', 
             components: [ 
-                { component: Personal, props: { user: true }} 
-            ] 
+                { component: Personal, props: { user: true }, emitsRefresh: true} 
+            ],
         },
         { 
             id: 4, 
             title: 'Compartir', 
             components: [ 
-                { component: ShareProfile, props: { user: true }} 
-            ] 
+                { component: ShareProfile, props: { user: true }, emitsRefresh: false} 
+            ],
         },
     ];
 }
@@ -79,4 +79,18 @@ export const colorRoleDonut = (slug: string): string => {
     }
 
     return map[slug] ?? 'stroke-gray-400'
+}
+
+export const getGenderId = (gender: string | null) => {
+
+    if(!gender) return 0
+
+    const normalized = gender?.toLowerCase() as string;
+
+    const id: Record<string, number> = {
+        masculino: 1,
+        femenino: 2
+    }
+
+    return (id[normalized] ?? 0)
 }

@@ -1,6 +1,8 @@
-import type { UserProfilePayload } from "#imports"
-import type { ApiResponse } from "#imports"
-import type { UserProfileGeneralInfo } from "#imports"
+import type { 
+    ApiResponse, 
+    UserProfilePayload, 
+    UserProfileGeneralInfo 
+} from "#imports"
 import type { UserProfileResponse } from "~~/shared/types/User"
 
 export const fetchUserProfileApi = async() => {

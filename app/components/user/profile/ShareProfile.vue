@@ -1,10 +1,10 @@
 <script setup lang="ts">
     import SectionTitle from '../shared/SectionTitle.vue';
     import QRLink from '~/assets/media/github-cramos.png';
-    import type { UserProfileData } from '#imports';
+    import type { UserProfileResponse } from '#imports';
 
     defineProps<{
-        user: UserProfileData | null
+        user: UserProfileResponse | null
     }>()
 
 </script>

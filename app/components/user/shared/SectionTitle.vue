@@ -17,7 +17,7 @@
 
 <template>
     <h1 
-        class="text-xl font-light mb-4 gap-x-3 dark:text-white"
+        class="text-xl font-normal mb-4 gap-x-3 dark:text-white"
         :class="showIcon ? `flex justify-${align} items-center` : 'flex justify-start items-center'"> 
             {{ title }}
                 <slot v-if="showIcon" name="icon">
