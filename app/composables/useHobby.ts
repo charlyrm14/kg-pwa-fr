@@ -1,37 +1,31 @@
-import { MOCK_HOBBIES_LIST } from "~/utils/mocks/hobby.mock";
-import type { ApiResponse, HobbyData } from "#imports";
+import { addHobbiesDataSource, fetchHobbiesDataSource } from "~/data/hobbies/hobbies.datasource";
+import { useAlert } from "#imports";
 
 export function useHobby () {
 
-    const config = useRuntimeConfig();
-    const IS_MOCK_API_MODE = config.public.mockApiMode
-    const hobbies = ref<ApiResponse<HobbyData[]> | null>(null)
+    const { showAlert } = useAlert()
 
     const fetchHobbies = async() => {
         try {
-
-            if(IS_MOCK_API_MODE) {
-                
-                hobbies.value = MOCK_HOBBIES_LIST
-
-            } else {
-
-                const response = await $fetch<ApiResponse<HobbyData[]>>(
-                    `${config.public.apiBaseUrl}/hobbies`
-                )
-
-                hobbies.value = response
-            }
-
-            return hobbies.value
-            
+            return await fetchHobbiesDataSource()
         } catch (error) {
-            console.error('Error trying to get hobbies')
+            console.error(error)
+            throw error
+        }
+    }
+
+    const addHobbies = async(hobbies: Array<number>) => {
+        try {
+            await addHobbiesDataSource(hobbies)
+            showAlert('Éxito', 'Hobbies agregados con éxito', 'success')
+        } catch (error) {
+            showAlert('Error', 'Hubo un error al agregar tus hobbies', 'error')
+            console.error(error)
         }
     }
 
     return {
-        hobbies,
-        fetchHobbies
+        fetchHobbies,
+        addHobbies
     }
 }
