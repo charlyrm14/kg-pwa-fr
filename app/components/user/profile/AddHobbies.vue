@@ -1,24 +1,41 @@
 <script setup lang="ts">
 
-    import { useHobby } from '#imports';
+    import { 
+        useHobby, 
+        type HobbyData, 
+        type ApiResponse 
+    } from '#imports';
 
-    defineEmits<{
-        (e: 'closeAddHobbiesModal'): void
+    const props = defineProps<{
+        userHobbies: Omit<HobbyData, 'slug'>[]
     }>()
 
-    const { hobbies, fetchHobbies} = useHobby()
+    const emit = defineEmits<{
+        (e: 'closeAddHobbiesModal'): void,
+        (e: 'refreshUserData'): void
+    }>()
+
+    const { fetchHobbies, addHobbies } = useHobby()
+    const hobbies = ref<ApiResponse<HobbyData[]> | null>(null)
 
     onMounted(async() => {
         try {
-            await fetchHobbies()
+            const response = await fetchHobbies()
+            hobbies.value = response
+            
+            if (props.userHobbies?.length) {
+                hobbiesSelected.value = props.userHobbies.map(h => h.id)
+            }
+
         } catch(error) {
-            console.error('Error to get hobbies')
+            console.error(error)
         }
     })
 
     const isSubmitting = ref<boolean>(false)
     const hobbiesSelected = ref<number[]>([])
     const error = ref<boolean>(false)
+
 
     const addHobby = (idHobby: number) => {
         const index = hobbiesSelected.value.indexOf(idHobby)
@@ -30,25 +47,39 @@
         }
     }
 
-    const handleSubmit = () => {
+    const isSelected = (id: number) => {
+        return hobbiesSelected.value.includes(id)
+            ? 'bg-sky-500 text-white'
+            : 'bg-gray-100 dark:bg-dark-extralight dark:text-gray-300'
+    }
+
+    const handleSubmit = async() => {
 
         if(hobbiesSelected.value.length === 0) {
             error.value = true
             return
         }
 
-        error.value = false
-    
         isSubmitting.value = true
-        setTimeout(() => {
+
+        try {
+
+            await addHobbies(hobbiesSelected.value)
+            emit('refreshUserData')
+            
+        } catch (error) {
+            console.error(error)
+        } finally {
+            error.value = false
             isSubmitting.value = false
-        }, 4000);
+            emit('closeAddHobbiesModal')
+        }
     }
 
 </script>
 
 <template>
-    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-55">
         <div class="bg-white dark:bg-dark rounded-2xl shadow-xl w-[85%] max-w-md md:w-4/5 md:max-w-xl mx-4 max-h-[90dvh] flex flex-col">
             <div class="flex justify-between items-center mb-4 border-b border-gray-200 dark:border-dark-light px-6 py-4 shrink-0">
                 <h2 class="text-xl font-extralight text-slate-800 dark:text-white flex items-center gap-2"> 
@@ -74,8 +105,8 @@
                     <span 
                         v-for="hobby in hobbies?.data"
                         :key="hobby.id"
-                        class="rounded-full px-4 py-1.5 hover:opacity-75 cursor-pointer inline-block mb-2"
-                        :class="hobbiesSelected.includes(hobby.id) ? 'bg-blue-500 text-white' : 'bg-gray-100 dark:bg-dark-extralight dark:text-gray-300'"
+                        class="rounded-full px-4 py-1 hover:opacity-75 cursor-pointer inline-block mb-2"
+                        :class="isSelected(hobby.id)"
                         @click="addHobby(hobby.id)"> 
                             {{ hobby?.name ?? 'unknown' }}
                     </span>
@@ -84,7 +115,7 @@
 
             <div class="flex justify-end items-center gap-x-4 px-6 py-4 bg-white dark:bg-dark border-t border-gray-200 dark:border-dark-light shrink-0 sticky bottom-0">
                 <button
-                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-lg px-4 py-2"
+                    class="bg-gray-100 dark:bg-dark-extralight text-gray-400 dark:text-gray-500 rounded-full px-4 py-2"
                     :class="isSubmitting ? 'cursor-not-allowed' : 'cursor-pointer hover:text-red-500'"
                     :disabled="isSubmitting"
                     @click="$emit('closeAddHobbiesModal')"> 
@@ -93,7 +124,7 @@
                 <button
                     :disabled="isSubmitting"
                     @click="handleSubmit"
-                    class="text-white px-4 py-2 rounded-lg hover:opacity-75"
+                    class="text-white px-4 py-2 rounded-full hover:opacity-75"
                     :class="isSubmitting ? 'bg-blue-300 cursor-progress' : 'bg-blue-500 cursor-pointer'"> 
                         {{ !isSubmitting ? 'Guardar' : 'Guardando' }} 
                 </button>

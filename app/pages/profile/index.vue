@@ -9,7 +9,7 @@
     const config = useRuntimeConfig();
     
     const { fetchUserProfileData} = useProfile()
-    const { open, isOpen, close } = useModalManager()
+    const { open, isOpen, close, modalPayload } = useModalManager()
     const { alert, closeAlert } = useAlert()
 
     const { data: userData, refresh } = await useAsyncData(
@@ -131,6 +131,8 @@
 
         <AddHobbies
             v-if="isOpen('AddHobbiesModal')"
+            :user-hobbies="modalPayload?.userHobbies"
+            @refreshUserData="refreshData"
             @closeAddHobbiesModal="close"/>
 
     </section>
