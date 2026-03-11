@@ -5,6 +5,7 @@
         type HobbyData, 
         type ApiResponse 
     } from '#imports';
+import type { ErrorHobbiesValidation } from '~~/shared/types/Hobby';
 
     const props = defineProps<{
         userHobbies: Omit<HobbyData, 'slug'>[]
@@ -34,14 +35,19 @@
 
     const isSubmitting = ref<boolean>(false)
     const hobbiesSelected = ref<number[]>([])
-    const error = ref<boolean>(false)
+
+    const validation = reactive<ErrorHobbiesValidation>({
+        status: false,
+        message: ""
+    })
 
 
     const addHobby = (idHobby: number) => {
         const index = hobbiesSelected.value.indexOf(idHobby)
         if (index === -1) { // Si no existe se agrega
             hobbiesSelected.value.push(idHobby)
-            error.value = false
+            validation.status = false
+            validation.message = ""
         } else { // Si existe se elimina
             hobbiesSelected.value.splice(index, 1)
         }
@@ -56,7 +62,14 @@
     const handleSubmit = async() => {
 
         if(hobbiesSelected.value.length === 0) {
-            error.value = true
+            validation.status = true
+            validation.message = "Selecciona al menos un pasatiempo"
+            return
+        }
+
+        if(hobbiesSelected.value.length > 8) {
+            validation.status = true
+            validation.message = "Alcanzaste el número máximo de hobbies"
             return
         }
 
@@ -70,7 +83,8 @@
         } catch (error) {
             console.error(error)
         } finally {
-            error.value = false
+            validation.status = false
+            validation.message = ""
             isSubmitting.value = false
             emit('closeAddHobbiesModal')
         }
@@ -97,9 +111,9 @@
 
             <div class="mt-2 px-6 py-2 flex-1 overflow-y-auto">
                 <h4 class="text-slate-800 dark:text-gray-300 mb-4"> Selecciona tus pasatiempos favoritos </h4>
-                <div v-if="error"
+                <div v-if="validation"
                     class="my-4">
-                        <p class="text-sm text-red-500"> Selecciona al menos un pasatiempo </p>
+                        <p class="text-sm text-red-500"> {{ validation?.message }} </p>
                 </div>
                 <div class="mt-3 space-x-2">
                     <span 

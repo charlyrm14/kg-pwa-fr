@@ -1,10 +1,12 @@
 import type { UserProfilePayload } from "~~/shared/types/User"
-import { useMedia } from "#imports"
+import { 
+    useMedia, 
+    useAlert 
+} from "#imports"
 import { 
     fetchUserProfileDataSource,
     updateProfileDataSource 
 } from "~/data/profile/profile.datasource"
-import { useAlert } from "#imports"
 
 export function useProfile () {
 
@@ -17,8 +19,9 @@ export function useProfile () {
 
     const updateProfile = async(payload: UserProfilePayload) => {
         try {
-            await updateProfileDataSource(payload)
+            const response = await updateProfileDataSource(payload)
             showAlert('Éxito', 'Datos actualizados con éxito', 'success')
+            return response
         } catch (error) {
             showAlert('Error', 'Hubo un error al actualizar los datos', 'error')
             console.error(error)

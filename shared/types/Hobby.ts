@@ -3,3 +3,8 @@ export interface HobbyData {
     name: string
     slug: string
 }
+
+export interface ErrorHobbiesValidation {
+    status: boolean
+    message: string
+}

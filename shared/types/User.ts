@@ -65,7 +65,7 @@ export interface UserBirthday {
     uuid: string
     student_code: string | null
     profile: UserProfileBirthday
-    current_level: string | null
+    current_level: CurrentLevelCategory | null
 }
 
 export interface UserFilters {

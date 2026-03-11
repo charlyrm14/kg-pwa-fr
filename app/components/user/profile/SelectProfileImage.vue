@@ -1,6 +1,5 @@
 <script setup lang="ts">
-    import { useImagePicker } from '#imports';
-    import { useProfile } from '#imports';
+    import { useImagePicker, useProfile } from '#imports';
     import ProfileAvatar from '~/assets/media/shark.png'
 
     const config = useRuntimeConfig();
@@ -39,7 +38,7 @@
         try {
             
             const response = await uploadAvatar(file.value as File)
-            console.log(response)
+
             if (response?.data?.profile_image?.path) {
                 emit('avatar-updated', `${config.public.apiMediaBaseUrl}/${response?.data?.profile_image?.path }`)
                 emit('closeSelectProfileImageModal')
