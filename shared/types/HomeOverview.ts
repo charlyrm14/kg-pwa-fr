@@ -1,20 +1,16 @@
-export interface CurrentLevelHome {
-    category_name: string
-    total_progress: number
-    total_progress_formatted: string
-}
+import type { CurrentLevelCategory, NextLevelCategory } from "./StudentProgram"
 
 export interface LastEventHome {
-    title: string
-    slug: string
-    content: string
-    published_at: string
-    location: string
-    start_date: string
-    start_hour: string
-    end_date: string
-    end_hour: string
-    remaining_time: string
+    title: string | null
+    slug: string | null
+    content: string | null
+    published_at: string | null
+    location: string | null
+    start_date: string | null
+    start_hour: string | null
+    end_date: string | null
+    end_hour: string | null
+    remaining_time: string | null
 }
 
 export interface LastReminderHome {
@@ -36,9 +32,9 @@ export interface HomeUser {
     uuid: string
     student_code: string | null
     role: string
-    current_level: CurrentLevelHome | null
-    next_level: string | null
-    last_event: LastEventHome | null
+    current_level: CurrentLevelCategory | null
+    next_level: NextLevelCategory | null
+    last_event: LastEventHome
     last_reminder: LastReminderHome | null
     todays_birthdays: TodayBirthdays[] | null
 }

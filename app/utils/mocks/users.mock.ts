@@ -101,7 +101,7 @@ export const MOCK_USER_BIRTHDAY: ApiResponse<UserBirthday[]> = {
                 age: 35,
                 gender: "MASCULINO"
             },
-            current_level: "Nivel Foca"
+            current_level: null
         }, 
         {
             name: "Valentina E.",
@@ -116,7 +116,17 @@ export const MOCK_USER_BIRTHDAY: ApiResponse<UserBirthday[]> = {
                 age: 10,
                 gender: "FEMENINO"
             },
-            current_level: "Nivel Foca"
+            current_level: {
+                category_id: 7,
+                category_name: "Estrella de Mar",
+                category_slug: "estrella-de-mar",
+                category_description: "Tu coordinación mejora y comienzas a nadar distancias más largas.",
+                progress_percentage: 0,
+                skills_completed: 0,
+                skills_total: 3,
+                started_at: "2026-03-11",
+                completed_at: null
+            }
         }
     ]
 }

@@ -10,10 +10,31 @@
         const { fetchHomeOverview } = useHomeOverview()
         return await fetchHomeOverview()
     })
+
+    const lastEvent = computed(() => homeData?.value?.data 
+        ? homeData?.value?.data?.last_event 
+        : null
+    )
+
+    const currentLevel = computed(() => homeData?.value?.data 
+        ? homeData?.value?.data?.current_level 
+        : null
+    )
     
-    const nextLevel = computed(() => {
-        return homeData.value?.data?.next_level ?? 'TORTUGA'
-    })
+    const nextLevel = computed(() => homeData?.value?.data 
+        ? homeData?.value?.data?.next_level
+        : null
+    )
+
+    const lastReminder = computed(() => homeData?.value?.data 
+        ? homeData?.value?.data?.last_reminder
+        : null
+    )
+
+    const birthdays = computed(() => homeData?.value?.data 
+        ? homeData?.value?.data?.todays_birthdays
+        : null
+    )
 
 </script>
 
@@ -21,8 +42,8 @@
     <section>
 
         <!-- Beginning Next Event -->
-        <section v-if="homeData?.data?.last_event">
-            <NextEvent :lastEvent="homeData?.data?.last_event"/>
+        <section v-if="lastEvent && lastEvent.slug">
+            <NextEvent :last-event="lastEvent"/>
         </section>
         <!-- End Next Event -->
 
@@ -31,22 +52,22 @@
         <!-- End Explore -->
         
         <!-- Beginning Current Level -->
-        <section v-if="homeData?.data?.current_level">
+        <section v-if="currentLevel && nextLevel">
             <CurrentLevel 
-                :currentLevel="homeData?.data?.current_level"
+                :currentLevel="currentLevel"
                 :next_level="nextLevel"/>
         </section>
         <!-- End Current Level -->
 
         <!-- Beginning Reminder -->
-        <section v-if="homeData?.data?.last_reminder">
-            <Reminders :reminder="homeData?.data?.last_reminder"/>
+        <section v-if="lastReminder">
+            <Reminders :reminder="lastReminder"/>
         </section>
         <!-- End reminder -->
 
         <!-- Beginning Users birthday -->
-        <section v-if="homeData?.data?.todays_birthdays">
-            <BirthdayToday :todaysBirthdays="homeData?.data?.todays_birthdays"/>
+        <section v-if="birthdays">
+            <BirthdayToday :todays-birthdays="birthdays"/>
         </section>
         <!-- End Users birthday -->
 

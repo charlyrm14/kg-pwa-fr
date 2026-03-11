@@ -1,5 +1,4 @@
-import type { ApiResponse } from "#imports"
-import type { HomeUser } from "#imports"
+import type { ApiResponse, HomeUser } from "#imports"
 
 export const HOME_OVERVIEW: ApiResponse<HomeUser> = {
     data: {
@@ -11,22 +10,33 @@ export const HOME_OVERVIEW: ApiResponse<HomeUser> = {
         student_code: null,
         role: "Admin",
         current_level: {
-            category_name: "Tortuga",
-            total_progress: 45,
-            total_progress_formatted: "45%"
+            category_id: 7,
+            category_name: "Estrella de Mar",
+            category_slug: "estrella-de-mar",
+            category_description: "Tu coordinación mejora y comienzas a nadar distancias más largas.",
+            progress_percentage: 0,
+            skills_completed: 0,
+            skills_total: 3,
+            started_at: "2026-03-11",
+            completed_at: null
         },
-        next_level: "Mantarraya",
+        next_level: {
+            category_id: 8,
+            category_name: "Delfín",
+            category_slug: "delfin",
+            category_description: "Tu técnica es cada vez más sólida. Ya dominas más de un estilo."
+        },
         last_event: {
-            title: "Todo Listo para la Copa Regional de Natación 2025",
-            slug: "todo-listo-para-la-copa-regional-de-natacion-2025",
-            content: "La emoción crece entre los amantes de la natación, ya que este sábado dará inicio la Copa Regional de Natación 2025, uno de los eventos más esperados del año para atletas jóvenes y experimentados. Más de 250 nadadores provenientes de distintas escuelas y clubes competirán en pruebas que van desde 50 metros libres hasta 200 metros mariposa, distribuidas en categorías por edad. El evento se llevará a cabo en el Complejo Acuático King Dreams, reconocido por sus instalaciones de nivel profesional. Entrenadores y familias ya anticipan jornadas llenas de energía, marcas personales y destacadas actuaciones. Los organizadores destacaron que la competencia busca no solo promover el alto rendimiento, sino también fortalecer la convivencia deportiva y el desarrollo de nuevos talentos. Las pruebas comenzarán a las 8:00 a.m., y el acceso al público será totalmente gratuito, fomentando así la participación de la comunidad en este importante encuentro acuático.",
-            published_at: "2025-11-13",
+            title: "Triatlón Copa del Océano 2026",
+            slug: "triatlon-copa-del-oceano-2026",
+            content: "¡Inscríbete y Desafía tus Límites en el Paraíso Costero! Fecha: Sábado 12 de abril de 2026 Lugar: Playa Esmeralda, Costa del Pacífico Distancias: Olímpica (1.5 km Natación / 40 km Ciclismo / 10 km Carrera) Descripción del Evento: El Triatlón Copa del Océano regresa en su tercera edición, ofreciendo una de las rutas más desafiantes y espectaculares del calendario nacional. La competencia se desarrollará en el entorno incomparable de Playa Esmeralda, comenzando con un tramo de natación en aguas cristalinas, seguido por un recorrido en bicicleta con vistas panorámicas a la costa y finalizando con una carrera a pie a lo largo del malecón principal.",
+            published_at: null,
             location: "Nextlalpan, Edo. de México",
-            start_date: "2026-01-26",
+            start_date: "2026-03-12",
             start_hour: "09:00",
-            end_date: "2026-01-26",
-            end_hour: "14:00",
-            remaining_time: "40 días"
+            end_date: "2026-03-12",
+            end_hour: "12:00",
+            remaining_time: "19.981008565556 horas"
         },
         last_reminder: {
             title: "Próximo pago",

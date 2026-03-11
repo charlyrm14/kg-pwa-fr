@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import { useUserBirthday } from '#imports';
     import { 
         textColorByGender, 
-        borderColorByGender 
+        borderColorByGender ,
+        useUserBirthday
     } from '#imports';
 
     const { $confetti } = useNuxtApp()
@@ -72,7 +72,7 @@
                         <div>
                             <h4 class="dark:text-white text-xl font-extrabold"> {{ user?.name}} </h4>
                             <span class="font-bold" :class="textColorByGender(user?.profile?.gender)"> {{ user?.profile?.age }} años 
-                                <span class="text-gray-400 dark:text-gray-500"> · {{ user?.current_level }}  </span> 
+                                <span class="text-amber-500"> {{ user?.current_level ? `· ${user?.current_level?.category_name}` : '' }}  </span> 
                             </span>
                         </div>
                     </div>
