@@ -1,9 +1,11 @@
 <script setup lang="ts">
     import Footer from '~/components/user/layouts/Footer.vue';
     import Header from '~/components/user/layouts/Header.vue';
-    import { useBrowserNotifications } from '#imports';
-    import { usePushNotifications } from '#imports';
-    import { useInstallApp } from '#imports';
+    import { 
+        useBrowserNotifications, 
+        usePushNotifications, 
+        useInstallApp 
+    } from '#imports';
 
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode

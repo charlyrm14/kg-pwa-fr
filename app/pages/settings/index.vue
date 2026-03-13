@@ -1,12 +1,18 @@
 <script setup lang="ts">
     import ChangeTheme from '~/components/user/settings/ChangeTheme.vue';
     import SectionTitle from '~/components/user/shared/SectionTitle.vue';
+    import LogoutCard from '~/components/user/settings/LogoutCard.vue';
+
+    definePageMeta({
+        middleware: ['auth']
+    })
     
 </script>
 
 <template>
     <section>
 
+        <!-- Beginning Notifications -->
         <section>
             <div>
                 <SectionTitle title="Notificaciones"/>
@@ -53,13 +59,27 @@
                 </div>
             </div>
         </section>
+        <!-- End Notifications -->
 
+
+        <!-- Beginning Theme -->
         <section class="mt-6">
             <div>
                 <SectionTitle title="Pantalla"/>
                 <ChangeTheme/>
             </div>
         </section>
+        <!-- End Theme -->
+
+        <!-- Beginning Logout -->
+        <section class="mt-6">
+            <div>
+                <SectionTitle title="Sesión"/>
+                <LogoutCard/>
+            </div>
+        </section>
+        <!-- End Logout -->
+
         
     </section>
 </template>

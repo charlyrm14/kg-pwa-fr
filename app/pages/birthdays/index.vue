@@ -5,6 +5,10 @@
         useUserBirthday
     } from '#imports';
 
+    definePageMeta({
+        middleware: ['auth']
+    })
+
     const { $confetti } = useNuxtApp()
     const { fetchUsersBirthday } = useUserBirthday();
 

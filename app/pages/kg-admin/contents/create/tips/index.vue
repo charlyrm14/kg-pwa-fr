@@ -10,7 +10,8 @@
     import { useMediaUploadStore } from '~/stores/mediaUpload';
 
     definePageMeta({
-        layout: 'admin'
+        layout: 'admin',
+        middleware: ['auth']
     })
 
     const contentStore = useContentStore()

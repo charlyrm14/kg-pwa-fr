@@ -10,7 +10,8 @@
     import { useAlert, useModalManager,  } from '#imports';
     
     definePageMeta({
-        layout: 'admin'
+        layout: 'admin',
+        middleware: ['auth']
     });
 
     const { modalPayload, close, isOpen } = useModalManager()

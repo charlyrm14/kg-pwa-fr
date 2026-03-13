@@ -11,6 +11,10 @@
         profileTabs 
     } from '#imports';
 
+    definePageMeta({
+        middleware: ['auth']
+    })
+
     const config = useRuntimeConfig();
 
     const route = useRoute()

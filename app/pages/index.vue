@@ -4,8 +4,15 @@
     import CurrentLevel from '~/components/user/home/CurrentLevel.vue';
     import NextEvent from '~/components/user/home/NextEvent.vue';
     import Reminders from '~/components/user/home/Reminders.vue';
-    import { useHomeOverview } from '#imports';
+    import Alert from '~/components/common/Alert.vue';
+    import { useHomeOverview, useAlert } from '#imports';
 
+    definePageMeta({
+        middleware: ['auth']
+    })
+
+    const { alert, closeAlert } = useAlert()
+    
     const { data: homeData } = await useAsyncData('home-overview', async() => {
         const { fetchHomeOverview } = useHomeOverview()
         return await fetchHomeOverview()
@@ -40,6 +47,13 @@
 
 <template>
     <section>
+
+        <Alert 
+            v-if="alert.status" 
+            :title="alert.title" 
+            :description="alert.description" 
+            :type="alert.type" 
+            @closeAlert="closeAlert"/>
 
         <!-- Beginning Next Event -->
         <section v-if="lastEvent && lastEvent.slug">

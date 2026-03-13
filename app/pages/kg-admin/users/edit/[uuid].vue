@@ -16,7 +16,8 @@
     import ConfirmUserDelete from '~/components/admin/users/ConfirmUserDelete.vue';
 
     definePageMeta({
-        layout: 'admin'
+        layout: 'admin',
+        middleware: ['auth']
     })
 
     const route = useRoute()

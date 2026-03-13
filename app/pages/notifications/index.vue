@@ -2,6 +2,10 @@
     import NotificationItem from '~/components/user/notifications/NotificationItem.vue';
     import { useNotifications } from '#imports';
 
+    definePageMeta({
+        middleware: ['auth']
+    })
+
     const { fetchUserNotifications } = useNotifications()
     
     const { data: notifications, pending, error } = await useAsyncData('user-notifications', 

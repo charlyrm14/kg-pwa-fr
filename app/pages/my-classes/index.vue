@@ -5,6 +5,10 @@
     import AttendanceCurrentMonth from '~/components/user/attendances/AttendanceCurrentMonth.vue';
     import AttendanceByMonth from '~/components/user/attendances/AttendanceByMonth.vue';
     import AttendancesStatuses from '~/components/user/attendances/AttendancesStatuses.vue';
+
+    definePageMeta({
+        middleware: ['auth']
+    })
     
     const { data: schedule } = await useAsyncData('schedule', async() => {
         const { fetchUserSchedule } = useSchedule()
