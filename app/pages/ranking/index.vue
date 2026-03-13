@@ -2,9 +2,12 @@
     import SectionTitle from '~/components/user/shared/SectionTitle.vue';
     import ContendersTable from '~/components/user/ranking/ContendersTable.vue';
     import Podium from '~/components/user/ranking/Podium.vue';
-    import { useRanking } from '#imports';
+    import { useRanking, periodSectionTitle } from '#imports';
     import type { TypePeriod } from '~~/shared/types/Ranking';
-    import { periodSectionTitle } from '#imports';
+
+    definePageMeta({
+        middleware: ['auth']
+    })
     
     const { $confetti } = useNuxtApp()
     const { fetchRanking } = useRanking()

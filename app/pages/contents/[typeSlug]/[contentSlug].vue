@@ -1,9 +1,18 @@
 <script setup lang="ts">
     import Alert from '~/components/common/Alert.vue'
     import ShareContent from '~/components/user/contents/ShareContent.vue'
-    import { colorByContentType, contentSectionTitle, contentTypeImage } from '#imports'
     import { useContentStore } from '~/stores/contents'
-    import { useFavorites, useAlert } from '#imports'
+    import { 
+        colorByContentType, 
+        contentSectionTitle, 
+        contentTypeImage, 
+        useFavorites, 
+        useAlert 
+    } from '#imports'
+
+    definePageMeta({
+        middleware: ['auth']
+    })
     
     const route = useRoute()
     const slugParam = route.params.contentSlug

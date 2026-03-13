@@ -8,7 +8,8 @@
     import Alert from '~/components/common/Alert.vue';
 
     definePageMeta({
-        layout: 'admin'
+        layout: 'admin',
+        middleware: ['auth']
     })
 
     const route = useRoute()

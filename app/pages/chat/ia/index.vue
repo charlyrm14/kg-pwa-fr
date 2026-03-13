@@ -2,6 +2,10 @@
     import { useChat, type HistoryChatMessage } from '#imports';
     import MessageCard from '~/components/user/chat/MessageCard.vue';
     import SkeletonChat from '~/components/user/chat/SkeletonChat.vue';
+
+    definePageMeta({
+        middleware: ['auth']
+    })
     
     const { 
         createChat, 

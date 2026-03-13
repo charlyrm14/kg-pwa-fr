@@ -5,6 +5,10 @@
     import StudentCurrentLevelCard from '~/components/user/progress/StudentCurrentLevelCard.vue'
     import SkillCurrentLevelCard from '~/components/user/progress/SkillCurrentLevelCard.vue'
 
+    definePageMeta({
+        middleware: ['auth']
+    })
+
     const { fetchSwimProgram } = useSwimProgram()
     const { fetchStudentProgram } = useStudentProgram()
 

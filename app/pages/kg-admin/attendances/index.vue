@@ -11,7 +11,8 @@
     import { useAlert } from '~/composables/useAlert';
     
     definePageMeta({
-        layout: 'admin'
+        layout: 'admin',
+        middleware: ['auth']
     })
 
     const { modalPayload, close, isOpen } = useModalManager()

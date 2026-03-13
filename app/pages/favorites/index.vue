@@ -1,11 +1,17 @@
 <script setup lang="ts">
-    import { useFavorites } from '#imports';
     import CoverCard  from '~/assets/media/card-news.png'
     import Hearth from '~/assets/media/hearth.png'
-    import { useAlert } from '#imports';
     import Alert from '~/components/common/Alert.vue';
-    import { colorByContentType } from '#imports';
-    import { contentSectionTitle } from '#imports';
+    import { 
+        colorByContentType, 
+        contentSectionTitle, 
+        useFavorites, 
+        useAlert 
+    } from '#imports';
+
+    definePageMeta({
+        middleware: ['auth']
+    })
     
     const { favorites, removeFromFavorite } = useFavorites()
     const { alert, closeAlert } = useAlert()

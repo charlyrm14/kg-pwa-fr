@@ -10,7 +10,8 @@
     import UploaderFile from '~/components/common/UploaderFile.vue';
 
     definePageMeta({
-        layout: 'admin'
+        layout: 'admin',
+        middleware: ['auth']
     })
 
     

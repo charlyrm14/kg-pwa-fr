@@ -10,7 +10,8 @@
     import { usePaymentStore } from '~/stores/payments';
 
     definePageMeta({
-        layout: 'admin'
+        layout: 'admin',
+        middleware: ['auth']
     })
 
     const { alert, closeAlert } = useAlert()

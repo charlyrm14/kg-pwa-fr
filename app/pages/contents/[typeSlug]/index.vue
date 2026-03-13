@@ -3,6 +3,10 @@
     import { contentTitle } from '#imports';
     import ContentItem from '~/components/user/contents/ContentItem.vue';
     import { useContentStore } from '~/stores/contents';
+
+    definePageMeta({
+        middleware: ['auth']
+    })
     
     const contentStore = useContentStore()
 

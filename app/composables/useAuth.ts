@@ -1,80 +1,61 @@
-import { MOCK_USER_CREDENTIALS, MOCK_TOKEN_COOKIE } from "~/utils/mocks/auth.mock";
+import { useAlert } from "#imports"
+import { loginDataSource, logoutDataSource } from "~/data/auth/auth.datasource"
 
 export function useAuth() {
 
-    const config = useRuntimeConfig();
+    const { showAlert } = useAlert()
 
-    type ErrorState = {
-        status: boolean
-        description: string
+    const user = useState<any | null>('auth:user', () => null)
+
+    const setUser = (data: any) => {
+        user.value = data
     }
 
-    const token = useCookie<string | null>(config.public.tokenAccessName)
-    const error = reactive<ErrorState>({
-        status: false,
-        description: '',
-    })
-
-    const IS_MOCK_API_MODE = config.public.mockApiMode
-
-    let initialAuthStatus: boolean;
-
-    if (IS_MOCK_API_MODE) {
-        initialAuthStatus = false;
-    } else {
-        initialAuthStatus = true; 
+    const clearUser = () => {
+        user.value = null
     }
-
-    const isAuthenticated = ref<boolean>(initialAuthStatus)
-
+    
     const login = async(email: string, password: string) => {
         try {
 
-            if(IS_MOCK_API_MODE) {
+            const response = await loginDataSource(email, password)
+            setUser(response.data.user)
+            await navigateTo('/')
+            showAlert('Éxito', `Bienvenido ${response.data.user.name ?? ''}`, 'success')
+            
+        } catch (error: any) {
+            console.error(error)
+            const status = error?.status || error?.statusCode
 
-                await new Promise(resolve => setTimeout(resolve, 800))
-                
-                if(email === MOCK_USER_CREDENTIALS.email && password === MOCK_USER_CREDENTIALS.password) {
-
-                    token.value = MOCK_TOKEN_COOKIE
-                    isAuthenticated.value = true
-                    await navigateTo('/')
-                    
-                } else {
-                    
-                    handleError('Invalid credentials Dude')
-                    throw new Error('Invalid mock credentials')
-                }
-
-            } else {
-                console.log('API login functionality')
+            if (status === 401) {
+                showAlert('Error', 'Credenciales invalidas', 'error')
             }
 
-        } catch(e: any) {
+            if (status === 403) {
+                showAlert('Error', 'Password change required', 'error')
+            }
 
-            console.log('Error during login process:' + e)
-
-        } 
+        }
     }
 
-    const handleError = (description: string) => {
-        error.status = true
-        error.description = description
-        resetError()
-    }
+    const logout = async() => {
+        try {
 
-    const resetError = () => {
-        setTimeout(() => {
-            error.status = false
-            error.description = ''
-        }, 4000);
+            await logoutDataSource()
+            
+        } catch (error) {
+            console.error(error)
+        } finally {
+            clearUser()
+            await navigateTo('/login')
+        }
     }
 
     return {
-        isAuthenticated,
-        error,
-        IS_MOCK_API_MODE,
-        MOCK_USER_CREDENTIALS,
-        login
+        user,
+        setUser,
+        clearUser,
+        login,
+        logout
     }
 }
