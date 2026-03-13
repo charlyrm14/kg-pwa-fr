@@ -1,8 +1,8 @@
+import { authApi } from "../auth/auth.api"
+
 export const fetchHomeOverviewApi = async(): Promise<ApiResponse<HomeUser>> => {
     
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<HomeUser>>(
-        `${config.public.apiBaseUrl}/overview/user`
-    )
+    return await api<ApiResponse<HomeUser>>('/overview/user')
 }
