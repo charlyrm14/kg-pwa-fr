@@ -73,7 +73,7 @@
         </NuxtLink>
 
         <NuxtLink 
-            to="/profile"
+            to="/profile/cb0e7925-dc39-45a6-bf9f-e53643acf830"
             class="flex items-center text-gray-400 hover:text-white"
             :class="route.path === '/profile' 
                 ? 'gap-2 bg-blue-500 px-5 py-2 rounded-full text-white shadow-inner flex-shrink-0' 

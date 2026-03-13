@@ -13,6 +13,7 @@ export interface User {
     last_name: string
     mother_last_name: string | null
     email: string
+    username: string
     uuid: string
     student_code: string | null
     role_id: number
@@ -39,10 +40,9 @@ export interface UserProfileResponse {
     last_name: string
     mother_last_name: string | null
     email: string
-    force_password_change: number
+    username: string
     uuid: string
     student_code: string | null
-    role: string
     profile: ProfileData | null
     hobbies: Hobby[]
     profile_image: UserProfileImage | null
@@ -79,6 +79,7 @@ export interface UserInfo {
     last_name: string
     mother_last_name: string | null
     email: string
+    username: string
     uuid: string
     student_code: string | null
     role_id: number
@@ -154,10 +155,20 @@ export interface CreateUserResponse {
     last_name: string
     mother_last_name: string | null
     email: string
+    username: string
     uuid: string
     student_code: string
     role: string
 }
 
-export type UpdateUserPayload = CreateUserPayload
+export type UpdateUserPayload = {
+    name: string
+    last_name: string
+    mother_last_name: string | null
+    username: string | null
+    email: string
+    birthdate: string
+    role_id?: number
+}
+
 export type UpdateUserResponse = CreateUserResponse

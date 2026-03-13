@@ -5,6 +5,7 @@
     } from '#imports';
     import { useForm } from 'vee-validate';
     import { updateProfileSchema } from '~/validations/users/update-profile.schema';
+    import SectionTitle from '../shared/SectionTitle.vue';
     
     const props = defineProps<{
         user: UserProfileResponse | null
@@ -56,6 +57,7 @@
 </script>
 
 <template>
+    <SectionTitle title="Personal"/>
     <div class="bg-white dark:bg-dark-extralight border border-gray-200 dark:border-none rounded-lg p-4 shadow">
         <div v-if="!enableEdit">
             <div class="flex justify-between items-start border-b border-gray-200 dark:border-dark-soft">

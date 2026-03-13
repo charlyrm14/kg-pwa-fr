@@ -13,8 +13,13 @@ export function useProfile () {
     const { uploadMedia } = useMedia()
     const { showAlert } = useAlert()
 
-    const fetchUserProfileData = async() => {
-        return await fetchUserProfileDataSource()
+    const fetchUserProfileData = async(uuid: string) => {
+        try {
+            return await fetchUserProfileDataSource(uuid)
+        } catch (error) {
+            console.error(error)
+            throw error
+        }
     }
 
     const updateProfile = async(payload: UserProfilePayload) => {

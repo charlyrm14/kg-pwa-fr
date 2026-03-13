@@ -16,6 +16,9 @@ export const updateUserSchema = yup.object({
         .min(4, 'El apellido materno debe tener al menos 4 caracteres')
         .max(20, 'El apellido materno debe tener un máximo de 20 caracteres')
         .nullable(),
+    username: yup
+        .string()
+        .nullable(),
     birthdate: yup
         .string()
         .required('Debes agregar una fecha de nacimiento'),
@@ -24,3 +27,6 @@ export const updateUserSchema = yup.object({
         .required('Debes seleccionar un rol de usuario')
         .notOneOf([0], 'Debes seleccionar un rol de usuario valido'),
 })
+
+export const aboutMeSchema = updateUserSchema.pick(['username']);
+export const usernameSchema = updateUserSchema.pick(['username']);
