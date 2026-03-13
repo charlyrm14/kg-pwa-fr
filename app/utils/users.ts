@@ -3,6 +3,7 @@ import Achievement from "~/components/user/profile/Achievement.vue";
 import Hobby from "~/components/user/profile/Hobby.vue";
 import Personal from "~/components/user/profile/Personal.vue";
 import ShareProfile from "~/components/user/profile/ShareProfile.vue";
+import Username from "~/components/user/profile/Username.vue";
 import type { ProfileTab } from '~~/shared/types/Tabs'
 
 export const profileTabs = (): ProfileTab[] => {
@@ -27,6 +28,7 @@ export const profileTabs = (): ProfileTab[] => {
             id: 3, 
             title: 'Información', 
             components: [ 
+                { component: Username, props: { user: true }, emitsRefresh: true},
                 { component: Personal, props: { user: true }, emitsRefresh: true} 
             ],
         },

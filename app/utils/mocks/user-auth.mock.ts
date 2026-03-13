@@ -6,6 +6,7 @@ export const MOCK_USER_AUTH_PROFILE_DATA: ApiResponse<UserProfileResponse> = {
         last_name: "Ramos",
         mother_last_name: null,
         email: "charlyrm14@gmail.com",
+        username: "cRamos",
         force_password_change: 0,
         uuid: "771f8eb5-a52e-40e4-af21-af947bf76048",
         student_code: null,

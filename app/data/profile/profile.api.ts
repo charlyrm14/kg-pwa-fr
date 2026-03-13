@@ -5,12 +5,12 @@ import type {
 } from "#imports"
 import type { UserProfileResponse } from "~~/shared/types/User"
 
-export const fetchUserProfileApi = async() => {
+export const fetchUserProfileApi = async(uuid: string) => {
 
     const config = useRuntimeConfig()
 
     return await $fetch<ApiResponse<UserProfileResponse>>(
-        `${config.public.apiBaseUrl}/profile`
+        `${config.public.apiBaseUrl}/profile/${uuid}`
     )
 }
 

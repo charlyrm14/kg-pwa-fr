@@ -1,37 +1,51 @@
 <script setup lang="ts">
     import CoverUserProfile from '~/assets/media/pool.webp';
-    import { profileTabs, useAlert, useProfile, useModalManager } from '#imports';
-    import AddHobbies from '~/components/user/profile/AddHobbies.vue';    
-    import SelectProfileImage from '~/components/user/profile/SelectProfileImage.vue';
     import ProfileAvatar from '~/assets/media/training.webp'
     import Alert from '~/components/common/Alert.vue';
+    import SelectProfileImage from '~/components/user/profile/SelectProfileImage.vue';
+    import AddHobbies from '~/components/user/profile/AddHobbies.vue';
+    import { 
+        useAlert, 
+        useModalManager, 
+        useProfile, 
+        profileTabs 
+    } from '#imports';
 
     const config = useRuntimeConfig();
-    
-    const { fetchUserProfileData} = useProfile()
-    const { open, isOpen, close, modalPayload } = useModalManager()
-    const { alert, closeAlert } = useAlert()
 
-    const { data: userData, refresh } = await useAsyncData(
-        'user-profile-data',
-        fetchUserProfileData
+    const route = useRoute()
+    const uuid = route.params.uuid
+
+    const { fetchUserProfileData} = useProfile()
+    const { alert, closeAlert } = useAlert()
+    const { open, isOpen, close, modalPayload } = useModalManager()
+
+    const { data: userData, error, refresh } = await useAsyncData(
+        `user-profile-${uuid}`,
+        () => fetchUserProfileData(uuid as string)
     )
+
+    if (error.value) {
+        throw createError({
+            statusCode: error.value.statusCode || 500,
+            statusMessage: 'User not found'
+        })
+    }
 
     const tabs = profileTabs()
     const activeTab = ref<number>(1)
     
-
     const toggleActiveTab = (id: number) => {
         activeTab.value = id
     }
+
+    const user = computed(() => userData?.value?.data ?? null)
 
     const activeComponents = computed(() => {
         const tab = tabs.find(t => t.id === activeTab.value)
         return tab?.components ?? []
     })
 
-
-    const user = computed(() => userData?.value?.data ?? null)
     const setAvatar = ref<string | null>(null)
 
     const avatar = computed(() => {
@@ -52,14 +66,15 @@
 
 <template>
     <section>
-
+        
         <Alert 
             v-if="alert.status" 
             :title="alert.title" 
             :description="alert.description" 
             :type="alert.type" 
             @closeAlert="closeAlert"/>
-    
+
+        <!-- Beginning User Cover -->
         <section>
             <div class="relative w-full">
                 <div class="w-full h-50 md:h-72 lg:h-96 rounded-2xl overflow-hidden shadow-lg">
@@ -85,15 +100,26 @@
                 </div>
             </div>
         </section>
+        <!-- End User Cover -->
 
+        <!-- Beginning User Name -->
         <section class="mt-21 md:mt-25">
             <h1 
                 v-gsap.whenVisible.animateText.once.slow
                 class="text-center text-2xl dark:text-white font-extrabold"> 
                     {{ user?.name ?? 'unknown' }} {{ user?.last_name ?? '' }}
             </h1>
+            <div class="flex justify-center">
+                <span 
+                    v-if="user?.username" 
+                    class="text-blue-500 text-sm font-bold"> 
+                        @{{ user?.username }} 
+                </span>
+            </div>
         </section>
+        <!-- End User Name -->
 
+        <!-- Beginning Tabs -->
         <section class="mt-6">
             <nav class="flex justify-start items-center gap-x-6">
                 <button
@@ -106,7 +132,9 @@
                 </button>
             </nav>
         </section>
+        <!-- End Tabs -->
 
+        <!-- Beginning Content Tabs -->
         <section class="mt-6">
             <template v-if="Array.isArray(activeComponents)">
                 <div>
@@ -123,17 +151,22 @@
                 <component :is="activeComponents" />
             </template>
         </section>
+        <!-- End Content Tabs -->
 
+        <!-- Beginning Upload Profile Image -->
         <SelectProfileImage
             v-if="isOpen('SelectProfileImageModal')"
             @avatar-updated="onAvatarUpdated"
             @closeSelectProfileImageModal="close"/>
+        <!-- End Upload Profile Image -->
 
+        <!-- Beginning Select User Hobbies -->
         <AddHobbies
             v-if="isOpen('AddHobbiesModal')"
             :user-hobbies="modalPayload?.userHobbies"
             @refreshUserData="refreshData"
             @closeAddHobbiesModal="close"/>
+        <!-- End Select User Hobbies -->
 
     </section>
 </template>

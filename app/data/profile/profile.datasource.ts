@@ -3,7 +3,7 @@ import { fetchUserProfileApi, updateProfileApi } from "./profile.api"
 import { MOCK_USER_AUTH_PROFILE_DATA } from "~/utils/mocks/user-auth.mock"
 import { updateUserProfileMock } from "~/utils/mocks/users.mock"
 
-export const fetchUserProfileDataSource = async() => {
+export const fetchUserProfileDataSource = async(uuid: string) => {
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
@@ -11,7 +11,7 @@ export const fetchUserProfileDataSource = async() => {
         return MOCK_USER_AUTH_PROFILE_DATA
     }
 
-    return fetchUserProfileApi()
+    return fetchUserProfileApi(uuid)
 }
 
 export const updateProfileDataSource = async(payload: UserProfilePayload) => {
