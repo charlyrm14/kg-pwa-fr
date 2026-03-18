@@ -61,7 +61,7 @@ export const useContentStore = defineStore('contents', () => {
             const response = await fetchContentBySlugDataSource(slug)
 
             contentDetail.value = response.data
-            return contentDetail.value
+            return response.data
             
         } catch (error) {
             contentDetail.value = null

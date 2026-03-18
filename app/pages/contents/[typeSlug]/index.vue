@@ -12,9 +12,11 @@
 
     const isUploading = ref<boolean>(false)
 
-    const { data: contents } = await useAsyncData('contents', async () => {
-            await contentStore.fetchContents()
-            return contentStore.contents ?? { data: [] }
+    const { data: contents } = await useAsyncData(
+            'contents', 
+            async () => {
+                await contentStore.fetchContents()
+                return contentStore.contents ?? { data: [] }
         }
     )
 
@@ -69,7 +71,7 @@
                 <button
                     @click="uploadContent"
                     :disabled="isUploading"
-                    class="w-full md:w-120 p-3 rounded-4xl hover:opacity-75 text-lg transition"
+                    class="w-full md:w-120 p-3 rounded-4xl hover:opacity-75 text-lg transition font-semibold"
                     :class="!isUploading ? 'bg-blue-500 text-white cursor-pointer' : 'bg-blue-400 text-white cursor-not-allowed'">
                         {{ !isUploading ? 'Cargar más' : 'Cargando...'}}
                 </button>

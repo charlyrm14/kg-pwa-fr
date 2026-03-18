@@ -5,22 +5,20 @@ import type {
     CreateContentPayload
 } from "#imports"
 import type { ContentDetail } from "~~/shared/types/Content"
+import { authApi } from "../auth/auth.api"
 
 export const fetchContentsApi = async(): Promise<ApiResponse<PaginationContent<Content>>> => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<PaginationContent<Content>>>(
-        `${config.public.apiBaseUrl}/contents`
-    )
+    return await api<ApiResponse<PaginationContent<Content>>>('/contents')
 }
 
 export const fetchContentBySlugApi = async(slug: string): Promise<ApiResponse<ContentDetail>> => {
-    const config = useRuntimeConfig()
-    
-    return await $fetch<ApiResponse<ContentDetail>>(`
-        ${config.public.apiBaseUrl}/contents/${slug}`
-    )
+
+    const api = authApi()
+
+    return await api<ApiResponse<ContentDetail>>(`/contents/${slug}`)
 }
 
 export const createContentApi = async(payload: CreateContentPayload) => {
