@@ -1,7 +1,11 @@
-import CardNews from '~/assets/media/card-news.png'
-import CardEvents from '~/assets/media/card-events.png'
-import CardTips from '~/assets/media/card-tips.png'
-import CardNutrition from '~/assets/media/card-nutrition.png'
+import NewsSectionCover from '~/assets/media/news-section.png'
+import EventSectionCover from '~/assets/media/event-section.png'
+import TipsSectionCover from '~/assets/media/tips-section.png'
+import NutritionSectionCover from '~/assets/media/nutrition-section.png'
+import NewsDetailCover from '~/assets/media/content-news-detail-cover.svg'
+import EventsDetailCover from '~/assets/media/content-events-detail-cover.svg'
+import TipsDetailCover from '~/assets/media/content-tips-detail-cover.svg'
+import NutritionDetailCover from '~/assets/media/content-nutrition-detail-cover.svg'
 import type { ContentTypeSlug } from '#imports'
 
 /**
@@ -43,13 +47,38 @@ export const contentTypeImage = (type: string = 'noticias'): string => {
     const normalized = type?.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '') as ContentTypeSlug;
 
     const imageURL: Record<ContentTypeSlug, string> = {
-        noticias: CardNews,
-        eventos: CardEvents,
-        consejos: CardTips,
-        nutricion: CardNutrition
+        noticias: NewsSectionCover,
+        eventos: EventSectionCover,
+        consejos: TipsSectionCover,
+        nutricion: NutritionSectionCover
     }
 
     return imageURL[normalized] ?? imageURL.noticias
+}
+
+/**
+ * The function `contentCoverDetail` returns the cover image URL based on the type of content provided,
+ * defaulting to a news cover image if no matching type is found.
+ * @param {string} [type=noticias] - The `type` parameter in the `contentCoverDetail` function is a
+ * string that specifies the type of content for which you want to retrieve the cover detail image. It
+ * has a default value of `'noticias'` if not provided.
+ * @returns The function `contentCoverDetail` returns the URL of the cover image based on the type of
+ * content provided. If the type is not specified or does not match any of the predefined types
+ * (noticias, eventos, consejos, nutricion), it will default to the cover image for noticias.
+ */
+export const contentCoverDetail = (type: string = 'noticias'): string => {
+
+    const normalized = type?.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '') as ContentTypeSlug;
+
+    const imageURL: Record<ContentTypeSlug, string> = {
+        noticias: NewsDetailCover,
+        eventos: EventsDetailCover,
+        consejos: TipsDetailCover,
+        nutricion: NutritionDetailCover
+    }
+
+    return imageURL[normalized] ?? imageURL.noticias
+
 }
 
 /**

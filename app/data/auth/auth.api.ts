@@ -11,9 +11,7 @@ export const authApi = () => {
         baseURL: config.public.apiBaseUrl,
         credentials: 'include',
         mode: 'cors',
-        headers: {
-            Accept: 'application/json'
-        },
+        headers: useRequestHeaders(['cookie']),
         onResponseError({ response }) {
             if (response.status === 401) {
                 const user = useState<AuthUser | null>('auth:user')

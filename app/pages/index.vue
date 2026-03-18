@@ -13,10 +13,13 @@
 
     const { alert, closeAlert } = useAlert()
     
-    const { data: homeData } = await useAsyncData('home-overview', async() => {
-        const { fetchHomeOverview } = useHomeOverview()
-        return await fetchHomeOverview()
-    })
+    const { data: homeData } = await useAsyncData(
+        'home-overview', 
+        async() => {
+            const { fetchHomeOverview } = useHomeOverview()
+            return await fetchHomeOverview()
+        }
+    )
 
     const lastEvent = computed(() => homeData?.value?.data 
         ? homeData?.value?.data?.last_event 

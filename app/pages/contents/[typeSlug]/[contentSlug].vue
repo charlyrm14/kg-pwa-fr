@@ -1,13 +1,13 @@
 <script setup lang="ts">
     import Alert from '~/components/common/Alert.vue'
-    import ShareContent from '~/components/user/contents/ShareContent.vue'
     import { useContentStore } from '~/stores/contents'
     import { 
         colorByContentType, 
         contentSectionTitle, 
-        contentTypeImage, 
+        contentCoverDetail,
         useFavorites, 
-        useAlert 
+        useAlert,
+        defineAsyncComponent 
     } from '#imports'
 
     definePageMeta({
@@ -15,30 +15,33 @@
     })
     
     const route = useRoute()
-    const slugParam = route.params.contentSlug
     const config = useRuntimeConfig()
 
-    let slugContent: string
+    const slugContent = computed(() => {
+        const slugParam = route.params.contentSlug
 
-    if(Array.isArray(slugParam) || !slugParam) {
-        throw createError({
+        if (Array.isArray(slugParam) || !slugParam) {
+            throw createError({
             statusCode: 404,
             statusMessage: 'Invalid slug or page not found'
-        })
-    } else {
-        slugContent = slugParam
-    }
+            })
+        }
+
+        return slugParam
+    })
+
 
     const contentStore = useContentStore()
+
     const { addToFavorites, isFavorite } = useFavorites()
     const { alert, closeAlert } = useAlert()
 
-    const { data: content, error } = await useAsyncData('content', async () => {        
-        await contentStore.fetchContentBySlug(slugContent as string)
-        return contentStore.contentDetail
-    })
+    const { data: content, error } = await useAsyncData(
+        () => `content-${slugContent.value}`, 
+        () => contentStore.fetchContentBySlug(slugContent.value)
+    )
 
-    if (error.value) {
+    if (error.value || !content.value) {
         throw createError({
             statusCode: 404,
             statusMessage: 'Page not found'
@@ -47,16 +50,16 @@
 
     const contentTab = ref<number>(1)
     const showShareModal = ref<boolean>(false)
+    
+    // Lazy loading component
+    const ShareContent = defineAsyncComponent(() =>
+        import('~/components/user/contents/ShareContent.vue')
+    )
 
     const closeShareModal = () => {
         showShareModal.value = false
     }
     
-    const typeSlugParam = computed(() => {
-        const param = route.params.typeSlug
-        return Array.isArray(param) ? param[0] : param ?? 'noticias'
-    })
-
 </script>
 
 <template>
@@ -106,12 +109,12 @@
                     class="w-full h-60 md:h-120 object-cover brightness-20 rounded-4xl"/>
                 <img 
                     v-else
-                    :src="contentTypeImage(content?.type)"
+                    :src="contentCoverDetail(content?.type)"
                     :alt="content?.name ?? 'unknown'" 
-                    class="w-full h-60 md:h-120 object-cover brightness-20 rounded-4xl"/>
+                    class="w-full h-60 md:h-120 object-cover opacity-50 dark:opacity-30 rounded-4xl"/>
                 <div class="absolute bottom-6 left-4 right-4">
                     <span class="inline-block px-4 py-0.5 text-white rounded-full text-sm" :class="`${colorByContentType(content?.type)}`"> {{ contentSectionTitle(content?.type) }} </span>
-                    <h1 v-gsap.whenVisible.animateText.once.fast class="text-white font-bold text-lg md:text-4xl mt-2 whitespace-normal break-words"> {{ content?.name ?? 'unknown' }} </h1>
+                    <h1 v-gsap.whenVisible.animateText.once.fast class="text-black dark:text-white font-bold text-lg md:text-4xl mt-2 whitespace-normal break-words"> {{ content?.name ?? 'unknown' }} </h1>
                 </div>
             </div>
         </section>
