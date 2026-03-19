@@ -17,7 +17,7 @@
 </script>
 
 <template>
-    <div class="relative overflow-hidden rounded-4xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 p-4 shadow-xl dark:border dark:border-slate-800">
+    <div class="relative overflow-hidden rounded-4xl bg-white dark:bg-gradient-to-br dark:from-dark-soft dark:via-dark-extralight dark:to-dark-light p-4 shadow-xl">
         <img 
             :src="iconSwimProgram(program?.id)"
             :alt="currentLevel?.category_description"
@@ -26,11 +26,13 @@
         <!-- Beginning Title -->
         <div class="flex flex-col items-start gap-3 mb-3">
             <div class="flex justify-between items-center gap-x-2">
-                <img 
+                <div class="bg-gray-100 dark:bg-dark-light p-1.5 rounded-xl">
+                    <img 
                     :src="Star" 
                     :alt="currentLevel?.category_slug"
                     class="w-5 h-5 drop-shadow-xl/50 drop-shadow-amber-500">
-                <h2 class="text-xl font-semibold text-white"> {{ currentLevel?.category_name }} </h2>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-600 dark:text-white"> {{ currentLevel?.category_name }} </h2>
             </div>
             <span class="ml-2 text-xs font-medium px-3 py-1 rounded-full bg-emerald-500/20 text-green-400">
                 Nivel actual
@@ -40,7 +42,7 @@
 
 
         <!-- Beginning Skills progress -->
-        <div class="flex items-center gap-2 text-slate-300 text-xs md:text-base mb-4">
+        <div class="flex items-center gap-2 text-gray-500 dark:text-slate-300 text-xs md:text-base mb-4">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge-icon lucide-gauge"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
             </span>
@@ -60,7 +62,7 @@
 
         <!-- Beginning Progress bar -->
         <div>
-            <div class="h-3 w-full bg-slate-700 rounded-full overflow-hidden mt-2">
+            <div class="h-3 w-full bg-gray-200 dark:bg-dark rounded-full overflow-hidden mt-2">
                 <div
                     class="h-full bg-gradient-to-r from-green-400 to-green-500 rounded-full transition-all duration-500"
                     :style="`width: ${currentLevel?.progress_percentage ?? 0}%`"></div>
@@ -71,7 +73,7 @@
 
 
         <!-- Beginning Description -->
-        <p class="text-slate-400 text-sm leading-relaxed mb-4 max-w-[75%] my-3">
+        <p class="text-gray-500 dark:text-slate-400 text-sm leading-relaxed mb-4 max-w-[75%] my-3">
             {{ currentLevel?.category_description }}
         </p>
         <!-- End Description -->

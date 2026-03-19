@@ -1,15 +1,15 @@
-import type { 
-    ApiResponse, 
-    AssignStudentProgramPayload, 
-    StudentProgram 
+import { 
+    type ApiResponse, 
+    type AssignStudentProgramPayload, 
+    type StudentProgram 
 } from "#imports"
+import { authApi } from "../auth/auth.api"
 
 export const fetchStudentProgramApi = async(uuid?: string): Promise<ApiResponse<StudentProgram>> => {
-    const config = useRuntimeConfig()
 
-    return await $fetch<ApiResponse<StudentProgram>>(
-        `${config.public.apiBaseUrl}/student-programs/`
-    )
+    const api = authApi()
+
+    return await api<ApiResponse<StudentProgram>>('/student-programs/')
 }
 
 export const assignUserProgressApi = async(payload: AssignStudentProgramPayload) => {

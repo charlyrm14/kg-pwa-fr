@@ -47,6 +47,8 @@
 
     const onChangeProgram = (programId: number) => {
         programSelected.value = programId
+        const el = document.getElementById('available-levels-section')
+        el?.scrollIntoView({ behavior: 'smooth' })
     }
 
     const categories = computed(() => {
@@ -127,7 +129,12 @@
         <!-- Beginning Skills Current Level -->
         <section class="mt-6">
             <div class="space-y-2">
-                <h6 class="dark:text-gray-400 mb-2 font-semibold"> Habilidades de estrella de mar </h6>
+                <h6 class="dark:text-gray-400 mb-2 font-semibold"> 
+                    {{ student?.current_level?.category_name 
+                        ? `Habilidades de ${student?.current_level?.category_name}` 
+                        : 'Habilidades de nivel actual'
+                    }} 
+                </h6>
                 <SkillCurrentLevelCard 
                     v-if="skillsCurrentLevel"
                     v-for="skill in skillsCurrentLevel.skills"
@@ -139,7 +146,7 @@
         <!-- End Skills Current Level -->
 
         <!-- Beginning Available Levels -->
-        <section class="my-6">
+        <section class="my-6" id="available-levels-section">
             <div class="space-y-3">
                 <h6 class="dark:text-gray-400 mb-2 font-semibold"> Niveles disponibles </h6>
                 <SwimCategoryCard
