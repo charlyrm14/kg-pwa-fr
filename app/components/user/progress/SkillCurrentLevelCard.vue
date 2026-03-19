@@ -21,7 +21,7 @@
 </script>
 
 <template>
-    <div class="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 rounded-xl p-3 shadow dark:shadow-none space-y-2">
+    <div class="bg-white dark:bg-gradient-to-br dark:from-dark-soft dark:via-dark-extralight dark:to-dark-light rounded-xl p-3 shadow dark:shadow-none space-y-2">
         <div class="flex justify-between items-start">
             <div class="flex justify-between items-center gap-x-2 text-sm">
                 <span 
@@ -30,7 +30,7 @@
                     :class="progressBySkill?.skill_progress_percentage === 100 ? 'text-green-500' : 'text-gray-400'">
                         <span v-html="iconSkillProgress(progressBySkill?.skill_progress_percentage)"></span>
                 </span>
-                <span class="text-gray-300"> 
+                <span class="text-gray-800 dark:text-gray-300"> 
                     {{ skill?.description ?? 'Unknown' }}  
                         <span 
                             v-if="progressBySkill"
@@ -47,7 +47,7 @@
                     {{ progressBySkill?.skill_progress_percentage ?? 0 }}% 
             </span>
         </div>
-        <div class="w-full bg-dark-extralight p-1 rounded-full">
+        <div class="w-full bg-gray-200 dark:bg-dark p-1 rounded-full">
             <div 
                 v-if="progressBySkill"
                 class="p-1 bg-blue-500 rounded-full" 
