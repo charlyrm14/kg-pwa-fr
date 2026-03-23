@@ -4,22 +4,20 @@ import type {
     UserProfileGeneralInfo 
 } from "#imports"
 import type { UserProfileResponse } from "~~/shared/types/User"
+import { authApi } from "../auth/auth.api"
 
 export const fetchUserProfileApi = async(uuid: string) => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<UserProfileResponse>>(
-        `${config.public.apiBaseUrl}/profile/${uuid}`
-    )
+    return await api<ApiResponse<UserProfileResponse>>(`/profile/${uuid}`)
 }
 
 export const updateProfileApi = async(payload: UserProfilePayload): Promise<ApiResponse<UserProfileGeneralInfo>> => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<UserProfileGeneralInfo>>(`
-        ${config.public.apiBaseUrl}/profile`,
+    return await api<ApiResponse<UserProfileGeneralInfo>>('/profile',
         {
             method: 'PUT',
             body: payload

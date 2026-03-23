@@ -1,3 +1,5 @@
+import { authApi } from "../auth/auth.api"
+
 export const fetchHobbiesApi = async() => {
 
     const config = useRuntimeConfig()
@@ -9,10 +11,9 @@ export const fetchHobbiesApi = async() => {
 
 export const addHobbiesApi = async(hobbies: Array<number>) => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch(
-        `${config.public.apiBaseUrl}/hobbies/me`,
+    return await api('/hobbies/me',
         {
             method: 'PUT',
             body: {

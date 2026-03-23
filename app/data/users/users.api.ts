@@ -11,6 +11,7 @@ import type {
     User, 
     UserInfo 
 } from "#imports";
+import { authApi } from "../auth/auth.api";
 
 export const fetchUsersApi = async(filters: UserFilters) => {
     const config = useRuntimeConfig()
@@ -46,10 +47,10 @@ export const createUserApi = async(payload: CreateUserPayload) => {
 }
 
 export const updateUserApi = async(uuid: string, payload: UpdateUserPayload) => {
-    const config = useRuntimeConfig()
 
-    return await $fetch<ApiResponse<UpdateUserResponse>>(
-        `${config.public.apiBaseUrl}/users/${uuid}`,
+    const api = authApi()
+
+    return await api<ApiResponse<UpdateUserResponse>>(`/users/${uuid}`,
         {
             method: 'PUT',
             body: payload

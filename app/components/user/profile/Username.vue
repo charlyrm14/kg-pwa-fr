@@ -3,7 +3,6 @@
     import { 
         type UpdateUserPayload, 
         type UserProfileResponse, 
-        getTodayDate 
     } from '#imports';
     import { useForm } from 'vee-validate';
     import { usernameSchema } from '~/validations/users/update-user-schema';

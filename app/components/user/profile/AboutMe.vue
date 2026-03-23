@@ -21,7 +21,7 @@
     const enableEdit = ref<boolean>(false)
     const isSubmitting = ref<boolean>(false)
     
-    const { defineField, handleSubmit, values, errors } = useForm<UserProfilePayload>({
+    const { defineField, handleSubmit, errors } = useForm<UserProfilePayload>({
         initialValues: {
             about_me: props?.user ? props?.user?.profile?.about_me : ''
         },

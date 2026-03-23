@@ -12,7 +12,7 @@ export const uploadMediaDataSource = (files: File[]): Promise<ApiResponse<MediaU
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
-    if(!IS_MOCK_API_MODE) {
+    if(IS_MOCK_API_MODE) {
         return Promise.resolve({
             data: []
         })
