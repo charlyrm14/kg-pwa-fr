@@ -62,6 +62,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_MONTH: ApiResponse<UserAttendance> = 
                 entry_time: "09:00:00",
                 departure_time: "10:00:00",
                 type_attendance: "No asignado",
+                attendance_id: 6,
                 attendance_description: "Día no asignado como asistencia.",
                 attendance_month: "Enero"
             },
@@ -74,6 +75,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_MONTH: ApiResponse<UserAttendance> = 
                 entry_time: "09:00:00",
                 departure_time: "10:00:00",
                 type_attendance: "Asistió",
+                attendance_id: 1,
                 attendance_description: "El alumno o participante asistió a la sesión.",
                 attendance_month: "Enero"
             },
@@ -86,6 +88,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_MONTH: ApiResponse<UserAttendance> = 
                 entry_time: "09:00:00",
                 departure_time: "10:00:00",
                 type_attendance: "Tarde",
+                attendance_id: 4,
                 attendance_description: "El alumno llegó tarde.",
                 attendance_month: "Enero"
             },
@@ -98,6 +101,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_MONTH: ApiResponse<UserAttendance> = 
                 entry_time: "09:00:00",
                 departure_time: "10:00:00",
                 type_attendance: "Ausencia no justificada",
+                attendance_id: 2,
                 attendance_description: "Ausencia sin previo aviso ni justificación.",
                 attendance_month: "Enero"
             },
@@ -110,6 +114,7 @@ export const MOCK_USER_ATTENDANCES_CURRENT_MONTH: ApiResponse<UserAttendance> = 
                 entry_time: "09:00:00",
                 departure_time: "10:00:00",
                 type_attendance: "Asistió",
+                attendance_id: 1,
                 attendance_description: "El alumno o participante asistió a la sesión.",
                 attendance_month: "Enero"
             }

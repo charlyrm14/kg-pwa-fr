@@ -101,7 +101,7 @@ export const useAttendanceStore = defineStore('attendances', () => {
             
             monthlyAttendance.value = response
 
-            return monthlyAttendance.value
+            return response.data
 
         } catch (error) {
             console.log(error)

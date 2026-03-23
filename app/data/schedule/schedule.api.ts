@@ -1,12 +1,15 @@
-import type { ApiResponse, AssignUserSchedulePayload, UserSchedule } from "#imports"
+import type { 
+    ApiResponse, 
+    AssignUserSchedulePayload, 
+    UserSchedule 
+} from "#imports"
+import { authApi } from "../auth/auth.api"
 
 export const fetchUserScheduleApi = async(): Promise<ApiResponse<UserSchedule>> => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<UserSchedule>>(
-        `${config.public.apiBaseUrl}/schedules`
-    )
+    return await api<ApiResponse<UserSchedule>>('/schedules')
 }
 
 export const assignUserScheduleApi = async(userUuid: string, payload: AssignUserSchedulePayload) => {

@@ -1,25 +1,25 @@
 export const ATTENDANCE_STATUS_MAP = {
-    PRESENT: { 
+    1: { 
         color: 'bg-lime-500', 
         status: 'Asistió' 
     },
-    ABSENT_UNJUSTIFIED: { 
+    2: { 
         color: 'bg-red-500', 
         status: 'Ausencia no justificada.'
     },
-    ABSENT_JUSTIFIED: { 
+    3: { 
         color: 'bg-yellow-500', 
         status: 'Ausencia justificada' 
     },
-    LATE: { 
+    4: { 
         color: 'bg-orange-400',
         status: 'Retardo' 
     },
-    EXCUSED: { 
+    5: { 
         color: 'bg-teal-600', 
         status: 'Exento' 
     },
-    UNASSIGNED: { 
+    6: { 
         color: 'bg-slate-400', 
         status: 'No asignado' 
     },
@@ -44,6 +44,7 @@ export interface Attendance {
     entry_time: string
     departure_time: string
     type_attendance: string
+    attendance_id: number
     attendance_description: string
     attendance_month: string
 }

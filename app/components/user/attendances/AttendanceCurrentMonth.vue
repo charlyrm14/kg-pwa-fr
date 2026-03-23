@@ -1,25 +1,21 @@
 <script setup lang="ts">
-    import { useAttendanceStore } from '~/stores/attendances';
-    import { attendanceBgColor } from '#imports';
+    import { attendanceBgColor, type Attendance } from '#imports';
 
-    const attendanceStore = useAttendanceStore()
-
-    onMounted(async() => {
-        try {
-            await attendanceStore.fetchMonthlyAttendance()
-        } catch (error) {
-            console.error('Error to get attendaces')
-        }
-    })
+    defineProps<{
+        attendances: Attendance[] | null
+    }>()
 
 </script>
 
 <template>
-    <div class="bg-white dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-4 rounded-lg shadow">
-        <div v-for="(attendance, index) in attendanceStore?.monthlyAttendance?.data?.attendances" :key="index" class="flex justify-between items-center border-b border-gray-200 dark:border-dark-soft my-1">
+    <div v-if="attendances?.length" class="bg-white dark:bg-dark-light border border-gray-200 dark:border-dark-extralight p-4 rounded-lg shadow">
+        <div v-for="(attendance, index) in attendances" :key="index" class="flex justify-between items-center border-b border-gray-200 dark:border-dark-soft my-1">
             <p class="dark:text-white text-base md:text-lg font-light mb-2"> {{ attendance?.day_with_number }} </p>
-            <div class="p-1 rounded-full bg-gray-300 dark:bg-dark-extralight mb-2">
-                <div class="p-3 rounded-full" :class="attendanceBgColor(attendance?.type_attendance as AttendanceType || undefined)"></div>
+            <div class="dark:bg-dark-soft rounded-full py-1 px-2 flex justify-between items-center gap-x-2 mb-2">
+                <div class="rounded-full p-2" :class="attendanceBgColor(attendance?.attendance_id as AttendanceType || undefined)"></div>
+                <span class="dark:text-gray-300 font-semibold text-sm md:text-base">
+                    {{ attendance.type_attendance }}
+                </span>
             </div>
         </div>
         <div class="mt-4 flex justify-center items-center">
