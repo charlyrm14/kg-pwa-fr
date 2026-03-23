@@ -6,6 +6,7 @@ import type {
     PaginationContent,
     AssignUserAttendancePayload
 } from "#imports"
+import { authApi } from "../auth/auth.api"
 
 export const fetchAttendancesTodayApi = async(): Promise<PaginationContent<AttendanceCurrentDay>> => {
 
@@ -31,11 +32,9 @@ export const assignUserAttendanceApi = async(userUuid: string, payload: AssignUs
 
 export const fetchMonthlyAttendanceApi = async(): Promise<ApiResponse<UserAttendance>> => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<UserAttendance>>(
-        `${config.public.apiBaseUrl}/attendances/history`
-    )
+    return await api<ApiResponse<UserAttendance>>('/attendances/history')
 }
 
 export const fetchAttendanceStatusesApi = async() => {

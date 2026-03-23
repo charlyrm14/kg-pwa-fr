@@ -2,13 +2,7 @@ import type {
     AttendanceType, 
     AttendanceBgColor 
 } from "~~/shared/types/Attendance"
-import type { 
-    SkillType, 
-    SkillDescription, 
-    SkillIndex,
-    LevelType,
-    LevelColors 
-} from '~~/shared/types/Swimming'
+
 import type { 
     Gender, 
     ColorBgGender, 
@@ -17,7 +11,6 @@ import type {
 } from "~~/shared/types/User"
 import { ATTENDANCE_STATUS_MAP } from "~~/shared/types/Attendance"
 import type { ContentStatus } from "~~/shared/types/Content"
-
 
 /**
  * The function `capitalizeFirstLetter` takes a string as input and returns the same string with the
@@ -31,50 +24,6 @@ export const capitalizeFirstLetter = (text: string): string => {
     return text.charAt(0).toUpperCase() + text.slice(1)
 }
 
-/**
- * This TypeScript function returns a skill type based on the given index, defaulting to 'Fuerza' if
- * the index is not found.
- * @param {number} index - The `index` parameter in the `skillType` function is used to determine the
- * type of skill based on the index provided. The function returns the corresponding skill type based
- * on the index.
- * @returns The function `skillType` returns a SkillType based on the index provided. If the index
- * matches one of the predefined SkillIndex values in the `type` object, it returns the corresponding
- * SkillType (e.g., 'Fuerza' for index 0). If the index does not match any of the predefined values, it
- * defaults to returning the SkillType associated with index 0.
- */
-export const skillType = (index: number): SkillType => {
-
-    const type: Record<SkillIndex, SkillType> = {
-        0: 'Fuerza',
-        1: 'Velocidad',
-        2: 'Resistencia'
-    }
-
-    return (type[index as SkillIndex] ?? type[0]) as SkillType
-}
-
-/**
- * This TypeScript function returns a skill description based on the provided index, with default value
- * if index is not found.
- * @param {number} index - The `index` parameter is used to determine which skill description to return
- * based on the provided index value. The function `skillTypeDescription` takes an index number as
- * input and returns the corresponding skill description from the `type` object. If the index matches
- * one of the keys in the `type`
- * @returns The `skillTypeDescription` function returns a description of a skill based on the provided
- * index. If the index matches one of the predefined skill descriptions in the `type` object, it
- * returns that description. If the index does not match any predefined description, it returns the
- * description for index 0 as a fallback.
- */
-export const skillTypeDescription = (index: number): SkillDescription => {
-
-    const type: Record<SkillIndex, SkillDescription> = {
-        0: 'Patadas firmes y seguras',
-        1: 'Brazos lentos pero fuertes',
-        2: 'Avanza sin prisa, sin pausa'
-    }
-
-    return (type[index as SkillIndex] ?? type[0]) as SkillDescription
-}
 
 /**
  * The function `backgroundColorByGender` returns a background color based on the gender provided,
@@ -154,7 +103,7 @@ export const borderColorByGender = (gender: string | Gender = 'MASCULINO'): Colo
  * color value from the entry.
  */
 export const attendancesColors = (): AttendanceColorMap[] => {
-    return (Object.entries(ATTENDANCE_STATUS_MAP) as [AttendanceType, typeof ATTENDANCE_STATUS_MAP[AttendanceType]][])
+    return (Object.entries(ATTENDANCE_STATUS_MAP))
     .map(([key, value], index) => ({
         id: index + 1,
         status: value.status, 
@@ -162,84 +111,26 @@ export const attendancesColors = (): AttendanceColorMap[] => {
     }));
 }
 
-/**
- * The function `attendanceBgColor` takes a type of attendance as input and returns the corresponding
- * background color based on the type.
- * @param {string | AttendanceType} [typeAttendance=PRESENT] - The `typeAttendance` parameter is a
- * string that represents the type of attendance. It can have the following values:
- * @returns The function `attendanceBgColor` returns the background color corresponding to the given
- * type of attendance. The function takes a parameter `typeAttendance` which is a string representing
- * the type of attendance. If no type is provided, it defaults to 'PRESENT'. The function then
- * normalizes the input by converting it to lowercase and maps the normalized type to a specific
- * background color using a lookup table. If the normalized
- */
-export const attendanceBgColor = (typeAttendance: AttendanceType = 'PRESENT'): AttendanceBgColor => {
 
-    const normalizedType = typeAttendance.toUpperCase() as AttendanceType;
-    const color = ATTENDANCE_STATUS_MAP[normalizedType]?.color;
+/**
+ * This function returns the background color associated with a given attendance status ID, defaulting
+ * to a specific color if none is found.
+ * @param {AttendanceType} [attendanceId=1] - The `attendanceId` parameter is used to determine the
+ * type of attendance for which we want to retrieve the background color. It has a default value of `1`
+ * if not provided.
+ * @returns The function `attendanceBgColor` returns the background color associated with the given
+ * `attendanceId` from the `ATTENDANCE_STATUS_MAP`. If the color is found in the map, it is returned.
+ * If not found, it returns the default color associated with attendanceId 1.
+ */
+export const attendanceBgColor = (attendanceId: AttendanceType = 1): AttendanceBgColor => {
+
+    const color = ATTENDANCE_STATUS_MAP[attendanceId]?.color;
 
     if (color) {
         return color;
     }
 
-    return ATTENDANCE_STATUS_MAP.PRESENT.color;
-}
-
-
-/**
- * This TypeScript function maps swimming levels to corresponding colors based on a provided level
- * string or defaulting to 'TORTUGA'.
- * @param {string | LevelType} [level=TORTUGA] - The `swimmingLevelColors` function takes a `level`
- * parameter, which is a string representing the swimming level. If no level is provided, it defaults
- * to `'TORTUGA'`. The function then normalizes and transforms the input level string to match the keys
- * in the `colors`
- * @returns The function `swimmingLevelColors` returns an object containing background, text, and
- * border colors based on the input `level`. The input `level` is normalized and used to look up the
- * corresponding colors in the `colors` object. If a matching color set is found, it is returned;
- * otherwise, the default color set for 'foca' is returned.
- */
-export const swimmingLevelColors = (level: string | LevelType = 'TORTUGA'): LevelColors => {
-
-    const normalized = level
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[-\s]/g, '_')
-
-    const colors: Record<string, LevelColors> = {
-        foca: {
-            bg: 'bg-slate-500',
-            text: 'text-slate-500',
-            border: 'border-slate-500',
-            gradient: 'bg-gradient-to-t from-slate-600 to-slate-400 text-white',
-        },
-        tortuga: {
-            bg: 'bg-green-500',
-            text: 'text-green-500',
-            border: 'border-green-500',
-            gradient: 'bg-gradient-to-t from-green-600 to-green-400 text-white',
-        },
-        mantarraya: {
-            bg: 'bg-orange-500',
-            text: 'text-orange-500',
-            border: 'border-orange-500',
-            gradient: 'bg-gradient-to-t from-orange-600 to-orange-400 text-white',
-        },
-        pez_vela: {
-            bg: 'bg-blue-500',
-            text: 'text-blue-500',
-            border: 'border-blue-500',
-            gradient: 'bg-gradient-to-t from-blue-600 to-blue-400 text-white',
-        },
-        tiburon: {
-            bg: 'bg-red-500',
-            text: 'text-red-500',
-            border: 'border-red-500',
-            gradient: 'bg-gradient-to-t from-red-600 to-red-400 text-white',
-        }
-    }
-
-    return colors[normalized] ?? colors.foca as LevelColors
+    return ATTENDANCE_STATUS_MAP[1]?.color;
 }
 
 /**

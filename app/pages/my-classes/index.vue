@@ -1,25 +1,46 @@
 <script setup lang="ts">
-    import { daysByCurrentWeek } from '#imports';
     import SectionTitle from '~/components/user/shared/SectionTitle.vue';
-    import { useSchedule } from '#imports';
     import AttendanceCurrentMonth from '~/components/user/attendances/AttendanceCurrentMonth.vue';
     import AttendanceByMonth from '~/components/user/attendances/AttendanceByMonth.vue';
-    import AttendancesStatuses from '~/components/user/attendances/AttendancesStatuses.vue';
+    import { useAttendanceStore } from '~/stores/attendances';
+    import { daysByCurrentWeek, useSchedule } from '#imports';
 
     definePageMeta({
         middleware: ['auth']
     })
+
+    const { fetchUserSchedule } = useSchedule()
+    const attendanceStore = useAttendanceStore()
     
-    const { data: schedule } = await useAsyncData('schedule', async() => {
-        const { fetchUserSchedule } = useSchedule()
-        return await fetchUserSchedule()
-    } )
+    const { data: schedule } = await useAsyncData(
+        'schedule', 
+        async() => {
+
+            const [ schedules, monthAttendances ] = await Promise.all([
+                fetchUserSchedule(),
+                attendanceStore?.fetchMonthlyAttendance()
+            ])
+
+            return {
+                schedules,
+                monthAttendances
+            }
+        },
+        {
+            server: true,
+            lazy: false,
+            default: () => ({
+                schedules: null,
+                monthAttendances: null
+            })
+        } 
+    )
     
     const contentTab = ref<number>(1)
 
     const weekWithAssignedDays = computed(() => {
         const week = daysByCurrentWeek()
-        const assigned = schedule.value?.data?.schedules ?? []
+        const assigned = schedule?.value?.schedules?.data?.schedules ?? []
 
         return week.map((day) => ({
             ...day,
@@ -27,22 +48,25 @@
         }))
     })
 
-    const entry_time = schedule.value?.data?.schedules?.at(0)?.entry_time;
-    const departure_time = schedule.value?.data?.schedules?.at(0)?.departure_time
+    const entry_time = schedule.value?.schedules?.data?.schedules?.at(0)?.entry_time;
+    const departure_time = schedule.value?.schedules?.data?.schedules?.at(0)?.departure_time
+
+    const attendances = computed(() => {
+        return schedule?.value?.monthAttendances?.attendances ?? []
+    })
 
 </script>
 
 <template>
     <section>
-        
         <section>
             <SectionTitle title="Mis clases"/>
-            <div>
+            <div class="bg-white dark:bg-dark-light rounded-xl p-2 shadow-lg">
                 <div class="flex justify-center md:justify-center items-start">
                     <h4 class="text-black dark:text-white text-base md:text-lg font-light"> Esta semana </h4>
                 </div>
                 <div class="flex justify-center md:items-center mb-2">
-                    <span class="dark:text-white inline-flex items-center gap-x-2 font-light"> 
+                    <span class="dark:text-white inline-flex items-center gap-x-2 font-semibold"> 
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
                             {{ entry_time }} - {{ departure_time }} 
                     </span>
@@ -52,7 +76,7 @@
                         v-for="dayWeek in weekWithAssignedDays"
                         :key="dayWeek.day_id"
                         class="px-3 py-4 rounded-4xl overflow-hidden flex-shrink-0"
-                        :class="dayWeek.assigned ? 'bg-blue-500' : 'bg-gray-400/70 dark:bg-dark-extralight'">
+                        :class="dayWeek.assigned ? 'bg-blue-500' : 'bg-gray-400/70 dark:bg-dark-soft'">
                             <h2 class="text-white text-xs uppercase text-center flex flex-col"> 
                                 {{ dayWeek.shortening }} <span class="text-2xl font-bold"> {{ dayWeek.date }} </span>
                             </h2>
@@ -68,7 +92,7 @@
                     @click="contentTab = 1"
                     class="dark:text-white w-full cursor-pointer hover:opacity-75"
                     :class="contentTab === 1 ? 'bg-white dark:bg-dark-soft px-4 py-2 rounded-full font-bold' : 'font-extralight'">
-                        Mes actual
+                        Este mes
                 </button>
                 <button
                     @click="contentTab = 2"
@@ -81,8 +105,8 @@
 
         <section class="mt-6">
             <div v-if="contentTab === 1">
-                <AttendancesStatuses/>
-                <AttendanceCurrentMonth/>
+                <AttendanceCurrentMonth
+                    :attendances="attendances"/>
             </div>
             <div v-else>
                 <AttendanceByMonth/>
