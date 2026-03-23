@@ -8,6 +8,7 @@ export const updateProfileSchema = yup.object({
         .max(600, 'Texto demasiado largo'),
     birthdate: yup
         .string()
+        .nullable()
         .matches(
             /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/,
             'La fecha debe tener el formato AAAA-MM-DD'

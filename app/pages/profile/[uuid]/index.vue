@@ -1,9 +1,7 @@
 <script setup lang="ts">
-    import CoverUserProfile from '~/assets/media/pool.webp';
+    import CoverUserProfile from '~/assets/media/user-profile-cover.svg';
     import ProfileAvatar from '~/assets/media/training.webp'
     import Alert from '~/components/common/Alert.vue';
-    import SelectProfileImage from '~/components/user/profile/SelectProfileImage.vue';
-    import AddHobbies from '~/components/user/profile/AddHobbies.vue';
     import { 
         useAlert, 
         useModalManager, 
@@ -38,7 +36,8 @@
 
     const tabs = profileTabs()
     const activeTab = ref<number>(1)
-    
+    const setAvatar = ref<string | null>(null)
+
     const toggleActiveTab = (id: number) => {
         activeTab.value = id
     }
@@ -49,8 +48,6 @@
         const tab = tabs.find(t => t.id === activeTab.value)
         return tab?.components ?? []
     })
-
-    const setAvatar = ref<string | null>(null)
 
     const avatar = computed(() => {
         if (setAvatar.value) return setAvatar.value
@@ -65,6 +62,14 @@
     }
 
     const refreshData = async() => await refresh()
+
+    const SelectProfileImage = defineAsyncComponent(() =>
+        import('~/components/user/profile/SelectProfileImage.vue')
+    )
+
+    const AddHobbies = defineAsyncComponent(() => 
+        import('~/components/user/profile/AddHobbies.vue')
+    )
 
 </script>
 
@@ -81,12 +86,12 @@
         <!-- Beginning User Cover -->
         <section>
             <div class="relative w-full">
-                <div class="w-full h-50 md:h-72 lg:h-96 rounded-2xl overflow-hidden shadow-lg">
+                <div class="w-full h-50 md:h-72 lg:h-96 rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-dark-light">
                     <ClientOnly>
                         <img 
                             :src="CoverUserProfile" 
                             alt="Cover profile" 
-                            class="w-full h-full object-cover brightness-60"/>
+                            class="w-full h-full object-cover opacity-30 dark:opacity-10"/>
                     </ClientOnly>
                 </div>
                 

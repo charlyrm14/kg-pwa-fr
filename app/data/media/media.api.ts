@@ -1,17 +1,17 @@
 import type { MediaUploadResponse } from '~~/shared/types/Media'
 import type { ApiResponse } from '#imports'
+import { authApi } from '../auth/auth.api'
 
 export const uploadMediaApi = async(files: File[]): Promise<ApiResponse<MediaUploadResponse[]>> => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
     const formData = new FormData()
 
     files.forEach(file => {
         formData.append('files[]', file)
     })
 
-    return await $fetch<ApiResponse<MediaUploadResponse[]>>(
-        `${config.public.apiBaseUrl}/media`,
+    return await api<ApiResponse<MediaUploadResponse[]>>('/media',
         {
             method: 'POST',
             body: formData,
@@ -21,10 +21,9 @@ export const uploadMediaApi = async(files: File[]): Promise<ApiResponse<MediaUpl
 
 export const deleteMediaApi = async(mediaId: number) => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch(
-        `${config.public.apiBaseUrl}/media/${mediaId}`,
+    return await api(`/media/${mediaId}`,
         {
             method: 'DELETE'
         }
