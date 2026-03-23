@@ -23,29 +23,31 @@ export function useAnalytic () {
         return await fetchRevenueTimelineDataSource(year)
     }
 
-    const getAnalyticsData = async(params?: any) => {
+    const getAnalyticsData = async() => {
 
-        const [
-            payments,
-            attendances,
-            users,
-            revenue
-        ] = await Promise.all([
-            fetchPaymentDistribution(params),
-            fetchAttendancesSummary(params),
-            fetchUsersComposition(),
-            fetchRevenueTimeline(params)
-        ])
+        try {
 
-        return {
-            payments: payments,
-            attendances: attendances,
-            users: users,
-            revenue: revenue
+            const [payments, attendances, users, revenue] = await Promise.all([
+                fetchPaymentDistribution().catch(() => null),
+                fetchAttendancesSummary().catch(() => null),
+                fetchUsersComposition().catch(() => null),
+                fetchRevenueTimeline().catch(() => null)
+            ]);
+
+            return {
+                payments,
+                attendances,
+                users,
+                revenue
+            }
+
+        } catch (error) {
+            console.error(error)
+            throw error
         }
     }
 
     return {
-        getAnalyticsData,
+        getAnalyticsData
     }
 }

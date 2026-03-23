@@ -1,19 +1,13 @@
-import { useAlert } from "#imports"
+import { 
+    useAlert, 
+    type Favorite 
+} from "#imports"
 
 const STORAGE_KEY = 'favorites'
 
 export function useFavorites () {
     
     const { showAlert } = useAlert()
-
-    type Favorite = {
-        name: string
-        slug: string
-        content: string
-        author: string | null
-        type: string
-        created_at: string
-    }
 
     const favorites = ref<Favorite[] | null>([])
 

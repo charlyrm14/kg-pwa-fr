@@ -1,7 +1,8 @@
 <script setup lang="ts">
-    import { useAdminSidebar } from '#imports';
+    import { useAdminSidebar, useAuth } from '#imports';
 
     const { toggle } = useAdminSidebar()
+    const { user } = useAuth()
 
 </script>
 
@@ -48,8 +49,10 @@
                     <span class="absolute top-2 right-2 block w-2 h-2 rounded-full bg-red-500 ring-2 ring-white"></span>
                 </button>
 
-                <div class="flex items-center space-x-3 cursor-pointer p-1 rounded-full transition">
-                    <span class="text-sm font-medium text-white hidden sm:inline"> Jhon W </span>
+                <div
+                    v-if="user" 
+                    class="flex items-center space-x-3 cursor-pointer p-1 rounded-full transition">
+                        <span class="text-sm font-medium text-white hidden sm:inline"> {{ user?.name }} </span>
                 </div>
 
             </nav>

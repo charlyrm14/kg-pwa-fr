@@ -1,17 +1,19 @@
 <script setup lang="ts">
-    import CoverCard  from '~/assets/media/card-news.png'
     import Hearth from '~/assets/media/hearth.png'
     import Alert from '~/components/common/Alert.vue';
     import { 
         colorByContentType, 
         contentSectionTitle, 
         useFavorites, 
-        useAlert 
+        useAlert,
+        contentTypeImage 
     } from '#imports';
 
     definePageMeta({
         middleware: ['auth']
     })
+
+    const config = useRuntimeConfig()
     
     const { favorites, removeFromFavorite } = useFavorites()
     const { alert, closeAlert } = useAlert()
@@ -34,7 +36,18 @@
                     <NuxtLink 
                         :to="`/contents/${favorite?.type.toLowerCase()}/${favorite?.slug}`"
                         class="shrink-0">
-                            <img :src="CoverCard" :alt="favorite?.name" class="w-30 h-20 object-cover rounded-2xl brightness-60"/>
+                            <img 
+                                v-if="favorite?.thumbnail"
+                                :src="`${config.public.apiMediaBaseUrl}/${favorite?.thumbnail}`" 
+                                :alt="favorite?.name ?? 'unknown'"
+                                loading="lazy" 
+                                class="w-30 h-auto object-cover rounded-2xl brightness-60"/>
+                            <img 
+                                v-else
+                                :src="contentTypeImage(favorite?.type)" 
+                                :alt="favorite?.name ?? 'unknown'"
+                                loading="lazy"
+                                class="w-20 opacity-40 h-auto object-cover rounded-2xl brightness-60 drop-shadow drop-shadow-pink-500">
                     </NuxtLink>
                     <div class="w-full">
                         <div class="flex justify-between">
