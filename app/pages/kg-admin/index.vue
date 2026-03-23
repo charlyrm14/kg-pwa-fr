@@ -11,13 +11,11 @@
         middleware: ['auth']
     })
 
-    const route = useRoute()
-
     const { getAnalyticsData } = useAnalytic()
 
-    const { data: dashboard, pending, refresh } = await useAsyncData(
-        () => `analytics-${route.query.month ?? 'current'}`,
-        () => getAnalyticsData(route.query.month),
+    const { data: dashboard } = await useAsyncData(
+        'analytics-dashboard',
+        async () => getAnalyticsData(),
         {
             server: true,
             lazy: false,

@@ -75,6 +75,7 @@
                     @click="addToFavorites({
                         name: content?.name,
                         slug: content?.slug,
+                        thumbnail: content?.cover_image ? content?.cover_image?.mime_type : null,
                         content: content?.content,
                         author: content?.author,
                         type: content?.type,
