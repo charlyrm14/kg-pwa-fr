@@ -23,10 +23,9 @@ export const fetchContentBySlugApi = async(slug: string): Promise<ApiResponse<Co
 
 export const createContentApi = async(payload: CreateContentPayload) => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<CreateContentPayload>>(
-        `${config.public.apiBaseUrl}/contents/`, 
+    return await api<ApiResponse<CreateContentPayload>>('/contents', 
         {
             method: 'POST',
             body: payload
@@ -35,10 +34,10 @@ export const createContentApi = async(payload: CreateContentPayload) => {
 }
 
 export const deleteContentApi = async(slug: string) => {
-    const config = useRuntimeConfig()
+
+    const api = authApi()
     
-    return await $fetch<ApiResponse<Content>>(`
-        ${config.public.apiBaseUrl}/contents/${slug}`,
+    return await api<ApiResponse<Content>>(`/contents/${slug}`,
         {
             method: 'DELETE'
         }
