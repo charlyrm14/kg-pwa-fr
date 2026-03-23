@@ -8,13 +8,14 @@ import type {
     PaymentDetail, 
     EditPaymentPayload
 } from "~~/shared/types/Payment"
+import { authApi } from "../auth/auth.api"
 
 export const fetchPaymentsApi = async(pageUrl: string | null = null, filters: PaymentFilters) => {
     
-    const config = useRuntimeConfig()
-    const endpoint = pageUrl ? pageUrl : `${config.public.apiBaseUrl}/payments`
+    const api = authApi()
+    const endpoint = pageUrl ? pageUrl : `/payments`
 
-    return await $fetch<ApiResponse<CursorPagination<Payment>>>(
+    return await api<ApiResponse<CursorPagination<Payment>>>(
         endpoint, {
             params: {
                 page: 1,
@@ -26,19 +27,16 @@ export const fetchPaymentsApi = async(pageUrl: string | null = null, filters: Pa
 
 export const fetchPaymentByIdApi = async(paymentId: number): Promise<ApiResponse<PaymentDetail>> => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<PaymentDetail>>(
-        `${config.public.apiBaseUrl}/payments/${paymentId}`
-    )
+    return await api<ApiResponse<PaymentDetail>>(`/payments/${paymentId}`)
 }
 
 export const createPaymentApi = async(payload: CreatePaymentPayload) => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<CreatePaymentResponse>>(
-        `${config.public.apiBaseUrl}/payments/`,
+    return await api<ApiResponse<CreatePaymentResponse>>('/payments/',
         {
             method: 'POST',
             body: payload
@@ -48,10 +46,9 @@ export const createPaymentApi = async(payload: CreatePaymentPayload) => {
 
 export const editPaymentApi = async(paymentId: number, payload: EditPaymentPayload) => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<CreatePaymentResponse>>(
-        `${config.public.apiBaseUrl}/payments/${paymentId}`,
+    return await api<ApiResponse<CreatePaymentResponse>>(`/payments/${paymentId}`,
         {
             method: 'PUT',
             body: payload
@@ -61,10 +58,9 @@ export const editPaymentApi = async(paymentId: number, payload: EditPaymentPaylo
 
 export const deletePaymentByIdApi = async(paymentId: number) => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<Payment>>(
-        `${config.public.apiBaseUrl}/payments/${paymentId}`,
+    return await api<ApiResponse<Payment>>(`/payments/${paymentId}`,
         {
             method: 'DELETE',
         } 

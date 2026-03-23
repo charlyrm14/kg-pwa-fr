@@ -24,7 +24,7 @@ export const fetchPaymentsDataSource = async(pageUrl: string | null = null, filt
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
-    if(IS_MOCK_API_MODE) {
+    if(!IS_MOCK_API_MODE) {
         return MOCK_PAYMENTS
     }
     
@@ -36,7 +36,7 @@ export const fetchPaymentByIdDataSource = async(paymentId: number) => {
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
-    if(IS_MOCK_API_MODE) {
+    if(!IS_MOCK_API_MODE) {
         return fetchPaymentByIdMock(paymentId)
     }
 
@@ -48,7 +48,7 @@ export const createPaymentDataSource = (payload: CreatePaymentPayload) => {
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
-    if(IS_MOCK_API_MODE) {
+    if(!IS_MOCK_API_MODE) {
         return createPaymentMock(payload)
     }
 
@@ -59,7 +59,7 @@ export const editPaymentDataSource = (paymentId: number, payload: EditPaymentPay
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
-    if(IS_MOCK_API_MODE) {
+    if(!IS_MOCK_API_MODE) {
         return editPaymentMock(paymentId, payload)
     }
 
@@ -71,7 +71,7 @@ export const deletePaymentByIdDataSource = (paymentId: number) => {
     const config = useRuntimeConfig()
     const IS_MOCK_API_MODE = config.public.mockApiMode
 
-    if(IS_MOCK_API_MODE) {
+    if(!IS_MOCK_API_MODE) {
         return deletePaymentByIdMock(paymentId)
     }
 
