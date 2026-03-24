@@ -10,19 +10,16 @@ import { authApi } from "../auth/auth.api"
 
 export const fetchAttendancesTodayApi = async(): Promise<PaginationContent<AttendanceCurrentDay>> => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<PaginationContent<AttendanceCurrentDay>>(
-        `${config.public.apiBaseUrl}/attendances/today`
-    )
+    return await api<PaginationContent<AttendanceCurrentDay>>('/attendances/today')
 }
 
 export const assignUserAttendanceApi = async(userUuid: string, payload: AssignUserAttendancePayload) => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<PaginationContent<AttendanceCurrentDay>>(
-        `${config.public.apiBaseUrl}/attendances/assign/${userUuid}`,
+    return await api<PaginationContent<AttendanceCurrentDay>>(`/attendances/assign/${userUuid}`,
         {
             method: 'PUT',
             body: payload
@@ -39,9 +36,7 @@ export const fetchMonthlyAttendanceApi = async(): Promise<ApiResponse<UserAttend
 
 export const fetchAttendanceStatusesApi = async() => {
 
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<AttendanceStatus[]>>(
-        `${config.public.apiBaseUrl}/attendances/statuses`
-    )
+    return await api<ApiResponse<AttendanceStatus[]>>('/attendances/statuses')
 }
