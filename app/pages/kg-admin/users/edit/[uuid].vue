@@ -112,8 +112,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <UserCurrentLevel/>
                     <div class="space-y-3">
-                        <EditUserProgress/>
-                        <EditSkillProgress/>
+                        <EditUserProgress
+                            v-if="user"
+                            :user-uuid="user?.uuid"
+                            @refreshUserData="refreshData"/>
+                        <EditSkillProgress
+                            v-if="user"
+                            :user-uuid="user?.uuid"
+                            @refreshUserData="refreshData"/>
                     </div>
                 </div>
             <!-- Beginning User Progress -->

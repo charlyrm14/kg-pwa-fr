@@ -14,10 +14,9 @@ import type {
 import { authApi } from "../auth/auth.api";
 
 export const fetchUsersApi = async(filters: UserFilters) => {
-    const config = useRuntimeConfig()
+    const api = authApi()
 
-    return await $fetch<ApiResponse<PaginationContent<User>>>(`
-        ${config.public.apiBaseUrl}/users`, {
+    return await api<ApiResponse<PaginationContent<User>>>('/users', {
             params: {
                 page: 1,
                 ...filters
@@ -27,6 +26,7 @@ export const fetchUsersApi = async(filters: UserFilters) => {
 }
 
 export const fetchUserInfoApi = async(uuid: string) => {
+
     const config = useRuntimeConfig()
     
     return await $fetch<ApiResponse<UserInfo>>(
@@ -35,10 +35,10 @@ export const fetchUserInfoApi = async(uuid: string) => {
 }
 
 export const createUserApi = async(payload: CreateUserPayload) => {
-    const config = useRuntimeConfig()
     
-    return await $fetch<ApiResponse<CreateUserResponse>>(
-        `${config.public.apiBaseUrl}/users`,
+    const api = authApi()
+
+    return await api<ApiResponse<CreateUserResponse>>('/users',
         {
             method: 'POST',
             body: payload
@@ -59,10 +59,10 @@ export const updateUserApi = async(uuid: string, payload: UpdateUserPayload) => 
 }
 
 export const deleteUserApi = async(uuid: string) => {
-    const config = useRuntimeConfig()
+    
+    const api = authApi()
 
-    return await $fetch(
-        `${config.public.apiBaseUrl}/users/${uuid}`,
+    return await api(`/users/${uuid}`,
         {
             method: 'DELETE'
         }

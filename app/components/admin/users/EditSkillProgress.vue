@@ -2,6 +2,14 @@
     import { useStudentProgram, type SkillCategoryProgress } from '#imports';
     import AssignSkillProgressSkeleton from '../skeleton/users/AssignSkillProgressSkeleton.vue';
     
+    const props = defineProps<{
+        userUuid: string
+    }>()
+
+    const emit = defineEmits<{
+        (e: 'refreshUserData'): void
+    }>()
+
     const { 
         studentProgram, 
         loading,
@@ -45,8 +53,9 @@
 
         try {
 
-            await updateStudentSkillProgress(skill.skill_progress_id, newProgress)
+            await updateStudentSkillProgress(skill.skill_progress_id, newProgress, props?.userUuid)
             skill.skill_progress_percentage = newProgress
+            emit('refreshUserData')
 
         } catch (error) {
             console.error(error)
