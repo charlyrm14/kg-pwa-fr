@@ -7,6 +7,14 @@
     } from '#imports';
     import AssignPorgressUserSkeleton from '../skeleton/users/AssignPorgressUserSkeleton.vue';
 
+    const props = defineProps<{
+        userUuid: string
+    }>()
+
+    const emit = defineEmits<{
+        (e: 'refreshUserData'): void
+    }>()
+
     const { fetchSwimProgram } = useSwimProgram()
     const { 
         studentProgram, 
@@ -51,12 +59,13 @@
         try {
 
             const payload: AssignStudentProgramPayload = {
-                user_uuid: null,
+                user_uuid: props?.userUuid,
                 swim_program_id: programSelected.value,
                 swim_category_id: categorySelected.value
             }
             
             await assignUserProgress(payload)
+            emit('refreshUserData') 
 
         } catch (error) {
             console.error(error)

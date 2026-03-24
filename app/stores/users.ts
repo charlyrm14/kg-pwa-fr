@@ -117,6 +117,16 @@ export const useUserStore = defineStore('users', () => {
         }
     }
 
+    /**
+     * The function `update` asynchronously updates a user's information and displays a success or
+     * error alert message accordingly.
+     * @param {string} uuid - The `uuid` parameter is a unique identifier for the user that you want to
+     * update. It is typically a string that uniquely identifies a specific user in your system.
+     * @param {UpdateUserPayload} payload - The `payload` parameter in the `update` function likely
+     * contains the data that needs to be updated for a user. It could include fields such as name,
+     * email, address, or any other information related to the user that needs to be updated in the
+     * data source. This data is passed to the
+     */
     const update = async(uuid: string, payload: UpdateUserPayload) => {
         try {
 
@@ -157,6 +167,8 @@ export const useUserStore = defineStore('users', () => {
         }
     }
 
+    /* The `filteredUsers` constant is using the `computed` function to create a reactive computed
+    property based on the values of `users` and `roleType`. Here's a breakdown of what it's doing: */
     const filteredUsers = computed(() => {
         if(!users.value) return null
 

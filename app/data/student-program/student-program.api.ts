@@ -9,7 +9,9 @@ export const fetchStudentProgramApi = async(uuid?: string): Promise<ApiResponse<
 
     const api = authApi()
 
-    return await api<ApiResponse<StudentProgram>>('/student-programs/')
+    return await api<ApiResponse<StudentProgram>>(
+        uuid ? `/student-programs/${uuid}` : '/student-programs'
+    )
 }
 
 export const assignUserProgressApi = async(payload: AssignStudentProgramPayload) => {
